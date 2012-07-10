@@ -5,7 +5,7 @@ import org.mongoid.scooter.Session
 
 class SessionSpec extends FunSpec with MustMatchers {
 
-  describe("org.scooter.Session") {
+  describe("org.mongoid.scooter.Session") {
 
     describe("#new") {
 
