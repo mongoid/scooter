@@ -4,5 +4,5 @@ import java.nio.ByteBuffer
 
 class Command extends Message {
 
-  def bsonSerialize(buffer: ByteBuffer) = {}
+  def serialize(buffer: ByteBuffer) = {}
 }

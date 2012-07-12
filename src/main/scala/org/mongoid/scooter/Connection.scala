@@ -19,7 +19,7 @@ class Connection(channel: SocketChannel) {
 
   def write(message: Message) = {
     var buffer = ByteBuffer.allocate(4).order(ByteOrder.LITTLE_ENDIAN)
-    message.bsonSerialize(buffer)
+    message.serialize(buffer)
     buffer.flip
     channel.write(buffer)
   }

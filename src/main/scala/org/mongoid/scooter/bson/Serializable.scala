@@ -4,5 +4,5 @@ import java.nio.ByteBuffer
 
 trait Serializable {
 
-  def bsonSerialize(buffer: ByteBuffer) : Unit
+  def bsonDump(buffer: ByteBuffer, key: String) : Unit
 }
