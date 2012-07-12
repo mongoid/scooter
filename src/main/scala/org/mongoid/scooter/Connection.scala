@@ -8,7 +8,7 @@ import java.nio.channels.SocketChannel
 
 object Connection {
 
-  def apply(address: SocketAddress) : Connection = {
+  def apply(address: SocketAddress) = {
     val channel = SocketChannel.open(address)
     channel.configureBlocking(false)
     new Connection(channel)
@@ -17,7 +17,7 @@ object Connection {
 
 class Connection(channel: SocketChannel) {
 
-  def write(message: Message) : Unit = {
+  def write(message: Message) = {
     var buffer = ByteBuffer.allocate(4).order(ByteOrder.LITTLE_ENDIAN)
     message.bsonSerialize(buffer)
     buffer.flip

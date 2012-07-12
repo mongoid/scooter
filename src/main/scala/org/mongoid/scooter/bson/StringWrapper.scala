@@ -9,5 +9,5 @@ object StringWrapper {
 
 class StringWrapper(target: String) extends Serializable {
 
-  def bsonSerialize(buffer: ByteBuffer) : Unit = {}
+  def bsonSerialize(buffer: ByteBuffer) = {}
 }
