@@ -1,11 +1,13 @@
 package org.mongoid.scooter.bson
 
+import java.nio.ByteBuffer
+
 object StringWrapper {
 
-  implicit def wrapString(string: String) : StringWrapper = new StringWrapper(string)
+  implicit def wrap(target: String) : StringWrapper = new StringWrapper(target)
 }
 
 class StringWrapper(target: String) extends Serializable {
 
-  def bsonDump: Unit = {}
+  def bsonSerialize(buffer: ByteBuffer) : Unit = {}
 }

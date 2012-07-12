@@ -1,8 +1,8 @@
-package org.mongoid.scooter.bson
+package org.mongoid.scooter.protocol
 
 import java.nio.ByteBuffer
 
-trait Serializable {
+trait Message {
 
   def bsonSerialize(buffer: ByteBuffer) : Unit
 }

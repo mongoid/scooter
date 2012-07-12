@@ -7,14 +7,14 @@ class StringWrapperSpec extends FunSpec with MustMatchers {
 
   describe("org.mongoid.scooter.bson.StringWrapper") {
 
-    describe("#bsonDump") {
+    describe("#bsonSerialize") {
 
     }
   }
 
   describe("java.lang.String") {
 
-    describe("#bsonDump") {
+    describe("#bsonSerialize") {
 
     }
   }
