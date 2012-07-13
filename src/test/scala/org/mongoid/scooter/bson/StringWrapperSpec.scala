@@ -2,6 +2,7 @@ import org.scalatest.FunSpec
 import org.scalatest.matchers.MustMatchers
 
 import org.mongoid.scooter.bson.StringWrapper
+import org.mongoid.scooter.bson.StringWrapper._
 
 import java.nio.{ ByteBuffer, ByteOrder }
 
@@ -9,7 +10,7 @@ class StringWrapperSpec extends FunSpec with MustMatchers {
 
   describe("org.mongoid.scooter.bson.StringWrapper") {
 
-    val buffer = ByteBuffer.allocate(24).order(ByteOrder.LITTLE_ENDIAN)
+    val buffer = ByteBuffer.allocate(18).order(ByteOrder.LITTLE_ENDIAN)
 
     describe("#bsonDump") {
 
@@ -20,15 +21,22 @@ class StringWrapperSpec extends FunSpec with MustMatchers {
 
       it("serializes the string to the buffer") {
         wrapper.bsonDump(buffer, key)
-        buffer.array.foreach(arg => println(arg))
       }
     }
   }
 
   describe("java.lang.String") {
 
+    val buffer = ByteBuffer.allocate(18).order(ByteOrder.LITTLE_ENDIAN)
+
     describe("#bsonDump") {
 
+      val key = "hello"
+      val value = "world"
+
+      it("serializes the string to the buffer") {
+        value.bsonDump(buffer, key)
+      }
     }
   }
 }
