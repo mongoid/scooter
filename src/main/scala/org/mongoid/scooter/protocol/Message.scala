@@ -27,7 +27,7 @@ trait Message {
    *
    * @param buffer The ByteBuffer that will get written.
    */
-  def serializeHeader(buffer: ByteBuffer) = {
+  protected def serializeHeader(buffer: ByteBuffer) = {
     buffer.
       putInt(0).            // Placeholder for message length.
       putInt(0).            // Request id.
