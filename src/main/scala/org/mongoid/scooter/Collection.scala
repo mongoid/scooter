@@ -19,6 +19,14 @@ class Collection(database: Database, name: String) {
   }
 
   /**
+   * Get the full name of the Collection. Will prefix with the
+   * Database name.
+   *
+   * @return The full name of the Collection.
+   */
+  def fullName = database.fullName + "." + name
+
+  /**
    * Generate a hash code for the Collection from the name.
    *
    * @return The hash code from the name.
@@ -30,16 +38,12 @@ class Collection(database: Database, name: String) {
    *
    * @param documents An array of documents to insert.
    */
-  def insert(documents: Array[Map[String, Any]]) = {
-    database.insert(documents)
-  }
+  def insert(documents: Array[Map[String, Any]]) = database.insert(documents)
 
   /**
    * Insert a single document into the database.
    *
    * @param document A document to insert.
    */
-  def insert(document: Map[String, Any]) = {
-    database.insert(document)
-  }
+  def insert(document: Map[String, Any]) = database.insert(document)
 }

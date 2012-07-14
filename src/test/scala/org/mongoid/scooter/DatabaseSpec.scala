@@ -18,5 +18,14 @@ class DatabaseSpec extends FunSpec with MustMatchers {
         database.collection("users") must be(collection)
       }
     }
+
+    describe("#fullName") {
+
+      val database = new Database(session, "scooter_test")
+
+      it("returns the name of the database") {
+        database.fullName must be("scooter_test")
+      }
+    }
   }
 }

@@ -50,6 +50,13 @@ class Database(session: Session, name: String) {
   }
 
   /**
+   * Gets the full name of the Database.
+   *
+   * @return The full name of the Database.
+   */
+  def fullName = name
+
+  /**
    * Generate a hash code for the Database from the name.
    *
    * @return The hash code from the name.
