@@ -2,22 +2,6 @@ package org.mongoid.scooter.bson
 
 import java.nio.ByteBuffer
 
-import language.implicitConversions
-
-/**
- * Companion object for the StringWrapper class.
- */
-object StringWrapper {
-
-  /**
-   * Implicit conversion from a String to a StringWrapper.
-   *
-   * @param target The String that is getting wrapped.
-   * @return The StringWrapper around the String.
-   */
-  implicit def wrap(target: String) = new StringWrapper(target)
-}
-
 /**
  * Wraps strings to provide additional behaviour around BSON serialization.
  *

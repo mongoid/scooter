@@ -1,7 +1,7 @@
 import java.nio.{ ByteBuffer, ByteOrder }
 
 import org.mongoid.scooter.bson.StringWrapper
-import org.mongoid.scooter.bson.StringWrapper._
+import org.mongoid.scooter.bson.Conversions._
 
 import org.scalatest.FunSpec
 import org.scalatest.matchers.MustMatchers

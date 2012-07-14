@@ -3,6 +3,8 @@ package org.mongoid.scooter.protocol
 import java.nio.ByteBuffer
 
 import org.mongoid.scooter.Collection
+import org.mongoid.scooter.bson._
+import org.mongoid.scooter.bson.Conversions._
 
 /**
  * Companion object for the Insert class.
@@ -31,5 +33,11 @@ object Insert {
  */
 class Insert(name: String, documents: Array[_<:Map[String, Any]]) extends Message {
 
-  def serialize(buffer: ByteBuffer) = {}
+  def serialize(buffer: ByteBuffer) = {
+    documents.foreach {
+      doc => doc.foreach {
+        case (key: String, value: String) => value.bsonDump(buffer, key)
+      }
+    }
+  }
 }
