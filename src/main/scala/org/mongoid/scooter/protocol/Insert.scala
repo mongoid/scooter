@@ -14,7 +14,6 @@ object Insert {
    *
    * @param collection The Collection to insert into.
    * @param documents The documents to insert.
-   *
    * @return The Insert message.
    */
   def apply(collection: Collection, documents: Array[Map[String, Any]]) = {
