@@ -18,6 +18,8 @@ object StringWrapper {
 
 /**
  * Wraps strings to provide additional behaviour around BSON serialization.
+ *
+ * @param target The String that is wrapped.
  */
 class StringWrapper(target: String) extends Serializable {
 
