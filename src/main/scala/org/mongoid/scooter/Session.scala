@@ -53,7 +53,6 @@ class Session(hosts: Array[String]) extends Dynamic {
    * is the collection name.
    *
    * @param name The name of the Collection.
-   * @param args The arguments passed to the method.
    * @return The Collection for the provided name.
    */
   def selectDynamic(name: String) = database.collection(name)
