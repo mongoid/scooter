@@ -1,10 +1,10 @@
 package org.mongoid.scooter
 
-import org.mongoid.scooter.protocol.Message
-
 import java.net.SocketAddress
 import java.nio.{ ByteBuffer, ByteOrder }
 import java.nio.channels.SocketChannel
+
+import org.mongoid.scooter.protocol.Message
 
 /**
  * Companion object for the Connection class.

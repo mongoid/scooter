@@ -1,6 +1,7 @@
 package org.mongoid.scooter.bson
 
 import java.nio.ByteBuffer
+
 import language.implicitConversions
 
 /**

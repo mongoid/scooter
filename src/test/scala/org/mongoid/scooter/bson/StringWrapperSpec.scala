@@ -1,10 +1,10 @@
-import org.scalatest.FunSpec
-import org.scalatest.matchers.MustMatchers
+import java.nio.{ ByteBuffer, ByteOrder }
 
 import org.mongoid.scooter.bson.StringWrapper
 import org.mongoid.scooter.bson.StringWrapper._
 
-import java.nio.{ ByteBuffer, ByteOrder }
+import org.scalatest.FunSpec
+import org.scalatest.matchers.MustMatchers
 
 class StringWrapperSpec extends FunSpec with MustMatchers {
 

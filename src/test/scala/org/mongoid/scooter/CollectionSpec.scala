@@ -1,7 +1,7 @@
+import org.mongoid.scooter.{ Collection, Database, Session }
+
 import org.scalatest.FunSpec
 import org.scalatest.matchers.MustMatchers
-
-import org.mongoid.scooter.{ Collection, Database, Session }
 
 class CollectionSpec extends FunSpec with MustMatchers {
 

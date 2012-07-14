@@ -1,8 +1,8 @@
 package org.mongoid.scooter.protocol
 
-import org.mongoid.scooter.Collection
-
 import java.nio.ByteBuffer
+
+import org.mongoid.scooter.Collection
 
 /**
  * Companion object for the Insert class.
@@ -16,7 +16,7 @@ object Insert {
    * @param documents The documents to insert.
    * @return The Insert message.
    */
-  def apply(collection: Collection, documents: Array[Map[String, Any]]) = {
+  def apply(collection: Collection, documents: Array[_<:Map[String, Any]]) = {
     new Insert(collection.fullName, documents)
   }
 }
@@ -30,7 +30,7 @@ object Insert {
  * @param name The full name of the Collection.
  * @param documents The documents to insert.
  */
-class Insert(name: String, documents: Array[Map[String, Any]]) extends Message {
+class Insert(name: String, documents: Array[_<:Map[String, Any]]) extends Message {
 
   def serialize(buffer: ByteBuffer) = {}
 }

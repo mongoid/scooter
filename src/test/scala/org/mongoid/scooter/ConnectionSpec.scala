@@ -1,10 +1,10 @@
-import org.scalatest.FunSpec
-import org.scalatest.matchers.MustMatchers
-
 import java.net.InetSocketAddress
 
 import org.mongoid.scooter.protocol.Command
 import org.mongoid.scooter.Connection
+
+import org.scalatest.FunSpec
+import org.scalatest.matchers.MustMatchers
 
 class ConnectionSpec extends FunSpec with MustMatchers {
 

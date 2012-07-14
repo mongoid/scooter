@@ -13,7 +13,7 @@ class Context(session: Session) {
    *
    * @param documents An array of documents to insert.
    */
-  def insert(documents: Array[Map[String, Any]]) = {}
+  def insert(documents: Array[_<:Map[String, Any]]) = {}
 
   /**
    * Insert a single document into the database.

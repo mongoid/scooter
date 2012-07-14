@@ -1,7 +1,7 @@
+import org.mongoid.scooter.Indexes
+
 import org.scalatest.FunSpec
 import org.scalatest.matchers.MustMatchers
-
-import org.mongoid.scooter.Indexes
 
 class IndexesSpec extends FunSpec with MustMatchers {
 

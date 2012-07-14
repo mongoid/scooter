@@ -38,7 +38,7 @@ class Collection(database: Database, name: String) {
    *
    * @param documents An array of documents to insert.
    */
-  def insert(documents: Array[Map[String, Any]]) = database.insert(documents)
+  def insert(documents: Array[_<:Map[String, Any]]) = database.insert(documents)
 
   /**
    * Insert a single document into the database.
