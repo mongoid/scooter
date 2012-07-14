@@ -39,6 +39,15 @@ class Insert(name: String, documents: Array[_<:Map[String, Any]]) extends Messag
    * @param buffer The ByteBuffer that will get written.
    */
   def serialize(buffer: ByteBuffer) = {
+    serializeDocuments(buffer)
+  }
+
+  /**
+   * Serialize the documents to the ByteBuffer.
+   *
+   * @param buffer The ByteBuffer that will get written.
+   */
+  private def serializeDocuments(buffer: ByteBuffer) = {
     documents.foreach {
       doc => doc.foreach {
         case (key: String, value: String) => value.bsonDump(buffer, key)
