@@ -5,8 +5,9 @@ import java.nio.ByteBuffer
 trait Serializable {
 
   /**
-   * See: http://bsonspec.org/#/specification
+   * Get a NULL byte. (\x00)
    *
+   * @link http://bsonspec.org/#/specification
    * @return The byte representation of null.
    */
   final val NULL: Byte = 0

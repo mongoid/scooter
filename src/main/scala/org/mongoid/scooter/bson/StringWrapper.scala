@@ -26,8 +26,9 @@ object StringWrapper {
 class StringWrapper(target: String) extends Serializable {
 
   /**
-   * See: http://bsonspec.org/#/specification
+   * Get the type for a String. (\x02)
    *
+   * @link http://bsonspec.org/#/specification
    * @return The byte representation of a UTF-8 string.
    */
   final val TYPE: Byte = 2

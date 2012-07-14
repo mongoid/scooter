@@ -25,8 +25,7 @@ object Insert {
  * This class encapsulates behaviour for the OP_INSERT command in the
  * MongoDB Wire Protocol.
  *
- * See: http://www.mongodb.org/display/DOCS/Mongo+Wire+Protocol
- *
+ * @link http://www.mongodb.org/display/DOCS/Mongo+Wire+Protocol
  * @param name The full name of the Collection.
  * @param documents The documents to insert.
  */
