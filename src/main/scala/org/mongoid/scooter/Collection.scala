@@ -24,4 +24,22 @@ class Collection(database: Database, name: String) {
    * @return The hash code from the name.
    */
   override def hashCode = name.hashCode
+
+  /**
+   * Insert documents into the database.
+   *
+   * @param documents An array of documents to insert.
+   */
+  def insert(documents: Array[Map[String, Any]]) = {
+    database.insert(documents)
+  }
+
+  /**
+   * Insert a single document into the database.
+   *
+   * @param document A document to insert.
+   */
+  def insert(document: Map[String, Any]) = {
+    database.insert(document)
+  }
 }
