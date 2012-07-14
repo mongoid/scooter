@@ -34,11 +34,26 @@ object Insert {
 class Insert(name: String, documents: Array[_<:Map[String, Any]]) extends Message {
 
   /**
+   * Get the operation code for an Insert.
+   *
+   * @link http://www.mongodb.org/display/DOCS/Mongo+Wire+Protocol
+   * @return The Integer operation code.
+   */
+  final val OP_CODE: Int = 2002
+
+  /**
    * Serialize the Insert into a buffer that can be written to the socket.
    *
    * @param buffer The ByteBuffer that will get written.
    */
   def serialize(buffer: ByteBuffer) = {
+    // buffer.
+    //  putInt(length).
+    //  putInt(requestId).
+    //  putInt(responseTo).
+    //  putInt(OP_CODE).
+    //  put(flags).
+    //  put(name).
     serializeDocuments(buffer)
   }
 
