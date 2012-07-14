@@ -1,4 +1,4 @@
-Scooter
+Scooter [![Build Status](https://secure.travis-ci.org/mongoid/scooter.png?branch=master&.png)](http://travis-ci.org/mongoid/scooter)
 =======
 
 Scooter is a MongoDB driver, written in Scala.
