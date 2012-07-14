@@ -10,6 +10,4 @@ libraryDependencies ++= Seq(
   "org.scalatest" %% "scalatest" % "1.9-2.10.0-M4-B2" % "test"
 )
 
-scalacOptions += "-Xexperimental"
-
 scalacOptions += "-feature"

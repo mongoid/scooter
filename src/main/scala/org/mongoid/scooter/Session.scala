@@ -56,7 +56,7 @@ class Session(hosts: Array[String]) extends Dynamic {
    * @param args The arguments passed to the method.
    * @return The Collection for the provided name.
    */
-  def applyDynamic(name: String)(args: Any*) = database.collection(name)
+  def selectDynamic(name: String) = database.collection(name)
 
   /**
    * Use the database as specified by the provided name.
