@@ -17,7 +17,7 @@ class InsertSpec extends FunSpec with MustMatchers {
 
     describe("#serialize") {
 
-      val buffer = ByteBuffer.allocate(24).order(ByteOrder.LITTLE_ENDIAN)
+      val buffer = ByteBuffer.allocate(64).order(ByteOrder.LITTLE_ENDIAN)
 
       it("adds the document to the buffer") {
         insert.serialize(buffer)

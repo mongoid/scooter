@@ -39,7 +39,7 @@ class Insert(name: String, documents: Array[_<:Map[String, Any]]) extends Messag
    * @link http://www.mongodb.org/display/DOCS/Mongo+Wire+Protocol
    * @return The Integer operation code.
    */
-  final val OP_CODE: Int = 2002
+  def operationCode = 2002
 
   /**
    * Serialize the Insert into a buffer that can be written to the socket.
@@ -47,14 +47,10 @@ class Insert(name: String, documents: Array[_<:Map[String, Any]]) extends Messag
    * @param buffer The ByteBuffer that will get written.
    */
   def serialize(buffer: ByteBuffer) = {
-    // buffer.
-    //  putInt(length).
-    //  putInt(requestId).
-    //  putInt(responseTo).
-    //  putInt(OP_CODE).
-    //  put(flags).
-    //  put(name).
-    serializeDocuments(buffer)
+    serializeHeader(buffer)     // The standard header.
+    buffer.putInt(0)            // The insert flags.
+    buffer.put(name.getBytes)   // The full name of the collection.
+    serializeDocuments(buffer)  // The documents to insert.
   }
 
   /**
