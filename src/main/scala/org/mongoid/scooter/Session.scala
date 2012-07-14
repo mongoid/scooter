@@ -28,7 +28,7 @@ object Session {
  *
  * @param hosts An Array of "host:port" String pairs.
  */
-class Session(hosts: Array[String]) {
+class Session(hosts: Array[String]) extends Dynamic {
 
   /**
    * This is the wrapped Context for this Session.
@@ -45,11 +45,21 @@ class Session(hosts: Array[String]) {
   var database : Database = null;
 
   /**
+   * Use of Scala's experimental Dyanmic invokation in order to simulate
+   * something similar to Ruby's method_missing. This way a collection
+   * can be accessed from the session simply by just calling a method that
+   * is the collection name.
+   *
+   * @param name The name of the Collection.
+   * @param args The arguments passed to the method.
+   * @return The Collection for the provided name.
+   */
+  def applyDynamic(name: String)(args: Any*) = database.collection(name)
+
+  /**
    * Use the database as specified by the provided name.
    *
    * @param name The name of the Database.
    */
-  def use(name: String) = {
-    this.database = new Database(this, name)
-  }
+  def use(name: String) = this.database = new Database(this, name)
 }
