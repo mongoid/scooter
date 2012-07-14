@@ -1,6 +1,7 @@
 package org.mongoid.scooter.bson
 
 import java.nio.ByteBuffer
+import language.implicitConversions
 
 /**
  * Companion object for the StringWrapper class.
@@ -13,7 +14,7 @@ object StringWrapper {
    * @param target The String that is getting wrapped.
    * @return The StringWrapper around the String.
    */
-  implicit def wrap(target: String) : StringWrapper = new StringWrapper(target)
+  implicit def wrap(target: String) = new StringWrapper(target)
 }
 
 /**

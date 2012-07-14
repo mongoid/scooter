@@ -1,5 +1,7 @@
 package org.mongoid.scooter
 
+import language.implicitConversions
+
 /**
  * Companion object for the StringWrapper class.
  */
