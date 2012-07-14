@@ -9,7 +9,7 @@ trait Serializable {
    *
    * @return The byte representation of null.
    */
-  final val NULL : Byte = 0
+  final val NULL: Byte = 0
 
   /**
    * Dump the value to the buffer in it's proper BSON format.

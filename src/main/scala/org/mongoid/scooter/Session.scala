@@ -44,7 +44,7 @@ class Session(hosts: Array[String]) extends Dynamic {
    *
    * @return The current Database.
    */
-  var database : Database = null;
+  var database: Database = null;
 
   /**
    * Use of Scala's experimental Dyanmic invokation in order to simulate
