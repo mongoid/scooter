@@ -33,6 +33,11 @@ object Insert {
  */
 class Insert(name: String, documents: Array[_<:Map[String, Any]]) extends Message {
 
+  /**
+   * Serialize the Insert into a buffer that can be written to the socket.
+   *
+   * @param buffer The ByteBuffer that will get written.
+   */
   def serialize(buffer: ByteBuffer) = {
     documents.foreach {
       doc => doc.foreach {
