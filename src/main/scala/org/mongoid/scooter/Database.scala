@@ -11,6 +11,7 @@ object Database {
    * Implicit conversion from a Database to a Context.
    *
    * @param session The Database to convert.
+   *
    * @return The Context for the session.
    */
   implicit def delegateToContext(database: Database) = database.context
@@ -28,6 +29,7 @@ class Database(session: Session, name: String) {
    * Get a Collection for the provided name.
    *
    * @param name The name of the collection.
+   *
    * @return The Collection.
    */
   def collection(name: String) = new Collection(this, name)
@@ -43,6 +45,7 @@ class Database(session: Session, name: String) {
    * A Database is equal to another if the names are the same.
    *
    * @param other The object to compare to.
+   *
    * @return If the objects are equal.
    */
   override def equals(other: Any) : Boolean = {

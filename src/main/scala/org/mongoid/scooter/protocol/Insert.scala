@@ -16,6 +16,7 @@ object Insert {
    *
    * @param collection The Collection to insert into.
    * @param documents The documents to insert.
+   *
    * @return The Insert message.
    */
   def apply(collection: Collection, documents: Array[_<:Map[String, Any]]) = {
@@ -28,6 +29,7 @@ object Insert {
  * MongoDB Wire Protocol.
  *
  * @link http://www.mongodb.org/display/DOCS/Mongo+Wire+Protocol
+ *
  * @param name The full name of the Collection.
  * @param documents The documents to insert.
  */
@@ -37,6 +39,7 @@ class Insert(name: String, documents: Array[_<:Map[String, Any]]) extends Messag
    * Get the operation code for an Insert.
    *
    * @link http://www.mongodb.org/display/DOCS/Mongo+Wire+Protocol
+   *
    * @return The Integer operation code.
    */
   def operationCode = 2002

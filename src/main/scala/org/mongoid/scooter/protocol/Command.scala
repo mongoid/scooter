@@ -11,6 +11,7 @@ class Command extends Message {
    * Get the operation code for a command..
    *
    * @link http://www.mongodb.org/display/DOCS/Mongo+Wire+Protocol
+   *
    * @return The Integer operation code.
    */
   def operationCode = 1000

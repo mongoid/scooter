@@ -15,6 +15,7 @@ object Connection {
    * Instantiate a new Connection.
    *
    * @param address The SocketAddress to connect to.
+   *
    * @return The new Connection.
    */
   def apply(address: SocketAddress) = {

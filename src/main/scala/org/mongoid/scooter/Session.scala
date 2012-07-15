@@ -11,6 +11,7 @@ object Session {
    * Implicit conversion from a Session to a Context.
    *
    * @param session The Session to convert.
+   *
    * @return The Context for the session.
    */
   implicit def delegateToContext(session: Session) = session.context
@@ -19,6 +20,7 @@ object Session {
    * Implicit conversion from a Session to a Database.
    *
    * @param session The Session to convert.
+   *
    * @return The Database for the session.
    */
   implicit def delegateToDatabase(session: Session) = session.database
@@ -53,6 +55,7 @@ class Session(hosts: Array[String]) extends Dynamic {
    * is the collection name.
    *
    * @param name The name of the Collection.
+   *
    * @return The Collection for the provided name.
    */
   def selectDynamic(name: String) = database.collection(name)

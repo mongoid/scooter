@@ -11,6 +11,7 @@ trait Message {
    * Get the operation code for the message.
    *
    * @link http://www.mongodb.org/display/DOCS/Mongo+Wire+Protocol
+   *
    * @return The Integer operation code.
    */
   def operationCode: Int

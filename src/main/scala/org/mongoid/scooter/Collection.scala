@@ -12,6 +12,7 @@ class Collection(database: Database, name: String) {
    * A Collection is equal to another if the names are the same.
    *
    * @param other The object to compare to.
+   *
    * @return If the objects are equal.
    */
   override def equals(other: Any) : Boolean = {
