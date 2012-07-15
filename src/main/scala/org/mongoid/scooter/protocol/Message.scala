@@ -26,13 +26,21 @@ trait Message {
   /**
    * Serializes the header of the message.
    *
+   * @link http://www.mongodb.org/display/DOCS/Mongo+Wire+Protocol
+   *
+   * @note The order in which bytes must be placed into the buffer:
+   *  - The length of the message.
+   *  - The request id.
+   *  - The id of the original message.
+   *  - The operation code.
+   *
    * @param buffer The ByteBuffer that will get written.
    */
   protected def serializeHeader(buffer: ByteBuffer) = {
     buffer.
-      putInt(0).            // Placeholder for message length.
-      putInt(0).            // Request id.
-      putInt(0).            // Response to.
-      putInt(operationCode) // Operation code.
+      putInt(0).
+      putInt(0).
+      putInt(0).
+      putInt(operationCode)
   }
 }

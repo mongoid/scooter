@@ -54,14 +54,16 @@ class Insert(name: String, documents: Array[_<:Map[String, Any]]) extends Messag
    *  - The bit vector of flags.
    *  - The full name of the collection.
    *  - The documents.
+   *  - Replace the length at position zero after everything is written.
    *
    * @param buffer The ByteBuffer that will get written.
    */
   def serialize(buffer: ByteBuffer) = {
     serializeHeader(buffer)
-    buffer.putInt(0)
+    buffer.putInt(0) // Bit vector.
     buffer.put(name.getBytes)
     serializeDocuments(buffer)
+    buffer.putInt(0, buffer.position)
   }
 
   /**

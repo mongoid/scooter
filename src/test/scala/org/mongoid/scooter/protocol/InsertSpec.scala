@@ -11,7 +11,7 @@ class InsertSpec extends FunSpec with MustMatchers {
 
   describe("org.mongoid.scooter.protocol.Insert") {
 
-    val document = HashMap("hello" -> "world")
+    val document = HashMap("hi" -> "ya")
     val documents = Array(document)
     val insert = new Insert("scooter_test.users", documents)
 

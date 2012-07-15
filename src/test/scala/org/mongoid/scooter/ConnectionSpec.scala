@@ -1,10 +1,12 @@
 import java.net.InetSocketAddress
 
-import org.mongoid.scooter.protocol.Command
+import org.mongoid.scooter.protocol.Insert
 import org.mongoid.scooter.Connection
 
 import org.scalatest.FunSpec
 import org.scalatest.matchers.MustMatchers
+
+import scala.collection.immutable.HashMap
 
 class ConnectionSpec extends FunSpec with MustMatchers {
 
@@ -15,10 +17,12 @@ class ConnectionSpec extends FunSpec with MustMatchers {
 
     describe("#write") {
 
-      val ping = new Command
+      val document = HashMap("hi" -> "ya")
+      val documents = Array(document)
+      val insert = new Insert("scooter_test.users", documents)
 
       it("it writes the messages to the socket") {
-        // connection.write(ping)
+        connection.write(insert)
       }
     }
   }

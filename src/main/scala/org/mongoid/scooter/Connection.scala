@@ -37,7 +37,7 @@ class Connection(channel: SocketChannel) {
    * @param message The Message to write.
    */
   def write(message: Message) = {
-    var buffer = ByteBuffer.allocate(4).order(ByteOrder.LITTLE_ENDIAN)
+    var buffer = ByteBuffer.allocate(64).order(ByteOrder.LITTLE_ENDIAN)
     message.serialize(buffer)
     buffer.flip
     channel.write(buffer)
