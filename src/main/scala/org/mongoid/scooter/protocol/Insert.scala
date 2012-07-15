@@ -44,13 +44,21 @@ class Insert(name: String, documents: Array[_<:Map[String, Any]]) extends Messag
   /**
    * Serialize the Insert into a buffer that can be written to the socket.
    *
+   * @link http://www.mongodb.org/display/DOCS/Mongo+Wire+Protocol
+   *
+   * @note The order in which bytes must be placed into the buffer:
+   *  - The standard header.
+   *  - The bit vector of flags.
+   *  - The full name of the collection.
+   *  - The documents.
+   *
    * @param buffer The ByteBuffer that will get written.
    */
   def serialize(buffer: ByteBuffer) = {
-    serializeHeader(buffer)     // The standard header.
-    buffer.putInt(0)            // The insert flags.
-    buffer.put(name.getBytes)   // The full name of the collection.
-    serializeDocuments(buffer)  // The documents to insert.
+    serializeHeader(buffer)
+    buffer.putInt(0)
+    buffer.put(name.getBytes)
+    serializeDocuments(buffer)
   }
 
   /**
@@ -60,7 +68,7 @@ class Insert(name: String, documents: Array[_<:Map[String, Any]]) extends Messag
    */
   private def serializeDocuments(buffer: ByteBuffer) = {
     documents.foreach {
-      doc => doc.foreach {
+      doc => new Document(doc).bsonDump(buffer) {
         case (key: String, value: String) => value.bsonDump(buffer, key)
       }
     }

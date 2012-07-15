@@ -2,7 +2,7 @@ package org.mongoid.scooter.bson
 
 import java.nio.ByteBuffer
 
-trait Serializable {
+object Serializable {
 
   /**
    * Get a NULL byte. (\x00)
@@ -11,6 +11,9 @@ trait Serializable {
    * @return The byte representation of null.
    */
   final val NULL: Byte = 0x00
+}
+
+trait Serializable {
 
   /**
    * Dump the value to the buffer in it's proper BSON format.
