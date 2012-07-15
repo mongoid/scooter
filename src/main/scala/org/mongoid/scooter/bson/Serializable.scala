@@ -10,7 +10,7 @@ trait Serializable {
    * @link http://bsonspec.org/#/specification
    * @return The byte representation of null.
    */
-  final val NULL: Byte = 0
+  final val NULL: Byte = 0x00
 
   /**
    * Dump the value to the buffer in it's proper BSON format.
