@@ -26,7 +26,7 @@ class Document(document: Map[String, Any]) {
     val start = buffer.position
     buffer.putInt(0)
     document.foreach(func)
-    buffer.put(Serializable.NULL)
+    buffer.put(Bytes.NULL)
     buffer.putInt(start, buffer.position - start)
   }
 }

@@ -39,9 +39,9 @@ class StringWrapper(target: String) extends Serializable {
     buffer.
       put(TYPE).
       put(key.getBytes).
-      put(Serializable.NULL).
+      put(Bytes.NULL).
       putInt(bytes.length + 1).
       put(bytes).
-      put(Serializable.NULL)
+      put(Bytes.NULL)
   }
 }

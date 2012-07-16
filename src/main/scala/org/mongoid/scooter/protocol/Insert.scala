@@ -62,6 +62,7 @@ class Insert(name: String, documents: Array[_<:Map[String, Any]]) extends Messag
     serializeHeader(buffer)
     buffer.putInt(0) // Bit vector.
     buffer.put(name.getBytes)
+    buffer.put(Bytes.NULL)
     serializeDocuments(buffer)
     buffer.putInt(0, buffer.position)
   }

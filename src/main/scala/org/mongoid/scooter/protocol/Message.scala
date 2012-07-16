@@ -36,7 +36,7 @@ trait Message {
    *
    * @param buffer The ByteBuffer that will get written.
    */
-  protected def serializeHeader(buffer: ByteBuffer) = {
+  def serializeHeader(buffer: ByteBuffer) = {
     buffer.
       putInt(0).
       putInt(0).
