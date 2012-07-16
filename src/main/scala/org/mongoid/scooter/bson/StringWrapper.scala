@@ -10,15 +10,6 @@ import java.nio.ByteBuffer
 class StringWrapper(target: String) extends Serializable {
 
   /**
-   * Get the type for a String. (\x02)
-   *
-   * @link http://bsonspec.org/#/specification
-   *
-   * @return The byte representation of a UTF-8 string.
-   */
-  final val TYPE: Byte = 0x02
-
-  /**
    * Dump the string to the buffer in it's proper BSON format.
    *
    * @link http://bsonspec.org/#/specification
@@ -37,7 +28,7 @@ class StringWrapper(target: String) extends Serializable {
   def bsonDump(buffer: ByteBuffer, key: String) = {
     val bytes = target.getBytes
     buffer.
-      put(TYPE).
+      put(Bytes.STRING).
       put(key.getBytes).
       put(Bytes.NULL).
       putInt(bytes.length + 1).
