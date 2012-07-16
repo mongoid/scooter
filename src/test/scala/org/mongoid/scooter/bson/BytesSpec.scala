@@ -51,5 +51,30 @@ class Bytes extends FunSpec with MustMatchers {
 
       it("returns 0x09") { TIME must be(0x09) }
     }
+
+    describe(".NULL_VALUE") {
+
+      it("returns 0x0A") { NULL_VALUE must be(0x0A) }
+    }
+
+    describe(".REGEX") {
+
+      it("returns 0x0B") { REGEX must be(0x0B) }
+    }
+
+    describe(".CODE") {
+
+      it("returns 0x0D") { CODE must be(0x0D) }
+    }
+
+    describe(".SYMBOL") {
+
+      it("returns 0x0E") { SYMBOL must be(0x0E) }
+    }
+
+    describe(".SCOPED_CODE") {
+
+      it("returns 0x0F") { SCOPED_CODE must be(0x0F) }
+    }
   }
 }

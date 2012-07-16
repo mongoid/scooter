@@ -82,4 +82,49 @@ object Bytes {
    * @return The byte representation of a UTC time.
    */
   final val TIME: Byte = 0x09
+
+  /**
+   * Get the type for null value. (0x0A)
+   *
+   * @link http://bsonspec.org/#/specification
+   *
+   * @return The byte representation of a null.
+   */
+  final val NULL_VALUE: Byte = 0x0A
+
+  /**
+   * Get the type for a regular expression. (0x0B)
+   *
+   * @link http://bsonspec.org/#/specification
+   *
+   * @return The byte representation of a regular expression.
+   */
+  final val REGEX: Byte = 0x0B
+
+  /**
+   * Get the type for Javascript code. (0x0D)
+   *
+   * @link http://bsonspec.org/#/specification
+   *
+   * @return The byte representation of Javascript code.
+   */
+  final val CODE: Byte = 0x0D
+
+  /**
+   * Get the type for a Symbol. (0x0E)
+   *
+   * @link http://bsonspec.org/#/specification
+   *
+   * @return The byte representation of a Symbol.
+   */
+  final val SYMBOL: Byte = 0x0E
+
+  /**
+   * Get the type for Javascript code with scope. (0x0F)
+   *
+   * @link http://bsonspec.org/#/specification
+   *
+   * @return The byte representation of Javascript code with scope.
+   */
+  final val SCOPED_CODE: Byte = 0x0F
 }
