@@ -5,6 +5,6 @@ import org.scalatest.matchers.MustMatchers
 
 class IndexesSpec extends FunSpec with MustMatchers {
 
-  describe("org.mongoid.scooter.Indexes") {
+  describe("Indexes") {
   }
 }

@@ -9,7 +9,7 @@ import scala.collection.immutable.HashMap
 
 class InsertSpec extends FunSpec with MustMatchers {
 
-  describe("org.mongoid.scooter.protocol.Insert") {
+  describe("Insert") {
 
     val document = HashMap("hi" -> "ya")
     val documents = Array(document)

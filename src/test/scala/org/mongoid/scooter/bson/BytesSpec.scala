@@ -5,7 +5,7 @@ import org.scalatest.matchers.MustMatchers
 
 class Bytes extends FunSpec with MustMatchers {
 
-  describe("org.mongoid.scooter.bson.Bytes") {
+  describe("Bytes") {
 
     describe(".NULL") {
 

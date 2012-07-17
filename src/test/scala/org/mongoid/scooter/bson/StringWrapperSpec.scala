@@ -10,7 +10,7 @@ class StringWrapperSpec extends FunSpec with MustMatchers {
 
   val bytes = Array[Byte](2, 104, 105, 0, 3, 0, 0, 0, 121, 97, 0)
 
-  describe("org.mongoid.scooter.bson.StringWrapper") {
+  describe("StringWrapper") {
 
     val buffer = ByteBuffer.allocate(11).order(ByteOrder.LITTLE_ENDIAN)
 
@@ -28,7 +28,7 @@ class StringWrapperSpec extends FunSpec with MustMatchers {
     }
   }
 
-  describe("java.lang.String") {
+  describe("String") {
 
     val buffer = ByteBuffer.allocate(11).order(ByteOrder.LITTLE_ENDIAN)
 

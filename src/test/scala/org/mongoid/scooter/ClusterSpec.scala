@@ -5,6 +5,6 @@ import org.scalatest.matchers.MustMatchers
 
 class ClusterSpec extends FunSpec with MustMatchers {
 
-  describe("org.mongoid.scooter.Cluster") {
+  describe("Cluster") {
   }
 }

@@ -5,7 +5,7 @@ import org.scalatest.matchers.MustMatchers
 
 class SessionSpec extends FunSpec with MustMatchers {
 
-  describe("org.mongoid.scooter.Session") {
+  describe("Session") {
 
     val session = new Session(Array("localhost:27017"))
 

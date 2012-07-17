@@ -10,7 +10,7 @@ import scala.collection.immutable.HashMap
 
 class ConnectionSpec extends FunSpec with MustMatchers {
 
-  describe("org.mongoid.scooter.Connection") {
+  describe("Connection") {
 
     val address = new InetSocketAddress("127.0.0.1", 27017)
     val connection = Connection(address)

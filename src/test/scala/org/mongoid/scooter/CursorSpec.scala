@@ -5,6 +5,6 @@ import org.scalatest.matchers.MustMatchers
 
 class CursorSpec extends FunSpec with MustMatchers {
 
-  describe("org.mongoid.scooter.Cursor") {
+  describe("Cursor") {
   }
 }

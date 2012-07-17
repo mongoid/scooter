@@ -12,7 +12,7 @@ class DocumentSpec extends FunSpec with MustMatchers {
 
   val bytes = Array[Byte](16, 0, 0, 0, 2, 104, 105, 0, 3, 0, 0, 0, 121, 97, 0, 0)
 
-  describe("org.mongoid.scooter.bson.Document") {
+  describe("Document") {
 
     val buffer = ByteBuffer.allocate(16).order(ByteOrder.LITTLE_ENDIAN)
 

@@ -5,7 +5,7 @@ import org.scalatest.matchers.MustMatchers
 
 class CollectionSpec extends FunSpec with MustMatchers {
 
-  describe("org.mongoid.scooter.Collection") {
+  describe("Collection") {
 
     val session = new Session(Array("localhost:27017"))
     val database = new Database(session, "scooter_test")

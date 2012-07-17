@@ -5,6 +5,6 @@ import org.scalatest.matchers.MustMatchers
 
 class QuerySpec extends FunSpec with MustMatchers {
 
-  describe("org.mongoid.scooter.Query") {
+  describe("Query") {
   }
 }
