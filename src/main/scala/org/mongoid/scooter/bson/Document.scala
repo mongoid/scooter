@@ -1,7 +1,5 @@
 package org.mongoid.scooter.bson
 
-import java.nio.ByteBuffer
-
 /**
  * A wrapper for a hash that is a representation of the document
  * as BSON.
@@ -19,14 +17,14 @@ class Document(document: Map[String, Any]) {
    *  - The document.
    *  - A null byte.
    *
-   * @param buffer The ByteBuffer to write to.
+   * @param buffer The MutableBuffer to write to.
    * @param func The function to apply to each pair in the hash.
    */
-  def bsonDump(buffer: ByteBuffer)(func: Any => Unit) = {
+  def bsonDump(buffer: MutableBuffer)(func: Any => Unit) = {
     val start = buffer.position
     buffer.putInt(0)
     document.foreach(func)
-    buffer.put(Bytes.NULL)
+    buffer.putByte(Bytes.NULL)
     buffer.putInt(start, buffer.position - start)
   }
 }

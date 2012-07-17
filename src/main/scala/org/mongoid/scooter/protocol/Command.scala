@@ -1,6 +1,6 @@
 package org.mongoid.scooter.protocol
 
-import java.nio.ByteBuffer
+import org.mongoid.scooter.bson.MutableBuffer
 
 /**
  * Represents a generic database Command.
@@ -19,7 +19,7 @@ class Command extends Message {
   /**
    * Serialize the Command into a buffer that can be written to the socket.
    *
-   * @param buffer The ByteBuffer that will get written.
+   * @param buffer The MutableBuffer that will get written.
    */
-  def serialize(buffer: ByteBuffer) = {}
+  def serialize(buffer: MutableBuffer) = {}
 }

@@ -1,6 +1,6 @@
 package org.mongoid.scooter.protocol
 
-import java.nio.ByteBuffer
+import org.mongoid.scooter.bson.MutableBuffer
 
 /**
  * All Messages sent to the database should mix in this trait.
@@ -19,9 +19,9 @@ trait Message {
   /**
    * Serialize the Message into a buffer that can be written to the socket.
    *
-   * @param buffer The ByteBuffer that will get written.
+   * @param buffer The MutableBuffer that will get written.
    */
-  def serialize(buffer: ByteBuffer) : Unit
+  def serialize(buffer: MutableBuffer) : Unit
 
   /**
    * Serializes the header of the message.
@@ -34,9 +34,9 @@ trait Message {
    *  - The id of the original message.
    *  - The operation code.
    *
-   * @param buffer The ByteBuffer that will get written.
+   * @param buffer The MutableBuffer that will get written.
    */
-  def serializeHeader(buffer: ByteBuffer) = {
+  def serializeHeader(buffer: MutableBuffer) = {
     buffer.
       putInt(0).
       putInt(0).

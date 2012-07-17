@@ -1,9 +1,9 @@
 package org.mongoid.scooter
 
 import java.net.SocketAddress
-import java.nio.{ ByteBuffer, ByteOrder }
 import java.nio.channels.SocketChannel
 
+import org.mongoid.scooter.bson.MutableBuffer
 import org.mongoid.scooter.protocol.Message
 
 /**
@@ -37,7 +37,7 @@ class Connection(channel: SocketChannel) {
    * @param message The Message to write.
    */
   def write(message: Message) = {
-    var buffer = ByteBuffer.allocate(64).order(ByteOrder.LITTLE_ENDIAN)
+    var buffer = MutableBuffer(64)
     message.serialize(buffer)
     buffer.flip
     channel.write(buffer)

@@ -1,7 +1,5 @@
 package org.mongoid.scooter.bson
 
-import java.nio.ByteBuffer
-
 trait Serializable {
 
   /**
@@ -10,5 +8,5 @@ trait Serializable {
    * @param buffer The buffer being written to.
    * @param key The string key to this instance string value.
    */
-  def bsonDump(buffer: ByteBuffer, key: String) : Unit
+  def bsonDump(buffer: MutableBuffer, key: String) : Unit
 }

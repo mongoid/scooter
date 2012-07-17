@@ -1,7 +1,5 @@
 package org.mongoid.scooter.protocol
 
-import java.nio.ByteBuffer
-
 import org.mongoid.scooter.Collection
 import org.mongoid.scooter.bson._
 import org.mongoid.scooter.bson.Conversions._
@@ -56,23 +54,23 @@ class Insert(name: String, documents: Array[_<:Map[String, Any]]) extends Messag
    *  - The documents.
    *  - Replace the length at position zero after everything is written.
    *
-   * @param buffer The ByteBuffer that will get written.
+   * @param buffer The MutableBuffer that will get written.
    */
-  def serialize(buffer: ByteBuffer) = {
+  def serialize(buffer: MutableBuffer) = {
     serializeHeader(buffer)
     buffer.putInt(0) // Bit vector.
-    buffer.put(name.getBytes)
-    buffer.put(Bytes.NULL)
+    buffer.putString(name)
+    buffer.putByte(Bytes.NULL)
     serializeDocuments(buffer)
     buffer.putInt(0, buffer.position)
   }
 
   /**
-   * Serialize the documents to the ByteBuffer.
+   * Serialize the documents to the MutableBuffer.
    *
-   * @param buffer The ByteBuffer that will get written.
+   * @param buffer The MutableBuffer that will get written.
    */
-  private def serializeDocuments(buffer: ByteBuffer) = {
+  private def serializeDocuments(buffer: MutableBuffer) = {
     documents.foreach {
       doc => new Document(doc).bsonDump(buffer) {
         case (key: String, value: String) => value.bsonDump(buffer, key)

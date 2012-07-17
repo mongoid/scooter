@@ -1,7 +1,5 @@
 package org.mongoid.scooter.bson
 
-import java.nio.ByteBuffer
-
 /**
  * Wraps strings to provide additional behaviour around BSON serialization.
  *
@@ -25,14 +23,13 @@ class StringWrapper(target: String) extends Serializable {
    * @param buffer The buffer being written to.
    * @param key The string key to this instance string value.
    */
-  def bsonDump(buffer: ByteBuffer, key: String) = {
-    val bytes = target.getBytes
+  def bsonDump(buffer: MutableBuffer, key: String) = {
     buffer.
-      put(Bytes.STRING).
-      put(key.getBytes).
-      put(Bytes.NULL).
-      putInt(bytes.length + 1).
-      put(bytes).
-      put(Bytes.NULL)
+      putByte(Bytes.STRING).
+      putString(key).
+      putByte(Bytes.NULL).
+      putInt(target.length + 1).
+      putString(target).
+      putByte(Bytes.NULL)
   }
 }

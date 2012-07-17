@@ -1,7 +1,6 @@
-import java.nio.{ ByteBuffer, ByteOrder }
-
 import org.mongoid.scooter.bson.Document
 import org.mongoid.scooter.bson.Conversions._
+import org.mongoid.scooter.bson.MutableBuffer
 
 import org.scalatest.FunSpec
 import org.scalatest.matchers.MustMatchers
@@ -14,7 +13,7 @@ class DocumentSpec extends FunSpec with MustMatchers {
 
   describe("Document") {
 
-    val buffer = ByteBuffer.allocate(16).order(ByteOrder.LITTLE_ENDIAN)
+    val buffer = MutableBuffer(16)
 
     describe("#bsonDump") {
 

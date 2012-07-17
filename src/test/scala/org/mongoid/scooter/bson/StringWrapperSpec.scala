@@ -1,7 +1,6 @@
-import java.nio.{ ByteBuffer, ByteOrder }
-
 import org.mongoid.scooter.bson.StringWrapper
 import org.mongoid.scooter.bson.Conversions._
+import org.mongoid.scooter.bson.MutableBuffer
 
 import org.scalatest.FunSpec
 import org.scalatest.matchers.MustMatchers
@@ -12,7 +11,7 @@ class StringWrapperSpec extends FunSpec with MustMatchers {
 
   describe("StringWrapper") {
 
-    val buffer = ByteBuffer.allocate(11).order(ByteOrder.LITTLE_ENDIAN)
+    val buffer = MutableBuffer(11)
 
     describe("#bsonDump") {
 
@@ -30,7 +29,7 @@ class StringWrapperSpec extends FunSpec with MustMatchers {
 
   describe("String") {
 
-    val buffer = ByteBuffer.allocate(11).order(ByteOrder.LITTLE_ENDIAN)
+    val buffer = MutableBuffer(11)
 
     describe("#bsonDump") {
 
