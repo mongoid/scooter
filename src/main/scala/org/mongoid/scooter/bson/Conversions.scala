@@ -17,6 +17,15 @@ object Conversions {
   implicit def wrapInt(target: Int) = new IntWrapper(target)
 
   /**
+   * Implicit conversion from a Float to a FloatWrapper.
+   *
+   * @param target The Float that is getting wrapped.
+   *
+   * @return The FloatWrapper around the Float.
+   */
+  implicit def wrapFloat(target: Float) = new FloatWrapper(target)
+
+  /**
    * Implicit conversion from a Long to a LongWrapper.
    *
    * @param target The Long that is getting wrapped.

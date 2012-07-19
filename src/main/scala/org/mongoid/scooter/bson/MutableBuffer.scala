@@ -59,6 +59,17 @@ class MutableBuffer(factor: Int, var buffer: ByteBuffer) {
   }
 
   /**
+   * Put an Double into the buffer. Will expand the size if necessary.
+   *
+   * @param value The Double to insert.
+   *
+   * @return This MutableBuffer.
+   */
+  def putDouble(value: Double) = {
+    putValue(buffer => buffer.putDouble(value))
+  }
+
+  /**
    * Put an Int into the buffer. Will expand the size if necessary.
    *
    * @param value The Int to insert.

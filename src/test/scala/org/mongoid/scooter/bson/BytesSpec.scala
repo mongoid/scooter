@@ -76,5 +76,15 @@ class Bytes extends FunSpec with MustMatchers {
 
       it("returns 0x0F") { SCOPED_CODE must be(0x0F) }
     }
+
+    describe(".INT_32") {
+
+      it("returns 0x10") { INT_32 must be(0x10) }
+    }
+
+    describe(".INT_64") {
+
+      it("returns 0x12") { INT_64 must be(0x12) }
+    }
   }
 }

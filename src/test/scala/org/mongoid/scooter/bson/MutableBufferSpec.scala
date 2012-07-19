@@ -35,6 +35,36 @@ class MutableBufferSpec extends FunSpec with MustMatchers {
       }
     }
 
+    describe("#putDouble") {
+
+      describe("when the buffer would not overflow") {
+
+        val buffer = MutableBuffer(8)
+        val result = buffer.putDouble(1.1233)
+
+        it("puts the double into the buffer") {
+          result.array must be(Array(126, -116, -71, 107, 9, -7, -15, 63))
+        }
+
+        it("returns the buffer") {
+          result must be(buffer)
+        }
+      }
+
+      describe("when the buffer would overflow") {
+
+        val buffer = MutableBuffer(8)
+        val result = buffer.putDouble(1.1233)
+
+        it("puts the double into the buffer") {
+          buffer.putDouble(1.1233)
+          result.array must be(
+            Array(126, -116, -71, 107, 9, -7, -15, 63, 126, -116, -71, 107, 9, -7, -15, 63)
+          )
+        }
+      }
+    }
+
     describe("#putInt") {
 
       describe("when the buffer would not overflow") {
