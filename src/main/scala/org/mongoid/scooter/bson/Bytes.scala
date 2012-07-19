@@ -127,4 +127,13 @@ object Bytes {
    * @return The byte representation of Javascript code with scope.
    */
   final val SCOPED_CODE: Byte = 0x0F
+
+  /**
+   * Get the type for a 32bit integer. (0x10)
+   *
+   * @link http://bsonspec.org/#/specification
+   *
+   * @return The byte representation of the 32 bit integer.
+   */
+  final val INT_32: Byte = 0x10
 }
