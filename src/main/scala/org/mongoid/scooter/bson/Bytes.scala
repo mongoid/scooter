@@ -136,4 +136,13 @@ object Bytes {
    * @return The byte representation of the 32 bit integer.
    */
   final val INT_32: Byte = 0x10
+
+  /**
+   * Get the type for a 64bit integer. (0x12)
+   *
+   * @link http://bsonspec.org/#/specification
+   *
+   * @return The byte representation of the 64 bit integer.
+   */
+  final val INT_64: Byte = 0x12
 }

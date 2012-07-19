@@ -1,24 +1,24 @@
-import org.mongoid.scooter.bson.IntWrapper
+import org.mongoid.scooter.bson.LongWrapper
 import org.mongoid.scooter.bson.Conversions._
 import org.mongoid.scooter.bson.MutableBuffer
 
 import org.scalatest.FunSpec
 import org.scalatest.matchers.MustMatchers
 
-class IntWrapperSpec extends FunSpec with MustMatchers {
+class LongWrapperSpec extends FunSpec with MustMatchers {
 
-  val bytes = Array[Byte](16, 104, 105, 0, 1, 0, 0, 0)
+  val bytes = Array[Byte](18, 104, 105, 0, 1, 0, 0, 0, 0, 0, 0, 0)
 
-  describe("IntWrapper") {
+  describe("LongWrapper") {
 
-    val buffer = MutableBuffer(8)
+    val buffer = MutableBuffer(12)
 
     describe("#bsonDump") {
 
       val key = "hi"
-      val value = 1
+      val value = 1l
 
-      val wrapper = new IntWrapper(value)
+      val wrapper = new LongWrapper(value)
 
       it("serializes the int to the buffer") {
         wrapper.bsonDump(buffer, key)
@@ -27,14 +27,14 @@ class IntWrapperSpec extends FunSpec with MustMatchers {
     }
   }
 
-  describe("Int") {
+  describe("Long") {
 
-    val buffer = MutableBuffer(8)
+    val buffer = MutableBuffer(12)
 
     describe("#bsonDump") {
 
       val key = "hi"
-      val value = 1
+      val value = 1l
 
       it("serializes the int to the buffer") {
         value.bsonDump(buffer, key)

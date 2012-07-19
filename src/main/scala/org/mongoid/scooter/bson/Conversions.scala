@@ -3,7 +3,7 @@ package org.mongoid.scooter.bson
 import language.implicitConversions
 
 /**
- * Companion object for the StringWrapper class.
+ * Contains the implicit conversions for all BSON types to their wrappers.
  */
 object Conversions {
 
@@ -15,6 +15,15 @@ object Conversions {
    * @return The IntWrapper around the Int.
    */
   implicit def wrapInt(target: Int) = new IntWrapper(target)
+
+  /**
+   * Implicit conversion from a Long to a LongWrapper.
+   *
+   * @param target The Long that is getting wrapped.
+   *
+   * @return The LongWrapper around the Long.
+   */
+  implicit def wrapLong(target: Long) = new LongWrapper(target)
 
   /**
    * Implicit conversion from a String to a StringWrapper.

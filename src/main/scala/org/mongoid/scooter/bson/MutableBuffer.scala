@@ -70,6 +70,17 @@ class MutableBuffer(factor: Int, var buffer: ByteBuffer) {
   }
 
   /**
+   * Put an Long into the buffer. Will expand the size if necessary.
+   *
+   * @param value The Long to insert.
+   *
+   * @return This MutableBuffer.
+   */
+  def putLong(value: Long) = {
+    putValue(buffer => buffer.putLong(value))
+  }
+
+  /**
    * Put a String into the buffer. Will expand the size if necessary.
    *
    * @param value The String to insert.

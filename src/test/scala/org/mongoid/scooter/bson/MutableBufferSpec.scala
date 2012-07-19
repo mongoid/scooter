@@ -57,8 +57,36 @@ class MutableBufferSpec extends FunSpec with MustMatchers {
         val result = buffer.putInt(1)
 
         it("puts the byte into the buffer") {
-          val result = buffer.putInt(1)
+          buffer.putInt(1)
           result.array must be(Array(1, 0, 0, 0, 1, 0, 0, 0))
+        }
+      }
+    }
+
+    describe("#putLong") {
+
+      describe("when the buffer would not overflow") {
+
+        val buffer = MutableBuffer(8)
+        val result = buffer.putLong(1l)
+
+        it("puts the byte into the buffer") {
+          result.array must be(Array(1, 0, 0, 0, 0, 0, 0, 0))
+        }
+
+        it("returns the buffer") {
+          result must be(buffer)
+        }
+      }
+
+      describe("when the buffer would overflow") {
+
+        val buffer = MutableBuffer(8)
+        val result = buffer.putLong(1l)
+
+        it("puts the byte into the buffer") {
+          buffer.putLong(1l)
+          result.array must be(Array(1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0))
         }
       }
     }
@@ -85,7 +113,7 @@ class MutableBufferSpec extends FunSpec with MustMatchers {
         val result = buffer.putString("a")
 
         it("puts the byte into the buffer") {
-          val result = buffer.putString("a")
+          buffer.putString("a")
           result.array must be(Array(97, 97))
         }
       }
