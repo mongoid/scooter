@@ -8,6 +8,15 @@ import language.implicitConversions
 object Conversions {
 
   /**
+   * Implicit conversion from a Boolean to a BooleanWrapper.
+   *
+   * @param target The Boolean that is getting wrapped.
+   *
+   * @return The BooleanWrapper around the Boolean.
+   */
+  implicit def wrapBoolean(target: Boolean) = new BooleanWrapper(target)
+
+  /**
    * Implicit conversion from a Int to a IntWrapper.
    *
    * @param target The Int that is getting wrapped.
