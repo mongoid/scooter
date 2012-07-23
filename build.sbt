@@ -1,3 +1,4 @@
+# vim:set filetype=scala:
 name := "scooter"
 
 version := "0.0.0"
