@@ -4,7 +4,7 @@ import org.mongoid.scooter.protocol.Insert
 import org.specs2.mutable.Specification
 import scala.collection.immutable.HashMap
 
-class CollectionSpec extends Specification {
+class ConnectionSpec extends Specification {
 
   def address = new InetSocketAddress("127.0.0.1", 27017)
   def connection = Connection(address)
