@@ -1,17 +1,20 @@
 import org.mongoid.scooter.{ Collection, Database, Session }
 import org.specs2.mutable.Specification
+import org.specs2.specification.Scope
 
 class CollectionSpec extends Specification {
 
-  def session = new Session(Array("localhost:27017"))
-  def database = new Database(session, "scooter_test")
-
   "Collection#fullName" should {
 
-    def collection = new Collection(database, "users")
-
-    "return the database name plus collection name" in {
+    "return the database name plus collection name" in new scope {
       collection.fullName must beEqualTo("scooter_test.users")
     }
+  }
+
+  trait scope extends Scope {
+
+    val session = new Session(Array("localhost:27017"))
+    val database = new Database(session, "scooter_test")
+    val collection = new Collection(database, "users")
   }
 }
