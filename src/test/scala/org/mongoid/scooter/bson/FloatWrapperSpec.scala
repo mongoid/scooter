@@ -9,8 +9,6 @@ class FloatWrapperSpec extends Specification {
   "FloatWrapper#bsonDump" should {
 
     val buffer = MutableBuffer(12)
-    val key = "hi"
-    val value = 1.123f
     val wrapper = new FloatWrapper(value)
 
     "serialize the float to the buffer" in new scope {
@@ -22,8 +20,6 @@ class FloatWrapperSpec extends Specification {
   "Float#bsonDump" should {
 
     val buffer = MutableBuffer(12)
-    val key = "hi"
-    val value = 1.123f
 
     "serialize the float to the buffer" in new scope {
       value.bsonDump(buffer, key)
@@ -31,8 +27,11 @@ class FloatWrapperSpec extends Specification {
     }
   }
 
+  def value = 1.123f
+
   trait scope extends Scope {
 
+    val key = "hi"
     val bytes = Array[Byte](1, 104, 105, 0, 0, 0, 0, -32, -50, -9, -15, 63)
   }
 }

@@ -9,8 +9,6 @@ class IntWrapperSpec extends Specification {
   "IntWrapper#bsonDump" should {
 
     val buffer = MutableBuffer(8)
-    val key = "hi"
-    val value = 1
     val wrapper = new IntWrapper(value)
 
     "serialize the int to the buffer" in new scope {
@@ -22,8 +20,6 @@ class IntWrapperSpec extends Specification {
   "Int#bsonDump" should {
 
     val buffer = MutableBuffer(8)
-    val key = "hi"
-    val value = 1
 
     "serialize the int to the buffer" in new scope {
       value.bsonDump(buffer, key)
@@ -31,8 +27,11 @@ class IntWrapperSpec extends Specification {
     }
   }
 
+  def value = 1
+
   trait scope extends Scope {
 
+    val key = "hi"
     val bytes = Array[Byte](16, 104, 105, 0, 1, 0, 0, 0)
   }
 }

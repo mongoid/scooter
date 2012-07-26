@@ -9,8 +9,6 @@ class StringWrapperSpec extends Specification {
   "StringWrapper#bsonDump" should {
 
     val buffer = MutableBuffer(11)
-    val key = "hi"
-    val value = "ya"
     val wrapper = new StringWrapper(value)
 
     "serialize the string to the buffer" in new scope {
@@ -22,8 +20,6 @@ class StringWrapperSpec extends Specification {
   "String#bsonDump" should {
 
     val buffer = MutableBuffer(11)
-    val key = "hi"
-    val value = "ya"
 
     "serialize the string to the buffer" in new scope {
       value.bsonDump(buffer, key)
@@ -31,8 +27,11 @@ class StringWrapperSpec extends Specification {
     }
   }
 
+  def value = "ya"
+
   trait scope extends Scope {
 
+    val key = "hi"
     val bytes = Array[Byte](2, 104, 105, 0, 3, 0, 0, 0, 121, 97, 0)
   }
 }

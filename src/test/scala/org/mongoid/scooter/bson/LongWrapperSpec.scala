@@ -9,8 +9,6 @@ class LongWrapperSpec extends Specification {
   "LongWrapper#bsonDump" should {
 
     val buffer = MutableBuffer(12)
-    val key = "hi"
-    val value = 1l
     val wrapper = new LongWrapper(value)
 
     "serialize the int to the buffer" in new scope {
@@ -22,8 +20,6 @@ class LongWrapperSpec extends Specification {
   "Long#bsonDump" should {
 
     val buffer = MutableBuffer(12)
-    val key = "hi"
-    val value = 1l
 
     "serialize the int to the buffer" in new scope {
       value.bsonDump(buffer, key)
@@ -31,8 +27,11 @@ class LongWrapperSpec extends Specification {
     }
   }
 
+  def value = 1l
+
   trait scope extends Scope {
 
+    val key = "hi"
     val bytes = Array[Byte](18, 104, 105, 0, 1, 0, 0, 0, 0, 0, 0, 0)
   }
 }
