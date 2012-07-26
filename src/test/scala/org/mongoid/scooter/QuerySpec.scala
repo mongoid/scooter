@@ -1,10 +1,6 @@
 import org.mongoid.scooter.Query
+import org.specs2.mutable.Specification
 
-import org.scalatest.FunSpec
-import org.scalatest.matchers.MustMatchers
+class QuerySpec extends Specification {
 
-class QuerySpec extends FunSpec with MustMatchers {
-
-  describe("Query") {
-  }
 }

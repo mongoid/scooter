@@ -1,22 +1,17 @@
 import org.mongoid.scooter.{ Collection, Database, Session }
+import org.specs2.mutable.Specification
 
-import org.scalatest.FunSpec
-import org.scalatest.matchers.MustMatchers
+class CollectionSpec extends Specification {
 
-class CollectionSpec extends FunSpec with MustMatchers {
+  def session = new Session(Array("localhost:27017"))
+  def database = new Database(session, "scooter_test")
 
-  describe("Collection") {
+  "Collection#fullName" should {
 
-    val session = new Session(Array("localhost:27017"))
-    val database = new Database(session, "scooter_test")
+    def collection = new Collection(database, "users")
 
-    describe("#fullName") {
-
-      val collection = new Collection(database, "users")
-
-      it("returns the database name plus collection name") {
-        collection.fullName must be("scooter_test.users")
-      }
+    "return the database name plus collection name" in {
+      collection.fullName must beEqualTo("scooter_test.users")
     }
   }
 }

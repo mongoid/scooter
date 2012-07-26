@@ -1,10 +1,6 @@
 import org.mongoid.scooter.Node
+import org.specs2.mutable.Specification
 
-import org.scalatest.FunSpec
-import org.scalatest.matchers.MustMatchers
+class NodeSpec extends Specification {
 
-class NodeSpec extends FunSpec with MustMatchers {
-
-  describe("Node") {
-  }
 }

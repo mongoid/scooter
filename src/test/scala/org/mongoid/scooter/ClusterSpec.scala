@@ -1,10 +1,6 @@
 import org.mongoid.scooter.Cluster
+import org.specs2.mutable.Specification
 
-import org.scalatest.FunSpec
-import org.scalatest.matchers.MustMatchers
+class ClusterSpec extends Specification {
 
-class ClusterSpec extends FunSpec with MustMatchers {
-
-  describe("Cluster") {
-  }
 }

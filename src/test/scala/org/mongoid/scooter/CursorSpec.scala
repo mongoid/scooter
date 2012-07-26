@@ -1,10 +1,6 @@
 import org.mongoid.scooter.Cursor
+import org.specs2.mutable.Specification
 
-import org.scalatest.FunSpec
-import org.scalatest.matchers.MustMatchers
+class CursorSpec extends Specification {
 
-class CursorSpec extends FunSpec with MustMatchers {
-
-  describe("Cursor") {
-  }
 }

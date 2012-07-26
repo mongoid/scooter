@@ -1,10 +1,6 @@
 import org.mongoid.scooter.Indexes
+import org.specs2.mutable.Specification
 
-import org.scalatest.FunSpec
-import org.scalatest.matchers.MustMatchers
+class IndexesSpec extends Specification {
 
-class IndexesSpec extends FunSpec with MustMatchers {
-
-  describe("Indexes") {
-  }
 }
