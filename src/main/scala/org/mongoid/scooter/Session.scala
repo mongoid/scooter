@@ -14,7 +14,7 @@ object Session {
    *
    * @return The Context for the session.
    */
-  implicit def delegateToContext(session: Session) = session.context
+  implicit def wrapContext(session: Session) = session.context
 
   /**
    * Implicit conversion from a Session to a Database.
@@ -23,7 +23,7 @@ object Session {
    *
    * @return The Database for the session.
    */
-  implicit def delegateToDatabase(session: Session) = session.database
+  implicit def wrapDatabase(session: Session) = session.database
 }
 
 /**
