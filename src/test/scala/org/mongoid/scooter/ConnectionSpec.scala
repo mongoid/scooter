@@ -6,14 +6,14 @@ import scala.collection.immutable.HashMap
 
 class ConnectionSpec extends Specification {
 
-  def address = new InetSocketAddress("127.0.0.1", 27017)
-  def connection = Connection(address)
+  val address = new InetSocketAddress("127.0.0.1", 27017)
+  val connection = Connection(address)
 
   "Connection#write" should {
 
-    def document = HashMap("hi" -> "ya")
-    def documents = Array(document)
-    def insert = new Insert("scooter_test.users", documents)
+    val document = HashMap("hi" -> "ya")
+    val documents = Array(document)
+    val insert = new Insert("scooter_test.users", documents)
 
     "return the database name plus collection name" in {
       // connection.write(insert)
