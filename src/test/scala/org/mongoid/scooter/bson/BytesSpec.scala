@@ -1,90 +1,117 @@
 import org.mongoid.scooter.bson.Bytes._
+import org.specs2.mutable.Specification
 
-import org.scalatest.FunSpec
-import org.scalatest.matchers.MustMatchers
+class Bytes extends Specification {
 
-class Bytes extends FunSpec with MustMatchers {
+  "Bytes.NULL" should {
 
-  describe("Bytes") {
-
-    describe(".NULL") {
-
-      it("returns 0x00") { NULL must be(0x00) }
+    "return 0x00" in {
+      NULL must beEqualTo(0x00)
     }
+  }
 
-    describe(".FLOAT") {
+  "Bytes.FLOAT" should {
 
-      it("returns 0x01") { FLOAT must be(0x01) }
+    "return 0x01" in {
+      FLOAT must beEqualTo(0x01)
     }
+  }
 
-    describe(".STRING") {
+  "Bytes.STRING" should {
 
-      it("returns 0x02") { STRING must be(0x02) }
+    "return 0x02" in {
+      STRING must beEqualTo(0x02)
     }
+  }
 
-    describe(".EMBEDDED") {
+  "Bytes.EMBEDDED" should {
 
-      it("returns 0x03") { EMBEDDED must be(0x03) }
+    "return 0x03" in {
+      EMBEDDED must beEqualTo(0x03)
     }
+  }
 
-    describe(".ARRAY") {
+  "Bytes.ARRAY" should {
 
-      it("returns 0x04") { ARRAY must be(0x04) }
+    "return 0x04" in {
+      ARRAY must beEqualTo(0x04)
     }
+  }
 
-    describe(".BINARY") {
+  "Bytes.BINARY" should {
 
-      it("returns 0x05") { BINARY must be(0x05) }
+    "return 0x05" in {
+      BINARY must beEqualTo(0x05)
     }
+  }
 
-    describe(".OBJECT_ID") {
+  "Bytes.OBJECT_ID" should {
 
-      it("returns 0x07") { OBJECT_ID must be(0x07) }
+    "return 0x07" in {
+      OBJECT_ID must beEqualTo(0x07)
     }
+  }
 
-    describe(".BOOLEAN") {
+  "Bytes.BOOLEAN" should {
 
-      it("returns 0x08") { BOOLEAN must be(0x08) }
+    "return 0x08" in {
+      BOOLEAN must beEqualTo(0x08)
     }
+  }
 
-    describe(".TIME") {
+  "Bytes.TIME" should {
 
-      it("returns 0x09") { TIME must be(0x09) }
+    "return 0x09" in {
+      TIME must beEqualTo(0x09)
     }
+  }
 
-    describe(".NULL_VALUE") {
+  "Bytes.NULL_VALUE" should {
 
-      it("returns 0x0A") { NULL_VALUE must be(0x0A) }
+    "return 0x0A" in {
+      NULL_VALUE must beEqualTo(0x0A)
     }
+  }
 
-    describe(".REGEX") {
+  "Bytes.REGEX" should {
 
-      it("returns 0x0B") { REGEX must be(0x0B) }
+    "return 0x0B" in {
+      REGEX must beEqualTo(0x0B)
     }
+  }
 
-    describe(".CODE") {
+  "Bytes.CODE" should {
 
-      it("returns 0x0D") { CODE must be(0x0D) }
+    "return 0x0D" in {
+      CODE must beEqualTo(0x0D)
     }
+  }
 
-    describe(".SYMBOL") {
+  "Bytes.SYMBOL" should {
 
-      it("returns 0x0E") { SYMBOL must be(0x0E) }
+    "return 0x0E" in {
+      SYMBOL must beEqualTo(0x0E)
     }
+  }
 
-    describe(".SCOPED_CODE") {
+  "Bytes.SCOPED_CODE" should {
 
-      it("returns 0x0F") { SCOPED_CODE must be(0x0F) }
+    "return 0x0F" in {
+      SCOPED_CODE must beEqualTo(0x0F)
     }
+  }
 
-    describe(".INT_32") {
+  "Bytes.INT_32" should {
 
-      it("returns 0x10") { INT_32 must be(0x10) }
+    "return 0x10" in {
+      INT_32 must beEqualTo(0x10)
     }
+  }
 
-    describe(".INT_64") {
+  "Bytes.INT_64" should {
 
-      it("returns 0x12") { INT_64 must be(0x12) }
+    "return 0x12" in {
+      INT_64 must beEqualTo(0x12)
     }
   }
 }

@@ -1,45 +1,34 @@
 import org.mongoid.scooter.bson.FloatWrapper
 import org.mongoid.scooter.bson.Conversions._
 import org.mongoid.scooter.bson.MutableBuffer
+import org.specs2.mutable.Specification
 
-import org.scalatest.FunSpec
-import org.scalatest.matchers.MustMatchers
-
-class FloatWrapperSpec extends FunSpec with MustMatchers {
+class FloatWrapperSpec extends Specification {
 
   val bytes = Array[Byte](1, 104, 105, 0, 0, 0, 0, -32, -50, -9, -15, 63)
 
-  describe("FloatWrapper") {
+  "FloatWrapper#bsonDump" should {
 
     val buffer = MutableBuffer(12)
+    val key = "hi"
+    val value = 1.123f
+    val wrapper = new FloatWrapper(value)
 
-    describe("#bsonDump") {
-
-      val key = "hi"
-      val value = 1.123f
-
-      val wrapper = new FloatWrapper(value)
-
-      it("serializes the float to the buffer") {
-        wrapper.bsonDump(buffer, key)
-        buffer.array must be(bytes)
-      }
+    "serialize the float to the buffer" in {
+      wrapper.bsonDump(buffer, key)
+      buffer.array must beEqualTo(bytes)
     }
   }
 
-  describe("Float") {
+  "Float#bsonDump" should {
 
     val buffer = MutableBuffer(12)
+    val key = "hi"
+    val value = 1.123f
 
-    describe("#bsonDump") {
-
-      val key = "hi"
-      val value = 1.123f
-
-      it("serializes the float to the buffer") {
-        value.bsonDump(buffer, key)
-        buffer.array must be(bytes)
-      }
+    "serialize the float to the buffer" in {
+      value.bsonDump(buffer, key)
+      buffer.array must beEqualTo(bytes)
     }
   }
 }

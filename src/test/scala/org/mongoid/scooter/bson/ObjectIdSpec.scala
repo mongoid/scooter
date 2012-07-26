@@ -1,26 +1,16 @@
 import java.net.InetAddress
 import java.security.MessageDigest
-
 import org.mongoid.scooter.bson.ObjectId
+import org.specs2.mutable.Specification
 
-import org.scalatest.FunSpec
-import org.scalatest.matchers.MustMatchers
+class ObjectIdSpec extends Specification {
 
-class ObjectIdSpec extends FunSpec with MustMatchers {
+  "ObjectId.apply" should {
 
-  describe("ObjectId") {
+    "when no arguments are provided" in {
 
-    describe(".apply") {
-
-      describe("when no arguments are provided") {
-
-        it("starts the counter at zero") {
-          ObjectId().data.last must be(0)
-        }
-
-        it("increments the counter each instantiation") {
-          ObjectId().data.last must be(1)
-        }
+      "start the counter at zero" in {
+        ObjectId().data.last must beEqualTo(0)
       }
     }
   }

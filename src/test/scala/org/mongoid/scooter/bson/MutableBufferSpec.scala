@@ -1,151 +1,146 @@
 import org.mongoid.scooter.bson._
+import org.specs2.mutable.Specification
 
-import org.scalatest.FunSpec
-import org.scalatest.matchers.MustMatchers
+class MutableBufferSpec extends Specification {
 
-class MutableBufferSpec extends FunSpec with MustMatchers {
+  "MutableBuffer#putByte" should {
 
-  describe("MutableBuffer") {
+    "when the buffer would not overflow" in {
 
-    describe("#putByte") {
+      val buffer = MutableBuffer(1)
+      val result = buffer.putByte(Bytes.STRING)
 
-      describe("when the buffer would not overflow") {
-
-        val buffer = MutableBuffer(1)
-        val result = buffer.putByte(Bytes.STRING)
-
-        it("puts the byte into the buffer") {
-          result.array must be(Array(Bytes.STRING))
-        }
-
-        it("returns the buffer") {
-          result must be(buffer)
-        }
+      "put the byte into the buffer" in {
+        result.array must beEqualTo(Array(Bytes.STRING))
       }
 
-      describe("when the buffer would overflow") {
-
-        val buffer = MutableBuffer(1)
-        val result = buffer.putByte(Bytes.STRING)
-
-        it("puts the byte into the buffer") {
-          buffer.putByte(Bytes.STRING)
-          result.array must be(Array(Bytes.STRING, Bytes.STRING))
-        }
+      "return the buffer" in {
+        result must beEqualTo(buffer)
       }
     }
 
-    describe("#putDouble") {
+    "when the buffer would overflow" in {
 
-      describe("when the buffer would not overflow") {
+      val buffer = MutableBuffer(1)
+      val result = buffer.putByte(Bytes.STRING)
 
-        val buffer = MutableBuffer(8)
-        val result = buffer.putDouble(1.1233)
+      "put the byte into the buffer" in {
+        buffer.putByte(Bytes.STRING)
+        result.array must beEqualTo(Array(Bytes.STRING, Bytes.STRING))
+      }
+    }
+  }
 
-        it("puts the double into the buffer") {
-          result.array must be(Array(126, -116, -71, 107, 9, -7, -15, 63))
-        }
+  "MutableBuffer#putDouble" should {
 
-        it("returns the buffer") {
-          result must be(buffer)
-        }
+    "when the buffer would not overflow" in {
+
+      val buffer = MutableBuffer(8)
+      val result = buffer.putDouble(1.1233)
+
+      "put the double into the buffer" in {
+        result.array must beEqualTo(Array(126, -116, -71, 107, 9, -7, -15, 63))
       }
 
-      describe("when the buffer would overflow") {
-
-        val buffer = MutableBuffer(8)
-        val result = buffer.putDouble(1.1233)
-
-        it("puts the double into the buffer") {
-          buffer.putDouble(1.1233)
-          result.array must be(
-            Array(126, -116, -71, 107, 9, -7, -15, 63, 126, -116, -71, 107, 9, -7, -15, 63)
-          )
-        }
+      "return the buffer" in {
+        result must beEqualTo(buffer)
       }
     }
 
-    describe("#putInt") {
+    "when the buffer would overflow" in {
 
-      describe("when the buffer would not overflow") {
+      val buffer = MutableBuffer(8)
+      val result = buffer.putDouble(1.1233)
 
-        val buffer = MutableBuffer(4)
-        val result = buffer.putInt(1)
+      "put the double into the buffer" in {
+        buffer.putDouble(1.1233)
+        result.array must beEqualTo(
+          Array(126, -116, -71, 107, 9, -7, -15, 63, 126, -116, -71, 107, 9, -7, -15, 63)
+        )
+      }
+    }
+  }
 
-        it("puts the byte into the buffer") {
-          result.array must be(Array(1, 0, 0, 0))
-        }
+  "MutableBuffer#putInt" should {
 
-        it("returns the buffer") {
-          result must be(buffer)
-        }
+    "when the buffer would not overflow" in {
+
+      val buffer = MutableBuffer(4)
+      val result = buffer.putInt(1)
+
+      "put the byte into the buffer" in {
+        result.array must beEqualTo(Array(1, 0, 0, 0))
       }
 
-      describe("when the buffer would overflow") {
-
-        val buffer = MutableBuffer(4)
-        val result = buffer.putInt(1)
-
-        it("puts the byte into the buffer") {
-          buffer.putInt(1)
-          result.array must be(Array(1, 0, 0, 0, 1, 0, 0, 0))
-        }
+      "return the buffer" in {
+        result must beEqualTo(buffer)
       }
     }
 
-    describe("#putLong") {
+    "when the buffer would overflow" in {
 
-      describe("when the buffer would not overflow") {
+      val buffer = MutableBuffer(4)
+      val result = buffer.putInt(1)
 
-        val buffer = MutableBuffer(8)
-        val result = buffer.putLong(1l)
+      "put the byte into the buffer" in {
+        buffer.putInt(1)
+        result.array must beEqualTo(Array(1, 0, 0, 0, 1, 0, 0, 0))
+      }
+    }
+  }
 
-        it("puts the byte into the buffer") {
-          result.array must be(Array(1, 0, 0, 0, 0, 0, 0, 0))
-        }
+  "MutableBuffer#putLong" should {
 
-        it("returns the buffer") {
-          result must be(buffer)
-        }
+    "when the buffer would not overflow" in {
+
+      val buffer = MutableBuffer(8)
+      val result = buffer.putLong(1l)
+
+      "put the byte into the buffer" in {
+        result.array must beEqualTo(Array(1, 0, 0, 0, 0, 0, 0, 0))
       }
 
-      describe("when the buffer would overflow") {
-
-        val buffer = MutableBuffer(8)
-        val result = buffer.putLong(1l)
-
-        it("puts the byte into the buffer") {
-          buffer.putLong(1l)
-          result.array must be(Array(1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0))
-        }
+      "return the buffer" in {
+        result must beEqualTo(buffer)
       }
     }
 
-    describe("#putString") {
+    "when the buffer would overflow" in {
 
-      describe("when the buffer would not overflow") {
+      val buffer = MutableBuffer(8)
+      val result = buffer.putLong(1l)
 
-        val buffer = MutableBuffer(1)
-        val result = buffer.putString("a")
+      "put the byte into the buffer" in {
+        buffer.putLong(1l)
+        result.array must beEqualTo(Array(1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0))
+      }
+    }
+  }
 
-        it("puts the byte into the buffer") {
-          result.array must be(Array(97))
-        }
+  "MutableBuffer#putString" should {
 
-        it("returns the buffer") {
-          result must be(buffer)
-        }
+    "when the buffer would not overflow" in {
+
+      val buffer = MutableBuffer(1)
+      val result = buffer.putString("a")
+
+      "put the byte into the buffer" in {
+        result.array must beEqualTo(Array(97))
       }
 
-      describe("when the buffer would overflow") {
+      "return the buffer" in {
+        result must beEqualTo(buffer)
+      }
+    }
 
-        val buffer = MutableBuffer(1)
-        val result = buffer.putString("a")
+    "when the buffer would overflow" in {
 
-        it("puts the byte into the buffer") {
-          buffer.putString("a")
-          result.array must be(Array(97, 97))
-        }
+      val buffer = MutableBuffer(1)
+      val result = buffer.putString("a")
+
+      "put the byte into the buffer" in {
+        buffer.putString("a")
+        result.array must beEqualTo(Array(97, 97))
       }
     }
   }

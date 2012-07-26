@@ -1,70 +1,60 @@
 import org.mongoid.scooter.bson.BooleanWrapper
 import org.mongoid.scooter.bson.Conversions._
 import org.mongoid.scooter.bson.MutableBuffer
+import org.specs2.mutable.{ Before, Specification }
 
-import org.scalatest.FunSpec
-import org.scalatest.matchers.MustMatchers
+class BooleanWrapperSpec extends Specification {
 
-class BooleanWrapperSpec extends FunSpec with MustMatchers {
+  val key = "hi"
 
-  describe("BooleanWrapper") {
+  "BooleanWrapper#bsonDump" should {
 
-    describe("#bsonDump") {
+    "when the boolean is true" in {
 
-      val key = "hi"
+      val buffer = MutableBuffer(5)
+      val bytes = Array[Byte](8, 104, 105, 0, 1)
+      val wrapper = new BooleanWrapper(true)
 
-      describe("when the boolean is true") {
-
-        val buffer = MutableBuffer(5)
-        val bytes = Array[Byte](8, 104, 105, 0, 1)
-        val wrapper = new BooleanWrapper(true)
-
-        it("serializes the int to the buffer") {
-          wrapper.bsonDump(buffer, key)
-          buffer.array must be(bytes)
-        }
+      "serialize the boolean to the buffer" in {
+        wrapper.bsonDump(buffer, key)
+        buffer.array must beEqualTo(bytes)
       }
+    }
 
-      describe("when the boolean is false") {
+    "when the boolean is false" in {
 
-        val buffer = MutableBuffer(5)
-        val bytes = Array[Byte](8, 104, 105, 0, 0)
-        val wrapper = new BooleanWrapper(false)
+      val buffer = MutableBuffer(5)
+      val bytes = Array[Byte](8, 104, 105, 0, 0)
+      val wrapper = new BooleanWrapper(false)
 
-        it("serializes the int to the buffer") {
-          wrapper.bsonDump(buffer, key)
-          buffer.array must be(bytes)
-        }
+      "serialize the boolean to the buffer" in {
+        wrapper.bsonDump(buffer, key)
+        buffer.array must beEqualTo(bytes)
       }
     }
   }
 
-  describe("Boolean") {
+  "Boolean#bsonDump" should {
 
-    describe("#bsonDump") {
+    "when the boolean is true" in {
 
-      val key = "hi"
+      val buffer = MutableBuffer(5)
+      val bytes = Array[Byte](8, 104, 105, 0, 1)
 
-      describe("when the boolean is true") {
-
-        val buffer = MutableBuffer(5)
-        val bytes = Array[Byte](8, 104, 105, 0, 1)
-
-        it("serializes the boolean to the buffer") {
-          true.bsonDump(buffer, key)
-          buffer.array must be(bytes)
-        }
+      "serialize the boolean to the buffer" in {
+        true.bsonDump(buffer, key)
+        buffer.array must beEqualTo(bytes)
       }
+    }
 
-      describe("when the boolean is false") {
+    "when the boolean is false" in {
 
-        val buffer = MutableBuffer(5)
-        val bytes = Array[Byte](8, 104, 105, 0, 0)
+      val buffer = MutableBuffer(5)
+      val bytes = Array[Byte](8, 104, 105, 0, 0)
 
-        it("serializes the boolean to the buffer") {
-          false.bsonDump(buffer, key)
-          buffer.array must be(bytes)
-        }
+      "serialize the boolean to the buffer" in {
+        false.bsonDump(buffer, key)
+        buffer.array must beEqualTo(bytes)
       }
     }
   }

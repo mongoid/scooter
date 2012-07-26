@@ -1,45 +1,34 @@
 import org.mongoid.scooter.bson.LongWrapper
 import org.mongoid.scooter.bson.Conversions._
 import org.mongoid.scooter.bson.MutableBuffer
+import org.specs2.mutable.Specification
 
-import org.scalatest.FunSpec
-import org.scalatest.matchers.MustMatchers
-
-class LongWrapperSpec extends FunSpec with MustMatchers {
+class LongWrapperSpec extends Specification {
 
   val bytes = Array[Byte](18, 104, 105, 0, 1, 0, 0, 0, 0, 0, 0, 0)
 
-  describe("LongWrapper") {
+  "LongWrapper#bsonDump" should {
 
     val buffer = MutableBuffer(12)
+    val key = "hi"
+    val value = 1l
+    val wrapper = new LongWrapper(value)
 
-    describe("#bsonDump") {
-
-      val key = "hi"
-      val value = 1l
-
-      val wrapper = new LongWrapper(value)
-
-      it("serializes the int to the buffer") {
-        wrapper.bsonDump(buffer, key)
-        buffer.array must be(bytes)
-      }
+    "serialize the int to the buffer" in {
+      wrapper.bsonDump(buffer, key)
+      buffer.array must beEqualTo(bytes)
     }
   }
 
-  describe("Long") {
+  "Long#bsonDump" should {
 
     val buffer = MutableBuffer(12)
+    val key = "hi"
+    val value = 1l
 
-    describe("#bsonDump") {
-
-      val key = "hi"
-      val value = 1l
-
-      it("serializes the int to the buffer") {
-        value.bsonDump(buffer, key)
-        buffer.array must be(bytes)
-      }
+    "serialize the int to the buffer" in {
+      value.bsonDump(buffer, key)
+      buffer.array must beEqualTo(bytes)
     }
   }
 }

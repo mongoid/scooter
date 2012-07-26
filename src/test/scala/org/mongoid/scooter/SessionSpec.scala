@@ -25,6 +25,7 @@ class SessionSpec extends Specification {
   }
 
   object scooter extends Before {
+
     def before = session.use("scooter_test")
   }
 }

@@ -1,45 +1,34 @@
 import org.mongoid.scooter.bson.IntWrapper
 import org.mongoid.scooter.bson.Conversions._
 import org.mongoid.scooter.bson.MutableBuffer
+import org.specs2.mutable.Specification
 
-import org.scalatest.FunSpec
-import org.scalatest.matchers.MustMatchers
-
-class IntWrapperSpec extends FunSpec with MustMatchers {
+class IntWrapperSpec extends Specification {
 
   val bytes = Array[Byte](16, 104, 105, 0, 1, 0, 0, 0)
 
-  describe("IntWrapper") {
+  "IntWrapper#bsonDump" should {
 
     val buffer = MutableBuffer(8)
+    val key = "hi"
+    val value = 1
+    val wrapper = new IntWrapper(value)
 
-    describe("#bsonDump") {
-
-      val key = "hi"
-      val value = 1
-
-      val wrapper = new IntWrapper(value)
-
-      it("serializes the int to the buffer") {
-        wrapper.bsonDump(buffer, key)
-        buffer.array must be(bytes)
-      }
+    "serialize the int to the buffer" in {
+      wrapper.bsonDump(buffer, key)
+      buffer.array must beEqualTo(bytes)
     }
   }
 
-  describe("Int") {
+  "Int#bsonDump" should {
 
     val buffer = MutableBuffer(8)
+    val key = "hi"
+    val value = 1
 
-    describe("#bsonDump") {
-
-      val key = "hi"
-      val value = 1
-
-      it("serializes the int to the buffer") {
-        value.bsonDump(buffer, key)
-        buffer.array must be(bytes)
-      }
+    "serialize the int to the buffer" in {
+      value.bsonDump(buffer, key)
+      buffer.array must beEqualTo(bytes)
     }
   }
 }
