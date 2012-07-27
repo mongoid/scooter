@@ -21,14 +21,14 @@ object MutableBuffer {
   }
 
   /**
-   * Methods not defined on the MutableBuffer should delegate through
+   * Methods not defined on the MutableBuffer should wrap through
    * to the wrapped ByteBuffer.
    *
    * @param buffer The MutableBuffer.
    *
    * @return The wrapped ByteBuffer.
    */
-  implicit def delegateToBuffer(buffer: MutableBuffer) = buffer.byteBuffer
+  implicit def wrapBuffer(buffer: MutableBuffer) = buffer.byteBuffer
 }
 
 /**
