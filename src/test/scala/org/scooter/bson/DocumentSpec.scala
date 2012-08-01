@@ -10,7 +10,7 @@ class DocumentSpec extends Specification {
   "Document#bsonDump" should {
 
     val buffer = MutableBuffer(16)
-    val hash = HashMap("hi" -> "ya")
+    val hash = HashMap[String, Any]("hi" -> "ya")
     val document = new Document(hash)
 
     "serializes the string to the buffer" in new scope {

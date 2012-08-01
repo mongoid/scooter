@@ -14,7 +14,7 @@ object Document {
    *
    * @return Map The document as a map.
    */
-  def bsonLoad[T<:Any](buffer: MutableBuffer, doc: HashMap[String, T]) = {
+  def bsonLoad(buffer: MutableBuffer, doc: HashMap[String, Any]) = {
     // io.read 4
     // while (buf = io.readbyte) != 0
       // key = io.gets(NULL_BYTE).from_utf8_binary.chop!
@@ -32,7 +32,7 @@ object Document {
  *
  * @param document The Hash to wrap.
  */
-class Document[T<:Any](document: HashMap[String, T]) {
+class Document(document: HashMap[String, Any]) {
 
   /**
    * Dump the document to the buffer, and yield to the provided

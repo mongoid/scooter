@@ -9,7 +9,7 @@ class ConnectionSpec extends Specification {
 
   "Connection#write" should {
 
-    val document = HashMap("hi" -> "ya")
+    val document = HashMap[String, Any]("hi" -> "ya")
     val documents = Array(document)
     val insert = new Insert("scooter_test.users", documents)
 

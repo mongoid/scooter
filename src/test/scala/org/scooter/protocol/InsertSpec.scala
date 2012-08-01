@@ -34,7 +34,7 @@ class InsertSpec extends Specification {
 
   trait scope extends Scope {
 
-    val doc = HashMap("hi" -> "ya")
+    val doc = HashMap[String, Any]("hi" -> "ya")
     val documents = Array(doc)
     val insert = new Insert("scooter_test.users", documents)
   }

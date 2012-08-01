@@ -18,7 +18,7 @@ object Insert {
    *
    * @return The Insert message.
    */
-  def apply[T<:Any](collection: Collection, documents: Array[HashMap[String, T]]) = {
+  def apply(collection: Collection, documents: Array[HashMap[String, Any]]) = {
     new Insert(collection.fullName, documents)
   }
 }
@@ -32,7 +32,7 @@ object Insert {
  * @param name The full name of the Collection.
  * @param documents The documents to insert.
  */
-class Insert[T<:Any](name: String, documents: Array[HashMap[String, T]]) extends Message {
+class Insert(name: String, documents: Array[HashMap[String, Any]]) extends Message {
 
   /**
    * Get the operation code for an Insert.
