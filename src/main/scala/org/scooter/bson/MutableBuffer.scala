@@ -56,8 +56,20 @@ class MutableBuffer(factor: Int, var buffer: ByteBuffer) {
   def getString: String = {
     val bytes = new ArrayBuffer[Byte]
     var byte = Bytes.NULL
-    // Add a wrapper for array with this functionality.
     while ({ byte = buffer.get; byte != Bytes.NULL }) { bytes += byte }
+    return new String(bytes.toArray)
+  }
+
+  /**
+   * Get a string from the buffer up to the provided length.
+   *
+   * @param size The size of the string.
+   *
+   * @return A String.
+   */
+  def getString(size: Int): String = {
+    val bytes = new Array[Byte](size)
+    buffer.get(bytes).get
     return new String(bytes.toArray)
   }
 

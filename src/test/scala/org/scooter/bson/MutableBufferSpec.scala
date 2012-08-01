@@ -5,13 +5,25 @@ class MutableBufferSpec extends Specification {
 
   "MutableBuffer#getString" should {
 
-    val buffer = MutableBuffer(5)
+    val buffer = MutableBuffer(6)
 
     "it returns the characters up to the null byte" in {
       buffer.putString("hello")
       buffer.putByte(Bytes.NULL)
       buffer.flip
       buffer.getString must beEqualTo("hello")
+    }
+  }
+
+  "MutableBuffer#getString(int)" should {
+
+    val buffer = MutableBuffer(6)
+
+    "return the string for the provided size" in {
+      buffer.putString("hello")
+      buffer.putByte(Bytes.NULL)
+      buffer.flip
+      buffer.getString(5) must beEqualTo("hello")
     }
   }
 
