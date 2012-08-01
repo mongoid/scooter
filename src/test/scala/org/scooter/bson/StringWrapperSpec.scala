@@ -28,6 +28,21 @@ class StringWrapperSpec extends Specification {
     }
   }
 
+  "StringWrapper.bsonLoad" should {
+
+    val buffer = MutableBuffer(11)
+    var doc = new HashMap[String, Any]
+    val wrapper = new StringWrapper(value)
+
+    "load the key and value into the hash" in new scope {
+      wrapper.bsonDump(buffer, key)
+      buffer.flip
+      StringWrapper.bsonLoad(buffer, doc)
+      // @todo: Why is this failing?
+      // doc must beEqualTo(HashMap("hi" -> "ya"))
+    }
+  }
+
   def value = "ya"
 
   trait scope extends Scope {

@@ -2,9 +2,19 @@ package org.scooter.bson
 
 import scala.collection.mutable.HashMap
 
+/**
+ * Companion object to the StringWrapper class.
+ */
 object StringWrapper {
 
-  def bsonLoad[T<:Any](buffer: MutableBuffer, doc: HashMap[String, T]) = {
+  /**
+   * Load the string value and its key from the buffer.
+   *
+   * @param buffer The MutableBuffer.
+   * @param doc The document to place in.
+   */
+  def bsonLoad(buffer: MutableBuffer, doc: HashMap[String, Any]) = {
+    doc += (buffer.getString -> buffer.getString(buffer.getInt - 1))
   }
 }
 
