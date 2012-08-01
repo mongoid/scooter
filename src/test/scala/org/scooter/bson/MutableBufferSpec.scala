@@ -3,6 +3,18 @@ import org.specs2.mutable.Specification
 
 class MutableBufferSpec extends Specification {
 
+  "MutableBuffer#getString" should {
+
+    val buffer = MutableBuffer(5)
+
+    "it returns the characters up to the null byte" in {
+      buffer.putString("hello")
+      buffer.putByte(Bytes.NULL)
+      buffer.flip
+      buffer.getString must beEqualTo("hello")
+    }
+  }
+
   "MutableBuffer#putByte" should {
 
     "when the buffer would not overflow" in {

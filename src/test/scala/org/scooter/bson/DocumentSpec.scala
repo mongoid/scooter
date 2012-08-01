@@ -3,7 +3,7 @@ import org.scooter.bson.Conversions._
 import org.scooter.bson.MutableBuffer
 import org.specs2.mutable.Specification
 import org.specs2.specification.Scope
-import scala.collection.immutable.HashMap
+import scala.collection.mutable.HashMap
 
 class DocumentSpec extends Specification {
 
@@ -18,6 +18,18 @@ class DocumentSpec extends Specification {
         case (key: String, value: String) => value.bsonDump(buffer, key)
       }
       buffer.array must beEqualTo(bytes)
+    }
+  }
+
+  "Document.bsonLoad" should {
+
+    val buffer = MutableBuffer(16)
+    val doc = new HashMap[String, Any]
+    val hash = HashMap("hi" -> "ya")
+
+    "deserialize the bytes into a hash map" in new scope {
+      // buffer.put(bytes)
+      // Document.bsonLoad(buffer, doc) must beEqualTo(hash)
     }
   }
 

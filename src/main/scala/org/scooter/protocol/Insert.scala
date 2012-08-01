@@ -3,6 +3,7 @@ package org.scooter.protocol
 import org.scooter.Collection
 import org.scooter.bson._
 import org.scooter.bson.Conversions._
+import scala.collection.mutable.HashMap
 
 /**
  * Companion object for the Insert class.
@@ -17,7 +18,7 @@ object Insert {
    *
    * @return The Insert message.
    */
-  def apply(collection: Collection, documents: Array[_<:Map[String, Any]]) = {
+  def apply[T<:Any](collection: Collection, documents: Array[HashMap[String, T]]) = {
     new Insert(collection.fullName, documents)
   }
 }
@@ -31,7 +32,7 @@ object Insert {
  * @param name The full name of the Collection.
  * @param documents The documents to insert.
  */
-class Insert(name: String, documents: Array[_<:Map[String, Any]]) extends Message {
+class Insert[T<:Any](name: String, documents: Array[HashMap[String, T]]) extends Message {
 
   /**
    * Get the operation code for an Insert.

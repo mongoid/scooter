@@ -1,5 +1,13 @@
 package org.scooter.bson
 
+import scala.collection.mutable.HashMap
+
+object StringWrapper {
+
+  def bsonLoad[T<:Any](buffer: MutableBuffer, doc: HashMap[String, T]) = {
+  }
+}
+
 /**
  * Wraps strings to provide additional behaviour around BSON serialization.
  *

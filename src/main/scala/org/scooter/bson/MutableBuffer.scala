@@ -2,6 +2,7 @@ package org.scooter.bson
 
 import java.nio.{ ByteBuffer, ByteOrder, BufferOverflowException }
 import language.implicitConversions
+import scala.collection.mutable.ArrayBuffer
 
 /**
  * Companion object to the MutableBuffer.
@@ -89,6 +90,18 @@ class MutableBuffer(factor: Int, var buffer: ByteBuffer) {
    */
   def putLong(value: Long) = {
     putValue(buffer => buffer.putLong(value))
+  }
+
+  /**
+   * Get a string from the buffer. Will read all bytes up to a null byte.
+   *
+   * @return A String.
+   */
+  def getString: String = {
+    val bytes = new ArrayBuffer[Byte]
+    var byte = Bytes.NULL
+    while ({ byte = buffer.get; byte != Bytes.NULL }) { bytes += byte }
+    return new String(bytes.toArray)
   }
 
   /**

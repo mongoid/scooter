@@ -3,6 +3,7 @@ import org.scooter.bson.Conversions._
 import org.scooter.bson.MutableBuffer
 import org.specs2.mutable.Specification
 import org.specs2.specification.Scope
+import scala.collection.mutable.HashMap
 
 class StringWrapperSpec extends Specification {
 

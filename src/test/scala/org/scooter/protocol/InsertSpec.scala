@@ -2,7 +2,7 @@ import org.scooter.bson.MutableBuffer
 import org.scooter.protocol.Insert
 import org.specs2.mutable.Specification
 import org.specs2.specification.Scope
-import scala.collection.immutable.HashMap
+import scala.collection.mutable.HashMap
 
 class InsertSpec extends Specification {
 

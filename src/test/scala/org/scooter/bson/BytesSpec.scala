@@ -1,7 +1,24 @@
+import org.scooter.bson._
 import org.scooter.bson.Bytes._
 import org.specs2.mutable.Specification
 
-class Bytes extends Specification {
+class BytesSpec extends Specification {
+
+  "Bytes.getType" should {
+
+    "when passed a float byte" in {
+
+      "return a float class" in {
+        Bytes.getType(0x01) must beEqualTo(classOf[Float])
+      }
+    }
+    "when passed a string byte" in {
+
+      "return a string class" in {
+        Bytes.getType(0x02) must beEqualTo(classOf[String])
+      }
+    }
+  }
 
   "Bytes.NULL" should {
 

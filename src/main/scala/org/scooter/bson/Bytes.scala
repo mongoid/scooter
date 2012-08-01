@@ -2,6 +2,19 @@ package org.scooter.bson
 
 object Bytes {
 
+  /* Get the type that is represented by the byte value.
+   *
+   * @param byte The Byte.
+   *
+   * @return [ Class ] The class.
+   */
+  def getType(byte: Byte) : Any = byte match {
+    // @todo: Check which is faster - pattern matching or pulling out of hash map.
+    case 0x01 => classOf[Float]
+    case 0x02 => classOf[String]
+    case _    => classOf[String]
+  }
+
   /**
    * Get a NULL byte. (0x00)
    *
