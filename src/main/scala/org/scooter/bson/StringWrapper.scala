@@ -14,7 +14,7 @@ object StringWrapper {
    * @param doc The document to place in.
    */
   def bsonLoad(buffer: MutableBuffer, doc: HashMap[String, Any]) = {
-    doc += (buffer.getString -> buffer.getString(buffer.getInt - 1))
+    doc(buffer.getString) = buffer.getString(buffer.getInt -1)
   }
 }
 

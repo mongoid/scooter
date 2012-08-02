@@ -37,9 +37,9 @@ class StringWrapperSpec extends Specification {
     "load the key and value into the hash" in new scope {
       wrapper.bsonDump(buffer, key)
       buffer.flip
+      buffer.get // The string type byte - will have already been read.
       StringWrapper.bsonLoad(buffer, doc)
-      // @todo: Why is this failing?
-      // doc must beEqualTo(HashMap("hi" -> "ya"))
+      doc must beEqualTo(HashMap("hi" -> "ya"))
     }
   }
 
