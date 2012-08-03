@@ -1,6 +1,6 @@
 package org.scooter.protocol
 
-import org.scooter.bson.MutableBuffer
+import org.jboss.netty.buffer.ChannelBuffer
 
 /**
  * Represents a generic database Command.
@@ -19,7 +19,7 @@ class Command extends Message {
   /**
    * Serialize the Command into a buffer that can be written to the socket.
    *
-   * @param buffer The MutableBuffer that will get written.
+   * @param buffer The ChannelBuffer that will get written.
    */
-  def serialize(buffer: MutableBuffer) = {}
+  def serialize(buffer: ChannelBuffer) = {}
 }

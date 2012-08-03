@@ -1,5 +1,6 @@
 package org.scooter.protocol
 
+import org.jboss.netty.buffer.ChannelBuffer
 import org.scooter.Collection
 import org.scooter.bson._
 import org.scooter.bson.Conversions._
@@ -55,23 +56,23 @@ class Insert(name: String, documents: Array[HashMap[String, Any]]) extends Messa
    *  - The documents.
    *  - Replace the length at position zero after everything is written.
    *
-   * @param buffer The MutableBuffer that will get written.
+   * @param buffer The ChannelBuffer that will get written.
    */
-  def serialize(buffer: MutableBuffer) = {
+  def serialize(buffer: ChannelBuffer) = {
     serializeHeader(buffer)
-    buffer.putInt(0) // Bit vector.
-    buffer.putString(name)
-    buffer.putByte(Bytes.NULL)
+    buffer.writeInt(0) // Bit vector.
+    buffer.writeBytes(name.getBytes)
+    buffer.writeZero(1)
     serializeDocuments(buffer)
-    buffer.putInt(0, buffer.position)
+    buffer.setInt(0, buffer.writerIndex)
   }
 
   /**
-   * Serialize the documents to the MutableBuffer.
+   * Serialize the documents to the ChannelBuffer.
    *
-   * @param buffer The MutableBuffer that will get written.
+   * @param buffer The ChannelBuffer that will get written.
    */
-  private def serializeDocuments(buffer: MutableBuffer) = {
+  private def serializeDocuments(buffer: ChannelBuffer) = {
     documents.foreach {
       doc => new Document(doc).bsonDump(buffer) {
         case (key: String, value: String) => value.bsonDump(buffer, key)

@@ -1,6 +1,8 @@
+import java.nio.ByteOrder
+import org.jboss.netty.buffer.ChannelBuffer
+import org.jboss.netty.buffer.ChannelBuffers._
 import org.scooter.bson.FloatWrapper
 import org.scooter.bson.Conversions._
-import org.scooter.bson.MutableBuffer
 import org.specs2.mutable.Specification
 import org.specs2.specification.Scope
 
@@ -8,7 +10,7 @@ class FloatWrapperSpec extends Specification {
 
   "FloatWrapper#bsonDump" should {
 
-    val buffer = MutableBuffer(12)
+    val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 12)
     val wrapper = new FloatWrapper(value)
 
     "serialize the float to the buffer" in new scope {
@@ -19,7 +21,7 @@ class FloatWrapperSpec extends Specification {
 
   "Float#bsonDump" should {
 
-    val buffer = MutableBuffer(12)
+    val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 12)
 
     "serialize the float to the buffer" in new scope {
       value.bsonDump(buffer, key)

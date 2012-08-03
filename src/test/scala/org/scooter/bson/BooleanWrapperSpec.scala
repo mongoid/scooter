@@ -1,6 +1,8 @@
+import java.nio.ByteOrder
+import org.jboss.netty.buffer.ChannelBuffer
+import org.jboss.netty.buffer.ChannelBuffers._
 import org.scooter.bson.BooleanWrapper
 import org.scooter.bson.Conversions._
-import org.scooter.bson.MutableBuffer
 import org.specs2.mutable.Specification
 import org.specs2.specification.Scope
 
@@ -10,7 +12,7 @@ class BooleanWrapperSpec extends Specification {
 
     "when the boolean is true" in {
 
-      val buffer = MutableBuffer(5)
+      val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 5)
       val bytes = Array[Byte](8, 104, 105, 0, 1)
       val wrapper = new BooleanWrapper(true)
 
@@ -22,7 +24,7 @@ class BooleanWrapperSpec extends Specification {
 
     "when the boolean is false" in {
 
-      val buffer = MutableBuffer(5)
+      val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 5)
       val bytes = Array[Byte](8, 104, 105, 0, 0)
       val wrapper = new BooleanWrapper(false)
 
@@ -37,7 +39,7 @@ class BooleanWrapperSpec extends Specification {
 
     "when the boolean is true" in {
 
-      val buffer = MutableBuffer(5)
+      val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 5)
       val bytes = Array[Byte](8, 104, 105, 0, 1)
 
       "serialize the boolean to the buffer" in new scope {
@@ -48,7 +50,7 @@ class BooleanWrapperSpec extends Specification {
 
     "when the boolean is false" in {
 
-      val buffer = MutableBuffer(5)
+      val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 5)
       val bytes = Array[Byte](8, 104, 105, 0, 0)
 
       "serialize the boolean to the buffer" in new scope {

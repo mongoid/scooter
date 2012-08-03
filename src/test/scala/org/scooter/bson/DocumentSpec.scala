@@ -1,6 +1,8 @@
+import java.nio.ByteOrder
+import org.jboss.netty.buffer.ChannelBuffer
+import org.jboss.netty.buffer.ChannelBuffers._
 import org.scooter.bson.Document
 import org.scooter.bson.Conversions._
-import org.scooter.bson.MutableBuffer
 import org.specs2.mutable.Specification
 import org.specs2.specification.Scope
 import scala.collection.mutable.HashMap
@@ -9,7 +11,7 @@ class DocumentSpec extends Specification {
 
   "Document#bsonDump" should {
 
-    val buffer = MutableBuffer(16)
+    val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 16)
     val hash = HashMap[String, Any]("hi" -> "ya")
     val document = new Document(hash)
 
@@ -23,7 +25,7 @@ class DocumentSpec extends Specification {
 
   "Document.bsonLoad" should {
 
-    val buffer = MutableBuffer(16)
+    val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 16)
     val doc = new HashMap[String, Any]
     val hash = HashMap("hi" -> "ya")
 

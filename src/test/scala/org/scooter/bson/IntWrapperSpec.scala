@@ -1,6 +1,8 @@
+import java.nio.ByteOrder
+import org.jboss.netty.buffer.ChannelBuffer
+import org.jboss.netty.buffer.ChannelBuffers._
 import org.scooter.bson.IntWrapper
 import org.scooter.bson.Conversions._
-import org.scooter.bson.MutableBuffer
 import org.specs2.mutable.Specification
 import org.specs2.specification.Scope
 
@@ -8,7 +10,7 @@ class IntWrapperSpec extends Specification {
 
   "IntWrapper#bsonDump" should {
 
-    val buffer = MutableBuffer(8)
+    val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 8)
     val wrapper = new IntWrapper(value)
 
     "serialize the int to the buffer" in new scope {
@@ -19,7 +21,7 @@ class IntWrapperSpec extends Specification {
 
   "Int#bsonDump" should {
 
-    val buffer = MutableBuffer(8)
+    val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 8)
 
     "serialize the int to the buffer" in new scope {
       value.bsonDump(buffer, key)

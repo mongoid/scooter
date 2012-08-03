@@ -1,9 +1,10 @@
 package org.scooter
 
 import java.net.SocketAddress
+import java.nio.ByteOrder
 import java.nio.channels.SocketChannel
-
-import org.scooter.bson.MutableBuffer
+import org.jboss.netty.buffer.ChannelBuffer
+import org.jboss.netty.buffer.ChannelBuffers._
 import org.scooter.protocol.Message
 
 /**
@@ -37,10 +38,9 @@ class Connection(channel: SocketChannel) {
    * @param message The Message to write.
    */
   def write(message: Message) = {
-    var buffer = MutableBuffer(64)
+    val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 64)
     message.serialize(buffer)
-    buffer.flip
-    channel.write(buffer)
+    channel.write(buffer.toByteBuffer)
   }
 
   /**

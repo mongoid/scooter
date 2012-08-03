@@ -1,5 +1,7 @@
 package org.scooter.bson
 
+import org.jboss.netty.buffer.ChannelBuffer
+
 trait Serializable {
 
   /**
@@ -8,5 +10,5 @@ trait Serializable {
    * @param buffer The buffer being written to.
    * @param key The string key to this instance string value.
    */
-  def bsonDump(buffer: MutableBuffer, key: String) : Unit
+  def bsonDump(buffer: ChannelBuffer, key: String) : Unit
 }

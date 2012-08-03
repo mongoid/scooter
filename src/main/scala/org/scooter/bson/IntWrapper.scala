@@ -1,5 +1,7 @@
 package org.scooter.bson
 
+import org.jboss.netty.buffer.ChannelBuffer
+
 /**
  * Wraps ints to provide additional behaviour around BSON serialization.
  *
@@ -21,11 +23,10 @@ class IntWrapper(target: Int) extends Serializable {
    * @param buffer The buffer being written to.
    * @param key The String key to this instance int value.
    */
-  def bsonDump(buffer: MutableBuffer, key: String) = {
-    buffer.
-      putByte(Bytes.INT_32).
-      putString(key).
-      putByte(Bytes.NULL).
-      putInt(target)
+  def bsonDump(buffer: ChannelBuffer, key: String) = {
+    buffer.writeByte(Bytes.INT_32)
+    buffer.writeBytes(key.getBytes)
+    buffer.writeZero(1)
+    buffer.writeInt(target)
   }
 }

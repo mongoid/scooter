@@ -1,5 +1,6 @@
 package org.scooter.bson
 
+import org.jboss.netty.buffer.ChannelBuffer
 import scala.collection.mutable.HashMap
 
 /**
@@ -14,7 +15,7 @@ object Document {
    *
    * @return Map The document as a map.
    */
-  def bsonLoad(buffer: MutableBuffer, doc: HashMap[String, Any]) = {
+  def bsonLoad(buffer: ChannelBuffer, doc: HashMap[String, Any]) = {
     // io.read 4
     // while (buf = io.readbyte) != 0
       // key = io.gets(NULL_BYTE).from_utf8_binary.chop!
@@ -43,14 +44,14 @@ class Document(document: HashMap[String, Any]) {
    *  - The document.
    *  - A null byte.
    *
-   * @param buffer The MutableBuffer to write to.
+   * @param buffer The ChannelBuffer to write to.
    * @param func The function to apply to each pair in the hash.
    */
-  def bsonDump(buffer: MutableBuffer)(func: Any => Unit) = {
-    val start = buffer.position
-    buffer.putInt(0)
+  def bsonDump(buffer: ChannelBuffer)(func: Any => Unit) = {
+    val start = buffer.writerIndex
+    buffer.writeInt(0)
     document.foreach(func)
-    buffer.putByte(Bytes.NULL)
-    buffer.putInt(start, buffer.position - start)
+    buffer.writeZero(1)
+    buffer.setInt(start, buffer.writerIndex - start)
   }
 }

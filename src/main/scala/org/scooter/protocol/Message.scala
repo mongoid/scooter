@@ -1,6 +1,6 @@
 package org.scooter.protocol
 
-import org.scooter.bson.MutableBuffer
+import org.jboss.netty.buffer.ChannelBuffer
 
 /**
  * All Messages sent to the database should mix in this trait.
@@ -19,9 +19,9 @@ trait Message {
   /**
    * Serialize the Message into a buffer that can be written to the socket.
    *
-   * @param buffer The MutableBuffer that will get written.
+   * @param buffer The ChannelBuffer that will get written.
    */
-  def serialize(buffer: MutableBuffer) : Unit
+  def serialize(buffer: ChannelBuffer) : Unit
 
   /**
    * Serializes the header of the message.
@@ -34,13 +34,12 @@ trait Message {
    *  - The id of the original message.
    *  - The operation code.
    *
-   * @param buffer The MutableBuffer that will get written.
+   * @param buffer The ChannelBuffer that will get written.
    */
-  def serializeHeader(buffer: MutableBuffer) = {
-    buffer.
-      putInt(0).
-      putInt(0).
-      putInt(0).
-      putInt(operationCode)
+  def serializeHeader(buffer: ChannelBuffer) = {
+    buffer.writeInt(0)
+    buffer.writeInt(0)
+    buffer.writeInt(0)
+    buffer.writeInt(operationCode)
   }
 }

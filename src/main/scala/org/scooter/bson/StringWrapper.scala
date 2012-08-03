@@ -1,5 +1,6 @@
 package org.scooter.bson
 
+import org.jboss.netty.buffer.ChannelBuffer
 import scala.collection.mutable.HashMap
 
 /**
@@ -10,11 +11,11 @@ object StringWrapper {
   /**
    * Load the string value and its key from the buffer.
    *
-   * @param buffer The MutableBuffer.
+   * @param buffer The ChannelBuffer.
    * @param doc The document to place in.
    */
-  def bsonLoad(buffer: MutableBuffer, doc: HashMap[String, Any]) = {
-    doc(buffer.getString) = buffer.getString(buffer.getInt -1)
+  def bsonLoad(buffer: ChannelBuffer, doc: HashMap[String, Any]) = {
+    // doc(buffer.getString) = buffer.getString(buffer.getInt -1)
   }
 }
 
@@ -41,13 +42,12 @@ class StringWrapper(target: String) extends Serializable {
    * @param buffer The buffer being written to.
    * @param key The string key to this instance string value.
    */
-  def bsonDump(buffer: MutableBuffer, key: String) = {
-    buffer.
-      putByte(Bytes.STRING).
-      putString(key).
-      putByte(Bytes.NULL).
-      putInt(target.length + 1).
-      putString(target).
-      putByte(Bytes.NULL)
+  def bsonDump(buffer: ChannelBuffer, key: String) = {
+    buffer.writeByte(Bytes.STRING)
+    buffer.writeBytes(key.getBytes)
+    buffer.writeZero(1)
+    buffer.writeInt(target.length + 1)
+    buffer.writeBytes(target.getBytes)
+    buffer.writeZero(1)
   }
 }
