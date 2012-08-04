@@ -53,4 +53,50 @@ class ChannelBufferWrapperSpec extends Specification {
       buffer.readString must beEqualTo("ya")
     }
   }
+
+  "ChannelBufferWrapper#writeCString" should {
+
+    val bytes = Array[Byte](104, 105, 0)
+    val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 3)
+    val wrapper = new ChannelBufferWrapper(buffer)
+
+    "return the string from the buffer" in {
+      wrapper.writeCString("hi")
+      buffer.array must beEqualTo(bytes)
+    }
+  }
+
+  "ChannelBuffer#writeCString" should {
+
+    val bytes = Array[Byte](104, 105, 0)
+    val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 3)
+
+    "return the string from the buffer" in {
+      buffer.writeCString("hi")
+      buffer.array must beEqualTo(bytes)
+    }
+  }
+
+  "ChannelBufferWrapper#writeString" should {
+
+    val bytes = Array[Byte](3, 0, 0, 0, 121, 97, 0)
+    val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 7)
+    val wrapper = new ChannelBufferWrapper(buffer)
+
+    "return the string from the buffer" in {
+      wrapper.writeString("ya")
+      buffer.array must beEqualTo(bytes)
+    }
+  }
+
+  "ChannelBuffer#writeString" should {
+
+    val bytes = Array[Byte](3, 0, 0, 0, 121, 97, 0)
+    val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 7)
+
+    "return the string from the buffer" in {
+      buffer.writeString("ya")
+      buffer.array must beEqualTo(bytes)
+    }
+  }
 }

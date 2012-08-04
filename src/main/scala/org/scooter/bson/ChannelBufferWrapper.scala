@@ -43,6 +43,36 @@ class ChannelBufferWrapper(target: ChannelBuffer) {
   }
 
   /**
+   * Write a c string to the buffer.
+   *
+   * @link http://bsonspec.org/#/specification
+   *
+   * @note The bytes that are getting written:
+   *  - The bytes for the string.
+   *  - A null byte.
+   */
+  def writeCString(string: String) = {
+    target.writeBytes(string.getBytes)
+    target.writeZero(1)
+  }
+
+  /**
+   * Write a string to the buffer.
+   *
+   * @link http://bsonspec.org/#/specification
+   *
+   * @note The bytes that are getting written:
+   *  - The length of the string in bytes.
+   *  - The bytes for the string.
+   *  - A null byte.
+   */
+  def writeString(string: String) = {
+    target.writeInt(string.length + 1)
+    target.writeBytes(string.getBytes)
+    target.writeZero(1)
+  }
+
+  /**
    * Read the bytes for a String of the specified length plus the trailing
    * null byte and return the String.
    *
