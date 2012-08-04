@@ -1,7 +1,6 @@
 package org.scooter.bson
 
 import org.jboss.netty.buffer.ChannelBuffer
-import org.jboss.netty.buffer.ChannelBufferIndexFinder._
 import org.scooter.bson.Conversions._
 import scala.collection.mutable.HashMap
 
