@@ -19,7 +19,7 @@ object Insert {
    *
    * @return The Insert message.
    */
-  def apply[T<:Map[String, Any]](collection: Collection, documents: Array[T]) = {
+  def apply[Doc<:Map[String, Any]](collection: Collection, documents: Array[Doc]) = {
     new Insert(collection.fullName, documents)
   }
 }
@@ -33,7 +33,7 @@ object Insert {
  * @param name The full name of the Collection.
  * @param documents The documents to insert.
  */
-class Insert[T<:Map[String, Any]](name: String, documents: Array[T]) extends Message {
+class Insert[Doc<:Map[String, Any]](name: String, documents: Array[Doc]) extends Message {
 
   /**
    * Get the operation code for an Insert.
