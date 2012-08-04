@@ -7,12 +7,16 @@ object Bytes {
    * @param byte The Byte.
    *
    * @return [ Class ] The class.
+   *
+   * @todo: Check which is faster - pattern matching or pulling out of hash map.
    */
-  def getType(byte: Byte) : Any = byte match {
-    // @todo: Check which is faster - pattern matching or pulling out of hash map.
-    case 0x01 => classOf[Float]
-    case 0x02 => classOf[String]
-    case _    => classOf[String]
+  def getWrapper(byte: Byte) : Any = byte match {
+    case FLOAT   => classOf[FloatWrapper]
+    case STRING  => classOf[StringWrapper]
+    case BOOLEAN => classOf[BooleanWrapper]
+    case INT_32  => classOf[IntWrapper]
+    case INT_64  => classOf[LongWrapper]
+    case _       => classOf[StringWrapper]
   }
 
   /**

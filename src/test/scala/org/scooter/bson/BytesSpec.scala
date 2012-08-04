@@ -4,18 +4,40 @@ import org.specs2.mutable.Specification
 
 class BytesSpec extends Specification {
 
-  "Bytes.getType" should {
+  "Bytes.getWrapper" should {
 
     "when passed a float byte" in {
 
-      "return a float class" in {
-        Bytes.getType(0x01) must beEqualTo(classOf[Float])
+      "return a float wrapper" in {
+        Bytes.getWrapper(0x01) must beEqualTo(classOf[FloatWrapper])
       }
     }
+
     "when passed a string byte" in {
 
-      "return a string class" in {
-        Bytes.getType(0x02) must beEqualTo(classOf[String])
+      "return a string wrapper" in {
+        Bytes.getWrapper(0x02) must beEqualTo(classOf[StringWrapper])
+      }
+    }
+
+    "when passed a boolean byte" in {
+
+      "return a boolean wrapper" in {
+        Bytes.getWrapper(0x08) must beEqualTo(classOf[BooleanWrapper])
+      }
+    }
+
+    "when passed a int byte" in {
+
+      "return a int wrapper" in {
+        Bytes.getWrapper(0x10) must beEqualTo(classOf[IntWrapper])
+      }
+    }
+
+    "when passed a long byte" in {
+
+      "return a long wrapper" in {
+        Bytes.getWrapper(0x12) must beEqualTo(classOf[LongWrapper])
       }
     }
   }
