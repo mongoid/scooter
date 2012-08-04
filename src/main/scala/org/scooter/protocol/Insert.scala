@@ -61,8 +61,7 @@ class Insert[T<:Map[String, Any]](name: String, documents: Array[T]) extends Mes
   def serialize(buffer: ChannelBuffer) = {
     serializeHeader(buffer)
     buffer.writeInt(0) // Bit vector.
-    buffer.writeBytes(name.getBytes)
-    buffer.writeZero(1)
+    buffer.writeCString(name)
     serializeDocuments(buffer)
     buffer.setInt(0, buffer.writerIndex)
   }
