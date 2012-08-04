@@ -30,19 +30,19 @@ class StringWrapperSpec extends Specification {
     }
   }
 
-  // "StringWrapper.bsonLoad" should {
+  "StringWrapper.bsonLoad" should {
 
-    // val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 11)
-    // var doc = new HashMap[String, Any]
-    // val wrapper = new StringWrapper(value)
+    val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 11)
+    var doc = new HashMap[String, Any]
+    val wrapper = new StringWrapper(value)
 
-    // "load the key and value into the hash" in new scope {
-      // wrapper.bsonDump(buffer, key)
-      // buffer.readByte // The string type byte - will have already been read.
-      // StringWrapper.bsonLoad(buffer, doc)
-      // doc must beEqualTo(HashMap("hi" -> "ya"))
-    // }
-  // }
+    "load the key and value into the hash" in new scope {
+      wrapper.bsonDump(buffer, key)
+      buffer.readByte
+      StringWrapper.bsonLoad(buffer, doc)
+      doc must beEqualTo(HashMap("hi" -> "ya"))
+    }
+  }
 
   def value = "ya"
 

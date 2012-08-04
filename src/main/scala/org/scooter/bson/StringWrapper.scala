@@ -1,12 +1,14 @@
 package org.scooter.bson
 
 import org.jboss.netty.buffer.ChannelBuffer
+import org.jboss.netty.buffer.ChannelBufferIndexFinder._
+import org.scooter.bson.Conversions._
 import scala.collection.mutable.HashMap
 
 /**
  * Companion object to the StringWrapper class.
  */
-object StringWrapper {
+object StringWrapper extends Deserializable {
 
   /**
    * Load the string value and its key from the buffer.
@@ -15,7 +17,7 @@ object StringWrapper {
    * @param doc The document to place in.
    */
   def bsonLoad(buffer: ChannelBuffer, doc: HashMap[String, Any]) = {
-    // doc(buffer.getString) = buffer.getString(buffer.getInt -1)
+    doc(buffer.readCString) = buffer.readString
   }
 }
 

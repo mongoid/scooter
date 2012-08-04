@@ -38,9 +38,9 @@ class Connection(channel: SocketChannel) {
    * @param message The Message to write.
    */
   def write(message: Message) = {
-    val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 64)
-    message.serialize(buffer)
-    channel.write(buffer.toByteBuffer)
+    // val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 64)
+    // message.serialize(buffer)
+    // channel.write(buffer.toByteBuffer)
   }
 
   /**

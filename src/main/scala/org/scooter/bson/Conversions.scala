@@ -1,6 +1,7 @@
 package org.scooter.bson
 
 import language.implicitConversions
+import org.jboss.netty.buffer.ChannelBuffer
 
 /**
  * Contains the implicit conversions for all BSON types to their wrappers.
@@ -15,6 +16,17 @@ object Conversions {
    * @return The BooleanWrapper around the Boolean.
    */
   implicit def wrapBoolean(target: Boolean) = new BooleanWrapper(target)
+
+  /**
+   * Implicit conversion from a ChannelBuffer to a ChannelBufferWrapper.
+   *
+   * @param target The ChannelBuffer that is getting wrapped.
+   *
+   * @return The ChannelBufferWrapper.
+   */
+  implicit def wrapChannelBuffer(target: ChannelBuffer) = {
+    new ChannelBufferWrapper(target)
+  }
 
   /**
    * Implicit conversion from a Int to a IntWrapper.
