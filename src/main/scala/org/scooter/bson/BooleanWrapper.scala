@@ -1,6 +1,7 @@
 package org.scooter.bson
 
 import org.jboss.netty.buffer.ChannelBuffer
+import org.scooter.bson.Conversions._
 
 /**
  * Wraps booleans to provide additional behaviour around BSON serialization.
@@ -25,8 +26,7 @@ class BooleanWrapper(target: Boolean) extends Serializable {
    */
   def bsonDump(buffer: ChannelBuffer, key: String) = {
     buffer.writeByte(Bytes.BOOLEAN)
-    buffer.writeBytes(key.getBytes)
-    buffer.writeZero(1)
+    buffer.writeCString(key)
     buffer.writeByte(byteValue)
   }
 

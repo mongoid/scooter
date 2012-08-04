@@ -1,6 +1,7 @@
 package org.scooter.bson
 
 import org.jboss.netty.buffer.ChannelBuffer
+import org.scooter.bson.Conversions._
 
 /**
  * Wraps floats to provide additional behaviour around BSON serialization.
@@ -25,8 +26,7 @@ class FloatWrapper(target: Float) extends Serializable {
    */
   def bsonDump(buffer: ChannelBuffer, key: String) = {
     buffer.writeByte(Bytes.FLOAT)
-    buffer.writeBytes(key.getBytes)
-    buffer.writeZero(1)
+    buffer.writeCString(key)
     buffer.writeDouble(target)
   }
 }
