@@ -1,7 +1,7 @@
 package org.scooter.bson
 
 import org.jboss.netty.buffer.ChannelBuffer
-import scala.collection.mutable.HashMap
+import scala.collection.mutable.Map
 
 /**
  * Companion object for a bson Document.
@@ -15,7 +15,7 @@ object Document extends Deserializable {
    *
    * @return Map The document as a map.
    */
-  def bsonLoad(buffer: ChannelBuffer, doc: HashMap[String, Any]) = {
+  def bsonLoad(buffer: ChannelBuffer, doc: Map[String, Any]) = {
   }
 }
 
@@ -25,7 +25,7 @@ object Document extends Deserializable {
  *
  * @param document The Hash to wrap.
  */
-class Document(document: HashMap[String, Any]) {
+class Document(document: Map[String, Any]) {
 
   /**
    * Dump the document to the buffer, and yield to the provided
