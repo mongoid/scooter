@@ -5,6 +5,7 @@ import org.scooter.bson.IntWrapper
 import org.scooter.bson.Conversions._
 import org.specs2.mutable.Specification
 import org.specs2.specification.Scope
+import scala.collection.mutable.HashMap
 
 class IntWrapperSpec extends Specification {
 
@@ -26,6 +27,19 @@ class IntWrapperSpec extends Specification {
     "serialize the int to the buffer" in new scope {
       value.bsonDump(buffer, key)
       buffer.array must beEqualTo(bytes)
+    }
+  }
+
+  "IntWrapper.bsonLoad" should {
+
+    val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 8)
+    val map = new HashMap[String, Any]
+
+    "adds the key and the int to the map" in new scope {
+      buffer.writeBytes(bytes)
+      buffer.readByte
+      IntWrapper.bsonLoad(buffer, map)
+      map must beEqualTo(HashMap("hi" -> 1))
     }
   }
 
