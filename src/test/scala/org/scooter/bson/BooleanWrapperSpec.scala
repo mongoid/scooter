@@ -5,6 +5,7 @@ import org.scooter.bson.BooleanWrapper
 import org.scooter.bson.Conversions._
 import org.specs2.mutable.Specification
 import org.specs2.specification.Scope
+import scala.collection.mutable.HashMap
 
 class BooleanWrapperSpec extends Specification {
 
@@ -56,6 +57,35 @@ class BooleanWrapperSpec extends Specification {
       "serialize the boolean to the buffer" in new scope {
         false.bsonDump(buffer, key)
         buffer.array must beEqualTo(bytes)
+      }
+    }
+  }
+
+  "BooleanWrapper.bsonLoad" should {
+
+    "when the boolean is true" in {
+
+      val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 4)
+      val bytes = Array[Byte](104, 105, 0, 1)
+      val map = new HashMap[String, Any]
+
+      "add the boolean true and key to the map" in new scope {
+        buffer.writeBytes(bytes)
+        BooleanWrapper.bsonLoad(buffer, map)
+        map must beEqualTo(HashMap("hi" -> true))
+      }
+    }
+
+    "when the boolean is false" in {
+
+      val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 4)
+      val bytes = Array[Byte](104, 105, 0, 0)
+      val map = new HashMap[String, Any]
+
+      "add the boolean false and key to the map" in new scope {
+        buffer.writeBytes(bytes)
+        BooleanWrapper.bsonLoad(buffer, map)
+        map must beEqualTo(HashMap("hi" -> false))
       }
     }
   }

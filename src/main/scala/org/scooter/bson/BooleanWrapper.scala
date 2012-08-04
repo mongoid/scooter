@@ -2,6 +2,23 @@ package org.scooter.bson
 
 import org.jboss.netty.buffer.ChannelBuffer
 import org.scooter.bson.Conversions._
+import scala.collection.mutable.HashMap
+
+/**
+ * Companion object to the BooleanWrapper class.
+ */
+object BooleanWrapper extends Deserializable {
+
+  /**
+   * Load the Boolean value and its key from the buffer.
+   *
+   * @param buffer The ChannelBuffer.
+   * @param doc The document to place in.
+   */
+  def bsonLoad(buffer: ChannelBuffer, doc: HashMap[String, Any]) = {
+    doc(buffer.readCString) = if (buffer.readByte == 0x01) true else false
+  }
+}
 
 /**
  * Wraps booleans to provide additional behaviour around BSON serialization.

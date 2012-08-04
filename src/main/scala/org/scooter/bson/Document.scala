@@ -6,7 +6,7 @@ import scala.collection.mutable.HashMap
 /**
  * Companion object for a bson Document.
  */
-object Document {
+object Document extends Deserializable {
 
   /**
    * Loads a Document from the buffer.
@@ -16,14 +16,6 @@ object Document {
    * @return Map The document as a map.
    */
   def bsonLoad(buffer: ChannelBuffer, doc: HashMap[String, Any]) = {
-    // io.read 4
-    // while (buf = io.readbyte) != 0
-      // key = io.gets(NULL_BYTE).from_utf8_binary.chop!
-      // if native_class = Types::MAP[buf]
-        // doc[key] = native_class.__bson_load__(io)
-      // end
-    // end
-    // while(bytes = buffer.
   }
 }
 
