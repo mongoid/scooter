@@ -1,23 +1,16 @@
 package org.scooter.bson
 
+import scala.collection.immutable.HashMap
+
 object Bytes {
 
   /* Get the type that is represented by the byte value.
    *
    * @param byte The Byte.
    *
-   * @return [ Class ] The class.
-   *
-   * @todo: Check which is faster - pattern matching or pulling out of hash map.
+   * @return The wrapper class.
    */
-  def getWrapper(byte: Byte) : Any = byte match {
-    case FLOAT   => classOf[FloatWrapper]
-    case STRING  => classOf[StringWrapper]
-    case BOOLEAN => classOf[BooleanWrapper]
-    case INT_32  => classOf[IntWrapper]
-    case INT_64  => classOf[LongWrapper]
-    case _       => classOf[StringWrapper]
-  }
+  def getWrapper(byte: Byte) = mappings(byte)
 
   /**
    * Get a NULL byte. (0x00)
@@ -162,4 +155,18 @@ object Bytes {
    * @return The byte representation of the 64 bit integer.
    */
   final val INT_64: Byte = 0x12
+
+  /**
+   * A hash of the mappings from a single byte to the wrapper class to be
+   * used in BSON loading.
+   *
+   * @return The mappings.
+   */
+  final val mappings = HashMap[Byte, Any](
+    FLOAT   -> classOf[FloatWrapper],
+    STRING  -> classOf[StringWrapper],
+    BOOLEAN -> classOf[BooleanWrapper],
+    INT_32  -> classOf[IntWrapper],
+    INT_64  -> classOf[LongWrapper]
+  )
 }
