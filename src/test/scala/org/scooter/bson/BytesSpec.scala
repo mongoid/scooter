@@ -42,115 +42,115 @@ class BytesSpec extends Specification {
     }
   }
 
-  "Bytes.NULL" should {
+  "Bytes.Null" should {
 
     "return 0x00" in {
-      NULL must beEqualTo(0x00)
+      Bytes.Null must beEqualTo(0x00)
     }
   }
 
-  "Bytes.FLOAT" should {
+  "Bytes.Float" should {
 
     "return 0x01" in {
-      FLOAT must beEqualTo(0x01)
+      Bytes.Float must beEqualTo(0x01)
     }
   }
 
-  "Bytes.STRING" should {
+  "Bytes.String" should {
 
     "return 0x02" in {
-      STRING must beEqualTo(0x02)
+      Bytes.String must beEqualTo(0x02)
     }
   }
 
-  "Bytes.EMBEDDED" should {
+  "Bytes.Embedded" should {
 
     "return 0x03" in {
-      EMBEDDED must beEqualTo(0x03)
+      Bytes.Embedded must beEqualTo(0x03)
     }
   }
 
-  "Bytes.ARRAY" should {
+  "Bytes.Array" should {
 
     "return 0x04" in {
-      ARRAY must beEqualTo(0x04)
+      Bytes.Array must beEqualTo(0x04)
     }
   }
 
-  "Bytes.BINARY" should {
+  "Bytes.Binary" should {
 
     "return 0x05" in {
-      BINARY must beEqualTo(0x05)
+      Bytes.Binary must beEqualTo(0x05)
     }
   }
 
-  "Bytes.OBJECT_ID" should {
+  "Bytes.ObjectId" should {
 
     "return 0x07" in {
-      OBJECT_ID must beEqualTo(0x07)
+      Bytes.ObjectId must beEqualTo(0x07)
     }
   }
 
-  "Bytes.BOOLEAN" should {
+  "Bytes.Boolean" should {
 
     "return 0x08" in {
-      BOOLEAN must beEqualTo(0x08)
+      Bytes.Boolean must beEqualTo(0x08)
     }
   }
 
-  "Bytes.TIME" should {
+  "Bytes.Time" should {
 
     "return 0x09" in {
-      TIME must beEqualTo(0x09)
+      Bytes.Time must beEqualTo(0x09)
     }
   }
 
-  "Bytes.NULL_VALUE" should {
+  "Bytes.NullValue" should {
 
     "return 0x0A" in {
-      NULL_VALUE must beEqualTo(0x0A)
+      Bytes.NullValue must beEqualTo(0x0A)
     }
   }
 
-  "Bytes.REGEX" should {
+  "Bytes.Regex" should {
 
     "return 0x0B" in {
-      REGEX must beEqualTo(0x0B)
+      Bytes.Regex must beEqualTo(0x0B)
     }
   }
 
-  "Bytes.CODE" should {
+  "Bytes.Code" should {
 
     "return 0x0D" in {
-      CODE must beEqualTo(0x0D)
+      Bytes.Code must beEqualTo(0x0D)
     }
   }
 
-  "Bytes.SYMBOL" should {
+  "Bytes.Symbol" should {
 
     "return 0x0E" in {
-      SYMBOL must beEqualTo(0x0E)
+      Bytes.Symbol must beEqualTo(0x0E)
     }
   }
 
-  "Bytes.SCOPED_CODE" should {
+  "Bytes.CodeWithScope" should {
 
     "return 0x0F" in {
-      SCOPED_CODE must beEqualTo(0x0F)
+      Bytes.CodeWithScope must beEqualTo(0x0F)
     }
   }
 
-  "Bytes.INT_32" should {
+  "Bytes.Int32" should {
 
     "return 0x10" in {
-      INT_32 must beEqualTo(0x10)
+      Bytes.Int32 must beEqualTo(0x10)
     }
   }
 
-  "Bytes.INT_64" should {
+  "Bytes.Int64" should {
 
     "return 0x12" in {
-      INT_64 must beEqualTo(0x12)
+      Bytes.Int64 must beEqualTo(0x12)
     }
   }
 }

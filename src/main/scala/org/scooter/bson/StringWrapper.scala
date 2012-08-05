@@ -44,7 +44,7 @@ class StringWrapper(target: String) extends Serializable {
    * @param key The string key to this instance string value.
    */
   def bsonDump(buffer: ChannelBuffer, key: String) = {
-    buffer.writeByte(Bytes.STRING)
+    buffer.writeByte(Bytes.String)
     buffer.writeCString(key)
     buffer.writeString(target)
   }

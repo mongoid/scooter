@@ -42,7 +42,7 @@ class BooleanWrapper(target: Boolean) extends Serializable {
    * @param key The String key to this instance boolean value.
    */
   def bsonDump(buffer: ChannelBuffer, key: String) = {
-    buffer.writeByte(Bytes.BOOLEAN)
+    buffer.writeByte(Bytes.Boolean)
     buffer.writeCString(key)
     buffer.writeByte(byteValue)
 

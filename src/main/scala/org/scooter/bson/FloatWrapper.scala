@@ -42,7 +42,7 @@ class FloatWrapper(target: Float) extends Serializable {
    * @param key The String key to this instance float value.
    */
   def bsonDump(buffer: ChannelBuffer, key: String) = {
-    buffer.writeByte(Bytes.FLOAT)
+    buffer.writeByte(Bytes.Float)
     buffer.writeCString(key)
     buffer.writeDouble(target)
   }

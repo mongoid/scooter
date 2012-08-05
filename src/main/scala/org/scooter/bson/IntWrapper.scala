@@ -42,7 +42,7 @@ class IntWrapper(target: Int) extends Serializable {
    * @param key The String key to this instance int value.
    */
   def bsonDump(buffer: ChannelBuffer, key: String) = {
-    buffer.writeByte(Bytes.INT_32)
+    buffer.writeByte(Bytes.Int32)
     buffer.writeCString(key)
     buffer.writeInt(target)
   }

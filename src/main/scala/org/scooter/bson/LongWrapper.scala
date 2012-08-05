@@ -25,7 +25,7 @@ class LongWrapper(target: Long) extends Serializable {
    * @param key The String key to this instance int value.
    */
   def bsonDump(buffer: ChannelBuffer, key: String) = {
-    buffer.writeByte(Bytes.INT_64)
+    buffer.writeByte(Bytes.Int64)
     buffer.writeCString(key)
     buffer.writeLong(target)
   }
