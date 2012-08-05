@@ -1,8 +1,8 @@
 package org.scooter.bson
 
 import org.jboss.netty.buffer.ChannelBuffer
+
 import org.scooter.bson.Conversions._
-import scala.collection.mutable.Map
 
 /**
  * Companion object to the FloatWrapper class.

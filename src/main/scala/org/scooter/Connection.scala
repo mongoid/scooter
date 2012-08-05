@@ -3,8 +3,10 @@ package org.scooter
 import java.net.SocketAddress
 import java.nio.ByteOrder
 import java.nio.channels.SocketChannel
+
 import org.jboss.netty.buffer.ChannelBuffer
 import org.jboss.netty.buffer.ChannelBuffers._
+
 import org.scooter.protocol.Message
 
 /**

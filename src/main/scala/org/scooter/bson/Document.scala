@@ -1,6 +1,7 @@
 package org.scooter.bson
 
 import org.jboss.netty.buffer.ChannelBuffer
+
 import scala.collection.mutable.HashMap
 
 /**
@@ -17,7 +18,7 @@ object Document extends Deserializable {
    */
   def apply(elements: (String, Any)*): Document = {
     val document = new Document
-    elements.foreach { case (key, value) => document(key) = value }
+    elements.foreach{ case (key, value) => document(key) = value }
     return document
   }
 

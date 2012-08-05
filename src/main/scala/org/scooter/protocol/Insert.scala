@@ -1,6 +1,7 @@
 package org.scooter.protocol
 
 import org.jboss.netty.buffer.ChannelBuffer
+
 import org.scooter.Collection
 import org.scooter.bson._
 import org.scooter.bson.Conversions._
