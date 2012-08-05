@@ -8,6 +8,13 @@ import scala.collection.mutable.HashMap
  */
 object Document extends Deserializable {
 
+  /**
+   * Instantiate a new document from the provided pairs.
+   *
+   * @param elements The key -> pair elements.
+   *
+   * @return The Document.
+   */
   def apply(elements: (String, Any)*): Document = {
     val document = new Document
     elements.foreach { case (key, value) => document(key) = value }

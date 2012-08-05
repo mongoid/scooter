@@ -11,6 +11,19 @@ import org.specs2.specification.Scope
 
 class DocumentSpec extends Specification {
 
+  "Document.apply" should {
+
+    val document = Document("first" -> 1, "second" -> "test")
+
+    "create a new document with the first pair" in {
+      document must havePair("first" -> 1)
+    }
+
+    "create a new document with the second pair" in {
+      document must havePair("second" -> "test")
+    }
+  }
+
   "Document#bsonDump" should {
 
     val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 16)
