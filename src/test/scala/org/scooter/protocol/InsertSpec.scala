@@ -1,10 +1,13 @@
 import java.nio.ByteOrder
+
 import org.jboss.netty.buffer.ChannelBuffer
 import org.jboss.netty.buffer.ChannelBuffers._
+
+import org.scooter.bson.Document
 import org.scooter.protocol.Insert
+
 import org.specs2.mutable.Specification
 import org.specs2.specification.Scope
-import scala.collection.mutable.HashMap
 
 class InsertSpec extends Specification {
 
@@ -36,7 +39,7 @@ class InsertSpec extends Specification {
 
   trait scope extends Scope {
 
-    val doc = HashMap[String, Any]("hi" -> "ya")
+    val doc = Document("hi" -> "ya")
     val documents = Array(doc)
     val insert = new Insert("scooter_test.users", documents)
   }

@@ -15,7 +15,7 @@ object FloatWrapper extends Deserializable {
    * @param buffer The ChannelBuffer.
    * @param doc The document to place in.
    */
-  def bsonLoad(buffer: ChannelBuffer, doc: Map[String, Any]) = {
+  def bsonLoad(buffer: ChannelBuffer, doc: Document) = {
     doc(buffer.readCString) = buffer.readDouble
   }
 }

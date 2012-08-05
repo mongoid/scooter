@@ -1,11 +1,14 @@
 import java.nio.ByteOrder
+
 import org.jboss.netty.buffer.ChannelBuffer
 import org.jboss.netty.buffer.ChannelBuffers._
+
 import org.scooter.bson.BooleanWrapper
 import org.scooter.bson.Conversions._
+import org.scooter.bson.Document
+
 import org.specs2.mutable.Specification
 import org.specs2.specification.Scope
-import scala.collection.mutable.HashMap
 
 class BooleanWrapperSpec extends Specification {
 
@@ -67,12 +70,12 @@ class BooleanWrapperSpec extends Specification {
 
       val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 4)
       val bytes = Array[Byte](104, 105, 0, 1)
-      val map = new HashMap[String, Any]
+      val doc = new Document
 
       "add the boolean true and key to the map" in new scope {
         buffer.writeBytes(bytes)
-        BooleanWrapper.bsonLoad(buffer, map)
-        map must beEqualTo(HashMap("hi" -> true))
+        BooleanWrapper.bsonLoad(buffer, doc)
+        doc must beEqualTo(Document("hi" -> true))
       }
     }
 
@@ -80,12 +83,12 @@ class BooleanWrapperSpec extends Specification {
 
       val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 4)
       val bytes = Array[Byte](104, 105, 0, 0)
-      val map = new HashMap[String, Any]
+      val doc = new Document
 
       "add the boolean false and key to the map" in new scope {
         buffer.writeBytes(bytes)
-        BooleanWrapper.bsonLoad(buffer, map)
-        map must beEqualTo(HashMap("hi" -> false))
+        BooleanWrapper.bsonLoad(buffer, doc)
+        doc must beEqualTo(Document("hi" -> false))
       }
     }
   }

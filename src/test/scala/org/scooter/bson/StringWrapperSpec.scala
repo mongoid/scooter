@@ -1,11 +1,14 @@
 import java.nio.ByteOrder
+
 import org.jboss.netty.buffer.ChannelBuffer
 import org.jboss.netty.buffer.ChannelBuffers._
-import org.scooter.bson.StringWrapper
+
 import org.scooter.bson.Conversions._
+import org.scooter.bson.Document
+import org.scooter.bson.StringWrapper
+
 import org.specs2.mutable.Specification
 import org.specs2.specification.Scope
-import scala.collection.mutable.HashMap
 
 class StringWrapperSpec extends Specification {
 
@@ -33,14 +36,14 @@ class StringWrapperSpec extends Specification {
   "StringWrapper.bsonLoad" should {
 
     val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 11)
-    var doc = new HashMap[String, Any]
+    var doc = new Document
     val wrapper = new StringWrapper(value)
 
     "load the key and value into the hash" in new scope {
       wrapper.bsonDump(buffer, key)
       buffer.readByte
       StringWrapper.bsonLoad(buffer, doc)
-      doc must beEqualTo(HashMap("hi" -> "ya"))
+      doc must beEqualTo(Document("hi" -> "ya"))
     }
   }
 

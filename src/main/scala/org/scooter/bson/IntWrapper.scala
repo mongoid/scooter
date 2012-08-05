@@ -2,7 +2,6 @@ package org.scooter.bson
 
 import org.jboss.netty.buffer.ChannelBuffer
 import org.scooter.bson.Conversions._
-import scala.collection.mutable.Map
 
 /**
  * Companion object to the IntWrapper class.
@@ -15,7 +14,7 @@ object IntWrapper extends Deserializable {
    * @param buffer The ChannelBuffer.
    * @param doc The document to place in.
    */
-  def bsonLoad(buffer: ChannelBuffer, doc: Map[String, Any]) = {
+  def bsonLoad(buffer: ChannelBuffer, doc: Document) = {
     doc(buffer.readCString) = buffer.readInt
   }
 }

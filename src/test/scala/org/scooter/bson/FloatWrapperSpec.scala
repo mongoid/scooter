@@ -1,11 +1,14 @@
 import java.nio.ByteOrder
+
 import org.jboss.netty.buffer.ChannelBuffer
 import org.jboss.netty.buffer.ChannelBuffers._
-import org.scooter.bson.FloatWrapper
+
 import org.scooter.bson.Conversions._
+import org.scooter.bson.Document
+import org.scooter.bson.FloatWrapper
+
 import org.specs2.mutable.Specification
 import org.specs2.specification.Scope
-import scala.collection.mutable.HashMap
 
 class FloatWrapperSpec extends Specification {
 
@@ -33,13 +36,13 @@ class FloatWrapperSpec extends Specification {
   "FloatWrapper.bsonLoad" should {
 
     val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 12)
-    val map = new HashMap[String, Any]
+    val doc = new Document
 
     "add the key and float to the map" in new scope {
       buffer.writeBytes(bytes)
       buffer.readByte
-      FloatWrapper.bsonLoad(buffer, map)
-      map must beEqualTo(HashMap("hi" -> value))
+      FloatWrapper.bsonLoad(buffer, doc)
+      doc must beEqualTo(Document("hi" -> value))
     }
   }
 

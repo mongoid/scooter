@@ -1,15 +1,17 @@
 import java.net.InetSocketAddress
+
 import org.scooter.Connection
+import org.scooter.bson.Document
 import org.scooter.protocol.Insert
+
 import org.specs2.mutable.Specification
 import org.specs2.specification.Scope
-import scala.collection.mutable.HashMap
 
 class ConnectionSpec extends Specification {
 
   "Connection#write" should {
 
-    val document = HashMap[String, Any]("hi" -> "ya")
+    val document = Document("hi" -> "ya")
     val documents = Array(document)
     val insert = new Insert("scooter_test.users", documents)
 
