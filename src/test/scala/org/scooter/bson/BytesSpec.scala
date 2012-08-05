@@ -1,5 +1,6 @@
 import org.scooter.bson._
 import org.scooter.bson.Bytes._
+
 import org.specs2.mutable.Specification
 
 class BytesSpec extends Specification {

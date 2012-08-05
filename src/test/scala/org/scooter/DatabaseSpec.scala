@@ -1,4 +1,5 @@
 import org.scooter.{ Collection, Database, Session }
+
 import org.specs2.mutable.Specification
 import org.specs2.specification.Scope
 
