@@ -22,7 +22,7 @@ object ObjectId {
   /**
    * Encapsulates behaviour around the generation of object id byte data.
    */
-  private object Generator {
+  object Generator {
 
     /**
      * Generate the next sequence of bytes based off the atomic counter.
@@ -36,21 +36,21 @@ object ObjectId {
      *
      * @return The AtomicInteger counter.
      */
-    private final val COUNTER = new AtomicInteger
+    final val COUNTER = new AtomicInteger
 
     /**
      * Get the machine id bytes.
      *
      * @return The Bytes for the machine id.
      */
-    private final val MACHINE = machine
+    final val MACHINE = machine
 
     /**
      * Get the process id.
      *
      * @return The Bytes for the process id.
      */
-    private final val PID = pid
+    final val PID = pid
 
     /**
      * Generate the bytes for the object id and increment with the provided
@@ -66,7 +66,7 @@ object ObjectId {
      *
      * @return The bytes for the object id.
      */
-    private def generate(counter: Int) = {
+    def generate(counter: Int) = {
       ByteBuffer.
         allocate(12).
         putInt(System.currentTimeMillis.asInstanceOf[Int]).
@@ -81,7 +81,7 @@ object ObjectId {
      *
      * @return The Bytes for the machine id.
      */
-    private def machine = {
+    def machine = {
       val md5 = MessageDigest.getInstance("MD5")
       md5.reset
       md5.update(InetAddress.getLocalHost.getHostName.getBytes)
@@ -93,7 +93,7 @@ object ObjectId {
      *
      * @return The Bytes for the process id.
      */
-    private def pid = {
+    def pid = {
       ManagementFactory.getRuntimeMXBean.getName.getBytes.slice(0, 2)
     }
   }

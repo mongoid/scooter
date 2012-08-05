@@ -45,12 +45,12 @@ class BooleanWrapper(target: Boolean) extends Serializable {
     buffer.writeByte(Bytes.BOOLEAN)
     buffer.writeCString(key)
     buffer.writeByte(byteValue)
-  }
 
-  /**
-   * Get the byte value for the boolean.
-   *
-   * @return The Byte value of the boolean.
-   */
-  private def byteValue: Byte = if (target) 0x01 else 0x00
+    /**
+     * Get the byte value for the boolean.
+     *
+     * @return The Byte value of the boolean.
+     */
+    def byteValue: Byte = if (target) 0x01 else 0x00
+  }
 }

@@ -62,19 +62,19 @@ class Insert[T<:Map[String, Any]](name: String, documents: Array[T]) extends Mes
     serializeHeader(buffer)
     buffer.writeInt(0) // Bit vector.
     buffer.writeCString(name)
-    serializeDocuments(buffer)
+    serializeDocuments
     buffer.setInt(0, buffer.writerIndex)
-  }
 
-  /**
-   * Serialize the documents to the ChannelBuffer.
-   *
-   * @param buffer The ChannelBuffer that will get written.
-   */
-  private def serializeDocuments(buffer: ChannelBuffer) = {
-    documents.foreach {
-      doc => new Document(doc).bsonDump(buffer) {
-        case (key: String, value: String) => value.bsonDump(buffer, key)
+    /**
+     * Serialize the documents to the ChannelBuffer.
+     *
+     * @param buffer The ChannelBuffer that will get written.
+     */
+    def serializeDocuments = {
+      documents.foreach {
+        doc => new Document(doc).bsonDump(buffer) {
+          case (key: String, value: String) => value.bsonDump(buffer, key)
+        }
       }
     }
   }
