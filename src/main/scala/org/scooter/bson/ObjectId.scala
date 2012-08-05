@@ -29,28 +29,28 @@ object ObjectId {
      *
      * @return The array of Bytes for the id.
      */
-    def next = generate(COUNTER.getAndIncrement)
+    def next = generate(Counter.getAndIncrement)
 
     /**
      * Get the counter used in id incrementing.
      *
      * @return The AtomicInteger counter.
      */
-    final val COUNTER = new AtomicInteger
+    final val Counter = new AtomicInteger
 
     /**
      * Get the machine id bytes.
      *
      * @return The Bytes for the machine id.
      */
-    final val MACHINE = machine
+    final val Machine = machine
 
     /**
      * Get the process id.
      *
      * @return The Bytes for the process id.
      */
-    final val PID = pid
+    final val Pid = pid
 
     /**
      * Generate the bytes for the object id and increment with the provided
@@ -70,8 +70,8 @@ object ObjectId {
       ByteBuffer.
         allocate(12).
         putInt(System.currentTimeMillis.asInstanceOf[Int]).
-        put(machine).
-        put(pid).
+        put(Machine).
+        put(Pid).
         putInt(counter).
         array
     }
