@@ -2,6 +2,7 @@ import java.net.InetSocketAddress
 
 import org.scooter.Connection
 import org.scooter.bson.Document
+import org.scooter.bson.Serialization._
 import org.scooter.protocol.Insert
 
 import org.specs2.mutable.Specification

@@ -8,6 +8,15 @@ class SerializationSpec extends Specification {
 
   "Serialization.bsonSerializable" should {
 
+    "when provided a double" in {
+
+      val serializable = bsonSerializable(1.22d)
+
+      "returns a wrapped double" in {
+        serializable must beAnInstanceOf[DoubleWrapper]
+      }
+    }
+
     "when provided a boolean" in {
 
       val serializable = bsonSerializable(true)

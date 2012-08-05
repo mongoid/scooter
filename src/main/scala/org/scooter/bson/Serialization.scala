@@ -8,6 +8,17 @@ import language.implicitConversions
 object Serialization {
 
   /**
+   * Implicit conversion from a Double to a DoubleWrapper.
+   *
+   * @param target The Double that is getting wrapped.
+   *
+   * @return The DoubleWrapper around the Double.
+   */
+  implicit def bsonSerializable(target: Double): Serializable = {
+    new DoubleWrapper(target)
+  }
+
+  /**
    * Implicit conversion from a Boolean to a BooleanWrapper.
    *
    * @param target The Boolean that is getting wrapped.

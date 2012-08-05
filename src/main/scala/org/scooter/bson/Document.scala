@@ -28,7 +28,7 @@ object Document extends Deserializable {
   /**
    * Loads a Document from the buffer.
    *
-   * @param buffer The Mutable buffer.
+   * @param buffer The ChannelBuffer.
    *
    * @return Map The document as a map.
    */
