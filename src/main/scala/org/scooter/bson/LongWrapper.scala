@@ -6,6 +6,22 @@ import org.scooter.bson.ChannelBufferWrapper._
 import org.scooter.bson.Serialization._
 
 /**
+ * Companion object to the LongWrapper class.
+ */
+object LongWrapper extends Deserializable {
+
+  /**
+   * Load the string value and its key from the buffer.
+   *
+   * @param buffer The ChannelBuffer.
+   * @param doc The document to place in.
+   */
+  def bsonLoad(buffer: ChannelBuffer, doc: Document) = {
+    doc(buffer.readCString) = buffer.readLong
+  }
+}
+
+/**
  * Wraps ints to provide additional behaviour around BSON serialization.
  *
  * @param target The Long that is wrapped.

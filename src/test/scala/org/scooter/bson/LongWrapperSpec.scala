@@ -3,6 +3,7 @@ import java.nio.ByteOrder
 import org.jboss.netty.buffer.ChannelBuffer
 import org.jboss.netty.buffer.ChannelBuffers._
 
+import org.scooter.bson.Document
 import org.scooter.bson.LongWrapper
 import org.scooter.bson.Serialization._
 
@@ -29,6 +30,19 @@ class LongWrapperSpec extends Specification {
     "serialize the int to the buffer" in new scope {
       value.bsonDump(buffer, key)
       buffer.array must beEqualTo(bytes)
+    }
+  }
+
+  "LongWrapper.bsonLoad" should {
+
+    val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 12)
+    val doc = new Document
+
+    "adds the key and the int to the doc" in new scope {
+      buffer.writeBytes(bytes)
+      buffer.readByte
+      LongWrapper.bsonLoad(buffer, doc)
+      doc must beEqualTo(Document("hi" -> value))
     }
   }
 
