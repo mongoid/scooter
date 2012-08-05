@@ -4,7 +4,8 @@ import org.jboss.netty.buffer.ChannelBuffer
 
 import org.scooter.Collection
 import org.scooter.bson._
-import org.scooter.bson.Conversions._
+import org.scooter.bson.ChannelBufferWrapper._
+import org.scooter.bson.Serialization._
 
 /**
  * Companion object for the Insert class.

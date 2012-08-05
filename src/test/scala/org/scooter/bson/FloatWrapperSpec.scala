@@ -3,9 +3,9 @@ import java.nio.ByteOrder
 import org.jboss.netty.buffer.ChannelBuffer
 import org.jboss.netty.buffer.ChannelBuffers._
 
-import org.scooter.bson.Conversions._
 import org.scooter.bson.Document
 import org.scooter.bson.FloatWrapper
+import org.scooter.bson.Serialization._
 
 import org.specs2.mutable.Specification
 import org.specs2.specification.Scope

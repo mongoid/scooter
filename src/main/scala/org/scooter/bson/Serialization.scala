@@ -2,12 +2,10 @@ package org.scooter.bson
 
 import language.implicitConversions
 
-import org.jboss.netty.buffer.ChannelBuffer
-
 /**
  * Contains the implicit conversions for all BSON types to their wrappers.
  */
-object Conversions {
+object Serialization {
 
   /**
    * Implicit conversion from a Boolean to a BooleanWrapper.
@@ -16,19 +14,8 @@ object Conversions {
    *
    * @return The BooleanWrapper around the Boolean.
    */
-  implicit def serializableBoolean(target: Boolean): Serializable = {
+  implicit def bsonSerializable(target: Boolean): Serializable = {
     new BooleanWrapper(target)
-  }
-
-  /**
-   * Implicit conversion from a ChannelBuffer to a ChannelBufferWrapper.
-   *
-   * @param target The ChannelBuffer that is getting wrapped.
-   *
-   * @return The ChannelBufferWrapper.
-   */
-  implicit def serializableBuffer(target: ChannelBuffer): ChannelBufferWrapper = {
-    new ChannelBufferWrapper(target)
   }
 
   /**
@@ -38,7 +25,7 @@ object Conversions {
    *
    * @return The IntWrapper around the Int.
    */
-  implicit def serializableInt(target: Int): Serializable = {
+  implicit def bsonSerializable(target: Int): Serializable = {
     new IntWrapper(target)
   }
 
@@ -49,7 +36,7 @@ object Conversions {
    *
    * @return The FloatWrapper around the Float.
    */
-  implicit def serializableFloat(target: Float): Serializable = {
+  implicit def bsonSerializable(target: Float): Serializable = {
     new FloatWrapper(target)
   }
 
@@ -60,7 +47,7 @@ object Conversions {
    *
    * @return The LongWrapper around the Long.
    */
-  implicit def serializableLong(target: Long): Serializable = {
+  implicit def bsonSerializable(target: Long): Serializable = {
     new LongWrapper(target)
   }
 
@@ -71,7 +58,7 @@ object Conversions {
    *
    * @return The StringWrapper around the String.
    */
-  implicit def serializableString(target: String): Serializable = {
+  implicit def bsonSerializable(target: String): Serializable = {
     new StringWrapper(target)
   }
 }

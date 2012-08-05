@@ -2,6 +2,9 @@ package org.scooter.bson
 
 import org.jboss.netty.buffer.ChannelBuffer
 
+import org.scooter.bson.ChannelBufferWrapper._
+import org.scooter.bson.Serialization._
+
 import scala.collection.mutable.HashMap
 
 /**

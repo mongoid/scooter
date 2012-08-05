@@ -1,7 +1,26 @@
 package org.scooter.bson
 
+import language.implicitConversions
+
 import org.jboss.netty.buffer.ChannelBuffer
 import org.jboss.netty.buffer.ChannelBufferIndexFinder.NUL
+
+/**
+ * Companion object to the ChannelBufferWrapper.
+ */
+object ChannelBufferWrapper {
+
+  /**
+   * Implicit conversion from a ChannelBuffer to a ChannelBufferWrapper.
+   *
+   * @param target The ChannelBuffer that is getting wrapped.
+   *
+   * @return The ChannelBufferWrapper.
+   */
+  implicit def wrapBuffer(target: ChannelBuffer): ChannelBufferWrapper = {
+    new ChannelBufferWrapper(target)
+  }
+}
 
 /**
  * Wraps the ChannelBuffer to provide additional read operations with respect

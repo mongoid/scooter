@@ -4,7 +4,7 @@ import org.jboss.netty.buffer.ChannelBuffer
 import org.jboss.netty.buffer.ChannelBuffers._
 
 import org.scooter.bson.LongWrapper
-import org.scooter.bson.Conversions._
+import org.scooter.bson.Serialization._
 
 import org.specs2.mutable.Specification
 import org.specs2.specification.Scope
