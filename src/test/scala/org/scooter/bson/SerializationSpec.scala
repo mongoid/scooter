@@ -7,50 +7,50 @@ import org.specs2.specification.Scope
 
 class SerializationSpec extends Specification {
 
-  "Serialization.bsonSerializable" should {
+  "Serialization.serializable" should {
 
     "when provided a double" in {
 
-      val serializable = bsonSerializable(1.22d)
+      val rich = serializable(1.22d)
 
       "returns a wrapped double" in {
-        serializable must beAnInstanceOf[BsonDouble]
+        rich must beAnInstanceOf[BsonDouble]
       }
     }
 
     "when provided a boolean" in {
 
-      val serializable = bsonSerializable(true)
+      val rich = serializable(true)
 
       "returns a wrapped boolean" in {
-        serializable must beAnInstanceOf[BsonBoolean]
+        rich must beAnInstanceOf[BsonBoolean]
       }
     }
 
     "when provided an int" in {
 
-      val serializable = bsonSerializable(1)
+      val rich = serializable(1)
 
       "returns a wrapped int" in {
-        serializable must beAnInstanceOf[BsonInt]
+        rich must beAnInstanceOf[BsonInt]
       }
     }
 
     "when provided a long" in {
 
-      val serializable = bsonSerializable(2l)
+      val rich = serializable(2l)
 
       "returns a wrapped long" in {
-        serializable must beAnInstanceOf[BsonLong]
+        rich must beAnInstanceOf[BsonLong]
       }
     }
 
     "when provided a string" in {
 
-      val serializable = bsonSerializable("test")
+      val rich = serializable("test")
 
       "returns a wrapped string" in {
-        serializable must beAnInstanceOf[BsonString]
+        rich must beAnInstanceOf[BsonString]
       }
     }
   }

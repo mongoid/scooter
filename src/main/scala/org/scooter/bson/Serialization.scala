@@ -16,7 +16,7 @@ object Serialization {
    *
    * @return The Double around the Double.
    */
-  implicit def bsonSerializable(target: Double): Serializable = {
+  implicit def serializable(target: Double): Serializable = {
     new BsonDouble(target)
   }
 
@@ -27,7 +27,7 @@ object Serialization {
    *
    * @return The Boolean around the Boolean.
    */
-  implicit def bsonSerializable(target: Boolean): Serializable = {
+  implicit def serializable(target: Boolean): Serializable = {
     new BsonBoolean(target)
   }
 
@@ -38,7 +38,7 @@ object Serialization {
    *
    * @return The Int around the Int.
    */
-  implicit def bsonSerializable(target: Int): Serializable = {
+  implicit def serializable(target: Int): Serializable = {
     new BsonInt(target)
   }
 
@@ -49,7 +49,7 @@ object Serialization {
    *
    * @return The Long around the Long.
    */
-  implicit def bsonSerializable(target: Long): Serializable = {
+  implicit def serializable(target: Long): Serializable = {
     new BsonLong(target)
   }
 
@@ -60,7 +60,7 @@ object Serialization {
    *
    * @return The String around the String.
    */
-  implicit def bsonSerializable(target: String): Serializable = {
+  implicit def serializable(target: String): Serializable = {
     new BsonString(target)
   }
 }
