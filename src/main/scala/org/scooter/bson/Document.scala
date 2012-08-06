@@ -59,7 +59,7 @@ class Document extends HashMap[String, Serializable] {
   def bsonDump(buffer: ChannelBuffer) = {
     val start = buffer.writerIndex
     buffer.writeInt(0)
-    for((key, value) <- this) value.bsonDump(buffer, key)
+    foreach(pair => pair._2.bsonDump(buffer, pair._1))
     buffer.writeZero(1)
     buffer.setInt(start, buffer.writerIndex - start)
   }
