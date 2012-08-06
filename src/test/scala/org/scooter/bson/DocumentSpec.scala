@@ -30,9 +30,7 @@ class DocumentSpec extends Specification {
     val document = Document("hi" -> "ya")
 
     "serializes the string to the buffer" in new scope {
-      document.bsonDump(buffer) {
-        case (key: String, value: String) => value.bsonDump(buffer, key)
-      }
+      document.bsonDump(buffer)
       buffer.array must beEqualTo(bytes)
     }
   }

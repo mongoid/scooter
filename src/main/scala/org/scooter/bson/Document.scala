@@ -56,11 +56,26 @@ class Document extends HashMap[String, Any] {
    * @param buffer The ChannelBuffer to write to.
    * @param func The function to apply to each pair in the hash.
    */
-  def bsonDump(buffer: ChannelBuffer)(func: Any => Unit) = {
+  def bsonDump(buffer: ChannelBuffer) = {
     val start = buffer.writerIndex
     buffer.writeInt(0)
-    foreach(func)
+    serializePairs
     buffer.writeZero(1)
     buffer.setInt(start, buffer.writerIndex - start)
+
+    /**
+     * Serialize each key/value pair into the ChannelBuffer.
+     *
+     * @todo: Can we get implicit conversions here?
+     */
+    def serializePairs = {
+      foreach {
+        case (key, value: Boolean) => value.bsonDump(buffer, key)
+        case (key, value: Double)  => value.bsonDump(buffer, key)
+        case (key, value: Float)   => value.bsonDump(buffer, key)
+        case (key, value: Int)     => value.bsonDump(buffer, key)
+        case (key, value: String)  => value.bsonDump(buffer, key)
+      }
+    }
   }
 }

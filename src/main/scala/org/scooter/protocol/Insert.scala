@@ -71,12 +71,6 @@ class Insert(name: String, documents: Array[Document]) extends Message {
      *
      * @param buffer The ChannelBuffer that will get written.
      */
-    def serializeDocuments = {
-      documents.foreach {
-        doc => doc.bsonDump(buffer) {
-          case (key: String, value: String) => value.bsonDump(buffer, key)
-        }
-      }
-    }
+    def serializeDocuments = documents.foreach(doc => doc.bsonDump(buffer))
   }
 }
