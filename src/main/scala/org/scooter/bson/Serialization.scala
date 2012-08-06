@@ -43,17 +43,6 @@ object Serialization {
   }
 
   /**
-   * Implicit conversion from a Float to a Float.
-   *
-   * @param target The Float that is getting wrapped.
-   *
-   * @return The Float around the Float.
-   */
-  implicit def bsonSerializable(target: Float): Serializable = {
-    new BsonFloat(target)
-  }
-
-  /**
    * Implicit conversion from a Long to a Long.
    *
    * @param target The Long that is getting wrapped.

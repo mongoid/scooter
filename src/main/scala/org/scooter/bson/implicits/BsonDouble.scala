@@ -44,7 +44,7 @@ case class BsonDouble(target: Double) extends Serializable {
    * @param key The String key to this instance double value.
    */
   def bsonDump(buffer: ChannelBuffer, key: String) = {
-    buffer.writeByte(Bytes.Float)
+    buffer.writeByte(Bytes.Double)
     buffer.writeCString(key)
     buffer.writeDouble(target)
   }

@@ -36,15 +36,6 @@ class SerializationSpec extends Specification {
       }
     }
 
-    "when provided a float" in {
-
-      val serializable = bsonSerializable(1.22f)
-
-      "returns a wrapped float" in {
-        serializable must beAnInstanceOf[BsonFloat]
-      }
-    }
-
     "when provided a long" in {
 
       val serializable = bsonSerializable(2l)

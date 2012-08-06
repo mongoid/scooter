@@ -8,10 +8,10 @@ class BytesSpec extends Specification {
 
   "Bytes.getImplicit" should {
 
-    "when passed a float byte" in {
+    "when passed a double byte" in {
 
-      "return a float wrapper" in {
-        Bytes.getImplicit(0x01) must beEqualTo(classOf[BsonFloat])
+      "return a double wrapper" in {
+        Bytes.getImplicit(0x01) must beEqualTo(classOf[BsonDouble])
       }
     }
 
@@ -51,10 +51,10 @@ class BytesSpec extends Specification {
     }
   }
 
-  "Bytes.Float" should {
+  "Bytes.Double" should {
 
     "return 0x01" in {
-      Bytes.Float must beEqualTo(0x01)
+      Bytes.Double must beEqualTo(0x01)
     }
   }
 

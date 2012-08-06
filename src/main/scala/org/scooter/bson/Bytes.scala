@@ -24,13 +24,13 @@ object Bytes {
   final val Null: Byte = 0x00
 
   /**
-   * Get the type for a Float. (0x01)
+   * Get the type for a Double. (0x01)
    *
    * @link http://bsonspec.org/#/specification
    *
-   * @return The byte representation of a Float.
+   * @return The byte representation of a Double.
    */
-  final val Float: Byte = 0x01
+  final val Double: Byte = 0x01
 
   /**
    * Get the type for a String. (0x02)
@@ -165,7 +165,7 @@ object Bytes {
    * @return The mappings.
    */
   final val mappings = HashMap[Byte, Any](
-    Float   -> classOf[BsonFloat],
+    Double  -> classOf[BsonDouble],
     String  -> classOf[BsonString],
     Boolean -> classOf[BsonBoolean],
     Int32   -> classOf[BsonInt],
