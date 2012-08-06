@@ -46,13 +46,6 @@ case class BsonBoolean(target: Boolean) extends Serializable {
   def bsonDump(buffer: ChannelBuffer, key: String) = {
     buffer.writeByte(Bytes.Boolean)
     buffer.writeCString(key)
-    buffer.writeByte(byteValue)
-
-    /**
-     * Get the byte value for the boolean.
-     *
-     * @return The Byte value of the boolean.
-     */
-    def byteValue: Byte = if (target) 0x01 else 0x00
+    buffer.writeByte(if (target) 0x01 else 0x00)
   }
 }
