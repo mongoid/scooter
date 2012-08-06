@@ -1,14 +1,15 @@
-package org.scooter.bson
+package org.scooter.bson.implicits
 
 import org.jboss.netty.buffer.ChannelBuffer
 
-import org.scooter.bson.ChannelBufferWrapper._
+import org.scooter.bson.{ Bytes, Deserializable, Document, Serializable }
+import org.scooter.bson.implicits.BsonChannelBuffer._
 import org.scooter.bson.Serialization._
 
 /**
- * Companion object to the StringWrapper class.
+ * Companion object to the BsonString class.
  */
-object StringWrapper extends Deserializable {
+object BsonString extends Deserializable {
 
   /**
    * Load the string value and its key from the buffer.
@@ -26,7 +27,7 @@ object StringWrapper extends Deserializable {
  *
  * @param target The String that is wrapped.
  */
-class StringWrapper(target: String) extends Serializable {
+class BsonString(target: String) extends Serializable {
 
   /**
    * Dump the string to the buffer in it's proper BSON format.

@@ -4,18 +4,18 @@ import org.jboss.netty.buffer.ChannelBuffer
 import org.jboss.netty.buffer.ChannelBuffers._
 
 import org.scooter.bson.Document
+import org.scooter.bson.implicits.BsonString
 import org.scooter.bson.Serialization._
-import org.scooter.bson.StringWrapper
 
 import org.specs2.mutable.Specification
 import org.specs2.specification.Scope
 
-class StringWrapperSpec extends Specification {
+class BsonStringSpec extends Specification {
 
-  "StringWrapper#bsonDump" should {
+  "BsonString#bsonDump" should {
 
     val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 11)
-    val wrapper = new StringWrapper(value)
+    val wrapper = new BsonString(value)
 
     "serialize the string to the buffer" in new scope {
       wrapper.bsonDump(buffer, key)
@@ -33,16 +33,16 @@ class StringWrapperSpec extends Specification {
     }
   }
 
-  "StringWrapper.bsonLoad" should {
+  "BsonString.bsonLoad" should {
 
     val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 11)
     var doc = new Document
-    val wrapper = new StringWrapper(value)
+    val wrapper = new BsonString(value)
 
     "load the key and value into the hash" in new scope {
       wrapper.bsonDump(buffer, key)
       buffer.readByte
-      StringWrapper.bsonLoad(buffer, doc)
+      BsonString.bsonLoad(buffer, doc)
       doc must beEqualTo(Document("hi" -> "ya"))
     }
   }

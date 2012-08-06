@@ -1,14 +1,15 @@
-package org.scooter.bson
+package org.scooter.bson.implicits
 
 import org.jboss.netty.buffer.ChannelBuffer
 
-import org.scooter.bson.ChannelBufferWrapper._
+import org.scooter.bson.{ Bytes, Deserializable, Document, Serializable }
+import org.scooter.bson.implicits.BsonChannelBuffer._
 import org.scooter.bson.Serialization._
 
 /**
- * Companion object to the DoubleWrapper class.
+ * Companion object to the BsonDouble class.
  */
-object DoubleWrapper extends Deserializable {
+object BsonDouble extends Deserializable {
 
   /**
    * Load the Double value and its key from the buffer.
@@ -26,7 +27,7 @@ object DoubleWrapper extends Deserializable {
  *
  * @param target The Double that is wrapped.
  */
-class DoubleWrapper(target: Double) extends Serializable {
+class BsonDouble(target: Double) extends Serializable {
 
   /**
    * Dump the double to the buffer in it's proper BSON format.

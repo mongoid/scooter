@@ -1,5 +1,6 @@
 import org.scooter.bson._
 import org.scooter.bson.Serialization._
+import org.scooter.bson.implicits._
 
 import org.specs2.mutable.Specification
 import org.specs2.specification.Scope
@@ -13,7 +14,7 @@ class SerializationSpec extends Specification {
       val serializable = bsonSerializable(1.22d)
 
       "returns a wrapped double" in {
-        serializable must beAnInstanceOf[DoubleWrapper]
+        serializable must beAnInstanceOf[BsonDouble]
       }
     }
 
@@ -22,7 +23,7 @@ class SerializationSpec extends Specification {
       val serializable = bsonSerializable(true)
 
       "returns a wrapped boolean" in {
-        serializable must beAnInstanceOf[BooleanWrapper]
+        serializable must beAnInstanceOf[BsonBoolean]
       }
     }
 
@@ -31,7 +32,7 @@ class SerializationSpec extends Specification {
       val serializable = bsonSerializable(1)
 
       "returns a wrapped int" in {
-        serializable must beAnInstanceOf[IntWrapper]
+        serializable must beAnInstanceOf[BsonInt]
       }
     }
 
@@ -40,7 +41,7 @@ class SerializationSpec extends Specification {
       val serializable = bsonSerializable(1.22f)
 
       "returns a wrapped float" in {
-        serializable must beAnInstanceOf[FloatWrapper]
+        serializable must beAnInstanceOf[BsonFloat]
       }
     }
 
@@ -49,7 +50,7 @@ class SerializationSpec extends Specification {
       val serializable = bsonSerializable(2l)
 
       "returns a wrapped long" in {
-        serializable must beAnInstanceOf[LongWrapper]
+        serializable must beAnInstanceOf[BsonLong]
       }
     }
 
@@ -58,7 +59,7 @@ class SerializationSpec extends Specification {
       val serializable = bsonSerializable("test")
 
       "returns a wrapped string" in {
-        serializable must beAnInstanceOf[StringWrapper]
+        serializable must beAnInstanceOf[BsonString]
       }
     }
   }

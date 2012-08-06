@@ -2,74 +2,76 @@ package org.scooter.bson
 
 import language.implicitConversions
 
+import org.scooter.bson.implicits._
+
 /**
  * Contains the implicit conversions for all BSON types to their wrappers.
  */
 object Serialization {
 
   /**
-   * Implicit conversion from a Double to a DoubleWrapper.
+   * Implicit conversion from a Double to a Double.
    *
    * @param target The Double that is getting wrapped.
    *
-   * @return The DoubleWrapper around the Double.
+   * @return The Double around the Double.
    */
   implicit def bsonSerializable(target: Double): Serializable = {
-    new DoubleWrapper(target)
+    new BsonDouble(target)
   }
 
   /**
-   * Implicit conversion from a Boolean to a BooleanWrapper.
+   * Implicit conversion from a Boolean to a Boolean.
    *
    * @param target The Boolean that is getting wrapped.
    *
-   * @return The BooleanWrapper around the Boolean.
+   * @return The Boolean around the Boolean.
    */
   implicit def bsonSerializable(target: Boolean): Serializable = {
-    new BooleanWrapper(target)
+    new BsonBoolean(target)
   }
 
   /**
-   * Implicit conversion from a Int to a IntWrapper.
+   * Implicit conversion from a Int to a Int.
    *
    * @param target The Int that is getting wrapped.
    *
-   * @return The IntWrapper around the Int.
+   * @return The Int around the Int.
    */
   implicit def bsonSerializable(target: Int): Serializable = {
-    new IntWrapper(target)
+    new BsonInt(target)
   }
 
   /**
-   * Implicit conversion from a Float to a FloatWrapper.
+   * Implicit conversion from a Float to a Float.
    *
    * @param target The Float that is getting wrapped.
    *
-   * @return The FloatWrapper around the Float.
+   * @return The Float around the Float.
    */
   implicit def bsonSerializable(target: Float): Serializable = {
-    new FloatWrapper(target)
+    new BsonFloat(target)
   }
 
   /**
-   * Implicit conversion from a Long to a LongWrapper.
+   * Implicit conversion from a Long to a Long.
    *
    * @param target The Long that is getting wrapped.
    *
-   * @return The LongWrapper around the Long.
+   * @return The Long around the Long.
    */
   implicit def bsonSerializable(target: Long): Serializable = {
-    new LongWrapper(target)
+    new BsonLong(target)
   }
 
   /**
-   * Implicit conversion from a String to a StringWrapper.
+   * Implicit conversion from a String to a String.
    *
    * @param target The String that is getting wrapped.
    *
-   * @return The StringWrapper around the String.
+   * @return The String around the String.
    */
   implicit def bsonSerializable(target: String): Serializable = {
-    new StringWrapper(target)
+    new BsonString(target)
   }
 }

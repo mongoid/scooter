@@ -1,44 +1,45 @@
 import org.scooter.bson._
 import org.scooter.bson.Bytes._
+import org.scooter.bson.implicits._
 
 import org.specs2.mutable.Specification
 
 class BytesSpec extends Specification {
 
-  "Bytes.getWrapper" should {
+  "Bytes.getImplicit" should {
 
     "when passed a float byte" in {
 
       "return a float wrapper" in {
-        Bytes.getWrapper(0x01) must beEqualTo(classOf[FloatWrapper])
+        Bytes.getImplicit(0x01) must beEqualTo(classOf[BsonFloat])
       }
     }
 
     "when passed a string byte" in {
 
       "return a string wrapper" in {
-        Bytes.getWrapper(0x02) must beEqualTo(classOf[StringWrapper])
+        Bytes.getImplicit(0x02) must beEqualTo(classOf[BsonString])
       }
     }
 
     "when passed a boolean byte" in {
 
       "return a boolean wrapper" in {
-        Bytes.getWrapper(0x08) must beEqualTo(classOf[BooleanWrapper])
+        Bytes.getImplicit(0x08) must beEqualTo(classOf[BsonBoolean])
       }
     }
 
     "when passed a int byte" in {
 
       "return a int wrapper" in {
-        Bytes.getWrapper(0x10) must beEqualTo(classOf[IntWrapper])
+        Bytes.getImplicit(0x10) must beEqualTo(classOf[BsonInt])
       }
     }
 
     "when passed a long byte" in {
 
       "return a long wrapper" in {
-        Bytes.getWrapper(0x12) must beEqualTo(classOf[LongWrapper])
+        Bytes.getImplicit(0x12) must beEqualTo(classOf[BsonLong])
       }
     }
   }

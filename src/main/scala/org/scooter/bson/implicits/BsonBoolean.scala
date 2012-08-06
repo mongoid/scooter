@@ -1,14 +1,15 @@
-package org.scooter.bson
+package org.scooter.bson.implicits
 
 import org.jboss.netty.buffer.ChannelBuffer
 
-import org.scooter.bson.ChannelBufferWrapper._
+import org.scooter.bson.{ Bytes, Deserializable, Document, Serializable }
+import org.scooter.bson.implicits.BsonChannelBuffer._
 import org.scooter.bson.Serialization._
 
 /**
- * Companion object to the BooleanWrapper class.
+ * Companion object to the BsonBoolean class.
  */
-object BooleanWrapper extends Deserializable {
+object BsonBoolean extends Deserializable {
 
   /**
    * Load the Boolean value and its key from the buffer.
@@ -26,7 +27,7 @@ object BooleanWrapper extends Deserializable {
  *
  * @param target The Boolean that is wrapped.
  */
-class BooleanWrapper(target: Boolean) extends Serializable {
+class BsonBoolean(target: Boolean) extends Serializable {
 
   /**
    * Dump the boolean to the buffer in it's proper BSON format.

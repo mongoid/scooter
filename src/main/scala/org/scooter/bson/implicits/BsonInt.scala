@@ -1,32 +1,33 @@
-package org.scooter.bson
+package org.scooter.bson.implicits
 
 import org.jboss.netty.buffer.ChannelBuffer
 
-import org.scooter.bson.ChannelBufferWrapper._
+import org.scooter.bson.{ Bytes, Deserializable, Document, Serializable }
+import org.scooter.bson.implicits.BsonChannelBuffer._
 import org.scooter.bson.Serialization._
 
 /**
- * Companion object to the LongWrapper class.
+ * Companion object to the BsonInt class.
  */
-object LongWrapper extends Deserializable {
+object BsonInt extends Deserializable {
 
   /**
-   * Load the string value and its key from the buffer.
+   * Load the Int value and its key from the buffer.
    *
    * @param buffer The ChannelBuffer.
    * @param doc The document to place in.
    */
   def bsonLoad(buffer: ChannelBuffer, doc: Document) = {
-    doc(buffer.readCString) = buffer.readLong
+    doc(buffer.readCString) = buffer.readInt
   }
 }
 
 /**
  * Wraps ints to provide additional behaviour around BSON serialization.
  *
- * @param target The Long that is wrapped.
+ * @param target The Int that is wrapped.
  */
-class LongWrapper(target: Long) extends Serializable {
+class BsonInt(target: Int) extends Serializable {
 
   /**
    * Dump the int to the buffer in it's proper BSON format.
@@ -34,17 +35,17 @@ class LongWrapper(target: Long) extends Serializable {
    * @link http://bsonspec.org/#/specification
    *
    * @note The order in which bytes must be placed into the buffer:
-   *  - The long type.
-   *  - The bytes for the long's key.
+   *  - The int type.
+   *  - The bytes for the int's key.
    *  - A null byte.
-   *  - The long.
+   *  - The int.
    *
    * @param buffer The buffer being written to.
    * @param key The String key to this instance int value.
    */
   def bsonDump(buffer: ChannelBuffer, key: String) = {
-    buffer.writeByte(Bytes.Int64)
+    buffer.writeByte(Bytes.Int32)
     buffer.writeCString(key)
-    buffer.writeLong(target)
+    buffer.writeInt(target)
   }
 }

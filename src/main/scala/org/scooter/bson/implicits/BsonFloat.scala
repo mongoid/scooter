@@ -1,14 +1,15 @@
-package org.scooter.bson
+package org.scooter.bson.implicits
 
 import org.jboss.netty.buffer.ChannelBuffer
 
-import org.scooter.bson.ChannelBufferWrapper._
+import org.scooter.bson.{ Bytes, Deserializable, Document, Serializable }
+import org.scooter.bson.implicits.BsonChannelBuffer._
 import org.scooter.bson.Serialization._
 
 /**
- * Companion object to the FloatWrapper class.
+ * Companion object to the BsonFloat class.
  */
-object FloatWrapper extends Deserializable {
+object BsonFloat extends Deserializable {
 
   /**
    * Load the Float value and its key from the buffer.
@@ -26,7 +27,7 @@ object FloatWrapper extends Deserializable {
  *
  * @param target The Float that is wrapped.
  */
-class FloatWrapper(target: Float) extends Serializable {
+class BsonFloat(target: Float) extends Serializable {
 
   /**
    * Dump the float to the buffer in it's proper BSON format.

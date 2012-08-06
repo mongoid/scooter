@@ -2,6 +2,8 @@ package org.scooter.bson
 
 import scala.collection.immutable.HashMap
 
+import org.scooter.bson.implicits._
+
 object Bytes {
 
   /* Get the type that is represented by the byte value.
@@ -10,7 +12,7 @@ object Bytes {
    *
    * @return The wrapper class.
    */
-  def getWrapper(byte: Byte) = mappings(byte)
+  def getImplicit(byte: Byte) = mappings(byte)
 
   /**
    * Get a NULL byte. (0x00)
@@ -163,10 +165,10 @@ object Bytes {
    * @return The mappings.
    */
   final val mappings = HashMap[Byte, Any](
-    Float   -> classOf[FloatWrapper],
-    String  -> classOf[StringWrapper],
-    Boolean -> classOf[BooleanWrapper],
-    Int32   -> classOf[IntWrapper],
-    Int64   -> classOf[LongWrapper]
+    Float   -> classOf[BsonFloat],
+    String  -> classOf[BsonString],
+    Boolean -> classOf[BsonBoolean],
+    Int32   -> classOf[BsonInt],
+    Int64   -> classOf[BsonLong]
   )
 }

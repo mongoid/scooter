@@ -4,18 +4,18 @@ import org.jboss.netty.buffer.ChannelBuffer
 import org.jboss.netty.buffer.ChannelBuffers._
 
 import org.scooter.bson.Document
-import org.scooter.bson.FloatWrapper
+import org.scooter.bson.implicits.BsonFloat
 import org.scooter.bson.Serialization._
 
 import org.specs2.mutable.Specification
 import org.specs2.specification.Scope
 
-class FloatWrapperSpec extends Specification {
+class BsonFloatSpec extends Specification {
 
-  "FloatWrapper#bsonDump" should {
+  "BsonFloat#bsonDump" should {
 
     val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 12)
-    val wrapper = new FloatWrapper(value)
+    val wrapper = new BsonFloat(value)
 
     "serialize the float to the buffer" in new scope {
       wrapper.bsonDump(buffer, key)
@@ -33,7 +33,7 @@ class FloatWrapperSpec extends Specification {
     }
   }
 
-  "FloatWrapper.bsonLoad" should {
+  "BsonFloat.bsonLoad" should {
 
     val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 12)
     val doc = new Document
@@ -41,7 +41,7 @@ class FloatWrapperSpec extends Specification {
     "add the key and float to the map" in new scope {
       buffer.writeBytes(bytes)
       buffer.readByte
-      FloatWrapper.bsonLoad(buffer, doc)
+      BsonFloat.bsonLoad(buffer, doc)
       doc must beEqualTo(Document("hi" -> value))
     }
   }

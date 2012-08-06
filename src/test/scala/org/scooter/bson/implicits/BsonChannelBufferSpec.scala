@@ -3,20 +3,20 @@ import java.nio.ByteOrder
 import org.jboss.netty.buffer.ChannelBuffer
 import org.jboss.netty.buffer.ChannelBuffers._
 
-import org.scooter.bson.ChannelBufferWrapper
-import org.scooter.bson.ChannelBufferWrapper._
+import org.scooter.bson.implicits.BsonChannelBuffer
+import org.scooter.bson.implicits.BsonChannelBuffer._
 import org.scooter.bson.Serialization._
 
 import org.specs2.mutable.Specification
 import org.specs2.specification.Scope
 
-class ChannelBufferWrapperSpec extends Specification {
+class BsonChannelBufferSpec extends Specification {
 
-  "ChannelBufferWrapper#readCString" should {
+  "BsonChannelBuffer#readCString" should {
 
     val bytes = Array[Byte](104, 105, 0)
     val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 3)
-    val wrapper = new ChannelBufferWrapper(buffer)
+    val wrapper = new BsonChannelBuffer(buffer)
 
     "return the string from the buffer" in {
       buffer.writeBytes(bytes)
@@ -35,11 +35,11 @@ class ChannelBufferWrapperSpec extends Specification {
     }
   }
 
-  "ChannelBufferWrapper#readString" should {
+  "BsonChannelBuffer#readString" should {
 
     val bytes = Array[Byte](3, 0, 0, 0, 121, 97, 0)
     val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 7)
-    val wrapper = new ChannelBufferWrapper(buffer)
+    val wrapper = new BsonChannelBuffer(buffer)
 
     "return the string from the buffer" in {
       buffer.writeBytes(bytes)
@@ -58,11 +58,11 @@ class ChannelBufferWrapperSpec extends Specification {
     }
   }
 
-  "ChannelBufferWrapper#writeCString" should {
+  "BsonChannelBuffer#writeCString" should {
 
     val bytes = Array[Byte](104, 105, 0)
     val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 3)
-    val wrapper = new ChannelBufferWrapper(buffer)
+    val wrapper = new BsonChannelBuffer(buffer)
 
     "return the string from the buffer" in {
       wrapper.writeCString("hi")
@@ -81,11 +81,11 @@ class ChannelBufferWrapperSpec extends Specification {
     }
   }
 
-  "ChannelBufferWrapper#writeString" should {
+  "BsonChannelBuffer#writeString" should {
 
     val bytes = Array[Byte](3, 0, 0, 0, 121, 97, 0)
     val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 7)
-    val wrapper = new ChannelBufferWrapper(buffer)
+    val wrapper = new BsonChannelBuffer(buffer)
 
     "return the string from the buffer" in {
       wrapper.writeString("ya")

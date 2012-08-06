@@ -3,22 +3,22 @@ import java.nio.ByteOrder
 import org.jboss.netty.buffer.ChannelBuffer
 import org.jboss.netty.buffer.ChannelBuffers._
 
-import org.scooter.bson.BooleanWrapper
+import org.scooter.bson.implicits.BsonBoolean
 import org.scooter.bson.Serialization._
 import org.scooter.bson.Document
 
 import org.specs2.mutable.Specification
 import org.specs2.specification.Scope
 
-class BooleanWrapperSpec extends Specification {
+class BsonBooleanSpec extends Specification {
 
-  "BooleanWrapper#bsonDump" should {
+  "BsonBoolean#bsonDump" should {
 
     "when the boolean is true" in {
 
       val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 5)
       val bytes = Array[Byte](8, 104, 105, 0, 1)
-      val wrapper = new BooleanWrapper(true)
+      val wrapper = new BsonBoolean(true)
 
       "serialize the boolean to the buffer" in new scope {
         wrapper.bsonDump(buffer, key)
@@ -30,7 +30,7 @@ class BooleanWrapperSpec extends Specification {
 
       val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 5)
       val bytes = Array[Byte](8, 104, 105, 0, 0)
-      val wrapper = new BooleanWrapper(false)
+      val wrapper = new BsonBoolean(false)
 
       "serialize the boolean to the buffer" in new scope {
         wrapper.bsonDump(buffer, key)
@@ -64,7 +64,7 @@ class BooleanWrapperSpec extends Specification {
     }
   }
 
-  "BooleanWrapper.bsonLoad" should {
+  "BsonBoolean.bsonLoad" should {
 
     "when the boolean is true" in {
 
@@ -74,7 +74,7 @@ class BooleanWrapperSpec extends Specification {
 
       "add the boolean true and key to the map" in new scope {
         buffer.writeBytes(bytes)
-        BooleanWrapper.bsonLoad(buffer, doc)
+        BsonBoolean.bsonLoad(buffer, doc)
         doc must beEqualTo(Document("hi" -> true))
       }
     }
@@ -87,7 +87,7 @@ class BooleanWrapperSpec extends Specification {
 
       "add the boolean false and key to the map" in new scope {
         buffer.writeBytes(bytes)
-        BooleanWrapper.bsonLoad(buffer, doc)
+        BsonBoolean.bsonLoad(buffer, doc)
         doc must beEqualTo(Document("hi" -> false))
       }
     }

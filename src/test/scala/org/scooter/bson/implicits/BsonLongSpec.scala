@@ -4,53 +4,53 @@ import org.jboss.netty.buffer.ChannelBuffer
 import org.jboss.netty.buffer.ChannelBuffers._
 
 import org.scooter.bson.Document
-import org.scooter.bson.DoubleWrapper
+import org.scooter.bson.implicits.BsonLong
 import org.scooter.bson.Serialization._
 
 import org.specs2.mutable.Specification
 import org.specs2.specification.Scope
 
-class DoubleWrapperSpec extends Specification {
+class BsonLongSpec extends Specification {
 
-  "DoubleWrapper#bsonDump" should {
+  "BsonLong#bsonDump" should {
 
     val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 12)
-    val wrapper = new DoubleWrapper(value)
+    val wrapper = new BsonLong(value)
 
-    "serialize the double to the buffer" in new scope {
+    "serialize the int to the buffer" in new scope {
       wrapper.bsonDump(buffer, key)
       buffer.array must beEqualTo(bytes)
     }
   }
 
-  "Double#bsonDump" should {
+  "Long#bsonDump" should {
 
     val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 12)
 
-    "serialize the double to the buffer" in new scope {
+    "serialize the int to the buffer" in new scope {
       value.bsonDump(buffer, key)
       buffer.array must beEqualTo(bytes)
     }
   }
 
-  "DoubleWrapper.bsonLoad" should {
+  "BsonLong.bsonLoad" should {
 
     val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 12)
     val doc = new Document
 
-    "add the key and double to the map" in new scope {
+    "adds the key and the int to the doc" in new scope {
       buffer.writeBytes(bytes)
       buffer.readByte
-      DoubleWrapper.bsonLoad(buffer, doc)
+      BsonLong.bsonLoad(buffer, doc)
       doc must beEqualTo(Document("hi" -> value))
     }
   }
 
-  def value = 1.123d
+  def value = 1l
 
   trait scope extends Scope {
 
     val key = "hi"
-    val bytes = Array[Byte](1, 104, 105, 0, 43, -121, 22, -39, -50, -9, -15, 63)
+    val bytes = Array[Byte](18, 104, 105, 0, 1, 0, 0, 0, 0, 0, 0, 0)
   }
 }

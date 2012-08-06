@@ -1,4 +1,4 @@
-package org.scooter.bson
+package org.scooter.bson.implicits
 
 import language.implicitConversions
 
@@ -6,19 +6,19 @@ import org.jboss.netty.buffer.ChannelBuffer
 import org.jboss.netty.buffer.ChannelBufferIndexFinder.NUL
 
 /**
- * Companion object to the ChannelBufferWrapper.
+ * Companion object to the BsonChannelBuffer.
  */
-object ChannelBufferWrapper {
+object BsonChannelBuffer {
 
   /**
-   * Implicit conversion from a ChannelBuffer to a ChannelBufferWrapper.
+   * Implicit conversion from a ChannelBuffer to a BsonChannelBuffer.
    *
    * @param target The ChannelBuffer that is getting wrapped.
    *
-   * @return The ChannelBufferWrapper.
+   * @return The BsonChannelBuffer.
    */
-  implicit def wrapBuffer(target: ChannelBuffer): ChannelBufferWrapper = {
-    new ChannelBufferWrapper(target)
+  implicit def wrapBuffer(target: ChannelBuffer): BsonChannelBuffer = {
+    new BsonChannelBuffer(target)
   }
 }
 
@@ -28,7 +28,7 @@ object ChannelBufferWrapper {
  *
  * @param target The wrapped ChannelBuffer.
  */
-class ChannelBufferWrapper(target: ChannelBuffer) {
+class BsonChannelBuffer(target: ChannelBuffer) {
 
   /**
    * Read a C String from the buffer.
