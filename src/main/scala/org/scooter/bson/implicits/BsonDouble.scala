@@ -27,7 +27,7 @@ object BsonDouble extends Deserializable {
  *
  * @param target The Double that is wrapped.
  */
-class BsonDouble(target: Double) extends Serializable {
+case class BsonDouble(target: Double) extends Serializable {
 
   /**
    * Dump the double to the buffer in it's proper BSON format.

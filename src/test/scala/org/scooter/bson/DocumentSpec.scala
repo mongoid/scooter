@@ -4,6 +4,7 @@ import org.jboss.netty.buffer.ChannelBuffer
 import org.jboss.netty.buffer.ChannelBuffers._
 
 import org.scooter.bson.Document
+import org.scooter.bson.implicits._
 import org.scooter.bson.Serialization._
 
 import org.specs2.mutable.Specification
@@ -16,11 +17,11 @@ class DocumentSpec extends Specification {
     val document = Document("first" -> 1, "second" -> "test")
 
     "create a new document with the first pair" in {
-      document must havePair("first" -> 1)
+      document must havePair("first" -> new BsonInt(1))
     }
 
     "create a new document with the second pair" in {
-      document must havePair("second" -> "test")
+      document must havePair("second" -> new BsonString("test"))
     }
   }
 

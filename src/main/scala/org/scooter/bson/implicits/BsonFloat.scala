@@ -18,7 +18,7 @@ object BsonFloat extends Deserializable {
    * @param doc The document to place in.
    */
   def bsonLoad(buffer: ChannelBuffer, doc: Document) = {
-    doc(buffer.readCString) = buffer.readDouble
+    doc(buffer.readCString) = buffer.readDouble.asInstanceOf[Float]
   }
 }
 
@@ -27,7 +27,7 @@ object BsonFloat extends Deserializable {
  *
  * @param target The Float that is wrapped.
  */
-class BsonFloat(target: Float) extends Serializable {
+case class BsonFloat(target: Float) extends Serializable {
 
   /**
    * Dump the float to the buffer in it's proper BSON format.

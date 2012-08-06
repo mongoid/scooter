@@ -27,7 +27,7 @@ object BsonInt extends Deserializable {
  *
  * @param target The Int that is wrapped.
  */
-class BsonInt(target: Int) extends Serializable {
+case class BsonInt(target: Int) extends Serializable {
 
   /**
    * Dump the int to the buffer in it's proper BSON format.

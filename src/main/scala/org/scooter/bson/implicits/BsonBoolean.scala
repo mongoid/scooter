@@ -27,7 +27,7 @@ object BsonBoolean extends Deserializable {
  *
  * @param target The Boolean that is wrapped.
  */
-class BsonBoolean(target: Boolean) extends Serializable {
+case class BsonBoolean(target: Boolean) extends Serializable {
 
   /**
    * Dump the boolean to the buffer in it's proper BSON format.

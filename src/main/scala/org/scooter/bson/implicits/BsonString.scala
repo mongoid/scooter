@@ -27,7 +27,7 @@ object BsonString extends Deserializable {
  *
  * @param target The String that is wrapped.
  */
-class BsonString(target: String) extends Serializable {
+case class BsonString(target: String) extends Serializable {
 
   /**
    * Dump the string to the buffer in it's proper BSON format.

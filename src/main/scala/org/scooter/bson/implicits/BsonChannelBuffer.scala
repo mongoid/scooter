@@ -28,7 +28,7 @@ object BsonChannelBuffer {
  *
  * @param target The wrapped ChannelBuffer.
  */
-class BsonChannelBuffer(target: ChannelBuffer) {
+case class BsonChannelBuffer(target: ChannelBuffer) {
 
   /**
    * Read a C String from the buffer.

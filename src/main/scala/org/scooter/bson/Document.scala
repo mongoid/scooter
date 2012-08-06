@@ -19,9 +19,9 @@ object Document extends Deserializable {
    *
    * @return The Document.
    */
-  def apply(elements: (String, Any)*): Document = {
+  def apply(elements: (String, Serializable)*): Document = {
     val document = new Document
-    elements.foreach{ case (key, value) => document(key) = value }
+    elements.foreach(pair => document(pair._1) = pair._2)
     return document
   }
 
@@ -42,7 +42,7 @@ object Document extends Deserializable {
  *
  * @param document The Hash to wrap.
  */
-class Document extends HashMap[String, Any] {
+class Document extends HashMap[String, Serializable] {
 
   /**
    * Dump the document to the buffer, and yield to the provided
@@ -59,23 +59,8 @@ class Document extends HashMap[String, Any] {
   def bsonDump(buffer: ChannelBuffer) = {
     val start = buffer.writerIndex
     buffer.writeInt(0)
-    serializePairs
+    for((key, value) <- this) value.bsonDump(buffer, key)
     buffer.writeZero(1)
     buffer.setInt(start, buffer.writerIndex - start)
-
-    /**
-     * Serialize each key/value pair into the ChannelBuffer.
-     *
-     * @todo: Can we get implicit conversions here?
-     */
-    def serializePairs = {
-      foreach {
-        case (key, value: Boolean) => value.bsonDump(buffer, key)
-        case (key, value: Double)  => value.bsonDump(buffer, key)
-        case (key, value: Float)   => value.bsonDump(buffer, key)
-        case (key, value: Int)     => value.bsonDump(buffer, key)
-        case (key, value: String)  => value.bsonDump(buffer, key)
-      }
-    }
   }
 }
