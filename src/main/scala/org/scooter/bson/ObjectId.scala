@@ -52,7 +52,8 @@ object ObjectId {
 }
 
 /**
- * Represents an ObjectId, which is the primary key type for MongoDB documents.
+ * Represents an ObjectId, which is the primary key type for
+ * MongoDB documents.
  *
  * @link http://www.mongodb.org/display/DOCS/Object+IDs
  *
@@ -61,7 +62,8 @@ object ObjectId {
  * @param pid The Int for the process id.
  * @param counter The Int counter.
  */
-case class ObjectId(time: Int, machine: Int, pid: Int, counter: Int) extends Serializable {
+case class ObjectId(time: Int, machine: Int, pid: Int, counter: Int)
+  extends Serializable {
 
 
   /**

@@ -20,7 +20,9 @@ object Document extends Deserializable {
    * @return The Document.
    */
   def apply(elements: (String, Serializable)*) = {
-    elements.foldLeft(new Document)((doc, pair) => doc += (pair._1 -> pair._2))
+    elements.foldLeft(new Document)(
+      (doc, pair) => doc += (pair._1 -> pair._2)
+    )
   }
 
   /**
