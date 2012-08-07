@@ -1,5 +1,5 @@
 package org.scooter
 
-class Node {
+case class Node {
 
 }

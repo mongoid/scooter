@@ -42,7 +42,7 @@ object Document extends Deserializable {
  *
  * @param document The Hash to wrap.
  */
-class Document extends HashMap[String, Serializable] {
+case class Document extends HashMap[String, Serializable] {
 
   /**
    * Dump the document to the buffer, and yield to the provided

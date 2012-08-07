@@ -1,5 +1,5 @@
 package org.scooter
 
-class Cluster {
+case class Cluster {
 
 }

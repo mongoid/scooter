@@ -1,5 +1,5 @@
 package org.scooter
 
-class Cursor {
+case class Cursor {
 
 }

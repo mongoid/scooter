@@ -1,5 +1,5 @@
 package org.scooter
 
-class Indexes {
+case class Indexes {
 
 }

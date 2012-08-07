@@ -1,5 +1,5 @@
 package org.scooter
 
-class Query {
+case class Query {
 
 }

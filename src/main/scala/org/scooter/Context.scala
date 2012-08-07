@@ -6,7 +6,7 @@ package org.scooter
  *
  * @param session The Session for the Context.
  */
-class Context(session: Session) {
+case class Context(session: Session) {
 
   /**
    * Insert documents into the database.
