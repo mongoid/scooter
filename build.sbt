@@ -13,3 +13,5 @@ libraryDependencies ++= Seq(
 )
 
 scalacOptions += "-feature"
+
+scalacOptions += "-deprecation"
