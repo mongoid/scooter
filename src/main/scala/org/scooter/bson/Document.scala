@@ -20,9 +20,7 @@ object Document extends Deserializable {
    * @return The Document.
    */
   def apply(elements: (String, Serializable)*) = {
-    val document = new Document
-    elements.foreach(pair => document(pair._1) = pair._2)
-    document
+    elements.foldLeft(new Document)((doc, pair) => doc += (pair._1 -> pair._2))
   }
 
   /**
@@ -42,7 +40,7 @@ object Document extends Deserializable {
  *
  * @param document The Hash to wrap.
  */
-case class Document extends HashMap[String, Serializable] {
+class Document extends HashMap[String, Serializable] {
 
   /**
    * Dump the document to the buffer, and yield to the provided

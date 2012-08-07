@@ -1,5 +1,3 @@
 package org.scooter
 
-case class Indexes {
-
-}
+class Indexes {}

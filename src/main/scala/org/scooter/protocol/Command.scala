@@ -5,7 +5,7 @@ import org.jboss.netty.buffer.ChannelBuffer
 /**
  * Represents a generic database Command.
  */
-case class Command extends Message {
+class Command extends Message {
 
   /**
    * Get the operation code for a command..
