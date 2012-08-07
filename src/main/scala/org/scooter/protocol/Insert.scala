@@ -34,7 +34,7 @@ object Insert {
  * @param name The full name of the Collection.
  * @param documents The documents to insert.
  */
-class Insert(name: String, documents: Array[Document]) extends Message {
+case class Insert(name: String, documents: Array[Document]) extends Message {
 
   /**
    * Get the operation code for an Insert.

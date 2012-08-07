@@ -41,9 +41,7 @@ case class BsonChannelBuffer(target: ChannelBuffer) {
    *
    * @return The String.
    */
-  def readCString: String = {
-    return readString(target.bytesBefore(NUL))
-  }
+  def readCString = readStringBytes(target.bytesBefore(NUL))
 
   /**
    * Read a String from the buffer.
@@ -57,9 +55,7 @@ case class BsonChannelBuffer(target: ChannelBuffer) {
    *
    * @return The String.
    */
-  def readString: String = {
-    return readString(target.readInt - 1)
-  }
+  def readString = readStringBytes(target.readInt - 1)
 
   /**
    * Write a c string to the buffer.
@@ -99,9 +95,9 @@ case class BsonChannelBuffer(target: ChannelBuffer) {
    *
    * @return The String.
    */
-  private def readString(length: Int): String = {
+  private def readStringBytes(length: Int) = {
     val buffer = target.readBytes(length)
     target.readByte
-    return new String(buffer.array)
+    new String(buffer.array)
   }
 }

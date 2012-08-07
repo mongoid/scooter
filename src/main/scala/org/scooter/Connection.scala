@@ -32,7 +32,7 @@ object Connection {
  *
  * @param channel The SocketChannel used in the Connection.
  */
-class Connection(channel: SocketChannel) {
+case class Connection(channel: SocketChannel) {
 
   /**
    * Write the Message to the socket.

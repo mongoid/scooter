@@ -41,7 +41,7 @@ object ObjectId {
   *
   * @return The ObjectId.
   */
-  def generate: ObjectId = ObjectId(time, Machine, Pid, Inc.getAndIncrement)
+  def generate = ObjectId(time, Machine, Pid, Inc.getAndIncrement)
 
   /**
    * Get the current time as an Int.

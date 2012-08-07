@@ -32,7 +32,7 @@ object Session {
  *
  * @param hosts An Array of "host:port" String pairs.
  */
-class Session(hosts: Array[String]) extends Dynamic {
+case class Session(hosts: Array[String]) extends Dynamic {
 
   /**
    * This is the wrapped Context for this Session.

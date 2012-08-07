@@ -19,10 +19,10 @@ object Document extends Deserializable {
    *
    * @return The Document.
    */
-  def apply(elements: (String, Serializable)*): Document = {
+  def apply(elements: (String, Serializable)*) = {
     val document = new Document
     elements.foreach(pair => document(pair._1) = pair._2)
-    return document
+    document
   }
 
   /**

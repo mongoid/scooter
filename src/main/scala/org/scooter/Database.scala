@@ -23,7 +23,7 @@ object Database {
  * @param session The Session that contains the Database.
  * @param name The name of the Database.
  */
-class Database(session: Session, name: String) {
+case class Database(session: Session, name: String) {
 
   /**
    * Get a Collection for the provided name.
@@ -42,27 +42,9 @@ class Database(session: Session, name: String) {
   def context = session.context
 
   /**
-   * A Database is equal to another if the names are the same.
-   *
-   * @param other The object to compare to.
-   *
-   * @return If the objects are equal.
-   */
-  override def equals(other: Any) : Boolean = {
-    other.isInstanceOf[Database] && (this.hashCode == other.hashCode)
-  }
-
-  /**
    * Gets the full name of the Database.
    *
    * @return The full name of the Database.
    */
   def fullName = name
-
-  /**
-   * Generate a hash code for the Database from the name.
-   *
-   * @return The hash code from the name.
-   */
-  override def hashCode = name.hashCode
 }
