@@ -35,6 +35,8 @@ object Header {
 /**
  * Represents the standard header that is sent to MongoDB in all messages.
  *
+ * @link http://www.mongodb.org/display/DOCS/Mongo+Wire+Protocol
+ *
  * @param length The length of the message.
  * @param request The id of the request.
  * @param original The id of the original request.
