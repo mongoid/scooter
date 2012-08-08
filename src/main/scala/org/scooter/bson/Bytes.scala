@@ -3,6 +3,7 @@ package org.scooter.bson
 import scala.collection.immutable.HashMap
 
 import org.scooter.bson.implicits._
+import org.scooter.bson.implicits.Companion._
 
 object Bytes {
 
@@ -12,7 +13,7 @@ object Bytes {
    *
    * @return The wrapper class.
    */
-  def getImplicit(byte: Byte) = mappings(byte)
+  def getCompanion(byte: Byte) = mappings(byte)
 
   /**
    * Get a NULL byte. (0x00)
@@ -164,11 +165,11 @@ object Bytes {
    *
    * @return The mappings.
    */
-  final val mappings = HashMap[Byte, Any](
-    Double  -> classOf[BsonDouble],
-    String  -> classOf[BsonString],
-    Boolean -> classOf[BsonBoolean],
-    Int32   -> classOf[BsonInt],
-    Int64   -> classOf[BsonLong]
+  final val mappings = HashMap[Byte, Deserializable](
+    Double  -> singleton[BsonDouble.type],
+    String  -> singleton[BsonString.type],
+    Boolean -> singleton[BsonBoolean.type],
+    Int32   -> singleton[BsonInt.type],
+    Int64   -> singleton[BsonLong.type]
   )
 }

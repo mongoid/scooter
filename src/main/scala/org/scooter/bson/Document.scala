@@ -33,6 +33,21 @@ object Document extends Deserializable {
    * @return Map The document as a map.
    */
   def bsonLoad(buffer: ChannelBuffer, doc: Document) = {
+    val length = buffer.readInt
+    loadPair(buffer.readByte)
+
+    /**
+     * Recursive function to load all the key/value pairs that are
+     * in the buffer.
+     *
+     * @param byte The Byte representing the value type or zero.
+     */
+    def loadPair(byte: Byte): Unit = {
+      if (byte != Bytes.Null) {
+        Bytes.getCompanion(byte).bsonLoad(buffer, doc)
+        loadPair(buffer.readByte)
+      }
+    }
   }
 }
 
