@@ -34,16 +34,7 @@ object Insert {
  * @param name The full name of the Collection.
  * @param documents The documents to insert.
  */
-case class Insert(name: String, documents: Array[Document]) extends Message {
-
-  /**
-   * Get the operation code for an Insert.
-   *
-   * @link http://www.mongodb.org/display/DOCS/Mongo+Wire+Protocol
-   *
-   * @return The Integer operation code.
-   */
-  def operationCode = 2002
+case class Insert(name: String, documents: Array[Document]) extends Message(2002) {
 
   /**
    * Serialize the Insert into a buffer that can be written to the socket.

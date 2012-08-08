@@ -5,16 +5,7 @@ import org.jboss.netty.buffer.ChannelBuffer
 /**
  * All Messages sent to the database should mix in this trait.
  */
-trait Message {
-
-  /**
-   * Get the operation code for the message.
-   *
-   * @link http://www.mongodb.org/display/DOCS/Mongo+Wire+Protocol
-   *
-   * @return The Integer operation code.
-   */
-  def operationCode: Int
+abstract class Message(code: Int) {
 
   /**
    * Serialize the Message into a buffer that can be written to the socket.
@@ -40,6 +31,6 @@ trait Message {
     buffer.writeInt(0)
     buffer.writeInt(0)
     buffer.writeInt(0)
-    buffer.writeInt(operationCode)
+    buffer.writeInt(code)
   }
 }
