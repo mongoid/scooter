@@ -37,8 +37,13 @@ object Document extends Deserializable {
     loadPair(buffer.readByte)
 
     /**
-     * Recursive function to load all the key/value pairs that are
-     * in the buffer.
+     * Recursive function to load all the key/value pairs that
+     * are in the buffer.
+     *
+     * @note This function operates by:
+     *   - Look at the provided byte to get the type of object.
+     *   - Get the Deserializable for that type, and load the bytes.
+     *   - Read the next byte.
      *
      * @param byte The Byte representing the value type or zero.
      */
