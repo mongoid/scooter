@@ -35,13 +35,6 @@ object Session {
 case class Session(hosts: Array[String]) extends Dynamic {
 
   /**
-   * This is the wrapped Context for this Session.
-   *
-   * @return The Context.
-   */
-  val context = new Context(this)
-
-  /**
    * The current Database the Session is operating with.
    *
    * @return The current Database.
