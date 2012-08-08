@@ -7,11 +7,11 @@ import org.specs2.specification.Scope
 
 class SerializationSpec extends Specification {
 
-  "Serialization.serializable" should {
+  "Serialization.dumpable" should {
 
     "when provided a double" in {
 
-      val rich = serializable(1.22d)
+      val rich = dumpable(1.22d)
 
       "returns a wrapped double" in {
         rich must beAnInstanceOf[BsonDouble]
@@ -20,7 +20,7 @@ class SerializationSpec extends Specification {
 
     "when provided a boolean" in {
 
-      val rich = serializable(true)
+      val rich = dumpable(true)
 
       "returns a wrapped boolean" in {
         rich must beAnInstanceOf[BsonBoolean]
@@ -29,7 +29,7 @@ class SerializationSpec extends Specification {
 
     "when provided an int" in {
 
-      val rich = serializable(1)
+      val rich = dumpable(1)
 
       "returns a wrapped int" in {
         rich must beAnInstanceOf[BsonInt]
@@ -38,7 +38,7 @@ class SerializationSpec extends Specification {
 
     "when provided a long" in {
 
-      val rich = serializable(2l)
+      val rich = dumpable(2l)
 
       "returns a wrapped long" in {
         rich must beAnInstanceOf[BsonLong]
@@ -47,7 +47,7 @@ class SerializationSpec extends Specification {
 
     "when provided a string" in {
 
-      val rich = serializable("test")
+      val rich = dumpable("test")
 
       "returns a wrapped string" in {
         rich must beAnInstanceOf[BsonString]
