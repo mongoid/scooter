@@ -72,6 +72,13 @@ case class BsonChannelBuffer(target: ChannelBuffer) {
   }
 
   /**
+   * Writes all the provided integers to the buffer in order.
+   *
+   * @param ints A sequence of Ints to write.
+   */
+  def writeInts(ints: Int*) = ints.foreach(int => target.writeInt(int))
+
+  /**
    * Write a string to the buffer.
    *
    * @link http://bsonspec.org/#/specification

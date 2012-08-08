@@ -16,7 +16,7 @@ object ObjectId {
    *
    * @return The AtomicInteger.
    */
-  final lazy val Inc = new AtomicInteger
+  final lazy val Inc = new AtomicInteger(0)
 
   /**
    * Get an integer value uniquely identifying this machine.

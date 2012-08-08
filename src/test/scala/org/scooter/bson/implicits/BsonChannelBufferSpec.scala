@@ -81,6 +81,29 @@ class BsonChannelBufferSpec extends Specification {
     }
   }
 
+  "BsonChannelBuffer#writeInts" should {
+
+    val bytes = Array[Byte](1, 0, 0, 0, 2, 0, 0, 0)
+    val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 8)
+    val wrapper = new BsonChannelBuffer(buffer)
+
+    "write each int to the buffer in order" in {
+      wrapper.writeInts(1, 2)
+      buffer.array must beEqualTo(bytes)
+    }
+  }
+
+  "ChannelBuffer#writeInts" should {
+
+    val bytes = Array[Byte](1, 0, 0, 0, 2, 0, 0, 0)
+    val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 8)
+
+    "write each int to the buffer in order" in {
+      buffer.writeInts(1, 2)
+      buffer.array must beEqualTo(bytes)
+    }
+  }
+
   "BsonChannelBuffer#writeString" should {
 
     val bytes = Array[Byte](3, 0, 0, 0, 121, 97, 0)

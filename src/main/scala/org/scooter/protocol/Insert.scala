@@ -34,7 +34,8 @@ object Insert {
  * @param name The full name of the Collection.
  * @param documents The documents to insert.
  */
-case class Insert(name: String, documents: Array[Document]) extends Message(2002) {
+sealed case class Insert(name: String, documents: Array[Document])
+  extends Message(2002) {
 
   /**
    * Serialize the Insert into a buffer that can be written to the socket.
@@ -51,7 +52,7 @@ case class Insert(name: String, documents: Array[Document]) extends Message(2002
    * @param buffer The ChannelBuffer that will get written.
    */
   def serialize(buffer: ChannelBuffer) = {
-    serializeHeader(buffer)
+    header.serialize(buffer)
     buffer.writeInt(0) // Bit vector.
     buffer.writeCString(name)
     serializeDocuments
