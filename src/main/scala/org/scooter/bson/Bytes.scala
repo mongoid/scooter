@@ -165,7 +165,7 @@ object Bytes {
    *
    * @return The mappings.
    */
-  final val mappings = HashMap[Byte, Deserializable](
+  final val mappings = HashMap[Byte, Loadable](
     Double  -> singleton[BsonDouble.type],
     String  -> singleton[BsonString.type],
     Boolean -> singleton[BsonBoolean.type],

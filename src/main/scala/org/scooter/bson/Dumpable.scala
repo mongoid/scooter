@@ -2,7 +2,7 @@ package org.scooter.bson
 
 import org.jboss.netty.buffer.ChannelBuffer
 
-trait Serializable {
+trait Dumpable {
 
   /**
    * Dump the value to the buffer in it's proper BSON format.

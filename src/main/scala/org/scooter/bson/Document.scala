@@ -10,7 +10,7 @@ import scala.collection.mutable.HashMap
 /**
  * Companion object for a bson Document.
  */
-object Document extends Deserializable {
+object Document extends Loadable {
 
   /**
    * Instantiate a new document from the provided pairs.
@@ -19,7 +19,7 @@ object Document extends Deserializable {
    *
    * @return The Document.
    */
-  def apply(elements: (String, Serializable)*) = {
+  def apply(elements: (String, Dumpable)*) = {
     elements.foldLeft(new Document)(
       (doc, pair) => doc += (pair._1 -> pair._2)
     )
@@ -42,7 +42,7 @@ object Document extends Deserializable {
      *
      * @note This function operates by:
      *   - Look at the provided byte to get the type of object.
-     *   - Get the Deserializable for that type, and load the bytes.
+     *   - Get the Loadable for that type, and load the bytes.
      *   - Read the next byte.
      *
      * @param byte The Byte representing the value type or zero.
@@ -62,7 +62,7 @@ object Document extends Deserializable {
  *
  * @param document The Hash to wrap.
  */
-class Document extends HashMap[String, Serializable] {
+class Document extends HashMap[String, Dumpable] {
 
   /**
    * Dump the document to the buffer, and yield to the provided

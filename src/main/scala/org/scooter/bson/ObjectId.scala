@@ -63,7 +63,7 @@ object ObjectId {
  * @param counter The Int counter.
  */
 case class ObjectId(time: Int, machine: Int, pid: Int, counter: Int)
-  extends Serializable {
+  extends Dumpable {
 
 
   /**

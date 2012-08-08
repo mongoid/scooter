@@ -2,14 +2,14 @@ package org.scooter.bson.implicits
 
 import org.jboss.netty.buffer.ChannelBuffer
 
-import org.scooter.bson.{ Bytes, Deserializable, Document, Serializable }
+import org.scooter.bson.{ Bytes, Loadable, Document, Dumpable }
 import org.scooter.bson.implicits.BsonChannelBuffer._
 import org.scooter.bson.Serialization._
 
 /**
  * Companion object to the BsonLong class.
  */
-object BsonLong extends Deserializable {
+object BsonLong extends Loadable {
 
   /**
    * Load the string value and its key from the buffer.
@@ -27,7 +27,7 @@ object BsonLong extends Deserializable {
  *
  * @param target The Long that is wrapped.
  */
-case class BsonLong(target: Long) extends Serializable {
+case class BsonLong(target: Long) extends Dumpable {
 
   /**
    * Dump the int to the buffer in it's proper BSON format.
