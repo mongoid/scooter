@@ -32,7 +32,9 @@ object Connection {
    * @return The ClientBootstrap.
    */
   private def bootstrap = {
-    new Bootstrap(factory) { boot => boot.setPipelineFactory(new Pipeline) }
+    val boot = new Bootstrap(factory)
+    boot.setPipelineFactory(new Pipeline)
+    boot
   }
 
   /**
