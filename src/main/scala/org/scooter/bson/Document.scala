@@ -52,6 +52,7 @@ class Document extends HashMap[String, Serializable] {
    *  - The length of the document in bytes.
    *  - The document.
    *  - A null byte.
+   *  - The length of the entire message.
    *
    * @param buffer The ChannelBuffer to write to.
    * @param func The function to apply to each pair in the hash.
