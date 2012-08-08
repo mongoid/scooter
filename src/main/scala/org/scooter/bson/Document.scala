@@ -75,7 +75,6 @@ class Document extends HashMap[String, Dumpable] {
    *  - The length of the entire message.
    *
    * @param buffer The ChannelBuffer to write to.
-   * @param func The function to apply to each pair in the hash.
    */
   def bsonDump(buffer: ChannelBuffer) = {
     val start = buffer.writerIndex

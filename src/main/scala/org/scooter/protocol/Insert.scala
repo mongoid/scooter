@@ -55,14 +55,7 @@ sealed case class Insert(name: String, documents: Array[Document])
     header.serialize(buffer)
     buffer.writeInt(0) // Bit vector.
     buffer.writeCString(name)
-    serializeDocuments
+    documents.foreach(doc => doc.bsonDump(buffer))
     buffer.setInt(0, buffer.writerIndex)
-
-    /**
-     * Serialize the documents to the ChannelBuffer.
-     *
-     * @param buffer The ChannelBuffer that will get written.
-     */
-    def serializeDocuments = documents.foreach(doc => doc.bsonDump(buffer))
   }
 }
