@@ -6,6 +6,9 @@ import org.jboss.netty.buffer.ChannelBuffer
 
 import org.scooter.bson.implicits.BsonChannelBuffer._
 
+/**
+ * Companion object to the Header class.
+ */
 object Header {
 
   /**
@@ -29,6 +32,14 @@ object Header {
   }
 }
 
+/**
+ * Represents the standard header that is sent to MongoDB in all messages.
+ *
+ * @param length The length of the message.
+ * @param request The id of the request.
+ * @param original The id of the original request.
+ * @param code The operation code.
+ */
 case class Header(length: Int, request: Int, original: Int, code: Int)
   extends Serializable {
 
