@@ -1,7 +1,7 @@
 import org.scooter.bson._
 import org.scooter.bson.Bytes._
 import org.scooter.bson.implicits._
-import org.scooter.bson.implicits.Companion._
+import org.scooter.functional.Utilities._
 
 import org.specs2.mutable.Specification
 
@@ -12,35 +12,35 @@ class BytesSpec extends Specification {
     "when passed a double byte" in {
 
       "return a double wrapper" in {
-        Bytes.getCompanion(0x01) must beEqualTo(singleton[BsonDouble.type])
+        Bytes.getCompanion(0x01) must beEqualTo(companion[BsonDouble.type])
       }
     }
 
     "when passed a string byte" in {
 
       "return a string wrapper" in {
-        Bytes.getCompanion(0x02) must beEqualTo(singleton[BsonString.type])
+        Bytes.getCompanion(0x02) must beEqualTo(companion[BsonString.type])
       }
     }
 
     "when passed a boolean byte" in {
 
       "return a boolean wrapper" in {
-        Bytes.getCompanion(0x08) must beEqualTo(singleton[BsonBoolean.type])
+        Bytes.getCompanion(0x08) must beEqualTo(companion[BsonBoolean.type])
       }
     }
 
     "when passed a int byte" in {
 
       "return a int wrapper" in {
-        Bytes.getCompanion(0x10) must beEqualTo(singleton[BsonInt.type])
+        Bytes.getCompanion(0x10) must beEqualTo(companion[BsonInt.type])
       }
     }
 
     "when passed a long byte" in {
 
       "return a long wrapper" in {
-        Bytes.getCompanion(0x12) must beEqualTo(singleton[BsonLong.type])
+        Bytes.getCompanion(0x12) must beEqualTo(companion[BsonLong.type])
       }
     }
   }

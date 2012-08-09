@@ -7,6 +7,7 @@ import org.jboss.netty.bootstrap.{ ClientBootstrap => Bootstrap }
 import org.jboss.netty.channel.Channel
 import org.jboss.netty.channel.socket.nio.{ NioClientSocketChannelFactory => Factory }
 
+import org.scooter.functional.Utilities._
 import org.scooter.io.Pipeline
 import org.scooter.protocol.Serializable
 
@@ -32,9 +33,7 @@ object Connection {
    * @return The ClientBootstrap.
    */
   private def bootstrap = {
-    val boot = new Bootstrap(factory)
-    boot.setPipelineFactory(new Pipeline)
-    boot
+    new Bootstrap(factory).tap(boot => boot.setPipelineFactory(new Pipeline))
   }
 
   /**

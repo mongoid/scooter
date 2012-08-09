@@ -4,6 +4,7 @@ import org.jboss.netty.buffer.ChannelBuffers._
 import org.jboss.netty.handler.codec.oneone.OneToOneEncoder
 import org.jboss.netty.channel.{ Channel, ChannelHandlerContext => Context }
 
+import org.scooter.functional.Utilities._
 import org.scooter.protocol.Serializable
 
 /**
@@ -23,9 +24,7 @@ class Encoder extends OneToOneEncoder {
    */
   def encode(context: Context, channel: Channel, msg: Object) = msg match {
     case message: Serializable => {
-      val buffer = dynamicBuffer(LITTLE_ENDIAN, 1024)
-      message.serialize(buffer)
-      buffer
+      dynamicBuffer(LITTLE_ENDIAN, 1024).tap(buf => message.serialize(buf))
     }
   }
 }
