@@ -13,7 +13,7 @@ class SessionSpec extends Specification {
 
       "return the collection for the dynamic name" in new scope {
         session.use("scooter_test")
-        session.users must beEqualTo(collection)
+        session.users.fullName must beEqualTo(collection.fullName)
       }
     }
   }
@@ -22,7 +22,7 @@ class SessionSpec extends Specification {
 
     "set the current database" in new scope {
       session.use("scooter_test")
-      session.database must beEqualTo(database)
+      session.currentDatabase.fullName must beEqualTo(database.fullName)
     }
   }
 
@@ -30,6 +30,6 @@ class SessionSpec extends Specification {
 
     val session = Session("localhost:27017")
     val database = new Database(session, "scooter_test")
-    val collection = new Collection(database, "users")
+    val collection = new Collection(database, "users", session)
   }
 }

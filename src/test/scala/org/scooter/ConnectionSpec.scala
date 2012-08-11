@@ -10,21 +10,20 @@ import org.specs2.specification.Scope
 
 class ConnectionSpec extends Specification {
 
-  "Connection#write" should {
+  // "Connection#write" should {
 
-    val document = Document("hi" -> "ya")
-    val documents = Array(document)
-    val insert = new Insert("scooter_test.users", documents)
+    // val document = Document("hi" -> "ya")
+    // val documents = Array(document)
+    // val insert = new Insert("scooter_test.users", documents)
 
-    "return the database name plus collection name" in new scope {
+    // "return the database name plus collection name" in new scope {
       // connection.write(insert)
-      true must beEqualTo(true)
-    }
-  }
+    // }
+  // }
 
-  trait scope extends Scope {
+  // trait scope extends Scope {
 
-    val address = new InetSocketAddress("127.0.0.1", 27017)
-    val connection = Connection(address)
-  }
+    // val address = new InetSocketAddress("127.0.0.1", 27017)
+    // val connection = Connection(address)
+  // }
 }

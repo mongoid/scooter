@@ -20,7 +20,7 @@ object Insert {
    *
    * @return The Insert message.
    */
-  def apply(collection: Collection, documents: Array[Document]) = {
+  def apply(collection: Collection, documents: Seq[Document]) = {
     new Insert(collection.fullName, documents)
   }
 }
@@ -34,7 +34,7 @@ object Insert {
  * @param name The full name of the Collection.
  * @param documents The documents to insert.
  */
-sealed case class Insert(name: String, documents: Array[Document])
+sealed case class Insert(name: String, documents: Seq[Document])
   extends Message(2002) {
 
   /**

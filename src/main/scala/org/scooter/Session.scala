@@ -19,15 +19,6 @@ object Session {
    * @return The Session.
    */
   def apply(addresses: String*) = new Session(socketAddresses(addresses))
-
-  /**
-   * Implicit conversion from a Session to a Database.
-   *
-   * @param session The Session to convert.
-   *
-   * @return The Database for the session.
-   */
-  implicit def wrapDatabase(session: Session) = session.database
 }
 
 /**
@@ -43,9 +34,7 @@ class Session(hosts: Seq[SocketAddress]) extends Dynamic {
    *
    * @return The current Database.
    */
-  var database: Database = null;
-
-  // val cluster = Cluster(hosts)
+  var currentDatabase: Database = null;
 
   /**
    * Use of Scala's experimental Dyanmic invokation in order to simulate
@@ -57,12 +46,28 @@ class Session(hosts: Seq[SocketAddress]) extends Dynamic {
    *
    * @return The Collection for the provided name.
    */
-  def selectDynamic(name: String) = database.collection(name)
+  def selectDynamic(name: String) = currentDatabase.collection(name)
 
   /**
    * Use the database as specified by the provided name.
    *
    * @param name The name of the Database.
    */
-  def use(name: String) = this.database = new Database(this, name)
+  def use(name: String) = currentDatabase = new Database(this, name)
+
+  /**
+   * Execute the provided function in the context of the primary Node.
+   *
+   * @param func The function to execute.
+   *
+   * @return The result of the function.
+   */
+  protected[scooter] def onPrimary(func: Node => Any) = cluster.onPrimary(func)
+
+  /**
+   * Get the cluster of nodes for this session.
+   *
+   * @return The session's Cluster.
+   */
+  private final lazy val cluster = Cluster(hosts)
 }

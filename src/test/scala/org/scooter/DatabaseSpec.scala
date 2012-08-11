@@ -12,7 +12,7 @@ class DatabaseSpec extends Specification {
     "when provided a name" in {
 
       "returns the collection for the name" in new scope {
-        database.collection("users") must beEqualTo(collection)
+        database.collection("users").fullName must beEqualTo(collection.fullName)
       }
     }
   }
@@ -28,6 +28,6 @@ class DatabaseSpec extends Specification {
 
     val session = new Session(List(new InetSocketAddress("localhost", 27017)))
     val database = new Database(session, "scooter_test")
-    val collection = new Collection(database, "users")
+    val collection = new Collection(database, "users", session)
   }
 }
