@@ -14,16 +14,23 @@ abstract class Message(code: Int) extends Serializable {
    * serialization.
    *
    * @example Serialize with a header.
-   *  header(buffer) {
+   *  withHeader(buffer) {
    *    buffer.writeCString(name)
    *  }
    *
    * @param buffer The ChannelBuffer to write to.
    * @param func The function to execute.
    */
-  def header(buffer: ChannelBuffer)(func: => Unit) = {
-    Header(0, 0, code).serialize(buffer)
+  def withHeader(buffer: ChannelBuffer)(func: => Unit) = {
+    header.serialize(buffer)
     func
     buffer.setInt(0, buffer.writerIndex)
   }
+
+  /**
+   * Get the header for this message.
+   *
+   * @return The Header.
+   */
+  private lazy val header = Header(0, 0, code)
 }

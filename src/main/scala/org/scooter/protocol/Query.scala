@@ -2,7 +2,27 @@ package org.scooter.protocol
 
 import org.jboss.netty.buffer.ChannelBuffer
 
+import org.scooter.Collection
+import org.scooter.bson.implicits.BsonChannelBuffer._
 import org.scooter.bson.Document
+
+/**
+ * Companion object for the Query class.
+ */
+object Query {
+
+  /**
+   * Instantiate a new Query message.
+   *
+   * @param collection The Collection to insert into.
+   * @param selector The selector Document.
+   *
+   * @return The Query message.
+   */
+  def apply(collection: Collection, selector: Document) = {
+    new Query(collection.fullName, selector)
+  }
+}
 
 /**
  * This class encapsulates behaviour for the OP_QUERY command in the
@@ -33,5 +53,12 @@ sealed case class Query(name: String, selector: Document)
    * @param buffer The ChannelBuffer that will get written.
    */
   def serialize(buffer: ChannelBuffer) = {
+    withHeader(buffer) {
+      buffer.writeInt(0) // Bit vector.
+      buffer.writeCString(name)
+      buffer.writeInt(0) // Skip.
+      buffer.writeInt(0) // Return.
+      selector.bsonDump(buffer)
+    }
   }
 }

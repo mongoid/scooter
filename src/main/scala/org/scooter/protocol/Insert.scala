@@ -3,7 +3,7 @@ package org.scooter.protocol
 import org.jboss.netty.buffer.ChannelBuffer
 
 import org.scooter.Collection
-import org.scooter.bson._
+import org.scooter.bson.Document
 import org.scooter.bson.implicits.BsonChannelBuffer._
 import org.scooter.bson.Serialization._
 
@@ -52,7 +52,7 @@ sealed case class Insert(name: String, documents: Seq[Document])
    * @param buffer The ChannelBuffer that will get written.
    */
   def serialize(buffer: ChannelBuffer) = {
-    header(buffer) {
+    withHeader(buffer) {
       buffer.writeInt(0) // Bit vector.
       buffer.writeCString(name)
       documents.foreach(doc => doc.bsonDump(buffer))
