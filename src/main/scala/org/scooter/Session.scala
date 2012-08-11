@@ -35,10 +35,11 @@ class Session(hosts: Seq[SocketAddress]) extends Dynamic {
   var currentDatabase: Database = null;
 
   /**
-   * Use of Scala's experimental Dyanmic invokation in order to simulate
-   * something similar to Ruby's method_missing. This way a collection
-   * can be accessed from the session simply by just calling a method that
-   * is the collection name.
+   * Use of Scala's Dyanmic invokation in order to simulate the same
+   * way collections are accessed via the Mongo console.
+   *
+   * @example Get the users collection.
+   *  session.users
    *
    * @param name The name of the Collection.
    *
