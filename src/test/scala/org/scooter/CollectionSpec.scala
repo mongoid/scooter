@@ -1,3 +1,5 @@
+import java.net.InetSocketAddress
+
 import org.scooter.{ Collection, Database, Session }
 
 import org.specs2.mutable.Specification
@@ -14,7 +16,7 @@ class CollectionSpec extends Specification {
 
   trait scope extends Scope {
 
-    val session = new Session(Array("localhost:27017"))
+    val session = new Session(List(new InetSocketAddress("localhost", 27017)))
     val database = new Database(session, "scooter_test")
     val collection = new Collection(database, "users")
   }

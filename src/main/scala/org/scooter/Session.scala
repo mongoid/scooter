@@ -1,6 +1,10 @@
 package org.scooter
 
-import language.implicitConversions
+import java.net.SocketAddress
+
+import org.scooter.Host._
+
+import scala.language.implicitConversions
 
 /**
  * Companion object for the Session class.
@@ -8,13 +12,13 @@ import language.implicitConversions
 object Session {
 
   /**
-   * Implicit conversion from a Session to a Context.
+   * Create a new session from the provided strings of host:port pairs.
    *
-   * @param session The Session to convert.
+   * @param addresses The strings in the form "127.0.0.1:27017".
    *
-   * @return The Context for the session.
+   * @return The Session.
    */
-  implicit def wrapContext(session: Session) = session.context
+  def apply(addresses: String*) = new Session(socketAddresses(addresses))
 
   /**
    * Implicit conversion from a Session to a Database.
@@ -30,9 +34,9 @@ object Session {
  * The Session is the main entry point in Scooter for dealing with MongoDB.
  * Most operations start from an instance of a Session.
  *
- * @param hosts An Array of "host:port" String pairs.
+ * @param hosts A sequence of SocketAddresses.
  */
-case class Session(hosts: Array[String]) extends Dynamic {
+class Session(hosts: Seq[SocketAddress]) extends Dynamic {
 
   /**
    * The current Database the Session is operating with.
@@ -40,6 +44,8 @@ case class Session(hosts: Array[String]) extends Dynamic {
    * @return The current Database.
    */
   var database: Database = null;
+
+  // val cluster = Cluster(hosts)
 
   /**
    * Use of Scala's experimental Dyanmic invokation in order to simulate
