@@ -1,5 +1,8 @@
 package org.scooter.functional
 
+import java.net.InetSocketAddress
+import java.net.SocketAddress
+
 import scala.language.implicitConversions
 import scala.reflect.ClassTag
 
@@ -19,6 +22,31 @@ object Utilities {
     val name = tag.runtimeClass.getName()
     val klass = Class.forName(name)
     klass.getField("MODULE$").get(klass).asInstanceOf[T]
+  }
+
+  /**
+   * Get a SocketAddress from the provided String.
+   *
+   * @param address The String address.
+   *
+   * @return The SocketAddress.
+   */
+  def socketAddress(address: String) = {
+    val split = address.split(":")
+    new InetSocketAddress(split(0), split(1).toInt)
+  }
+
+  /**
+   * Get SocketAddresses from the provided Strings.
+   *
+   * @param addresses The String addresses.
+   *
+   * @return The sequence of SocketAddresses.
+   */
+  def socketAddresses(addresses: Seq[String]) = {
+    addresses.foldLeft(List[SocketAddress]())(
+      (list, address) => list.+:(socketAddress(address))
+    )
   }
 
   /**

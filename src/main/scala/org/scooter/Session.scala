@@ -2,7 +2,7 @@ package org.scooter
 
 import java.net.SocketAddress
 
-import org.scooter.Host._
+import org.scooter.functional.Utilities._
 
 import scala.language.implicitConversions
 

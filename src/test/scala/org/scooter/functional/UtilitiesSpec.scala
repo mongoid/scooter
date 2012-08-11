@@ -1,13 +1,13 @@
 import java.net.InetSocketAddress
 
-import org.scooter.Host._
+import org.scooter.functional.Utilities._
 
 import org.specs2.mutable.Specification
 import org.specs2.specification.Scope
 
-class HostSpec extends Specification {
+class UtilitiesSpec extends Specification {
 
-  "Host.socketAddress" should {
+  "Utilities.socketAddress" should {
 
     val address = new InetSocketAddress("127.0.0.1", 27017)
 
@@ -16,7 +16,7 @@ class HostSpec extends Specification {
     }
   }
 
-  "Host.socketAddresses" should {
+  "Utilities.socketAddresses" should {
 
     val first = new InetSocketAddress("127.0.0.1", 27017)
     val second = new InetSocketAddress("127.0.0.1", 27018)
