@@ -52,10 +52,10 @@ sealed case class Insert(name: String, documents: Seq[Document])
    * @param buffer The ChannelBuffer that will get written.
    */
   def serialize(buffer: ChannelBuffer) = {
-    header.serialize(buffer)
-    buffer.writeInt(0) // Bit vector.
-    buffer.writeCString(name)
-    documents.foreach(doc => doc.bsonDump(buffer))
-    buffer.setInt(0, buffer.writerIndex)
+    header(buffer) {
+      buffer.writeInt(0) // Bit vector.
+      buffer.writeCString(name)
+      documents.foreach(doc => doc.bsonDump(buffer))
+    }
   }
 }

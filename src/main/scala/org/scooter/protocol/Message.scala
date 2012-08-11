@@ -10,9 +10,20 @@ import org.jboss.netty.buffer.ChannelBuffer
 abstract class Message(code: Int) extends Serializable {
 
   /**
-   * Get the header for this message.
+   * Serialize a header then process the rest of the message's
+   * serialization.
    *
-   * @return The Header.
+   * @example Serialize with a header.
+   *  header(buffer) {
+   *    buffer.writeCString(name)
+   *  }
+   *
+   * @param buffer The ChannelBuffer to write to.
+   * @param func The function to execute.
    */
-  val header = Header(0, 0, code)
+  def header(buffer: ChannelBuffer)(func: => Unit) = {
+    Header(0, 0, code).serialize(buffer)
+    func
+    buffer.setInt(0, buffer.writerIndex)
+  }
 }
