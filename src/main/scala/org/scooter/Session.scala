@@ -4,8 +4,6 @@ import java.net.SocketAddress
 
 import org.scooter.functional.Utilities._
 
-import scala.language.implicitConversions
-
 /**
  * Companion object for the Session class.
  */
