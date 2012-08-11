@@ -8,7 +8,7 @@ organization := "org.scooter"
 scalaVersion := "2.10.0-M5"
 
 libraryDependencies ++= Seq(
-  "org.jboss.netty" % "netty" % "3.2.7.Final",
+  "io.netty" % "netty" % "3.5.3.Final",
   "org.specs2" %% "specs2" % "1.11" % "test"
 )
 
