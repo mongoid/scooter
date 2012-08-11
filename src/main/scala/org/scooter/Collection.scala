@@ -18,9 +18,9 @@ class Collection(database: Database, name: String, session: Session) {
    * @example Find all documents.
    *  session.users.find
    *
-   * @return The chainable Query object for all documents.
+   * @return The chainable Criteria object for all documents.
    */
-  def find = Query(this, session)
+  def find = Criteria(this, session)
 
   /**
    * Get all documents matching the selector in the Collection.
@@ -31,9 +31,9 @@ class Collection(database: Database, name: String, session: Session) {
    *
    * @param selector The MongoDB selector as a Document.
    *
-   * @return The chainable Query object for the matching documents.
+   * @return The chainable Criteria object for the matching documents.
    */
-  def find(selector: Document) = Query(this, selector, session)
+  def find(selector: Document) = Criteria(this, selector, session)
 
   /**
    * Get all documents matching the selector in the Collection.
@@ -43,10 +43,10 @@ class Collection(database: Database, name: String, session: Session) {
    *
    * @param selector The MongoDB selector in Dumpable form.
    *
-   * @return The chainable Query object for the matching documents.
+   * @return The chainable Criteria object for the matching documents.
    */
   def find(selector: (String, Dumpable)*) = {
-    Query(this, Document(selector: _*), session)
+    Criteria(this, Document(selector: _*), session)
   }
 
   /**
