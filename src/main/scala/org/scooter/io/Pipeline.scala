@@ -12,5 +12,5 @@ class Pipeline extends ChannelPipelineFactory {
    *
    * @return The ChannelPipeline.
    */
-  def getPipeline = Channels.pipeline(new Encoder)
+  def getPipeline = Channels.pipeline(new Encoder, new Handler)
 }
