@@ -42,22 +42,8 @@ object Header {
  * @param original The id of the original request.
  * @param code The operation code.
  */
-case class Header(length: Int, request: Int, original: Int, code: Int)
+case class Header(val length: Int, val request: Int, val original: Int, val code: Int)
   extends Serializable {
-
-  /**
-   * Get the unique request id for this message.
-   *
-   * @return The Int request id.
-   */
-  def requestId = request
-
-  /**
-   * Get the id of the original request, used in replies.
-   *
-   * @return The Int original id.
-   */
-  def originalId = original
 
   /**
    * Serializes the header.

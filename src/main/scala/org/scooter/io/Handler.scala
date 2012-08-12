@@ -8,10 +8,25 @@ import org.jboss.netty.channel.{ MessageEvent => Event }
 
 import org.scooter.protocol.Reply
 
+import scala.concurrent.SyncVar
+
 /**
  * Handler for hooking into messages received by the channel.
  */
 class Handler extends SimpleChannelHandler {
+
+  /**
+   * Get a reply given the id of the original Request. This id is generated
+   * automatically by the request header when created.
+   *
+   * @param original The original Request id.
+   *
+   * @return The SyncVar of the Reply.
+   */
+  def reply(original: Int) = {
+    replies.putIfAbsent(original, new SyncVar[Reply])
+    replies.get(original)
+  }
 
   /**
    * Holds all the replies that come back from the database, until they
@@ -19,7 +34,7 @@ class Handler extends SimpleChannelHandler {
    *
    * @return The replies map.
    */
-  private val replies = new ConcurrentHashMap[Int, Reply]
+  private val replies = new ConcurrentHashMap[Int, SyncVar[Reply]]
 
   /**
    * Receive the Reply message event.
@@ -29,7 +44,9 @@ class Handler extends SimpleChannelHandler {
    */
   override def messageReceived(context: Context, event: Event) = {
     event.getMessage match {
-      case reply: Reply => replies.put(reply.header.originalId, reply)
+      case reply: Reply => {
+        Option(replies.remove(reply.header.original)).map { _.put(reply) }
+      }
     }
   }
 }
