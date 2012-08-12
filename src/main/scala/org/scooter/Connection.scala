@@ -9,7 +9,7 @@ import org.jboss.netty.channel.socket.nio.{ NioClientSocketChannelFactory => Fac
 
 import org.scooter.functional.Utilities._
 import org.scooter.io.Pipeline
-import org.scooter.protocol.Serializable
+import org.scooter.protocol.Request
 
 /**
  * Companion object for the Connection class.
@@ -64,16 +64,9 @@ object Connection {
 case class Connection(channel: Channel) {
 
   /**
-   * Write the Message to the socket.
+   * Write the Request to the socket.
    *
-   * @param message The Message to write.
+   * @param message The Request to write.
    */
-  def write(message: Serializable) = channel.write(message)
-
-  /**
-   * Write multiple messages to the socket.
-   *
-   * @param messages The Messages to write.
-   */
-  def write(messages: Array[Serializable]): Unit = messages.foreach(write)
+  def write(request: Request) = channel.write(request)
 }

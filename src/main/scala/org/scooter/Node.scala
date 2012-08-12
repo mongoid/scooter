@@ -2,7 +2,7 @@ package org.scooter
 
 import java.net.SocketAddress
 
-import org.scooter.protocol.Message
+import org.scooter.protocol.Request
 
 /**
  * Companion object for a Node.
@@ -29,9 +29,9 @@ object Node {
 class Node(connection: Connection) {
 
   /**
-   * Send the provided Message to the database.
+   * Send the provided request to the database.
    *
-   * @param message The Message to send.
+   * @param message The Request to send.
    */
-  protected[scooter] def send(message: Message) = connection.write(message)
+  protected[scooter] def send(request: Request) = connection.write(request)
 }

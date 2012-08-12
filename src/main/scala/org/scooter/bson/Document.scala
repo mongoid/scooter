@@ -4,13 +4,14 @@ import org.jboss.netty.buffer.ChannelBuffer
 
 import org.scooter.bson.implicits.BsonChannelBuffer._
 import org.scooter.bson.Serialization._
+import org.scooter.functional.Utilities._
 
 import scala.collection.mutable.HashMap
 
 /**
  * Companion object for a bson Document.
  */
-object Document extends Loadable {
+object Document {
 
   /**
    * Instantiate a new document from the provided pairs.
@@ -30,28 +31,34 @@ object Document extends Loadable {
    *
    * @param buffer The ChannelBuffer.
    *
-   * @return Map The document as a map.
+   * @return The document.
    */
-  def bsonLoad(buffer: ChannelBuffer, doc: Document) = {
-    val length = buffer.readInt
-    loadPair(buffer.readByte)
-
-    /**
-     * Recursive function to load all the key/value pairs that
-     * are in the buffer.
-     *
-     * @note This function operates by:
-     *   - Look at the provided byte to get the type of object.
-     *   - Get the Loadable for that type, and load the bytes.
-     *   - Read the next byte.
-     *
-     * @param byte The Byte representing the value type or zero.
-     */
-    def loadPair(byte: Byte): Unit = {
-      if (byte != Bytes.Null) {
-        Bytes.getCompanion(byte).bsonLoad(buffer, doc)
-        loadPair(buffer.readByte)
+  def bsonLoad(buffer: ChannelBuffer) = {
+    new Document tap(
+      doc => {
+        val length = buffer.readInt
+        loadPair(buffer, buffer.readByte, doc)
       }
+    )
+  }
+
+  /**
+   * Recursive function to load all the key/value pairs that
+   * are in the buffer.
+   *
+   * @note This function operates by:
+   *   - Look at the provided byte to get the type of object.
+   *   - Get the Loadable for that type, and load the bytes.
+   *   - Read the next byte.
+   *
+   * @param buffer The ChannelBuffer to read from.
+   * @param byte The Byte representing the value type or zero.
+   * @param doc The Document being written into.
+   */
+  private def loadPair(buffer: ChannelBuffer, byte: Byte, doc: Document): Unit = {
+    if (byte != Bytes.Null) {
+      Bytes.getCompanion(byte).bsonLoad(buffer, doc)
+      loadPair(buffer, buffer.readByte, doc)
     }
   }
 }

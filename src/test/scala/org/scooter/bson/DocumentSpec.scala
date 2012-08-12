@@ -40,12 +40,10 @@ class DocumentSpec extends Specification {
 
     val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 16)
     val document = Document("hi" -> "ya")
-    val doc = new Document
 
     "deserialize the bytes into a hash map" in new scope {
       buffer.writeBytes(bytes)
-      Document.bsonLoad(buffer, doc)
-      doc must beEqualTo(document)
+      Document.bsonLoad(buffer) must beEqualTo(document)
     }
   }
 

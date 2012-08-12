@@ -1,9 +1,11 @@
 package org.scooter.bson.implicits
 
-import language.implicitConversions
-
 import org.jboss.netty.buffer.ChannelBuffer
 import org.jboss.netty.buffer.ChannelBufferIndexFinder.NUL
+
+import org.scooter.protocol.Header
+
+import scala.language.implicitConversions
 
 /**
  * Companion object to the BsonChannelBuffer.
@@ -42,6 +44,20 @@ case class BsonChannelBuffer(target: ChannelBuffer) {
    * @return The String.
    */
   def readCString = readStringBytes(target.bytesBefore(NUL))
+
+  /**
+   * Read a Header from the ChannelBuffer.
+   *
+   * @return The message Header.
+   */
+  def readHeader = {
+    new Header(
+      target.readInt,
+      target.readInt,
+      target.readInt,
+      target.readInt
+    )
+  }
 
   /**
    * Read a String from the buffer.

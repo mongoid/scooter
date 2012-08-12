@@ -34,7 +34,7 @@ object Query {
  * @param selector The selector Document.
  */
 sealed case class Query(name: String, selector: Document)
-  extends Message(2004) {
+  extends Request(2004) {
 
   /**
    * Serialize the Query into a buffer that can be written to the socket.

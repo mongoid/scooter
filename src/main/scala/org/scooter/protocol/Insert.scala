@@ -35,7 +35,7 @@ object Insert {
  * @param documents The documents to insert.
  */
 sealed case class Insert(name: String, documents: Seq[Document])
-  extends Message(2002) {
+  extends Request(2002) {
 
   /**
    * Serialize the Insert into a buffer that can be written to the socket.
