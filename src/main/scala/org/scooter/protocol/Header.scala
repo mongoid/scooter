@@ -2,7 +2,7 @@ package org.scooter.protocol
 
 import java.util.concurrent.atomic.AtomicInteger
 
-import org.jboss.netty.buffer.ChannelBuffer
+import org.jboss.netty.buffer.{ ChannelBuffer => Buffer }
 
 import org.scooter.bson.implicits.BsonChannelBuffer._
 
@@ -58,7 +58,7 @@ case class Header(length: Int, request: Int, original: Int, code: Int)
    *
    * @param buffer The ChannelBuffer that will get written.
    */
-  def serialize(buffer: ChannelBuffer) = {
+  def serialize(buffer: Buffer) = {
     buffer.writeInts(length, request, original, code)
   }
 }

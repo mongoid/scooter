@@ -1,6 +1,6 @@
 package org.scooter.bson.implicits
 
-import org.jboss.netty.buffer.ChannelBuffer
+import org.jboss.netty.buffer.{ ChannelBuffer => Buffer }
 
 import org.scooter.bson.{ Bytes, Loadable, Document, Dumpable }
 import org.scooter.bson.implicits.BsonChannelBuffer._
@@ -17,7 +17,7 @@ object BsonLong extends Loadable {
    * @param buffer The ChannelBuffer.
    * @param doc The document to place in.
    */
-  def bsonLoad(buffer: ChannelBuffer, doc: Document) = {
+  def bsonLoad(buffer: Buffer, doc: Document) = {
     doc(buffer.readCString) = buffer.readLong
   }
 }
@@ -43,7 +43,7 @@ case class BsonLong(target: Long) extends Dumpable {
    * @param buffer The buffer being written to.
    * @param key The String key to this instance int value.
    */
-  def bsonDump(buffer: ChannelBuffer, key: String) = {
+  def bsonDump(buffer: Buffer, key: String) = {
     buffer.writeByte(Bytes.Int64)
     buffer.writeCString(key)
     buffer.writeLong(target)

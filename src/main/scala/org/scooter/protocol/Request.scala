@@ -1,6 +1,6 @@
 package org.scooter.protocol
 
-import org.jboss.netty.buffer.ChannelBuffer
+import org.jboss.netty.buffer.{ ChannelBuffer => Buffer }
 
 /**
  * Represents any message that is sent to the database.
@@ -21,7 +21,7 @@ abstract class Request(code: Int) extends Message(code) with Serializable {
    * @param buffer The ChannelBuffer to write to.
    * @param func The function to execute.
    */
-  def withHeader(buffer: ChannelBuffer)(func: => Unit) = {
+  def withHeader(buffer: Buffer)(func: => Unit) = {
     header.serialize(buffer)
     func
     buffer.setInt(0, buffer.writerIndex)

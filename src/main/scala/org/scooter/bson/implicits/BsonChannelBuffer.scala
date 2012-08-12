@@ -1,6 +1,6 @@
 package org.scooter.bson.implicits
 
-import org.jboss.netty.buffer.ChannelBuffer
+import org.jboss.netty.buffer.{ ChannelBuffer => Buffer }
 import org.jboss.netty.buffer.ChannelBufferIndexFinder.NUL
 
 import org.scooter.protocol.Header
@@ -19,7 +19,7 @@ object BsonChannelBuffer {
    *
    * @return The BsonChannelBuffer.
    */
-  implicit def wrapBuffer(target: ChannelBuffer): BsonChannelBuffer = {
+  implicit def wrapBuffer(target: Buffer): BsonChannelBuffer = {
     new BsonChannelBuffer(target)
   }
 }
@@ -30,7 +30,7 @@ object BsonChannelBuffer {
  *
  * @param target The wrapped ChannelBuffer.
  */
-case class BsonChannelBuffer(target: ChannelBuffer) {
+case class BsonChannelBuffer(target: Buffer) {
 
   /**
    * Read a C String from the buffer.

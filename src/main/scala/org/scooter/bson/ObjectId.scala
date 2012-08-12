@@ -4,7 +4,7 @@ import java.lang.management.{ ManagementFactory => MX }
 import java.net.InetAddress
 import java.util.concurrent.atomic.AtomicInteger
 
-import org.jboss.netty.buffer.ChannelBuffer
+import org.jboss.netty.buffer.{ ChannelBuffer => Buffer }
 
 import org.scooter.bson.implicits.BsonChannelBuffer._
 import org.scooter.bson.Serialization._
@@ -45,7 +45,7 @@ object ObjectId extends Loadable {
    * @param buffer The ChannelBuffer.
    * @param doc The document to place in.
    */
-  def bsonLoad(buffer: ChannelBuffer, doc: Document) = {
+  def bsonLoad(buffer: Buffer, doc: Document) = {
     doc(buffer.readCString) =
       new ObjectId(buffer.readInt, buffer.readInt, buffer.readInt, buffer.readInt)
   }
@@ -94,5 +94,5 @@ case class ObjectId(time: Int, machine: Int, pid: Int, counter: Int)
    * @param buffer The buffer being written to.
    * @param key The String key to this instance value.
    */
-  def bsonDump(buffer: ChannelBuffer, key: String) = {}
+  def bsonDump(buffer: Buffer, key: String) = {}
 }

@@ -1,6 +1,6 @@
 package org.scooter.protocol
 
-import org.jboss.netty.buffer.ChannelBuffer
+import org.jboss.netty.buffer.{ ChannelBuffer => Buffer }
 
 /**
  * Represents any object that can be serialized into bytes on a ChannelBuffer.
@@ -12,5 +12,5 @@ trait Serializable {
    *
    * @param buffer The ChannelBuffer that will get written.
    */
-  def serialize(buffer: ChannelBuffer) : Unit
+  def serialize(buffer: Buffer) : Unit
 }

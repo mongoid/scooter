@@ -1,8 +1,8 @@
 package org.scooter.io
 
-import org.jboss.netty.buffer.ChannelBuffer
-import org.jboss.netty.handler.codec.frame.LengthFieldBasedFrameDecoder
+import org.jboss.netty.buffer.{ ChannelBuffer => Buffer }
 import org.jboss.netty.channel.{ Channel, ChannelHandlerContext => Context }
+import org.jboss.netty.handler.codec.frame.LengthFieldBasedFrameDecoder
 
 import org.scooter.protocol.Reply
 
@@ -21,10 +21,10 @@ class Decoder extends LengthFieldBasedFrameDecoder(2048, 0, 4, 0, 4) {
    *
    * @return The database Reply.
    */
-  override def decode(context: Context, channel: Channel, buffer: ChannelBuffer): Object = {
+  override def decode(context: Context, channel: Channel, buffer: Buffer): Object = {
     // println("EXPECTED LENGTH: " + buffer.getInt(0))
     // println(Reply.deserialize(buffer))
-    reply(super.decode(context, channel, buffer).asInstanceOf[ChannelBuffer])
+    reply(super.decode(context, channel, buffer).asInstanceOf[Buffer])
   }
 
   /**
@@ -34,7 +34,7 @@ class Decoder extends LengthFieldBasedFrameDecoder(2048, 0, 4, 0, 4) {
    *
    * @return The Reply or null.
    */
-  private def reply(buffer: ChannelBuffer) = {
+  private def reply(buffer: Buffer) = {
     // println("HEY MA:")
     // println(buffer)
     if (buffer == null) null else Reply.deserialize(buffer)

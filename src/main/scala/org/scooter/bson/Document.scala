@@ -1,6 +1,6 @@
 package org.scooter.bson
 
-import org.jboss.netty.buffer.ChannelBuffer
+import org.jboss.netty.buffer.{ ChannelBuffer => Buffer }
 
 import org.scooter.bson.implicits.BsonChannelBuffer._
 import org.scooter.bson.Serialization._
@@ -33,7 +33,7 @@ object Document {
    *
    * @return The document.
    */
-  def bsonLoad(buffer: ChannelBuffer) = {
+  def bsonLoad(buffer: Buffer) = {
     new Document tap(
       doc => {
         val length = buffer.readInt
@@ -55,7 +55,7 @@ object Document {
    * @param byte The Byte representing the value type or zero.
    * @param doc The Document being written into.
    */
-  private def loadPair(buffer: ChannelBuffer, byte: Byte, doc: Document): Unit = {
+  private def loadPair(buffer: Buffer, byte: Byte, doc: Document): Unit = {
     if (byte != Bytes.Null) {
       Bytes.getCompanion(byte).bsonLoad(buffer, doc)
       loadPair(buffer, buffer.readByte, doc)
@@ -83,7 +83,7 @@ class Document extends HashMap[String, Dumpable] {
    *
    * @param buffer The ChannelBuffer to write to.
    */
-  def bsonDump(buffer: ChannelBuffer) = {
+  def bsonDump(buffer: Buffer) = {
     val start = buffer.writerIndex
     buffer.writeInt(0)
     foreach(pair => pair._2.bsonDump(buffer, pair._1))

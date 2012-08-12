@@ -1,6 +1,6 @@
 package org.scooter.bson.implicits
 
-import org.jboss.netty.buffer.ChannelBuffer
+import org.jboss.netty.buffer.{ ChannelBuffer => Buffer }
 
 import org.scooter.bson.{ Bytes, Loadable, Document, Dumpable }
 import org.scooter.bson.implicits.BsonChannelBuffer._
@@ -17,7 +17,7 @@ object BsonBoolean extends Loadable {
    * @param buffer The ChannelBuffer.
    * @param doc The document to place in.
    */
-  def bsonLoad(buffer: ChannelBuffer, doc: Document) = {
+  def bsonLoad(buffer: Buffer, doc: Document) = {
     doc(buffer.readCString) = if (buffer.readByte == 0x01) true else false
   }
 }
@@ -43,7 +43,7 @@ case class BsonBoolean(target: Boolean) extends Dumpable {
    * @param buffer The buffer being written to.
    * @param key The String key to this instance boolean value.
    */
-  def bsonDump(buffer: ChannelBuffer, key: String) = {
+  def bsonDump(buffer: Buffer, key: String) = {
     buffer.writeByte(Bytes.Boolean)
     buffer.writeCString(key)
     buffer.writeByte(if (target) 0x01 else 0x00)

@@ -1,6 +1,6 @@
 package org.scooter.protocol
 
-import org.jboss.netty.buffer.ChannelBuffer
+import org.jboss.netty.buffer.{ ChannelBuffer => Buffer }
 
 /**
  * Represents objects that can be deserialized from bytes into Reply objects.
@@ -14,5 +14,5 @@ trait Deserializable {
    *
    * @return The Reply.
    */
-  def deserialize(buffer: ChannelBuffer) : Reply
+  def deserialize(buffer: Buffer) : Reply
 }

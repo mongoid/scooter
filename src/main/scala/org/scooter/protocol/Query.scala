@@ -1,6 +1,6 @@
 package org.scooter.protocol
 
-import org.jboss.netty.buffer.ChannelBuffer
+import org.jboss.netty.buffer.{ ChannelBuffer => Buffer }
 
 import org.scooter.Collection
 import org.scooter.bson.implicits.BsonChannelBuffer._
@@ -52,7 +52,7 @@ sealed case class Query(name: String, selector: Document)
    *
    * @param buffer The ChannelBuffer that will get written.
    */
-  def serialize(buffer: ChannelBuffer) = {
+  def serialize(buffer: Buffer) = {
     withHeader(buffer) {
       buffer.writeInt(0) // Bit vector.
       buffer.writeCString(name)

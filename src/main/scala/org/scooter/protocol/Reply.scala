@@ -1,6 +1,6 @@
 package org.scooter.protocol
 
-import org.jboss.netty.buffer.ChannelBuffer
+import org.jboss.netty.buffer.{ ChannelBuffer => Buffer }
 
 import org.scooter.bson.Document
 import org.scooter.bson.implicits.BsonChannelBuffer._
@@ -27,7 +27,7 @@ object Reply extends Deserializable {
    *
    * @return The Reply.
    */
-  def deserialize(buffer: ChannelBuffer): Reply = {
+  def deserialize(buffer: Buffer): Reply = {
     new Reply(
       buffer.readHeader,
       buffer.readInt,
@@ -44,7 +44,7 @@ object Reply extends Deserializable {
    *
    * @return A sequence of Documents.
    */
-  private def documents(buffer: ChannelBuffer) = {
+  private def documents(buffer: Buffer) = {
     (1 to buffer.readInt).foldLeft(List[Document]())(
       (docs, bytes) => docs.:+(Document.bsonLoad(buffer))
     )

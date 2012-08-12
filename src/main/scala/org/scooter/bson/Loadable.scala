@@ -1,6 +1,6 @@
 package org.scooter.bson
 
-import org.jboss.netty.buffer.ChannelBuffer
+import org.jboss.netty.buffer.{ ChannelBuffer => Buffer }
 
 trait Loadable {
 
@@ -10,5 +10,5 @@ trait Loadable {
    * @param buffer The buffer being read from.
    * @param doc The document to write to.
    */
-  def bsonLoad(buffer: ChannelBuffer, doc: Document) : Unit
+  def bsonLoad(buffer: Buffer, doc: Document) : Unit
 }
