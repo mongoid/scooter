@@ -4,7 +4,7 @@ import java.net.InetSocketAddress
 
 import org.scooter.bson.Document
 import org.scooter.bson.Serialization._
-import org.scooter.protocol.{ Insert, Query }
+import org.scooter.protocol.{ Header, Insert, Query }
 
 import org.specs2.mutable.Specification
 import org.specs2.specification.Scope
@@ -17,7 +17,8 @@ class ConnectionSpec extends Specification {
 
       val document = Document("hi" -> "ya")
       val documents = Array(document)
-      val insert = new Insert("scooter_test.users", documents)
+      val header = Header(0, 0, 2002)
+      val insert = new Insert(header, "scooter_test.users", documents)
 
       "writes the message" in new scope {
         // connection.write(insert)
@@ -27,7 +28,8 @@ class ConnectionSpec extends Specification {
 
     "when writing a message that expects replies" in {
 
-      val query = new Query("scooter_test.users", Document("hi" -> "ya"))
+      val header = Header(0, 0, 2004)
+      val query = new Query(header, "scooter_test.users", Document("hi" -> "ya"))
 
       "writes the message" in new scope {
         connection.send(query)

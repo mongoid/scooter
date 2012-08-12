@@ -7,14 +7,14 @@ import org.jboss.netty.buffer.{ ChannelBuffer => Buffer }
  *
  * @param code The operation code.
  */
-abstract class Message(code: Int) {
+abstract class Message(head: Header, code: Int) {
 
   /**
-   * Generate a header for this message.
+   * Get the message Header.
    *
-   * @return The new Header.
+   * @return The message Header.
    */
-  val header = Header(0, 0, code)
+  def header = head
 
   /**
    * Serialize a header then process the rest of the message's

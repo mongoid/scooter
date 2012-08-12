@@ -7,4 +7,5 @@ import org.jboss.netty.buffer.{ ChannelBuffer => Buffer }
  *
  * @param code The operation code.
  */
-abstract class Request(code: Int) extends Message(code) with Serializable
+abstract class Request(head: Header, code: Int) extends Message(head, code)
+  with Serializable

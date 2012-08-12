@@ -54,15 +54,15 @@ object Reply extends Deserializable {
 /**
  * Represents a Reply message from the database.
  *
- * @param header The message Header.
+ * @param head The message Header.
  * @param flags The options.
  * @param cursor The id of the cursor if there are more documents to read.
  * @param skip The marker of where the cursor is on the server.
  * @param docs The sequence of Documents in this batch.
  */
 sealed case class Reply(
-  override val header: Header,
-  val flags: Int,
-  val cursor: Long,
-  val skip: Int,
-  val documents: Seq[Document]) extends Message(1)
+  head: Header,
+  flags: Int,
+  cursor: Long,
+  skip: Int,
+  val documents: Seq[Document]) extends Message(head, 1)

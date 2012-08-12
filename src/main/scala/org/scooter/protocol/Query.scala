@@ -20,7 +20,7 @@ object Query {
    * @return The Query message.
    */
   def apply(collection: Collection, selector: Document) = {
-    new Query(collection.fullName, selector)
+    new Query(Header(0, 0, 2004), collection.fullName, selector)
   }
 }
 
@@ -33,8 +33,8 @@ object Query {
  * @param name The full name of the Collection.
  * @param selector The selector Document.
  */
-sealed case class Query(name: String, selector: Document)
-  extends Request(2004) {
+sealed case class Query(head: Header, name: String, selector: Document)
+  extends Request(head, 2004) {
 
   /**
    * Serialize the Query into a buffer that can be written to the socket.
