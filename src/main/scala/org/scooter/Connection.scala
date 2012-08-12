@@ -10,8 +10,8 @@ import org.jboss.netty.channel.Channel
 import org.jboss.netty.channel.socket.nio.{ NioClientSocketChannelFactory => Factory }
 
 import org.scooter.functional.Utilities._
-import org.scooter.io.Pipeline
-import org.scooter.protocol.Request
+import org.scooter.io.{ Handler, Pipeline }
+import org.scooter.protocol.{ Command, Request }
 
 /**
  * Companion object for the Connection class.
@@ -25,7 +25,7 @@ object Connection {
    *
    * @return The new Connection.
    */
-  def apply(address: SocketAddress) = {
+  protected[scooter] def apply(address: SocketAddress) = {
     new Connection(future(address).awaitUninterruptibly.getChannel)
   }
 
@@ -77,9 +77,28 @@ object Connection {
 case class Connection(channel: Channel) {
 
   /**
+   * Write the Command to the socket.
+   *
+   * @param command The Command to write.
+   */
+  protected[scooter] def send(command: Command) = channel.write(command)
+
+  /**
    * Write the Request to the socket.
    *
-   * @param message The Request to write.
+   * @param request The Request to write.
    */
-  def write(request: Request) = channel.write(request)
+  protected[scooter] def send(request: Request) = {
+    channel.write(request)
+    // Need to return a promise to respond to the request.
+  }
+
+  /**
+   * Get the scooter io handler, the last object in the pipeline.
+   *
+   * @return The Handler.
+   */
+  private def handler: Handler = {
+    channel.getPipeline.getLast.asInstanceOf[Handler]
+  }
 }

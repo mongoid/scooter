@@ -1,6 +1,7 @@
+package org.scooter
+
 import java.net.InetSocketAddress
 
-import org.scooter.Connection
 import org.scooter.bson.Document
 import org.scooter.bson.Serialization._
 import org.scooter.protocol.{ Insert, Query }
@@ -10,7 +11,7 @@ import org.specs2.specification.Scope
 
 class ConnectionSpec extends Specification {
 
-  "Connection#write" should {
+  "Connection#send" should {
 
     "when writing a message that does not expect replies" in {
 
@@ -29,7 +30,7 @@ class ConnectionSpec extends Specification {
       val query = new Query("scooter_test.users", Document("hi" -> "ya"))
 
       "writes the message" in new scope {
-        connection.write(query)
+        connection.send(query)
         true
       }
     }

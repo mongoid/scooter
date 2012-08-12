@@ -1,4 +1,4 @@
-import org.scooter.Criteria
+package org.scooter
 
 import org.specs2.mutable.Specification
 

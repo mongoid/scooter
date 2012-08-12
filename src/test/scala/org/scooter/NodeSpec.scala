@@ -1,4 +1,4 @@
-import org.scooter.Node
+package org.scooter
 
 import org.specs2.mutable.Specification
 

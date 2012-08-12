@@ -1,6 +1,6 @@
-import java.net.InetSocketAddress
+package org.scooter
 
-import org.scooter.{ Collection, Database, Session }
+import java.net.InetSocketAddress
 
 import org.specs2.mutable.Specification
 import org.specs2.specification.Scope
