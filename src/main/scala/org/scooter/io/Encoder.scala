@@ -1,7 +1,6 @@
 package org.scooter.io
 
-import org.jboss.netty.buffer.ChannelBuffers.{ LITTLE_ENDIAN => LE }
-import org.jboss.netty.buffer.ChannelBuffers.{ dynamicBuffer => dynamic }
+import org.jboss.netty.buffer.ChannelBuffers._
 import org.jboss.netty.handler.codec.oneone.OneToOneEncoder
 import org.jboss.netty.channel.{ Channel, ChannelHandlerContext => Context }
 
@@ -25,7 +24,7 @@ class Encoder extends OneToOneEncoder {
    */
   def encode(context: Context, channel: Channel, msg: Object) = msg match {
     case message: Serializable => {
-      dynamic(LE, 1024).tap(buf => message.serialize(buf))
+      dynamicBuffer(LITTLE_ENDIAN, 1024).tap(buf => message.serialize(buf))
     }
   }
 }
