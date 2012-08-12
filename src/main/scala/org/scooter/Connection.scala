@@ -84,7 +84,10 @@ case class Connection(channel: Channel) {
   protected[scooter] def send(command: Command) = channel.write(command)
 
   /**
-   * Write the Request to the socket.
+   * Write the Request to the socket and return the Reply.
+   *
+   * @note The Reply is wrapped in a SynVar which will wait to return
+   *   until the response has come back from the database.
    *
    * @param request The Request to write.
    *
@@ -92,7 +95,7 @@ case class Connection(channel: Channel) {
    */
   protected[scooter] def send(request: Request) = {
     channel.write(request)
-    handler.reply(request.header.request).get
+    handler.reply(request.header.request)
   }
 
   /**

@@ -25,7 +25,7 @@ class Handler extends SimpleChannelHandler {
    */
   def reply(original: Int) = {
     replies.putIfAbsent(original, new SyncVar[Reply])
-    replies.get(original)
+    replies.get(original).get
   }
 
   /**
