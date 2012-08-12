@@ -87,10 +87,12 @@ case class Connection(channel: Channel) {
    * Write the Request to the socket.
    *
    * @param request The Request to write.
+   *
+   * @return The Reply once it is available.
    */
   protected[scooter] def send(request: Request) = {
     channel.write(request)
-    // Need to return a promise to respond to the request.
+    handler.reply(request.header.request).get
   }
 
   /**

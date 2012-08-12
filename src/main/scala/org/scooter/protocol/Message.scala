@@ -10,6 +10,13 @@ import org.jboss.netty.buffer.{ ChannelBuffer => Buffer }
 abstract class Message(code: Int) {
 
   /**
+   * Generate a header for this message.
+   *
+   * @return The new Header.
+   */
+  val header = Header(0, 0, code)
+
+  /**
    * Serialize a header then process the rest of the message's
    * serialization.
    *
@@ -22,15 +29,8 @@ abstract class Message(code: Int) {
    * @param func The function to execute.
    */
   def withHeader(buffer: Buffer)(func: => Unit) = {
-    generateHeader.serialize(buffer)
+    header.serialize(buffer)
     func
     buffer.setInt(0, buffer.writerIndex)
   }
-
-  /**
-   * Generate a header for this message.
-   *
-   * @return The new Header.
-   */
-  private lazy val generateHeader = Header(0, 0, code)
 }

@@ -31,7 +31,6 @@ class ConnectionSpec extends Specification {
 
       "writes the message" in new scope {
         connection.send(query)
-        true
       }
     }
   }

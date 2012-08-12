@@ -61,7 +61,7 @@ object Reply extends Deserializable {
  * @param docs The sequence of Documents in this batch.
  */
 sealed case class Reply(
-  val header: Header,
+  override val header: Header,
   val flags: Int,
   val cursor: Long,
   val skip: Int,
