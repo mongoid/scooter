@@ -46,6 +46,20 @@ case class Header(length: Int, request: Int, original: Int, code: Int)
   extends Serializable {
 
   /**
+   * Get the unique request id for this message.
+   *
+   * @return The Int request id.
+   */
+  def requestId = request
+
+  /**
+   * Get the id of the original request, used in replies.
+   *
+   * @return The Int original id.
+   */
+  def originalId = original
+
+  /**
    * Serializes the header.
    *
    * @link http://www.mongodb.org/display/DOCS/Mongo+Wire+Protocol

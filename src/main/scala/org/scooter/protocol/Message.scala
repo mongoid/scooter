@@ -22,15 +22,15 @@ abstract class Message(code: Int) {
    * @param func The function to execute.
    */
   def withHeader(buffer: Buffer)(func: => Unit) = {
-    header.serialize(buffer)
+    generateHeader.serialize(buffer)
     func
     buffer.setInt(0, buffer.writerIndex)
   }
 
   /**
-   * Get the header for this message.
+   * Generate a header for this message.
    *
-   * @return The Header.
+   * @return The new Header.
    */
-  private lazy val header = Header(0, 0, code)
+  private lazy val generateHeader = Header(0, 0, code)
 }
