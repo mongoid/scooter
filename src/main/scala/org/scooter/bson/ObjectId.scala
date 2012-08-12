@@ -6,10 +6,13 @@ import java.util.concurrent.atomic.AtomicInteger
 
 import org.jboss.netty.buffer.ChannelBuffer
 
+import org.scooter.bson.implicits.BsonChannelBuffer._
+import org.scooter.bson.Serialization._
+
 /**
  * Companion object for BSON ObjectIds.
  */
-object ObjectId {
+object ObjectId extends Loadable {
 
   /**
    * Gets the atomic counter for incrementing ids.
@@ -34,6 +37,17 @@ object ObjectId {
    */
   final lazy val Pid = {
     MX.getRuntimeMXBean().getName().hashCode() & 0xFFFF
+  }
+
+  /**
+   * Load the ObjectId value and its key from the buffer.
+   *
+   * @param buffer The ChannelBuffer.
+   * @param doc The document to place in.
+   */
+  def bsonLoad(buffer: ChannelBuffer, doc: Document) = {
+    doc(buffer.readCString) =
+      new ObjectId(buffer.readInt, buffer.readInt, buffer.readInt, buffer.readInt)
   }
 
   /**

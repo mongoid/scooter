@@ -1,7 +1,7 @@
 package org.scooter.io
 
 import org.jboss.netty.buffer.ChannelBuffer
-import org.jboss.netty.handler.codec.frame.FrameDecoder
+import org.jboss.netty.handler.codec.frame.LengthFieldBasedFrameDecoder
 import org.jboss.netty.channel.{ Channel, ChannelHandlerContext => Context }
 
 import org.scooter.protocol.Reply
@@ -10,7 +10,7 @@ import org.scooter.protocol.Reply
  * Decodes bytes from the database server and converts the frames of bytes
  * into Reply objects.
  */
-class Decoder extends FrameDecoder {
+class Decoder extends LengthFieldBasedFrameDecoder(2048, 0, 4, 0, 4) {
 
   /**
    * Decode the reply from the database, returning a Reply object.
@@ -21,23 +21,22 @@ class Decoder extends FrameDecoder {
    *
    * @return The database Reply.
    */
-  def decode(context: Context, channel: Channel, buffer: ChannelBuffer): Object = {
+  override def decode(context: Context, channel: Channel, buffer: ChannelBuffer): Object = {
+    // println("EXPECTED LENGTH: " + buffer.getInt(0))
+    // println(Reply.deserialize(buffer))
+    reply(super.decode(context, channel, buffer).asInstanceOf[ChannelBuffer])
+  }
 
-    // Break from processing if we cannot read the length of the message.
-    if (buffer.readableBytes < 4) return null
-
-    // Mark the buffer and read the expected length of the message.
-    buffer.markReaderIndex
-    val length = buffer.readInt
-
-    // Break from processing if we cannot read the entire message. Will reset the
-    // buffer's index so it can process again as normal.
-    if (buffer.readableBytes < length) {
-      buffer.resetReaderIndex
-      return null
-    }
-
-    // Deserialize the database reply.
-    Reply.deserialize(buffer.readBytes(length))
+  /**
+   * Return the reply or null depending on the frame.
+   *
+   * @param buffer The extracted frame.
+   *
+   * @return The Reply or null.
+   */
+  private def reply(buffer: ChannelBuffer) = {
+    // println("HEY MA:")
+    // println(buffer)
+    if (buffer == null) null else Reply.deserialize(buffer)
   }
 }

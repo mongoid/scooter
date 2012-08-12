@@ -166,10 +166,11 @@ object Bytes {
    * @return The mappings.
    */
   final val mappings = HashMap[Byte, Loadable](
-    Double  -> companion[BsonDouble.type],
-    String  -> companion[BsonString.type],
-    Boolean -> companion[BsonBoolean.type],
-    Int32   -> companion[BsonInt.type],
-    Int64   -> companion[BsonLong.type]
+    Boolean  -> companion[BsonBoolean.type],
+    Double   -> companion[BsonDouble.type],
+    String   -> companion[BsonString.type],
+    Int32    -> companion[BsonInt.type],
+    Int64    -> companion[BsonLong.type],
+    ObjectId -> companion[org.scooter.bson.ObjectId.type]
   )
 }
