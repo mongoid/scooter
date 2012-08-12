@@ -9,7 +9,11 @@ import org.jboss.netty.channel.{ MessageEvent => Event }
  */
 class Handler extends SimpleChannelHandler {
 
-  override def messageReceived(context: Context, event: Event) = {
-    println(event.getMessage)
-  }
+  /**
+   * Receive the Reply message event.
+   *
+   * @param context The handler context.
+   * @param event The MessageEvent.
+   */
+  override def messageReceived(context: Context, event: Event) = {}
 }

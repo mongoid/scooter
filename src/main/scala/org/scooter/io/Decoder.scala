@@ -10,7 +10,7 @@ import org.scooter.protocol.Reply
  * Decodes bytes from the database server and converts the frames of bytes
  * into Reply objects.
  */
-class Decoder extends LengthFieldBasedFrameDecoder(2048, 0, 4, 0, 4) {
+class Decoder extends LengthFieldBasedFrameDecoder(2048, 0, 4, -4, 0) {
 
   /**
    * Decode the reply from the database, returning a Reply object.
@@ -22,8 +22,6 @@ class Decoder extends LengthFieldBasedFrameDecoder(2048, 0, 4, 0, 4) {
    * @return The database Reply.
    */
   override def decode(context: Context, channel: Channel, buffer: Buffer): Object = {
-    // println("EXPECTED LENGTH: " + buffer.getInt(0))
-    // println(Reply.deserialize(buffer))
     reply(super.decode(context, channel, buffer).asInstanceOf[Buffer])
   }
 
@@ -35,8 +33,6 @@ class Decoder extends LengthFieldBasedFrameDecoder(2048, 0, 4, 0, 4) {
    * @return The Reply or null.
    */
   private def reply(buffer: Buffer) = {
-    // println("HEY MA:")
-    // println(buffer)
     if (buffer == null) null else Reply.deserialize(buffer)
   }
 }

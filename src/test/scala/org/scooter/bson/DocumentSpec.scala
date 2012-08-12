@@ -38,17 +38,32 @@ class DocumentSpec extends Specification {
 
   "Document.bsonLoad" should {
 
-    val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 16)
-    val document = Document("hi" -> "ya")
+    "when the document has a single pair" in {
 
-    "deserialize the bytes into a hash map" in new scope {
-      buffer.writeBytes(bytes)
-      Document.bsonLoad(buffer) must beEqualTo(document)
+      val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 16)
+      val document = Document("hi" -> "ya")
+
+      "deserialize the bytes into a hash map" in new scope {
+        buffer.writeBytes(bytes)
+        Document.bsonLoad(buffer) must beEqualTo(document)
+      }
+    }
+
+    "when the document has multiple pairs" in {
+
+      val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 27)
+      val document = Document("hi" -> "ya", "hj" -> "ya")
+
+      "deserialize the bytes into a hash map" in new scope {
+        buffer.writeBytes(multi)
+        Document.bsonLoad(buffer) must beEqualTo(document)
+      }
     }
   }
 
   trait scope extends Scope {
 
     val bytes = Array[Byte](16, 0, 0, 0, 2, 104, 105, 0, 3, 0, 0, 0, 121, 97, 0, 0)
+    val multi = Array[Byte](27, 0, 0, 0, 2, 104, 105, 0, 3, 0, 0, 0, 121, 97, 0, 2, 104, 106, 0, 3, 0, 0, 0, 121, 97, 0, 0)
   }
 }

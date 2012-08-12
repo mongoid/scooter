@@ -46,8 +46,7 @@ object ObjectId extends Loadable {
    * @param doc The document to place in.
    */
   def bsonLoad(buffer: Buffer, doc: Document) = {
-    doc(buffer.readCString) =
-      new ObjectId(buffer.readInt, buffer.readInt, buffer.readInt, buffer.readInt)
+    doc(buffer.readCString) = buffer.readObjectId
   }
 
   /**
@@ -55,7 +54,7 @@ object ObjectId extends Loadable {
   *
   * @return The ObjectId.
   */
-  def generate = ObjectId(time, Machine, Pid, Inc.getAndIncrement)
+  def generate = ObjectId(time, Machine, Inc.getAndIncrement)
 
   /**
    * Get the current time as an Int.
@@ -76,9 +75,7 @@ object ObjectId extends Loadable {
  * @param pid The Int for the process id.
  * @param counter The Int counter.
  */
-case class ObjectId(time: Int, machine: Int, pid: Int, counter: Int)
-  extends Dumpable {
-
+case class ObjectId(time: Int, machine: Int, counter: Int) extends Dumpable {
 
   /**
    * Dump the ObjectId to the buffer in it's proper BSON format.

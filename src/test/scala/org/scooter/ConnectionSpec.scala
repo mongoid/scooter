@@ -26,7 +26,7 @@ class ConnectionSpec extends Specification {
 
     "when writing a message that expects replies" in {
 
-      val query = new Query("scooter_test.users", new Document)
+      val query = new Query("scooter_test.users", Document("hi" -> "ya"))
 
       "writes the message" in new scope {
         connection.write(query)

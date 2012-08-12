@@ -1,9 +1,11 @@
 package org.scooter
 
 import java.net.SocketAddress
+import java.nio.ByteOrder._
 import java.util.concurrent.{ Executors => Ex }
 
 import org.jboss.netty.bootstrap.{ ClientBootstrap => Bootstrap }
+import org.jboss.netty.buffer.{ HeapChannelBufferFactory => BufferFactory }
 import org.jboss.netty.channel.Channel
 import org.jboss.netty.channel.socket.nio.{ NioClientSocketChannelFactory => Factory }
 
@@ -30,10 +32,21 @@ object Connection {
   /**
    * Get the ClientBootstrap to use with the connection.
    *
+   * @note This sets some default options for the bootstrap:
+   *  - The default byte order should always be little endian.
+   *  - Use TCP_NODELAY at all times.
+   *  - Set the pipeline factory to our pipeline.
+   *
    * @return The ClientBootstrap.
    */
   private def bootstrap = {
-    new Bootstrap(factory).tap(boot => boot.setPipelineFactory(new Pipeline))
+    new Bootstrap(factory).tap(
+      boot => {
+        boot.setOption("bufferFactory", new BufferFactory(LITTLE_ENDIAN))
+        boot.setOption("tcpNoDelay", true)
+        boot.setPipelineFactory(new Pipeline)
+      }
+    )
   }
 
   /**

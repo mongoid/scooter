@@ -3,6 +3,7 @@ package org.scooter.bson.implicits
 import org.jboss.netty.buffer.{ ChannelBuffer => Buffer }
 import org.jboss.netty.buffer.ChannelBufferIndexFinder.NUL
 
+import org.scooter.bson.ObjectId
 import org.scooter.protocol.Header
 
 import scala.language.implicitConversions
@@ -57,6 +58,17 @@ case class BsonChannelBuffer(target: Buffer) {
       target.readInt,
       target.readInt
     )
+  }
+
+  /**
+   * Read an object id from the buffer.
+   *
+   * @todo: Temporary.
+   *
+   * @return The ObjectId.
+   */
+  def readObjectId = {
+    new ObjectId(target.readInt, target.readInt, target.readInt)
   }
 
   /**
