@@ -14,7 +14,7 @@ object Cluster {
    *
    * @return The Cluster.
    */
-  def apply(addresses: Seq[SocketAddress]) = {
+  protected[scooter] def apply(addresses: Seq[SocketAddress]) = {
     new Cluster(
       addresses.foldLeft(List[Node]())(
         (nodes, address) => nodes.+:(Node(address))

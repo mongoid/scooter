@@ -22,7 +22,7 @@ object Bootstrap {
    *
    * @return The Channel.
    */
-  def channel(address: SocketAddress) = {
+  protected[scooter] def channel(address: SocketAddress) = {
     future(address).awaitUninterruptibly.getChannel
   }
 
