@@ -51,7 +51,7 @@ case class Connection(channel: Channel) {
    */
   protected[scooter] def send(request: Request) = {
     channel.write(request)
-    handler.reply(request.header.request)
+    handler.reply(request.id)
   }
 
   /**

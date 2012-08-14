@@ -31,11 +31,12 @@ object Insert {
  *
  * @link http://www.mongodb.org/display/DOCS/Mongo+Wire+Protocol
  *
+ * @param header The Header.
  * @param name The full name of the Collection.
  * @param documents The documents to insert.
  */
-sealed case class Insert(head: Header, name: String, documents: Seq[Document])
-  extends Command(head, 2002) {
+sealed case class Insert(header: Header, name: String, documents: Seq[Document])
+  extends Command(header, 2002) {
 
   /**
    * Serialize the Insert into a buffer that can be written to the socket.

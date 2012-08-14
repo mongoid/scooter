@@ -19,13 +19,13 @@ class Handler extends SimpleChannelHandler {
    * Get a reply given the id of the original Request. This id is generated
    * automatically by the request header when created.
    *
-   * @param original The original Request id.
+   * @param requestId The original Request id.
    *
    * @return The SyncVar of the Reply.
    */
-  def reply(original: Int) = {
-    replies.putIfAbsent(original, new SyncVar[Reply])
-    replies.get(original).get
+  def reply(requestId: Int) = {
+    replies.putIfAbsent(requestId, new SyncVar[Reply])
+    replies.get(requestId).get
   }
 
   /**
@@ -45,7 +45,7 @@ class Handler extends SimpleChannelHandler {
   override def messageReceived(context: Context, event: Event) = {
     event.getMessage match {
       case reply: Reply => {
-        Option(replies.remove(reply.header.original)).map { _.put(reply) }
+        Option(replies.remove(reply.originalId)).map { _.put(reply) }
       }
     }
   }

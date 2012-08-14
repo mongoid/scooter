@@ -30,11 +30,12 @@ object Query {
  *
  * @link http://www.mongodb.org/display/DOCS/Mongo+Wire+Protocol
  *
+ * @param header The Header.
  * @param name The full name of the Collection.
  * @param selector The selector Document.
  */
-sealed case class Query(head: Header, name: String, selector: Document)
-  extends Request(head, 2004) {
+sealed case class Query(header: Header, name: String, selector: Document)
+  extends Request(header, 2004) {
 
   /**
    * Serialize the Query into a buffer that can be written to the socket.

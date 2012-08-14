@@ -5,16 +5,10 @@ import org.jboss.netty.buffer.{ ChannelBuffer => Buffer }
 /**
  * All Messages sent/received to/from the database inherit from this class.
  *
+ * @param header The Header.
  * @param code The operation code.
  */
-abstract class Message(head: Header, code: Int) {
-
-  /**
-   * Get the message Header.
-   *
-   * @return The message Header.
-   */
-  def header = head
+abstract class Message(header: Header, code: Int) {
 
   /**
    * Serialize a header then process the rest of the message's
