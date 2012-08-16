@@ -16,7 +16,7 @@ class HeaderSpec extends Specification with Data {
 
     val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 16)
 
-    "add the header as 32 bit integers" in {
+    "adds the header as 32 bit integers" in {
       headerValue.serialize(buffer)
       buffer.array must beEqualTo(dumpedHeader)
     }

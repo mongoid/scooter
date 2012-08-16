@@ -85,4 +85,23 @@ trait Data {
   def dumpedHeader = {
     Array[Byte](0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -46, 7, 0, 0)
   }
+
+  def dumpedFlags = {
+    Array[Byte](0, 0, 0, 0)
+  }
+
+  val collectionName = "scooter_test.users"
+
+  def dumpedCollectionName = {
+    Array[Byte](115, 99, 111, 111, 116, 101, 114, 95, 116, 101, 115, 116) ++
+      Array[Byte](46, 117, 115, 101, 114, 115, 0)
+  }
+
+  def dumpedInsertHeader = {
+    Array[Byte](55, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -46, 7, 0, 0)
+  }
+
+  def dumpedInsert = {
+    dumpedInsertHeader ++ dumpedFlags ++ dumpedCollectionName ++ dumpedDocument
+  }
 }
