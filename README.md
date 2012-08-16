@@ -1,7 +1,8 @@
 Scooter [![Build Status](https://secure.travis-ci.org/mongoid/scooter.png?branch=master&.png)](http://travis-ci.org/mongoid/scooter)
 =======
 
-Scooter is a MongoDB driver, written in Scala.
+Scooter is an asynchronous (non-blocking) MongoDB driver for the JVM,
+written in Scala.
 
 Road Map
 --------
@@ -10,9 +11,10 @@ This is a work in progress, with no expectations around release date
 at this point. The following is where we'd like to be before release.
 
 - Support for the same feature set as Moped with a similar API that
-  is as clean as the Ruby version but Scala-esque at the same time.
-- All I/O is non-blocking, leveraging Netty for the API.
-- Fast as hell. Main goal is to be the fastest JVM driver for MongoDB out there.
+  is as clean as the Ruby version but Scala-esque at the same time. This
+  includes support for all bson types and full replica set support with
+  failover.
+- The fastest MongoDB driver on the JVM.
 
 License
 -------
