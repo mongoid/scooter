@@ -6,12 +6,9 @@ import org.scooter.bson.Document
 import org.scooter.bson.implicits.BsonLong
 import org.scooter.bson.Serialization._
 
-import org.scooter.spec.Data
+import org.scooter.spec.Spec
 
-import org.specs2.mutable.Specification
-import org.specs2.specification.Scope
-
-class BsonLongSpec extends Specification with Data {
+class BsonLongSpec extends Spec {
 
   "BsonLong#bsonDump" should {
 

@@ -7,10 +7,9 @@ import org.scooter.bson.implicits.BsonChannelBuffer
 import org.scooter.bson.implicits.BsonChannelBuffer._
 import org.scooter.bson.Serialization._
 
-import org.specs2.mutable.Specification
-import org.specs2.specification.Scope
+import org.scooter.spec.Spec
 
-class BsonChannelBufferSpec extends Specification {
+class BsonChannelBufferSpec extends Spec {
 
   "BsonChannelBuffer#readCString" should {
 
