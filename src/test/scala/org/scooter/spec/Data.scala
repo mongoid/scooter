@@ -123,4 +123,34 @@ trait Data {
     dumpedQueryHeader ++ dumpedVector ++ dumpedCollectionName ++
       dumpedOptions ++ dumpedDocument
   }
+
+  def dumpedReplyHeader = {
+    Array[Byte](52, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -46, 7, 0, 0)
+  }
+
+  def dumpedCursorId = {
+    Array[Byte](0, 0, 0, 0, 0, 0, 0, 0)
+  }
+
+  def dumpedSkip = {
+    Array[Byte](0, 0, 0, 0)
+  }
+
+  def dumpedCount = {
+    Array[Byte](2, 0, 0, 0)
+  }
+
+  def dumpedSecondDocument = {
+    Array[Byte](16, 0, 0, 0, 2, 104, 106, 0, 3, 0, 0, 0, 121, 97, 0, 0)
+
+  }
+
+  def dumpedQueryDocuments = {
+    dumpedDocument ++ dumpedSecondDocument
+  }
+
+  def dumpedReply = {
+    dumpedReplyHeader ++ dumpedFlags ++ dumpedCursorId ++ dumpedSkip ++
+      dumpedCount ++ dumpedQueryDocuments
+  }
 }
