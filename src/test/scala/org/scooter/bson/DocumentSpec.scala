@@ -51,7 +51,6 @@ class DocumentSpec extends Specification with Data {
     "when the document has multiple pairs" in {
 
       val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 27)
-      val document = Document("hi" -> "ya", "hj" -> "ya")
 
       "deserialize the bytes into a hash map" in {
         buffer.writeBytes(dumpedMultiDocument)
