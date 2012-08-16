@@ -38,7 +38,9 @@ case class Connection(channel: Channel) {
    *
    * @param command The Command to write.
    */
-  protected[scooter] def send(command: Command) = channel.write(command)
+  protected[scooter] def send(command: Command) = {
+    channel.write(command)
+  }
 
   /**
    * Write the Request to the socket and return the Reply.
