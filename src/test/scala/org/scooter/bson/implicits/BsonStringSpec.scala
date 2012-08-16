@@ -10,35 +10,35 @@ import org.scooter.spec.Spec
 
 class BsonStringSpec extends Spec {
 
-  "BsonString#bsonDump" should {
+  "BsonString#bsonWrite" should {
 
     val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 11)
     val wrapper = new BsonString(stringValue)
 
     "serialize the string to the buffer" in {
-      wrapper.bsonDump(buffer, field)
+      wrapper.bsonWrite(buffer, field)
       buffer.array must beEqualTo(dumpedString)
     }
   }
 
-  "String#bsonDump" should {
+  "String#bsonWrite" should {
 
     val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 11)
 
     "serialize the string to the buffer" in {
-      stringValue.bsonDump(buffer, field)
+      stringValue.bsonWrite(buffer, field)
       buffer.array must beEqualTo(dumpedString)
     }
   }
 
-  "BsonString.bsonLoad" should {
+  "BsonString.bsonRead" should {
 
     val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 11)
     var doc = new Document
 
     "load the key and value into the hash" in {
       buffer.writeBytes(loadedString)
-      BsonString.bsonLoad(buffer, doc)
+      BsonString.bsonRead(buffer, doc)
       doc must beEqualTo(Document(field -> stringValue))
     }
   }

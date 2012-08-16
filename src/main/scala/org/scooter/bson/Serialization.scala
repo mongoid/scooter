@@ -16,7 +16,7 @@ object Serialization {
    *
    * @return The Double around the Double.
    */
-  implicit def dumpable(target: Double): Dumpable = new BsonDouble(target)
+  implicit def dumpable(target: Double): Writable = new BsonDouble(target)
 
   /**
    * Implicit conversion from a Boolean to a Boolean.
@@ -25,7 +25,7 @@ object Serialization {
    *
    * @return The Boolean around the Boolean.
    */
-  implicit def dumpable(target: Boolean): Dumpable = new BsonBoolean(target)
+  implicit def dumpable(target: Boolean): Writable = new BsonBoolean(target)
 
   /**
    * Implicit conversion from a Int to a Int.
@@ -34,7 +34,7 @@ object Serialization {
    *
    * @return The Int around the Int.
    */
-  implicit def dumpable(target: Int): Dumpable = new BsonInt(target)
+  implicit def dumpable(target: Int): Writable = new BsonInt(target)
 
   /**
    * Implicit conversion from a Long to a Long.
@@ -43,7 +43,7 @@ object Serialization {
    *
    * @return The Long around the Long.
    */
-  implicit def dumpable(target: Long): Dumpable = new BsonLong(target)
+  implicit def dumpable(target: Long): Writable = new BsonLong(target)
 
   /**
    * Implicit conversion from a String to a String.
@@ -52,5 +52,5 @@ object Serialization {
    *
    * @return The String around the String.
    */
-  implicit def dumpable(target: String): Dumpable = new BsonString(target)
+  implicit def dumpable(target: String): Writable = new BsonString(target)
 }

@@ -10,7 +10,7 @@ import org.scooter.spec.Spec
 
 class BsonBooleanSpec extends Spec {
 
-  "BsonBoolean#bsonDump" should {
+  "BsonBoolean#bsonWrite" should {
 
     "when the boolean is true" in {
 
@@ -18,7 +18,7 @@ class BsonBooleanSpec extends Spec {
       val wrapper = new BsonBoolean(true)
 
       "serialize the boolean to the buffer" in {
-        wrapper.bsonDump(buffer, field)
+        wrapper.bsonWrite(buffer, field)
         buffer.array must beEqualTo(dumpedTrue)
       }
     }
@@ -29,20 +29,20 @@ class BsonBooleanSpec extends Spec {
       val wrapper = new BsonBoolean(false)
 
       "serialize the boolean to the buffer" in {
-        wrapper.bsonDump(buffer, field)
+        wrapper.bsonWrite(buffer, field)
         buffer.array must beEqualTo(dumpedFalse)
       }
     }
   }
 
-  "Boolean#bsonDump" should {
+  "Boolean#bsonWrite" should {
 
     "when the boolean is true" in {
 
       val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 5)
 
       "serialize the boolean to the buffer" in {
-        true.bsonDump(buffer, field)
+        true.bsonWrite(buffer, field)
         buffer.array must beEqualTo(dumpedTrue)
       }
     }
@@ -52,13 +52,13 @@ class BsonBooleanSpec extends Spec {
       val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 5)
 
       "serialize the boolean to the buffer" in {
-        false.bsonDump(buffer, field)
+        false.bsonWrite(buffer, field)
         buffer.array must beEqualTo(dumpedFalse)
       }
     }
   }
 
-  "BsonBoolean.bsonLoad" should {
+  "BsonBoolean.bsonRead" should {
 
     "when the boolean is true" in {
 
@@ -67,7 +67,7 @@ class BsonBooleanSpec extends Spec {
 
       "add the boolean true and key to the map" in {
         buffer.writeBytes(loadedTrue)
-        BsonBoolean.bsonLoad(buffer, doc)
+        BsonBoolean.bsonRead(buffer, doc)
         doc must beEqualTo(Document(field -> true))
       }
     }
@@ -79,7 +79,7 @@ class BsonBooleanSpec extends Spec {
 
       "add the boolean false and key to the map" in {
         buffer.writeBytes(loadedFalse)
-        BsonBoolean.bsonLoad(buffer, doc)
+        BsonBoolean.bsonRead(buffer, doc)
         doc must beEqualTo(Document(field -> false))
       }
     }

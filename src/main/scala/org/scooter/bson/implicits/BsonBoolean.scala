@@ -2,14 +2,14 @@ package org.scooter.bson.implicits
 
 import org.jboss.netty.buffer.{ ChannelBuffer => Buffer }
 
-import org.scooter.bson.{ Bytes, Loadable, Document, Dumpable }
+import org.scooter.bson.{ Bytes, Readable, Document, Writable }
 import org.scooter.bson.implicits.BsonChannelBuffer._
 import org.scooter.bson.Serialization._
 
 /**
  * Companion object to the BsonBoolean class.
  */
-object BsonBoolean extends Loadable {
+object BsonBoolean extends Readable {
 
   /**
    * Load the Boolean value and its key from the buffer.
@@ -17,7 +17,7 @@ object BsonBoolean extends Loadable {
    * @param buffer The ChannelBuffer.
    * @param doc The document to place in.
    */
-  def bsonLoad(buffer: Buffer, doc: Document) = {
+  def bsonRead(buffer: Buffer, doc: Document) = {
     doc(buffer.readCString) = if (buffer.readByte == 0x01) true else false
   }
 }
@@ -27,7 +27,7 @@ object BsonBoolean extends Loadable {
  *
  * @param target The Boolean that is wrapped.
  */
-case class BsonBoolean(target: Boolean) extends Dumpable {
+case class BsonBoolean(target: Boolean) extends Writable {
 
   /**
    * Dump the boolean to the buffer in it's proper BSON format.
@@ -43,7 +43,7 @@ case class BsonBoolean(target: Boolean) extends Dumpable {
    * @param buffer The buffer being written to.
    * @param key The String key to this instance boolean value.
    */
-  def bsonDump(buffer: Buffer, key: String) = {
+  def bsonWrite(buffer: Buffer, key: String) = {
     buffer.writeByte(Bytes.Boolean)
     buffer.writeCString(key)
     buffer.writeByte(if (target) 0x01 else 0x00)

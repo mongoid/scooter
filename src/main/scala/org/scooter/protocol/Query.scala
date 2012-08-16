@@ -59,7 +59,7 @@ sealed case class Query(header: Header, name: String, selector: Document)
       buffer.writeCString(name)
       buffer.writeInt(0) // Skip.
       buffer.writeInt(0) // Return.
-      selector.bsonDump(buffer)
+      selector.bsonWrite(buffer)
     }
   }
 }

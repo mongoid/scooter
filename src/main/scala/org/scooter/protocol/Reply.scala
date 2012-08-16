@@ -46,7 +46,7 @@ object Reply extends Deserializable {
    */
   private def documents(buffer: Buffer) = {
     (1 to buffer.readInt).foldLeft(List[Document]())(
-      (docs, bytes) => docs.:+(Document.bsonLoad(buffer))
+      (docs, bytes) => docs.:+(Document.bsonRead(buffer))
     )
   }
 }

@@ -56,7 +56,7 @@ sealed case class Insert(header: Header, name: String, documents: Seq[Document])
     withHeader(buffer) {
       buffer.writeInt(0) // Bit vector.
       buffer.writeCString(name)
-      documents.foreach(doc => doc.bsonDump(buffer))
+      documents.foreach(doc => doc.bsonWrite(buffer))
     }
   }
 }

@@ -2,13 +2,14 @@ package org.scooter.bson
 
 import org.jboss.netty.buffer.{ ChannelBuffer => Buffer }
 
-trait Loadable {
+trait Readable {
 
   /**
-   * Dump the value to the buffer in it's proper BSON format.
+   * Read the BSON from the buffer and put it's object representation
+   * into the Document.
    *
    * @param buffer The buffer being read from.
    * @param doc The document to write to.
    */
-  def bsonLoad(buffer: Buffer, doc: Document) : Unit
+  def bsonRead(buffer: Buffer, doc: Document) : Unit
 }

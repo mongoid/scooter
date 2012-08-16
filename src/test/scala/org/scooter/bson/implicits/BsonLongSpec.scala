@@ -10,35 +10,35 @@ import org.scooter.spec.Spec
 
 class BsonLongSpec extends Spec {
 
-  "BsonLong#bsonDump" should {
+  "BsonLong#bsonWrite" should {
 
     val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 12)
     val wrapper = new BsonLong(longValue)
 
     "serialize the long to the buffer" in {
-      wrapper.bsonDump(buffer, field)
+      wrapper.bsonWrite(buffer, field)
       buffer.array must beEqualTo(dumpedLong)
     }
   }
 
-  "Long#bsonDump" should {
+  "Long#bsonWrite" should {
 
     val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 12)
 
     "serialize the long to the buffer" in {
-      longValue.bsonDump(buffer, field)
+      longValue.bsonWrite(buffer, field)
       buffer.array must beEqualTo(dumpedLong)
     }
   }
 
-  "BsonLong.bsonLoad" should {
+  "BsonLong.bsonRead" should {
 
     val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 12)
     val doc = new Document
 
     "adds the key and the long to the doc" in {
       buffer.writeBytes(loadedLong)
-      BsonLong.bsonLoad(buffer, doc)
+      BsonLong.bsonRead(buffer, doc)
       doc must beEqualTo(Document(field -> longValue))
     }
   }

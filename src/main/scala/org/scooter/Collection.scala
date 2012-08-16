@@ -1,6 +1,6 @@
 package org.scooter
 
-import org.scooter.bson.{ Document, Dumpable }
+import org.scooter.bson.{ Document, Writable }
 import org.scooter.bson.Serialization._
 import org.scooter.protocol.Insert
 
@@ -41,11 +41,11 @@ class Collection(database: Database, name: String, session: Session) {
    * @example Find mtching documents for the selector.
    *  session.users.find("firstName" -> "Sid")
    *
-   * @param selector The MongoDB selector in Dumpable form.
+   * @param selector The MongoDB selector in Writable form.
    *
    * @return The chainable Criteria object for the matching documents.
    */
-  def find(selector: (String, Dumpable)*) = {
+  def find(selector: (String, Writable)*) = {
     Criteria(this, Document(selector: _*), session)
   }
 

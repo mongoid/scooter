@@ -12,7 +12,7 @@ import org.scooter.bson.Serialization._
 /**
  * Companion object for BSON ObjectIds.
  */
-object ObjectId extends Loadable {
+object ObjectId extends Readable {
 
   /**
    * Gets the atomic counter for incrementing ids.
@@ -45,7 +45,7 @@ object ObjectId extends Loadable {
    * @param buffer The ChannelBuffer.
    * @param doc The document to place in.
    */
-  def bsonLoad(buffer: Buffer, doc: Document) = {
+  def bsonRead(buffer: Buffer, doc: Document) = {
     doc(buffer.readCString) = buffer.readObjectId
   }
 
@@ -75,7 +75,7 @@ object ObjectId extends Loadable {
  * @param pid The Int for the process id.
  * @param counter The Int counter.
  */
-case class ObjectId(time: Int, machine: Int, counter: Int) extends Dumpable {
+case class ObjectId(time: Int, machine: Int, counter: Int) extends Writable {
 
   /**
    * Dump the ObjectId to the buffer in it's proper BSON format.
@@ -91,5 +91,5 @@ case class ObjectId(time: Int, machine: Int, counter: Int) extends Dumpable {
    * @param buffer The buffer being written to.
    * @param key The String key to this instance value.
    */
-  def bsonDump(buffer: Buffer, key: String) = {}
+  def bsonWrite(buffer: Buffer, key: String) = {}
 }

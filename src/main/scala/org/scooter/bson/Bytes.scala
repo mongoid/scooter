@@ -165,7 +165,7 @@ object Bytes {
    *
    * @return The mappings.
    */
-  final val mappings = HashMap[Byte, Loadable](
+  final val mappings = HashMap[Byte, Readable](
     Boolean  -> companion[BsonBoolean.type],
     Double   -> companion[BsonDouble.type],
     String   -> companion[BsonString.type],

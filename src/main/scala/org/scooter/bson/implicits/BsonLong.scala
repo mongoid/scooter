@@ -2,14 +2,14 @@ package org.scooter.bson.implicits
 
 import org.jboss.netty.buffer.{ ChannelBuffer => Buffer }
 
-import org.scooter.bson.{ Bytes, Loadable, Document, Dumpable }
+import org.scooter.bson.{ Bytes, Readable, Document, Writable }
 import org.scooter.bson.implicits.BsonChannelBuffer._
 import org.scooter.bson.Serialization._
 
 /**
  * Companion object to the BsonLong class.
  */
-object BsonLong extends Loadable {
+object BsonLong extends Readable {
 
   /**
    * Load the string value and its key from the buffer.
@@ -17,7 +17,7 @@ object BsonLong extends Loadable {
    * @param buffer The ChannelBuffer.
    * @param doc The document to place in.
    */
-  def bsonLoad(buffer: Buffer, doc: Document) = {
+  def bsonRead(buffer: Buffer, doc: Document) = {
     doc(buffer.readCString) = buffer.readLong
   }
 }
@@ -27,7 +27,7 @@ object BsonLong extends Loadable {
  *
  * @param target The Long that is wrapped.
  */
-case class BsonLong(target: Long) extends Dumpable {
+case class BsonLong(target: Long) extends Writable {
 
   /**
    * Dump the int to the buffer in it's proper BSON format.
@@ -43,7 +43,7 @@ case class BsonLong(target: Long) extends Dumpable {
    * @param buffer The buffer being written to.
    * @param key The String key to this instance int value.
    */
-  def bsonDump(buffer: Buffer, key: String) = {
+  def bsonWrite(buffer: Buffer, key: String) = {
     buffer.writeByte(Bytes.Int64)
     buffer.writeCString(key)
     buffer.writeLong(target)

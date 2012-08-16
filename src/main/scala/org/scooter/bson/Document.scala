@@ -20,7 +20,7 @@ object Document {
    *
    * @return The Document.
    */
-  def apply(elements: (String, Dumpable)*) = {
+  def apply(elements: (String, Writable)*) = {
     elements.foldLeft(new Document)(
       (doc, pair) => doc += (pair._1 -> pair._2)
     )
@@ -33,7 +33,7 @@ object Document {
    *
    * @return The document.
    */
-  def bsonLoad(buffer: Buffer) = {
+  def bsonRead(buffer: Buffer) = {
     new Document tap(
       doc => {
         val length = buffer.readInt
@@ -48,7 +48,7 @@ object Document {
    *
    * @note This function operates by:
    *   - Look at the provided byte to get the type of object.
-   *   - Get the Loadable for that type, and load the bytes.
+   *   - Get the Readable for that type, and load the bytes.
    *   - Read the next byte.
    *
    * @param buffer The ChannelBuffer to read from.
@@ -57,7 +57,7 @@ object Document {
    */
   private def loadPair(buffer: Buffer, byte: Byte, doc: Document): Unit = {
     if (byte != Bytes.Null) {
-      Bytes.getCompanion(byte).bsonLoad(buffer, doc)
+      Bytes.getCompanion(byte).bsonRead(buffer, doc)
       loadPair(buffer, buffer.readByte, doc)
     }
   }
@@ -69,7 +69,7 @@ object Document {
  *
  * @param document The Hash to wrap.
  */
-class Document extends HashMap[String, Dumpable] {
+class Document extends HashMap[String, Writable] {
 
   /**
    * Dump the document to the buffer, and yield to the provided
@@ -83,10 +83,10 @@ class Document extends HashMap[String, Dumpable] {
    *
    * @param buffer The ChannelBuffer to write to.
    */
-  def bsonDump(buffer: Buffer) = {
+  def bsonWrite(buffer: Buffer) = {
     val start = buffer.writerIndex
     buffer.writeInt(0)
-    foreach(pair => pair._2.bsonDump(buffer, pair._1))
+    foreach(pair => pair._2.bsonWrite(buffer, pair._1))
     buffer.writeZero(1)
     buffer.setInt(start, buffer.writerIndex - start)
   }
