@@ -63,7 +63,9 @@ class Collection(database: Database, name: String) {
    * @param document The Document to insert.
    */
   def insert(document: Document) = {
-    session.onPrimary(node => node.send(Insert(this, List(document))))
+    session.onPrimary {
+      (node: Node) => node.send(Insert(this, List(document)))
+    }
   }
 
   /**
@@ -72,7 +74,9 @@ class Collection(database: Database, name: String) {
    * @param documents The Documents to insert.
    */
   def insert(documents: Document*) = {
-    session.onPrimary(node => node.send(Insert(this, documents)))
+    session.onPrimary {
+      (node: Node) => node.send(Insert(this, documents))
+    }
   }
 
   /**

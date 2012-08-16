@@ -57,7 +57,9 @@ class Criteria(collection: Collection, selector: Document)
    * @return A single matching Document.
    */
   def one = {
-    session.onPrimary(node => node.send(Query(collection, selector)))
+    session.onPrimary {
+      (node: Node) => node.send(Query(collection, selector))
+    }
   }
 
   /**

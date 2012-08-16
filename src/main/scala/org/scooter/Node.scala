@@ -33,12 +33,16 @@ class Node(connection: Connection) {
    *
    * @param message The Command to send.
    */
-  protected[scooter] def send(command: Command) = connection.send(command)
+  protected[scooter] def send(command: Command) = {
+    connection.send(command)
+  }
 
   /**
    * Send the provided request to the database.
    *
    * @param message The Request to send.
    */
-  protected[scooter] def send(request: Request) = connection.send(request)
+  protected[scooter] def send(request: Request) = {
+    connection.send(request)
+  }
 }

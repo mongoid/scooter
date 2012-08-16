@@ -3,6 +3,7 @@ package org.scooter
 import java.net.SocketAddress
 
 import org.scooter.functional.Utilities._
+import org.scooter.protocol.Reply
 
 /**
  * Companion object for the Session class.
@@ -59,9 +60,20 @@ class Session(hosts: Seq[SocketAddress]) extends Dynamic {
    *
    * @param func The function to execute.
    *
-   * @return The result of the function.
+   * @return The Reply from the database.
    */
-  protected[scooter] def onPrimary(func: Node => Any) = cluster.onPrimary(func)
+  protected[scooter] def onPrimary(func: Node => Reply) = {
+    cluster.onPrimary(func)
+  }
+
+  /**
+   * Execute the provided function in the context of the primary Node.
+   *
+   * @param func The function to execute.
+   */
+  protected[scooter] def onPrimary(func: Node => Unit) = {
+    cluster.onPrimary(func)
+  }
 
   /**
    * Get the cluster of nodes for this session.
