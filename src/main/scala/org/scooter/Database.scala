@@ -8,7 +8,7 @@ import language.implicitConversions
  * @param session The Session that contains the Database.
  * @param name The name of the Database.
  */
-class Database(session: Session, name: String) {
+class Database(val session: Session, name: String) {
 
   /**
    * Get a Collection for the provided name.
@@ -17,7 +17,7 @@ class Database(session: Session, name: String) {
    *
    * @return The Collection.
    */
-  def collection(name: String) = new Collection(this, name, session)
+  def collection(name: String) = new Collection(this, name)
 
   /**
    * Gets the full name of the Database.

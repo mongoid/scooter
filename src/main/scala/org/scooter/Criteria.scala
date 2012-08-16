@@ -1,6 +1,7 @@
 package org.scooter
 
 import org.scooter.bson.Document
+import org.scooter.protocol.Query
 
 import scala.collection.Iterable
 
@@ -13,12 +14,11 @@ object Criteria {
    * Instantiate a new Criteria object with no selector.
    *
    * @param collection The Collection.
-   * @param session The Session.
    *
    * @return The new Criteria.
    */
-  def apply(collection: Collection, session: Session) = {
-    new Criteria(collection, new Document, session)
+  def apply(collection: Collection) = {
+    new Criteria(collection, new Document)
   }
 
   /**
@@ -26,12 +26,11 @@ object Criteria {
    *
    * @param collection The Collection.
    * @param selector The selector Document.
-   * @param session The Session.
    *
    * @return The new Criteria.
    */
-  def apply(collection: Collection, selector: Document, session: Session) = {
-    new Criteria(collection, selector, session)
+  def apply(collection: Collection, selector: Document) = {
+    new Criteria(collection, selector)
   }
 }
 
@@ -42,7 +41,7 @@ object Criteria {
  * @param collection The Collection the Criteria executes against.
  * @param session The database Session.
  */
-class Criteria(collection: Collection, selector: Document, session: Session)
+class Criteria(collection: Collection, selector: Document)
   extends Iterable[Document] {
 
   /**
@@ -51,4 +50,20 @@ class Criteria(collection: Collection, selector: Document, session: Session)
    * @return The Cursor.
    */
   def iterator = new Cursor
+
+  /**
+   * Get one document matching the criteria.
+   *
+   * @return A single matching Document.
+   */
+  def one = {
+    session.onPrimary(node => node.send(Query(collection, selector)))
+  }
+
+  /**
+   * Get the session that this criteria belongs to.
+   *
+   * @return The Session.
+   */
+  protected[scooter] def session = collection.session
 }

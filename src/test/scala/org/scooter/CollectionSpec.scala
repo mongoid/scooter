@@ -17,8 +17,7 @@ class CollectionSpec extends Spec {
 
   trait scope extends Scope {
 
-    val session = new Session(List(new InetSocketAddress("localhost", 27017)))
     val database = new Database(session, "scooter_test")
-    val collection = new Collection(database, "users", session)
+    val collection = new Collection(database, "users")
   }
 }

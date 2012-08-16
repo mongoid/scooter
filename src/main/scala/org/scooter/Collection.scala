@@ -10,7 +10,7 @@ import org.scooter.protocol.Insert
  * @param database The database the Collection belongs to.
  * @param name The name of the Collection.
  */
-class Collection(database: Database, name: String, session: Session) {
+class Collection(database: Database, name: String) {
 
   /**
    * Get all documents that are in the Collection.
@@ -20,7 +20,7 @@ class Collection(database: Database, name: String, session: Session) {
    *
    * @return The chainable Criteria object for all documents.
    */
-  def find = Criteria(this, session)
+  def find = Criteria(this)
 
   /**
    * Get all documents matching the selector in the Collection.
@@ -33,7 +33,7 @@ class Collection(database: Database, name: String, session: Session) {
    *
    * @return The chainable Criteria object for the matching documents.
    */
-  def find(selector: Document) = Criteria(this, selector, session)
+  def find(selector: Document) = Criteria(this, selector)
 
   /**
    * Get all documents matching the selector in the Collection.
@@ -46,7 +46,7 @@ class Collection(database: Database, name: String, session: Session) {
    * @return The chainable Criteria object for the matching documents.
    */
   def find(selector: (String, Writable)*) = {
-    Criteria(this, Document(selector: _*), session)
+    Criteria(this, Document(selector: _*))
   }
 
   /**
@@ -74,4 +74,11 @@ class Collection(database: Database, name: String, session: Session) {
   def insert(documents: Document*) = {
     session.onPrimary(node => node.send(Insert(this, documents)))
   }
+
+  /**
+   * Get the session this Collection belongs to.
+   *
+   * @return The Session.
+   */
+  protected[scooter] def session = database.session
 }

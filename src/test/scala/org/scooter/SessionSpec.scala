@@ -29,8 +29,7 @@ class SessionSpec extends Spec {
 
   trait scope extends Scope {
 
-    val session = Session("localhost:27017")
     val database = new Database(session, "scooter_test")
-    val collection = new Collection(database, "users", session)
+    val collection = new Collection(database, "users")
   }
 }
