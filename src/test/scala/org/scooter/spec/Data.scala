@@ -104,4 +104,23 @@ trait Data {
   def dumpedInsert = {
     dumpedInsertHeader ++ dumpedFlags ++ dumpedCollectionName ++ dumpedDocument
   }
+
+  val queryHeaderValue = Header(0, 0, 0, 2004)
+
+  def dumpedQueryHeader = {
+    Array[Byte](63, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -44, 7, 0, 0)
+  }
+
+  def dumpedVector = {
+    Array[Byte](0, 0, 0, 0)
+  }
+
+  def dumpedOptions = {
+    Array[Byte](0, 0, 0, 0, 0, 0, 0, 0)
+  }
+
+  def dumpedQuery = {
+    dumpedQueryHeader ++ dumpedVector ++ dumpedCollectionName ++
+      dumpedOptions ++ dumpedDocument
+  }
 }
