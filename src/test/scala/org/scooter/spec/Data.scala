@@ -166,4 +166,27 @@ trait Data {
     dumpedDeleteHeader ++ dumpedPlaceholder ++ dumpedCollectionName ++
       dumpedFlags ++ dumpedDocument
   }
+
+  def dumpedKillHeader = {
+    Array[Byte](40, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -46, 7, 0, 0)
+  }
+
+  def dumpedKillPlaceholder = {
+    Array[Byte](0, 0, 0, 0)
+  }
+
+  def dumpedKillCount = {
+    Array[Byte](2, 0, 0, 0)
+  }
+
+  val cursorValues = Array[Long](1l, 2l)
+
+  def dumpedKillValues = {
+    Array[Byte](1, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0)
+  }
+
+  def dumpedKillCursors = {
+    dumpedKillHeader ++ dumpedKillPlaceholder ++
+      dumpedKillCount ++ dumpedKillValues
+  }
 }
