@@ -125,7 +125,7 @@ trait Data {
   }
 
   def dumpedReplyHeader = {
-    Array[Byte](52, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -46, 7, 0, 0)
+    Array[Byte](52, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0)
   }
 
   def dumpedCursorId = {
@@ -152,5 +152,18 @@ trait Data {
   def dumpedReply = {
     dumpedReplyHeader ++ dumpedFlags ++ dumpedCursorId ++ dumpedSkip ++
       dumpedCount ++ dumpedQueryDocuments
+  }
+
+  def dumpedDeleteHeader = {
+    Array[Byte](59, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -46, 7, 0, 0)
+  }
+
+  def dumpedPlaceholder = {
+    Array[Byte](0, 0, 0, 0)
+  }
+
+  def dumpedDelete = {
+    dumpedDeleteHeader ++ dumpedPlaceholder ++ dumpedCollectionName ++
+      dumpedFlags ++ dumpedDocument
   }
 }
