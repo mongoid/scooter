@@ -2,11 +2,7 @@ package org.scooter.protocol
 
 import java.nio.ByteOrder
 
-import org.jboss.netty.buffer.ChannelBuffer
 import org.jboss.netty.buffer.ChannelBuffers._
-
-import org.scooter.bson.Document
-import org.scooter.bson.Serialization._
 
 import org.scooter.spec.Spec
 
