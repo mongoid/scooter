@@ -2,10 +2,11 @@ package org.scooter
 
 import java.net.InetSocketAddress
 
-import org.specs2.mutable.Specification
+import org.scooter.spec.Spec
+
 import org.specs2.specification.Scope
 
-class DatabaseSpec extends Specification {
+class DatabaseSpec extends Spec {
 
   "Database#collection" should {
 

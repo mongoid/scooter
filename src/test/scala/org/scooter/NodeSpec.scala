@@ -1,7 +1,5 @@
 package org.scooter
 
-import org.specs2.mutable.Specification
+import org.scooter.spec.Spec
 
-class NodeSpec extends Specification {
-
-}
+class NodeSpec extends Spec

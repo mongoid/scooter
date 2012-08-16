@@ -2,10 +2,11 @@ package org.scooter
 
 import java.net.InetSocketAddress
 
-import org.specs2.mutable.Specification
 import org.specs2.specification.Scope
 
-class CollectionSpec extends Specification {
+import org.scooter.spec.Spec
+
+class CollectionSpec extends Spec {
 
   "Collection#fullName" should {
 

@@ -1,16 +1,14 @@
+package org.scooter.protocol
+
 import java.nio.ByteOrder
 
 import org.jboss.netty.buffer.ChannelBuffers._
 
 import org.scooter.bson.Serialization._
-import org.scooter.protocol.Header
 
-import org.scooter.spec.Data
+import org.scooter.spec.Spec
 
-import org.specs2.mutable.Specification
-import org.specs2.specification.Scope
-
-class HeaderSpec extends Specification with Data {
+class HeaderSpec extends Spec {
 
   "Header#serialize" should {
 

@@ -8,10 +8,11 @@ import org.jboss.netty.buffer.ChannelBuffers._
 import org.scooter.bson.Document
 import org.scooter.bson.Serialization._
 
-import org.specs2.mutable.Specification
+import org.scooter.spec.Spec
+
 import org.specs2.specification.Scope
 
-class QuerySpec extends Specification {
+class QuerySpec extends Spec {
 
   "Query#serialize" should {
 

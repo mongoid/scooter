@@ -1,11 +1,14 @@
+package org.scooter.functional
+
 import java.net.InetSocketAddress
 
 import org.scooter.functional.Utilities._
 
-import org.specs2.mutable.Specification
+import org.scooter.spec.Spec
+
 import org.specs2.specification.Scope
 
-class UtilitiesSpec extends Specification {
+class UtilitiesSpec extends Spec {
 
   "Utilities.socketAddress" should {
 

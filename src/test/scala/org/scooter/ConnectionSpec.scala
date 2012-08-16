@@ -6,10 +6,11 @@ import org.scooter.bson.Document
 import org.scooter.bson.Serialization._
 import org.scooter.protocol.{ Header, Insert, Query }
 
-import org.specs2.mutable.Specification
+import org.scooter.spec.Spec
+
 import org.specs2.specification.Scope
 
-class ConnectionSpec extends Specification {
+class ConnectionSpec extends Spec {
 
   "Connection#send" should {
 

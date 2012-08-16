@@ -1,11 +1,13 @@
+package org.scooter.bson
+
 import org.scooter.bson._
 import org.scooter.bson.Bytes._
 import org.scooter.bson.implicits._
 import org.scooter.functional.Utilities._
 
-import org.specs2.mutable.Specification
+import org.scooter.spec.Spec
 
-class BytesSpec extends Specification {
+class BytesSpec extends Spec {
 
   "Bytes.getCompanion" should {
 

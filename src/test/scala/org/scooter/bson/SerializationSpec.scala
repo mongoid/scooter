@@ -1,11 +1,12 @@
+package org.scooter.bson
+
 import org.scooter.bson._
 import org.scooter.bson.Serialization._
 import org.scooter.bson.implicits._
 
-import org.specs2.mutable.Specification
-import org.specs2.specification.Scope
+import org.scooter.spec.Spec
 
-class SerializationSpec extends Specification {
+class SerializationSpec extends Spec {
 
   "Serialization.dumpable" should {
 

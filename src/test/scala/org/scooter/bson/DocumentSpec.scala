@@ -1,17 +1,15 @@
+package org.scooter.bson
+
 import java.nio.ByteOrder
 
 import org.jboss.netty.buffer.ChannelBuffers._
 
-import org.scooter.bson.Document
 import org.scooter.bson.implicits._
 import org.scooter.bson.Serialization._
 
-import org.scooter.spec.Data
+import org.scooter.spec.Spec
 
-import org.specs2.mutable.Specification
-import org.specs2.specification.Scope
-
-class DocumentSpec extends Specification with Data {
+class DocumentSpec extends Spec {
 
   "Document.apply" should {
 

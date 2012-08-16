@@ -1,10 +1,8 @@
+package org.scooter.bson
+
 import java.net.InetAddress
 import java.security.MessageDigest
 
-import org.scooter.bson.ObjectId
+import org.scooter.spec.Spec
 
-import org.specs2.mutable.Specification
-
-class ObjectIdSpec extends Specification {
-
-}
+class ObjectIdSpec extends Spec
