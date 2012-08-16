@@ -4,7 +4,8 @@ import java.net.SocketAddress
 
 import org.jboss.netty.channel.Channel
 
-import org.scooter.io.{ Bootstrap, Handler, Pipeline }
+import org.scooter.io.Bootstrap._
+import org.scooter.io.{ Handler, Pipeline }
 import org.scooter.protocol.{ Command, Request }
 
 /**
@@ -20,7 +21,7 @@ object Connection {
    * @return The new Connection.
    */
   protected[scooter] def apply(address: SocketAddress) = {
-    new Connection(Bootstrap.channel(address))
+    new Connection(createChannel(address))
   }
 }
 

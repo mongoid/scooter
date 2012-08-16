@@ -1,25 +1,26 @@
 import java.nio.ByteOrder
 
-import org.jboss.netty.buffer.ChannelBuffer
 import org.jboss.netty.buffer.ChannelBuffers._
 
 import org.scooter.bson.Document
 import org.scooter.bson.implicits.BsonString
 import org.scooter.bson.Serialization._
 
+import org.scooter.spec.Data
+
 import org.specs2.mutable.Specification
 import org.specs2.specification.Scope
 
-class BsonStringSpec extends Specification {
+class BsonStringSpec extends Specification with Data {
 
   "BsonString#bsonDump" should {
 
     val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 11)
-    val wrapper = new BsonString(value)
+    val wrapper = new BsonString(stringValue)
 
-    "serialize the string to the buffer" in new scope {
-      wrapper.bsonDump(buffer, key)
-      buffer.array must beEqualTo(bytes)
+    "serialize the string to the buffer" in {
+      wrapper.bsonDump(buffer, field)
+      buffer.array must beEqualTo(dumpedString)
     }
   }
 
@@ -27,9 +28,9 @@ class BsonStringSpec extends Specification {
 
     val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 11)
 
-    "serialize the string to the buffer" in new scope {
-      value.bsonDump(buffer, key)
-      buffer.array must beEqualTo(bytes)
+    "serialize the string to the buffer" in {
+      stringValue.bsonDump(buffer, field)
+      buffer.array must beEqualTo(dumpedString)
     }
   }
 
@@ -37,21 +38,11 @@ class BsonStringSpec extends Specification {
 
     val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 11)
     var doc = new Document
-    val wrapper = new BsonString(value)
 
-    "load the key and value into the hash" in new scope {
-      wrapper.bsonDump(buffer, key)
-      buffer.readByte
+    "load the key and value into the hash" in {
+      buffer.writeBytes(loadedString)
       BsonString.bsonLoad(buffer, doc)
-      doc must beEqualTo(Document("hi" -> "ya"))
+      doc must beEqualTo(Document(field -> stringValue))
     }
-  }
-
-  def value = "ya"
-
-  trait scope extends Scope {
-
-    val key = "hi"
-    val bytes = Array[Byte](2, 104, 105, 0, 3, 0, 0, 0, 121, 97, 0)
   }
 }

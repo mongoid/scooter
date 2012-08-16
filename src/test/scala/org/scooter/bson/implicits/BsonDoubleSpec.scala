@@ -1,25 +1,26 @@
 import java.nio.ByteOrder
 
-import org.jboss.netty.buffer.ChannelBuffer
 import org.jboss.netty.buffer.ChannelBuffers._
 
 import org.scooter.bson.Document
 import org.scooter.bson.implicits.BsonDouble
 import org.scooter.bson.Serialization._
 
+import org.scooter.spec.Data
+
 import org.specs2.mutable.Specification
 import org.specs2.specification.Scope
 
-class BsonDoubleSpec extends Specification {
+class BsonDoubleSpec extends Specification with Data {
 
   "BsonDouble#bsonDump" should {
 
     val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 12)
-    val wrapper = new BsonDouble(value)
+    val wrapper = new BsonDouble(doubleValue)
 
-    "serialize the double to the buffer" in new scope {
-      wrapper.bsonDump(buffer, key)
-      buffer.array must beEqualTo(bytes)
+    "serialize the double to the buffer" in {
+      wrapper.bsonDump(buffer, field)
+      buffer.array must beEqualTo(dumpedDouble)
     }
   }
 
@@ -27,9 +28,9 @@ class BsonDoubleSpec extends Specification {
 
     val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 12)
 
-    "serialize the double to the buffer" in new scope {
-      value.bsonDump(buffer, key)
-      buffer.array must beEqualTo(bytes)
+    "serialize the double to the buffer" in {
+      doubleValue.bsonDump(buffer, field)
+      buffer.array must beEqualTo(dumpedDouble)
     }
   }
 
@@ -38,19 +39,10 @@ class BsonDoubleSpec extends Specification {
     val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 12)
     val doc = new Document
 
-    "add the key and double to the map" in new scope {
-      buffer.writeBytes(bytes)
-      buffer.readByte
+    "add the key and double to the map" in {
+      buffer.writeBytes(loadedDouble)
       BsonDouble.bsonLoad(buffer, doc)
-      doc must beEqualTo(Document("hi" -> value))
+      doc must beEqualTo(Document(field -> doubleValue))
     }
-  }
-
-  def value = 1.123d
-
-  trait scope extends Scope {
-
-    val key = "hi"
-    val bytes = Array[Byte](1, 104, 105, 0, 43, -121, 22, -39, -50, -9, -15, 63)
   }
 }

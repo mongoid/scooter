@@ -1,25 +1,26 @@
 import java.nio.ByteOrder
 
-import org.jboss.netty.buffer.ChannelBuffer
 import org.jboss.netty.buffer.ChannelBuffers._
 
 import org.scooter.bson.Document
 import org.scooter.bson.implicits.BsonInt
 import org.scooter.bson.Serialization._
 
+import org.scooter.spec.Data
+
 import org.specs2.mutable.Specification
 import org.specs2.specification.Scope
 
-class BsonIntSpec extends Specification {
+class BsonIntSpec extends Specification with Data {
 
   "BsonInt#bsonDump" should {
 
     val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 8)
-    val wrapper = new BsonInt(value)
+    val wrapper = new BsonInt(intValue)
 
-    "serialize the int to the buffer" in new scope {
-      wrapper.bsonDump(buffer, key)
-      buffer.array must beEqualTo(bytes)
+    "serialize the int to the buffer" in {
+      wrapper.bsonDump(buffer, field)
+      buffer.array must beEqualTo(dumpedInt)
     }
   }
 
@@ -27,9 +28,9 @@ class BsonIntSpec extends Specification {
 
     val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 8)
 
-    "serialize the int to the buffer" in new scope {
-      value.bsonDump(buffer, key)
-      buffer.array must beEqualTo(bytes)
+    "serialize the int to the buffer" in {
+      intValue.bsonDump(buffer, field)
+      buffer.array must beEqualTo(dumpedInt)
     }
   }
 
@@ -38,19 +39,10 @@ class BsonIntSpec extends Specification {
     val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 8)
     val doc = new Document
 
-    "adds the key and the int to the doc" in new scope {
-      buffer.writeBytes(bytes)
-      buffer.readByte
+    "adds the key and the int to the doc" in {
+      buffer.writeBytes(loadedInt)
       BsonInt.bsonLoad(buffer, doc)
-      doc must beEqualTo(Document("hi" -> 1))
+      doc must beEqualTo(Document(field -> intValue))
     }
-  }
-
-  def value = 1
-
-  trait scope extends Scope {
-
-    val key = "hi"
-    val bytes = Array[Byte](16, 104, 105, 0, 1, 0, 0, 0)
   }
 }
