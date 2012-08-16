@@ -21,7 +21,7 @@ object Insert {
    * @return The Insert message.
    */
   def apply(collection: Collection, documents: Seq[Document]) = {
-    new Insert(Header(0, 0, 2002), collection.fullName, documents)
+    new Insert(Header(0, 0, 2002), collection.name, documents)
   }
 }
 

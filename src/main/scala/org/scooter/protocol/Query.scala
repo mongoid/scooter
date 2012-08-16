@@ -20,7 +20,7 @@ object Query {
    * @return The Query message.
    */
   def apply(collection: Collection, selector: Document) = {
-    new Query(Header(0, 0, 2004), collection.fullName, selector)
+    new Query(Header(0, 0, 2004), collection.name, selector)
   }
 }
 

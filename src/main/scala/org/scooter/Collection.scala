@@ -5,12 +5,30 @@ import org.scooter.bson.Serialization._
 import org.scooter.protocol.Insert
 
 /**
+ * Companion object for the Collection.
+ */
+object Collection {
+
+  /**
+   * Instantiate a new Collection.
+   *
+   * @param database The Collection's Database.
+   * @param name The full name of the Collection.
+   *
+   * @return The Collection.
+   */
+  def apply(database: Database, name: String) = {
+    new Collection(database, database.name + "." + name)
+  }
+}
+
+/**
  * Represents a collection in the database.
  *
  * @param database The database the Collection belongs to.
  * @param name The name of the Collection.
  */
-class Collection(database: Database, name: String) {
+class Collection(database: Database, val name: String) {
 
   /**
    * Get all documents that are in the Collection.
@@ -48,14 +66,6 @@ class Collection(database: Database, name: String) {
   def find(selector: (String, Writable)*) = {
     Criteria(this, Document(selector: _*))
   }
-
-  /**
-   * Get the full name of the Collection. Will prefix with the
-   * Database name.
-   *
-   * @return The full name of the Collection.
-   */
-  def fullName = database.fullName + "." + name
 
   /**
    * Insert a single Document into the database.

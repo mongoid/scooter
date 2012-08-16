@@ -13,21 +13,14 @@ class DatabaseSpec extends Spec {
     "when provided a name" in {
 
       "returns the collection for the name" in new scope {
-        database.collection("users").fullName must beEqualTo(collection.fullName)
+        database.collection("users").name must beEqualTo(collection.name)
       }
-    }
-  }
-
-  "Database#fullName" should {
-
-    "return the name of the database" in new scope {
-      database.fullName must beEqualTo("scooter_test")
     }
   }
 
   trait scope extends Scope {
 
     val database = new Database(session, "scooter_test")
-    val collection = new Collection(database, "users")
+    val collection = Collection(database, "users")
   }
 }

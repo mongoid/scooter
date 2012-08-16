@@ -14,7 +14,7 @@ class SessionSpec extends Spec {
 
       "return the collection for the dynamic name" in new scope {
         session.use("scooter_test")
-        session.users.fullName must beEqualTo(collection.fullName)
+        session.users.name must beEqualTo(collection.name)
       }
     }
   }
@@ -23,13 +23,13 @@ class SessionSpec extends Spec {
 
     "set the current database" in new scope {
       session.use("scooter_test")
-      session.currentDatabase.fullName must beEqualTo(database.fullName)
+      session.currentDatabase.name must beEqualTo(database.name)
     }
   }
 
   trait scope extends Scope {
 
     val database = new Database(session, "scooter_test")
-    val collection = new Collection(database, "users")
+    val collection = Collection(database, "users")
   }
 }
