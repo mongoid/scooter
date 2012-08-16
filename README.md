@@ -14,6 +14,7 @@ at this point. The following is where we'd like to be before release.
   is as clean as the Ruby version but Scala-esque at the same time. This
   includes support for all bson types and full replica set support with
   failover.
+- Minimal dependencies, most likely only Netty.
 - The fastest MongoDB driver on the JVM.
 
 License
