@@ -1,5 +1,8 @@
 package org.scooter.spec
 
+import org.scooter.bson.Document
+import org.scooter.bson.Serialization._
+
 trait Data {
 
   def field = "hi"
@@ -58,5 +61,21 @@ trait Data {
 
   def loadedString = {
     Array[Byte](104, 105, 0, 3, 0, 0, 0, 121, 97, 0)
+  }
+
+  val dumpedAltString = {
+    Array[Byte](2, 104, 106, 0, 3, 0, 0, 0, 121, 97, 0)
+  }
+
+  val documentValue = Document("hi" -> "ya")
+
+  def dumpedDocument = {
+    Array[Byte](16, 0, 0, 0) ++ dumpedString ++ Array[Byte](0)
+  }
+
+  val multiDocumentValue = Document("hi" -> "ya", "hj" -> "ya")
+
+  def dumpedMultiDocument = {
+    Array[Byte](27, 0, 0, 0) ++ dumpedString ++ dumpedAltString ++ Array[Byte](0)
   }
 }

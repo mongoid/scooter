@@ -1,16 +1,17 @@
 import java.nio.ByteOrder
 
-import org.jboss.netty.buffer.ChannelBuffer
 import org.jboss.netty.buffer.ChannelBuffers._
 
 import org.scooter.bson.Document
 import org.scooter.bson.implicits._
 import org.scooter.bson.Serialization._
 
+import org.scooter.spec.Data
+
 import org.specs2.mutable.Specification
 import org.specs2.specification.Scope
 
-class DocumentSpec extends Specification {
+class DocumentSpec extends Specification with Data {
 
   "Document.apply" should {
 
@@ -28,11 +29,10 @@ class DocumentSpec extends Specification {
   "Document#bsonDump" should {
 
     val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 16)
-    val document = Document("hi" -> "ya")
 
-    "serializes the string to the buffer" in new scope {
-      document.bsonDump(buffer)
-      buffer.array must beEqualTo(bytes)
+    "serializes the string to the buffer" in {
+      documentValue.bsonDump(buffer)
+      buffer.array must beEqualTo(dumpedDocument)
     }
   }
 
@@ -41,11 +41,10 @@ class DocumentSpec extends Specification {
     "when the document has a single pair" in {
 
       val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 16)
-      val document = Document("hi" -> "ya")
 
-      "deserialize the bytes into a hash map" in new scope {
-        buffer.writeBytes(bytes)
-        Document.bsonLoad(buffer) must beEqualTo(document)
+      "deserialize the bytes into a hash map" in {
+        buffer.writeBytes(dumpedDocument)
+        Document.bsonLoad(buffer) must beEqualTo(documentValue)
       }
     }
 
@@ -54,16 +53,10 @@ class DocumentSpec extends Specification {
       val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 27)
       val document = Document("hi" -> "ya", "hj" -> "ya")
 
-      "deserialize the bytes into a hash map" in new scope {
-        buffer.writeBytes(multi)
-        Document.bsonLoad(buffer) must beEqualTo(document)
+      "deserialize the bytes into a hash map" in {
+        buffer.writeBytes(dumpedMultiDocument)
+        Document.bsonLoad(buffer) must beEqualTo(multiDocumentValue)
       }
     }
-  }
-
-  trait scope extends Scope {
-
-    val bytes = Array[Byte](16, 0, 0, 0, 2, 104, 105, 0, 3, 0, 0, 0, 121, 97, 0, 0)
-    val multi = Array[Byte](27, 0, 0, 0, 2, 104, 105, 0, 3, 0, 0, 0, 121, 97, 0, 2, 104, 106, 0, 3, 0, 0, 0, 121, 97, 0, 0)
   }
 }
