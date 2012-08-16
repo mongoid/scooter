@@ -2,6 +2,7 @@ package org.scooter.spec
 
 import org.scooter.bson.Document
 import org.scooter.bson.Serialization._
+import org.scooter.protocol.Header
 
 trait Data {
 
@@ -77,5 +78,11 @@ trait Data {
 
   def dumpedMultiDocument = {
     Array[Byte](27, 0, 0, 0) ++ dumpedString ++ dumpedAltString ++ Array[Byte](0)
+  }
+
+  val headerValue = Header(0, 0, 0, 2002)
+
+  def dumpedHeader = {
+    Array[Byte](0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -46, 7, 0, 0)
   }
 }
