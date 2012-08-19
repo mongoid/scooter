@@ -1,8 +1,6 @@
 package org.scooter.protocol
 
-import java.nio.ByteOrder
-
-import org.jboss.netty.buffer.ChannelBuffers._
+import io.netty.buffer.Unpooled._
 
 import org.scooter.bson.Serialization._
 
@@ -13,7 +11,7 @@ class KillCursorsSpec extends Spec {
   "KillCursors#serialize" should {
 
     val killCursors = new KillCursors(headerValue, cursorValues)
-    val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 40)
+    val buffer = dynamicBuffer(40)
 
     "add the document to the buffer" in {
       killCursors.serialize(buffer)

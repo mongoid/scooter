@@ -1,8 +1,6 @@
 package org.scooter.protocol
 
-import java.nio.ByteOrder
-
-import org.jboss.netty.buffer.ChannelBuffers._
+import io.netty.buffer.Unpooled._
 
 import org.scooter.bson.Serialization._
 
@@ -12,7 +10,7 @@ class HeaderSpec extends Spec {
 
   "Header#serialize" should {
 
-    val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 16)
+    val buffer = dynamicBuffer(16)
 
     "adds the header as 32 bit integers" in {
       headerValue.serialize(buffer)

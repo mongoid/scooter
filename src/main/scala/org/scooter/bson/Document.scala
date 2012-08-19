@@ -1,8 +1,8 @@
 package org.scooter.bson
 
-import org.jboss.netty.buffer.{ ChannelBuffer => Buffer }
+import io.netty.buffer.ByteBuf
 
-import org.scooter.bson.implicits.BsonChannelBuffer._
+import org.scooter.bson.implicits.BsonByteBuf._
 import org.scooter.bson.Serialization._
 import org.scooter.functional.Utilities._
 
@@ -29,11 +29,11 @@ object Document {
   /**
    * Loads a Document from the buffer.
    *
-   * @param buffer The ChannelBuffer.
+   * @param buffer The ByteBuf.
    *
    * @return The document.
    */
-  def bsonRead(buffer: Buffer) = {
+  def bsonRead(buffer: ByteBuf) = {
     new Document tap(
       doc => {
         val length = buffer.readInt
@@ -51,11 +51,11 @@ object Document {
    *   - Get the Readable for that type, and load the bytes.
    *   - Read the next byte.
    *
-   * @param buffer The ChannelBuffer to read from.
+   * @param buffer The ByteBuf to read from.
    * @param byte The Byte representing the value type or zero.
    * @param doc The Document being written into.
    */
-  private def loadPair(buffer: Buffer, byte: Byte, doc: Document): Unit = {
+  private def loadPair(buffer: ByteBuf, byte: Byte, doc: Document): Unit = {
     if (byte != Bytes.Null) {
       Bytes.getCompanion(byte).bsonRead(buffer, doc)
       loadPair(buffer, buffer.readByte, doc)
@@ -81,9 +81,9 @@ class Document extends HashMap[String, Writable] {
    *  - A null byte.
    *  - The length of the entire message.
    *
-   * @param buffer The ChannelBuffer to write to.
+   * @param buffer The ByteBuf to write to.
    */
-  def bsonWrite(buffer: Buffer) = {
+  def bsonWrite(buffer: ByteBuf) = {
     val start = buffer.writerIndex
     buffer.writeInt(0)
     foreach(pair => pair._2.bsonWrite(buffer, pair._1))

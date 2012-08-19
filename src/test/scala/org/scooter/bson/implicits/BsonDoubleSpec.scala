@@ -1,9 +1,8 @@
-import java.nio.ByteOrder
+package org.scooter.bson.implicits
 
-import org.jboss.netty.buffer.ChannelBuffers._
+import io.netty.buffer.Unpooled._
 
 import org.scooter.bson.Document
-import org.scooter.bson.implicits.BsonDouble
 import org.scooter.bson.Serialization._
 
 import org.scooter.spec.Spec
@@ -12,7 +11,7 @@ class BsonDoubleSpec extends Spec {
 
   "BsonDouble#bsonWrite" should {
 
-    val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 12)
+    val buffer = dynamicBuffer(12)
     val wrapper = new BsonDouble(doubleValue)
 
     "serialize the double to the buffer" in {
@@ -23,7 +22,7 @@ class BsonDoubleSpec extends Spec {
 
   "Double#bsonWrite" should {
 
-    val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 12)
+    val buffer = dynamicBuffer(12)
 
     "serialize the double to the buffer" in {
       doubleValue.bsonWrite(buffer, field)
@@ -33,7 +32,7 @@ class BsonDoubleSpec extends Spec {
 
   "BsonDouble.bsonRead" should {
 
-    val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 12)
+    val buffer = dynamicBuffer(12)
     val doc = new Document
 
     "add the key and double to the map" in {

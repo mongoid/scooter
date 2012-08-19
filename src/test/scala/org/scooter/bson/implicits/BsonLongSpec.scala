@@ -1,9 +1,8 @@
-import java.nio.ByteOrder
+package org.scooter.bson.implicits
 
-import org.jboss.netty.buffer.ChannelBuffers._
+import io.netty.buffer.Unpooled._
 
 import org.scooter.bson.Document
-import org.scooter.bson.implicits.BsonLong
 import org.scooter.bson.Serialization._
 
 import org.scooter.spec.Spec
@@ -12,7 +11,7 @@ class BsonLongSpec extends Spec {
 
   "BsonLong#bsonWrite" should {
 
-    val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 12)
+    val buffer = dynamicBuffer(12)
     val wrapper = new BsonLong(longValue)
 
     "serialize the long to the buffer" in {
@@ -23,7 +22,7 @@ class BsonLongSpec extends Spec {
 
   "Long#bsonWrite" should {
 
-    val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 12)
+    val buffer = dynamicBuffer(12)
 
     "serialize the long to the buffer" in {
       longValue.bsonWrite(buffer, field)
@@ -33,7 +32,7 @@ class BsonLongSpec extends Spec {
 
   "BsonLong.bsonRead" should {
 
-    val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 12)
+    val buffer = dynamicBuffer(12)
     val doc = new Document
 
     "adds the key and the long to the doc" in {

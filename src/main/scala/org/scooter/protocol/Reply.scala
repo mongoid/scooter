@@ -1,9 +1,9 @@
 package org.scooter.protocol
 
-import org.jboss.netty.buffer.{ ChannelBuffer => Buffer }
+import io.netty.buffer.ByteBuf
 
 import org.scooter.bson.Document
-import org.scooter.bson.implicits.BsonChannelBuffer._
+import org.scooter.bson.implicits.BsonByteBuf._
 
 /**
  * Companion object for Reply.
@@ -23,11 +23,11 @@ object Reply extends Deserializable {
    *  - The number of documents returned.
    *  - The documents.
    *
-   * @param buffer The ChannelBuffer that is the exact frame of the response.
+   * @param buffer The ByteBuf that is the exact frame of the response.
    *
    * @return The Reply.
    */
-  def deserialize(buffer: Buffer): Reply = {
+  def deserialize(buffer: ByteBuf): Reply = {
     new Reply(
       buffer.readHeader,
       buffer.readInt,
@@ -40,11 +40,11 @@ object Reply extends Deserializable {
   /**
    * Deserialize a sequence of Documents from the buffer.
    *
-   * @param buffer The ChannelBuffer that has only documents to read.
+   * @param buffer The ByteBuf that has only documents to read.
    *
    * @return A sequence of Documents.
    */
-  private def documents(buffer: Buffer) = {
+  private def documents(buffer: ByteBuf) = {
     (1 to buffer.readInt).foldLeft(List[Document]())(
       (docs, bytes) => docs.:+(Document.bsonRead(buffer))
     )

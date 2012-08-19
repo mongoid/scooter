@@ -1,8 +1,6 @@
 package org.scooter.protocol
 
-import java.nio.ByteOrder
-
-import org.jboss.netty.buffer.ChannelBuffers._
+import io.netty.buffer.Unpooled._
 
 import org.scooter.bson.Document
 import org.scooter.bson.Serialization._
@@ -15,7 +13,7 @@ class ReplySpec extends Spec {
 
     "when the buffer has more than one document" in {
 
-      val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 52)
+      val buffer = dynamicBuffer(52)
       buffer.writeBytes(dumpedReply)
       val reply = Reply.deserialize(buffer)
 

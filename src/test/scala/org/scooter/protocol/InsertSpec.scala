@@ -1,8 +1,6 @@
 package org.scooter.protocol
 
-import java.nio.ByteOrder
-
-import org.jboss.netty.buffer.ChannelBuffers._
+import io.netty.buffer.Unpooled._
 
 import org.scooter.bson.Document
 import org.scooter.bson.Serialization._
@@ -14,7 +12,7 @@ class InsertSpec extends Spec {
   "Insert#serialize" should {
 
     val insert = new Insert(headerValue, "scooter_test.users", Array(documentValue))
-    val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 55)
+    val buffer = dynamicBuffer(55)
 
     "add the document to the buffer" in {
       insert.serialize(buffer)

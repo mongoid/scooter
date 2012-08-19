@@ -1,7 +1,7 @@
 package org.scooter.bson.implicits
 
-import org.jboss.netty.buffer.{ ChannelBuffer => Buffer }
-import org.jboss.netty.buffer.ChannelBufferIndexFinder.NUL
+import io.netty.buffer.ByteBuf
+import io.netty.buffer.ByteBufIndexFinder.NUL
 
 import org.scooter.bson.ObjectId
 import org.scooter.protocol.Header
@@ -9,29 +9,29 @@ import org.scooter.protocol.Header
 import scala.language.implicitConversions
 
 /**
- * Companion object to the BsonChannelBuffer.
+ * Companion object to the BsonByteBuf.
  */
-object BsonChannelBuffer {
+object BsonByteBuf {
 
   /**
-   * Implicit conversion from a ChannelBuffer to a BsonChannelBuffer.
+   * Implicit conversion from a ByteBuf to a BsonByteBuf.
    *
-   * @param target The ChannelBuffer that is getting wrapped.
+   * @param target The ByteBuf that is getting wrapped.
    *
-   * @return The BsonChannelBuffer.
+   * @return The BsonByteBuf.
    */
-  implicit def wrapBuffer(target: Buffer): BsonChannelBuffer = {
-    new BsonChannelBuffer(target)
+  implicit def wrapBuffer(target: ByteBuf): BsonByteBuf = {
+    new BsonByteBuf(target)
   }
 }
 
 /**
- * Wraps the ChannelBuffer to provide additional read operations with respect
+ * Wraps the ByteBuf to provide additional read operations with respect
  * to BSON deserialization specifics.
  *
- * @param target The wrapped ChannelBuffer.
+ * @param target The wrapped ByteBuf.
  */
-case class BsonChannelBuffer(target: Buffer) {
+case class BsonByteBuf(target: ByteBuf) {
 
   /**
    * Read a C String from the buffer.
@@ -47,7 +47,7 @@ case class BsonChannelBuffer(target: Buffer) {
   def readCString = readStringBytes(target.bytesBefore(NUL))
 
   /**
-   * Read a Header from the ChannelBuffer.
+   * Read a Header from the ByteBuf.
    *
    * @return The message Header.
    */

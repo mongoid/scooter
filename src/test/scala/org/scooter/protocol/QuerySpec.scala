@@ -1,8 +1,6 @@
 package org.scooter.protocol
 
-import java.nio.ByteOrder
-
-import org.jboss.netty.buffer.ChannelBuffers._
+import io.netty.buffer.Unpooled._
 
 import org.scooter.spec.Spec
 
@@ -12,7 +10,7 @@ class QuerySpec extends Spec {
 
     "when the query is not empty" in {
 
-      val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 63)
+      val buffer = dynamicBuffer(63)
       val query = new Query(queryHeaderValue, "scooter_test.users", documentValue)
 
       "serializes the message with the query document" in {

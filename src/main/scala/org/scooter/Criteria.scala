@@ -59,7 +59,7 @@ class Criteria(collection: Collection, selector: Document)
   def one = {
     session.onPrimary {
       (node: Node) => node.send(Query(collection, selector))
-    }.documents(0)
+    }//.documents(0)
   }
 
   /**

@@ -1,9 +1,9 @@
 package org.scooter.bson.implicits
 
-import org.jboss.netty.buffer.{ ChannelBuffer => Buffer }
+import io.netty.buffer.ByteBuf
 
 import org.scooter.bson.{ Bytes, Readable, Document, Writable }
-import org.scooter.bson.implicits.BsonChannelBuffer._
+import org.scooter.bson.implicits.BsonByteBuf._
 import org.scooter.bson.Serialization._
 
 /**
@@ -14,10 +14,10 @@ object BsonString extends Readable {
   /**
    * Load the string value and its key from the buffer.
    *
-   * @param buffer The ChannelBuffer.
+   * @param buffer The ByteBuf.
    * @param doc The document to place in.
    */
-  def bsonRead(buffer: Buffer, doc: Document) = {
+  def bsonRead(buffer: ByteBuf, doc: Document) = {
     doc(buffer.readCString) = buffer.readString
   }
 }
@@ -45,7 +45,7 @@ case class BsonString(target: String) extends Writable {
    * @param buffer The buffer being written to.
    * @param key The string key to this instance string value.
    */
-  def bsonWrite(buffer: Buffer, key: String) = {
+  def bsonWrite(buffer: ByteBuf, key: String) = {
     buffer.writeByte(Bytes.String)
     buffer.writeCString(key)
     buffer.writeString(target)

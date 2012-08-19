@@ -1,10 +1,10 @@
 package org.scooter.protocol
 
-import org.jboss.netty.buffer.{ ChannelBuffer => Buffer }
+import io.netty.buffer.ByteBuf
 
 import org.scooter.Collection
 import org.scooter.bson.Document
-import org.scooter.bson.implicits.BsonChannelBuffer._
+import org.scooter.bson.implicits.BsonByteBuf._
 import org.scooter.bson.Serialization._
 
 /**
@@ -51,9 +51,9 @@ sealed case class Delete(header: Header, name: String, document: Document)
    *  - The selector document.
    *  - Replace the length at position zero after everything is written.
    *
-   * @param buffer The ChannelBuffer that will get written.
+   * @param buffer The ByteBuf that will get written.
    */
-  def serialize(buffer: Buffer) = {
+  def serialize(buffer: ByteBuf) = {
     withHeader(buffer) {
       buffer.writeInt(0) // Placeholder.
       buffer.writeCString(name)

@@ -1,6 +1,6 @@
 package org.scooter.protocol
 
-import org.jboss.netty.buffer.{ ChannelBuffer => Buffer }
+import io.netty.buffer.ByteBuf
 
 /**
  * All Messages sent/received to/from the database inherit from this class.
@@ -19,10 +19,10 @@ abstract class Message(header: Header, code: Int) {
    *    buffer.writeCString(name)
    *  }
    *
-   * @param buffer The ChannelBuffer to write to.
+   * @param buffer The ByteBuf to write to.
    * @param func The function to execute.
    */
-  def withHeader(buffer: Buffer)(func: => Unit) = {
+  def withHeader(buffer: ByteBuf)(func: => Unit) = {
     header.serialize(buffer)
     func
     buffer.setInt(0, buffer.writerIndex)

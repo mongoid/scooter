@@ -1,8 +1,6 @@
 package org.scooter.bson
 
-import java.nio.ByteOrder
-
-import org.jboss.netty.buffer.ChannelBuffers._
+import io.netty.buffer.Unpooled._
 
 import org.scooter.bson.implicits._
 import org.scooter.bson.Serialization._
@@ -26,7 +24,7 @@ class DocumentSpec extends Spec {
 
   "Document#bsonWrite" should {
 
-    val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 16)
+    val buffer = dynamicBuffer(16)
 
     "serializes the string to the buffer" in {
       documentValue.bsonWrite(buffer)
@@ -38,7 +36,7 @@ class DocumentSpec extends Spec {
 
     "when the document has a single pair" in {
 
-      val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 16)
+      val buffer = dynamicBuffer(16)
 
       "deserialize the bytes into a hash map" in {
         buffer.writeBytes(dumpedDocument)
@@ -48,7 +46,7 @@ class DocumentSpec extends Spec {
 
     "when the document has multiple pairs" in {
 
-      val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 27)
+      val buffer = dynamicBuffer(27)
 
       "deserialize the bytes into a hash map" in {
         buffer.writeBytes(dumpedMultiDocument)

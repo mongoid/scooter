@@ -1,8 +1,8 @@
 package org.scooter.bson
 
-import language.implicitConversions
-
 import org.scooter.bson.implicits._
+
+import scala.language.implicitConversions
 
 /**
  * Contains the implicit conversions for all BSON types to their wrappers.

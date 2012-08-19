@@ -1,21 +1,20 @@
-import java.nio.ByteOrder
+package org.scooter.bson.implicits
 
-import org.jboss.netty.buffer.ChannelBuffer
-import org.jboss.netty.buffer.ChannelBuffers._
+import io.netty.buffer.ByteBuf
+import io.netty.buffer.Unpooled._
 
-import org.scooter.bson.implicits.BsonChannelBuffer
-import org.scooter.bson.implicits.BsonChannelBuffer._
+import org.scooter.bson.implicits.BsonByteBuf._
 import org.scooter.bson.Serialization._
 
 import org.scooter.spec.Spec
 
-class BsonChannelBufferSpec extends Spec {
+class BsonByteBufSpec extends Spec {
 
-  "BsonChannelBuffer#readCString" should {
+  "BsonByteBuf#readCString" should {
 
     val bytes = Array[Byte](104, 105, 0)
-    val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 3)
-    val wrapper = new BsonChannelBuffer(buffer)
+    val buffer = dynamicBuffer(3)
+    val wrapper = new BsonByteBuf(buffer)
 
     "return the string from the buffer" in {
       buffer.writeBytes(bytes)
@@ -23,10 +22,10 @@ class BsonChannelBufferSpec extends Spec {
     }
   }
 
-  "ChannelBuffer#readCString" should {
+  "ByteBuf#readCString" should {
 
     val bytes = Array[Byte](104, 105, 0)
-    val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 3)
+    val buffer = dynamicBuffer(3)
 
     "return the string from the buffer" in {
       buffer.writeBytes(bytes)
@@ -34,11 +33,11 @@ class BsonChannelBufferSpec extends Spec {
     }
   }
 
-  "BsonChannelBuffer#readString" should {
+  "BsonByteBuf#readString" should {
 
     val bytes = Array[Byte](3, 0, 0, 0, 121, 97, 0)
-    val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 7)
-    val wrapper = new BsonChannelBuffer(buffer)
+    val buffer = dynamicBuffer(7)
+    val wrapper = new BsonByteBuf(buffer)
 
     "return the string from the buffer" in {
       buffer.writeBytes(bytes)
@@ -46,10 +45,10 @@ class BsonChannelBufferSpec extends Spec {
     }
   }
 
-  "ChannelBuffer#readString" should {
+  "ByteBuf#readString" should {
 
     val bytes = Array[Byte](3, 0, 0, 0, 121, 97, 0)
-    val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 7)
+    val buffer = dynamicBuffer(7)
 
     "return the string from the buffer" in {
       buffer.writeBytes(bytes)
@@ -57,11 +56,11 @@ class BsonChannelBufferSpec extends Spec {
     }
   }
 
-  "BsonChannelBuffer#writeCString" should {
+  "BsonByteBuf#writeCString" should {
 
     val bytes = Array[Byte](104, 105, 0)
-    val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 3)
-    val wrapper = new BsonChannelBuffer(buffer)
+    val buffer = dynamicBuffer(3)
+    val wrapper = new BsonByteBuf(buffer)
 
     "return the string from the buffer" in {
       wrapper.writeCString("hi")
@@ -69,10 +68,10 @@ class BsonChannelBufferSpec extends Spec {
     }
   }
 
-  "ChannelBuffer#writeCString" should {
+  "ByteBuf#writeCString" should {
 
     val bytes = Array[Byte](104, 105, 0)
-    val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 3)
+    val buffer = dynamicBuffer(3)
 
     "return the string from the buffer" in {
       buffer.writeCString("hi")
@@ -80,11 +79,11 @@ class BsonChannelBufferSpec extends Spec {
     }
   }
 
-  "BsonChannelBuffer#writeInts" should {
+  "BsonByteBuf#writeInts" should {
 
     val bytes = Array[Byte](1, 0, 0, 0, 2, 0, 0, 0)
-    val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 8)
-    val wrapper = new BsonChannelBuffer(buffer)
+    val buffer = dynamicBuffer(8)
+    val wrapper = new BsonByteBuf(buffer)
 
     "write each int to the buffer in order" in {
       wrapper.writeInts(1, 2)
@@ -92,10 +91,10 @@ class BsonChannelBufferSpec extends Spec {
     }
   }
 
-  "ChannelBuffer#writeInts" should {
+  "ByteBuf#writeInts" should {
 
     val bytes = Array[Byte](1, 0, 0, 0, 2, 0, 0, 0)
-    val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 8)
+    val buffer = dynamicBuffer(8)
 
     "write each int to the buffer in order" in {
       buffer.writeInts(1, 2)
@@ -103,11 +102,11 @@ class BsonChannelBufferSpec extends Spec {
     }
   }
 
-  "BsonChannelBuffer#writeString" should {
+  "BsonByteBuf#writeString" should {
 
     val bytes = Array[Byte](3, 0, 0, 0, 121, 97, 0)
-    val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 7)
-    val wrapper = new BsonChannelBuffer(buffer)
+    val buffer = dynamicBuffer(7)
+    val wrapper = new BsonByteBuf(buffer)
 
     "return the string from the buffer" in {
       wrapper.writeString("ya")
@@ -115,10 +114,10 @@ class BsonChannelBufferSpec extends Spec {
     }
   }
 
-  "ChannelBuffer#writeString" should {
+  "ByteBuf#writeString" should {
 
     val bytes = Array[Byte](3, 0, 0, 0, 121, 97, 0)
-    val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 7)
+    val buffer = dynamicBuffer(7)
 
     "return the string from the buffer" in {
       buffer.writeString("ya")

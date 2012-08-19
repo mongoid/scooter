@@ -1,9 +1,8 @@
-import java.nio.ByteOrder
+package org.scooter.bson.implicits
 
-import org.jboss.netty.buffer.ChannelBuffers._
+import io.netty.buffer.Unpooled._
 
 import org.scooter.bson.Document
-import org.scooter.bson.implicits.BsonString
 import org.scooter.bson.Serialization._
 
 import org.scooter.spec.Spec
@@ -12,7 +11,7 @@ class BsonStringSpec extends Spec {
 
   "BsonString#bsonWrite" should {
 
-    val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 11)
+    val buffer = dynamicBuffer(11)
     val wrapper = new BsonString(stringValue)
 
     "serialize the string to the buffer" in {
@@ -23,7 +22,7 @@ class BsonStringSpec extends Spec {
 
   "String#bsonWrite" should {
 
-    val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 11)
+    val buffer = dynamicBuffer(11)
 
     "serialize the string to the buffer" in {
       stringValue.bsonWrite(buffer, field)
@@ -33,7 +32,7 @@ class BsonStringSpec extends Spec {
 
   "BsonString.bsonRead" should {
 
-    val buffer = dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 11)
+    val buffer = dynamicBuffer(11)
     var doc = new Document
 
     "load the key and value into the hash" in {
