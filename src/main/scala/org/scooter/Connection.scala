@@ -2,8 +2,7 @@ package org.scooter
 
 import java.net.SocketAddress
 
-import io.netty.channel.Channel
-
+import org.scooter.channel.Config.bootstrap
 import org.scooter.protocol.{ Command, Request }
 
 /**
@@ -19,7 +18,7 @@ object Connection {
    * @return The new Connection.
    */
   protected[scooter] def apply(address: SocketAddress) = {
-    new Connection(createChannel(address))
+    new Connection(bootstrap(address))
   }
 }
 
@@ -37,7 +36,7 @@ case class Connection(channel: Channel) {
    * @param command The Command to write.
    */
   protected[scooter] def send(command: Command) = {
-    // channel.write(command)
+    channel.write(command)
   }
 
   /**
@@ -51,8 +50,8 @@ case class Connection(channel: Channel) {
    * @return The Reply once it is available.
    */
   protected[scooter] def send(request: Request) = {
-    // channel.write(request)
-    // handler.reply(request.id)
+    channel.write(request)
+    handler.reply(request.id)
   }
 
   /**
@@ -60,7 +59,7 @@ case class Connection(channel: Channel) {
    *
    * @return The Handler.
    */
-  // private def handler: Handler = {
-    // channel.getPipeline.getLast.asInstanceOf[Handler]
-  // }
+  private def handler: Handler = {
+    channel.pipeline.last.asInstanceOf[Handler]
+  }
 }
