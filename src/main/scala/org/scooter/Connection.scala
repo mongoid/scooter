@@ -1,5 +1,7 @@
 package org.scooter
 
+import io.netty.channel.Channel
+
 import java.net.SocketAddress
 
 import org.scooter.channel.Config.bootstrap
