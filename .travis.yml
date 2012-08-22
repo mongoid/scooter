@@ -4,6 +4,3 @@ scala:
 jdk:
   - openjdk7
   - oraclejdk7
-branches:
-  except:
-    - netty-four
