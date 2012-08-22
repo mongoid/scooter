@@ -2,7 +2,7 @@ package org.scooter
 
 import org.scooter.bson.{ Document, Writable }
 import org.scooter.bson.Serialization._
-import org.scooter.protocol.Insert
+import org.scooter.protocol.{ Insert, Query }
 
 /**
  * Companion object for the Collection.
@@ -31,6 +31,13 @@ object Collection {
 class Collection(database: Database, val name: String) {
 
   /**
+   * Drops this collection.
+   *
+   * @return The Reply.
+   */
+  def drop = database.command("drop" -> name)
+
+  /**
    * Get all documents that are in the Collection.
    *
    * @example Find all documents.
@@ -39,19 +46,6 @@ class Collection(database: Database, val name: String) {
    * @return The chainable Criteria object for all documents.
    */
   def find = Criteria(this)
-
-  /**
-   * Get all documents matching the selector in the Collection.
-   *
-   * @example Find matching documents by the provided Document.
-   *  val document = Document("firstName" -> "Sid")
-   *  session.users.find(document)
-   *
-   * @param selector The MongoDB selector as a Document.
-   *
-   * @return The chainable Criteria object for the matching documents.
-   */
-  def find(selector: Document) = Criteria(this, selector)
 
   /**
    * Get all documents matching the selector in the Collection.

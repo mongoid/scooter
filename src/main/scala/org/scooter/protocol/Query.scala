@@ -22,6 +22,17 @@ object Query {
   def apply(collection: Collection, selector: Document) = {
     new Query(Header(0, 0, 2004), collection.name, selector)
   }
+
+  /**
+   * Instantiate a new Query message that is a $cmd.
+   *
+   * @param command The command.
+   *
+   * @return The Query message.
+   */
+  def apply(command: Document) = {
+    new Query(Header(0, 0, 2004), "$cmd", command)
+  }
 }
 
 /**

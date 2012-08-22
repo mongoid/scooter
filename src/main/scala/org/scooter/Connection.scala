@@ -1,6 +1,6 @@
 package org.scooter
 
-import io.netty.channel.{ Channel, ChannelFuture => Future }
+import io.netty.channel.{ Channel, ChannelFuture }
 
 import java.net.SocketAddress
 
@@ -37,8 +37,10 @@ case class Connection(channel: Channel) {
    * Write the Command to the socket.
    *
    * @param command The Command to write.
+   *
+   * @return The ChannelFuture.
    */
-  protected[scooter] def send(command: Command): Future = {
+  protected[scooter] def send(command: Command): ChannelFuture = {
     channel.write(command)
   }
 

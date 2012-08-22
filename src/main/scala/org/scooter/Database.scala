@@ -1,6 +1,8 @@
 package org.scooter
 
-import language.implicitConversions
+import org.scooter.bson.{ Document, Writable }
+import org.scooter.bson.Serialization._
+import org.scooter.protocol.{ Query, Reply }
 
 /**
  * The Database represents a Database in a single MongoDB session.
@@ -18,4 +20,20 @@ class Database(val session: Session, val name: String) {
    * @return The Collection.
    */
   def collection(name: String) = Collection(this, name)
+
+  /**
+   * Execute a command ($cmd) against this database.
+   *
+   * @example Execute a drop collection command.
+   *  database.command("drop" -> "users")
+   *
+   * @param instruction The command instructions.
+   *
+   * @return The Reply.
+   */
+  def command(instruction: (String, Writable)*): Reply = {
+    session.onPrimary {
+      (node: Node) => node.send(Query(Document(instruction: _*)))
+    }
+  }
 }
