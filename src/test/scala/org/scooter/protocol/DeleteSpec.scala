@@ -12,11 +12,11 @@ class DeleteSpec extends Spec {
   "Delete#serialize" should {
 
     val delete = new Delete(headerValue, "scooter_test.users", documentValue)
-    val buffer = dynamicBuffer(59)
+    val buff = buffer(59).order(LITTLE_ENDIAN)
 
     "add the document to the buffer" in {
-      delete.serialize(buffer)
-      buffer.array must beEqualTo(dumpedDelete)
+      delete.serialize(buff)
+      buff.array must beEqualTo(dumpedDelete)
     }
   }
 }

@@ -11,33 +11,33 @@ class BsonDoubleSpec extends Spec {
 
   "BsonDouble#bsonWrite" should {
 
-    val buffer = dynamicBuffer(12)
+    val buff = buffer(12).order(LITTLE_ENDIAN)
     val wrapper = new BsonDouble(doubleValue)
 
     "serialize the double to the buffer" in {
-      wrapper.bsonWrite(buffer, field)
-      buffer.array must beEqualTo(dumpedDouble)
+      wrapper.bsonWrite(buff, field)
+      buff.array must beEqualTo(dumpedDouble)
     }
   }
 
   "Double#bsonWrite" should {
 
-    val buffer = dynamicBuffer(12)
+    val buff = buffer(12).order(LITTLE_ENDIAN)
 
     "serialize the double to the buffer" in {
-      doubleValue.bsonWrite(buffer, field)
-      buffer.array must beEqualTo(dumpedDouble)
+      doubleValue.bsonWrite(buff, field)
+      buff.array must beEqualTo(dumpedDouble)
     }
   }
 
   "BsonDouble.bsonRead" should {
 
-    val buffer = dynamicBuffer(12)
+    val buff = buffer(12).order(LITTLE_ENDIAN)
     val doc = new Document
 
     "add the key and double to the map" in {
-      buffer.writeBytes(loadedDouble)
-      BsonDouble.bsonRead(buffer, doc)
+      buff.writeBytes(loadedDouble)
+      BsonDouble.bsonRead(buff, doc)
       doc must beEqualTo(Document(field -> doubleValue))
     }
   }

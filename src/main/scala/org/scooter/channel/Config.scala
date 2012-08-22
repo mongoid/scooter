@@ -3,9 +3,9 @@ package org.scooter.channel
 import java.net.SocketAddress
 
 import io.netty.bootstrap.Bootstrap
+import io.netty.channel.ChannelOption._
 import io.netty.channel.socket.aio.{ AioEventLoopGroup, AioSocketChannel }
 
-import org.scooter.channel.Opt._
 import org.scooter.functional.Utilities._
 
 /**
@@ -26,7 +26,7 @@ object Config {
         (new Bootstrap).
           channel(channel).
           handler(new Initializer).
-          option(TcpNoDelay, true).
+          // option(TCP_NODELAY, true).
           remoteAddress(address)
       }
     }

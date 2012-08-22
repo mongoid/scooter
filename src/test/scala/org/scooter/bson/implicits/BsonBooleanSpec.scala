@@ -13,23 +13,23 @@ class BsonBooleanSpec extends Spec {
 
     "when the boolean is true" in {
 
-      val buffer = dynamicBuffer(5)
+      val buff = buffer(5).order(LITTLE_ENDIAN)
       val wrapper = new BsonBoolean(true)
 
       "serialize the boolean to the buffer" in {
-        wrapper.bsonWrite(buffer, field)
-        buffer.array must beEqualTo(dumpedTrue)
+        wrapper.bsonWrite(buff, field)
+        buff.array must beEqualTo(dumpedTrue)
       }
     }
 
     "when the boolean is false" in {
 
-      val buffer = dynamicBuffer(5)
+      val buff = buffer(5).order(LITTLE_ENDIAN)
       val wrapper = new BsonBoolean(false)
 
       "serialize the boolean to the buffer" in {
-        wrapper.bsonWrite(buffer, field)
-        buffer.array must beEqualTo(dumpedFalse)
+        wrapper.bsonWrite(buff, field)
+        buff.array must beEqualTo(dumpedFalse)
       }
     }
   }
@@ -38,21 +38,21 @@ class BsonBooleanSpec extends Spec {
 
     "when the boolean is true" in {
 
-      val buffer = dynamicBuffer(5)
+      val buff = buffer(5).order(LITTLE_ENDIAN)
 
       "serialize the boolean to the buffer" in {
-        true.bsonWrite(buffer, field)
-        buffer.array must beEqualTo(dumpedTrue)
+        true.bsonWrite(buff, field)
+        buff.array must beEqualTo(dumpedTrue)
       }
     }
 
     "when the boolean is false" in {
 
-      val buffer = dynamicBuffer(5)
+      val buff = buffer(5).order(LITTLE_ENDIAN)
 
       "serialize the boolean to the buffer" in {
-        false.bsonWrite(buffer, field)
-        buffer.array must beEqualTo(dumpedFalse)
+        false.bsonWrite(buff, field)
+        buff.array must beEqualTo(dumpedFalse)
       }
     }
   }
@@ -61,24 +61,24 @@ class BsonBooleanSpec extends Spec {
 
     "when the boolean is true" in {
 
-      val buffer = dynamicBuffer(4)
+      val buff = buffer(4).order(LITTLE_ENDIAN)
       val doc = new Document
 
       "add the boolean true and key to the map" in {
-        buffer.writeBytes(loadedTrue)
-        BsonBoolean.bsonRead(buffer, doc)
+        buff.writeBytes(loadedTrue)
+        BsonBoolean.bsonRead(buff, doc)
         doc must beEqualTo(Document(field -> true))
       }
     }
 
     "when the boolean is false" in {
 
-      val buffer = dynamicBuffer(4)
+      val buff = buffer(4).order(LITTLE_ENDIAN)
       val doc = new Document
 
       "add the boolean false and key to the map" in {
-        buffer.writeBytes(loadedFalse)
-        BsonBoolean.bsonRead(buffer, doc)
+        buff.writeBytes(loadedFalse)
+        BsonBoolean.bsonRead(buff, doc)
         doc must beEqualTo(Document(field -> false))
       }
     }

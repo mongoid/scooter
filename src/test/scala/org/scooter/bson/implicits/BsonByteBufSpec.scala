@@ -13,11 +13,11 @@ class BsonByteBufSpec extends Spec {
   "BsonByteBuf#readCString" should {
 
     val bytes = Array[Byte](104, 105, 0)
-    val buffer = dynamicBuffer(3)
-    val wrapper = new BsonByteBuf(buffer)
+    val buff = buffer(3).order(LITTLE_ENDIAN)
+    val wrapper = new BsonByteBuf(buff)
 
     "return the string from the buffer" in {
-      buffer.writeBytes(bytes)
+      buff.writeBytes(bytes)
       wrapper.readCString must beEqualTo("hi")
     }
   }
@@ -25,22 +25,22 @@ class BsonByteBufSpec extends Spec {
   "ByteBuf#readCString" should {
 
     val bytes = Array[Byte](104, 105, 0)
-    val buffer = dynamicBuffer(3)
+    val buff = buffer(3).order(LITTLE_ENDIAN)
 
     "return the string from the buffer" in {
-      buffer.writeBytes(bytes)
-      buffer.readCString must beEqualTo("hi")
+      buff.writeBytes(bytes)
+      buff.readCString must beEqualTo("hi")
     }
   }
 
   "BsonByteBuf#readString" should {
 
     val bytes = Array[Byte](3, 0, 0, 0, 121, 97, 0)
-    val buffer = dynamicBuffer(7)
-    val wrapper = new BsonByteBuf(buffer)
+    val buff = buffer(7).order(LITTLE_ENDIAN)
+    val wrapper = new BsonByteBuf(buff)
 
     "return the string from the buffer" in {
-      buffer.writeBytes(bytes)
+      buff.writeBytes(bytes)
       wrapper.readString must beEqualTo("ya")
     }
   }
@@ -48,80 +48,80 @@ class BsonByteBufSpec extends Spec {
   "ByteBuf#readString" should {
 
     val bytes = Array[Byte](3, 0, 0, 0, 121, 97, 0)
-    val buffer = dynamicBuffer(7)
+    val buff = buffer(7).order(LITTLE_ENDIAN)
 
     "return the string from the buffer" in {
-      buffer.writeBytes(bytes)
-      buffer.readString must beEqualTo("ya")
+      buff.writeBytes(bytes)
+      buff.readString must beEqualTo("ya")
     }
   }
 
   "BsonByteBuf#writeCString" should {
 
     val bytes = Array[Byte](104, 105, 0)
-    val buffer = dynamicBuffer(3)
-    val wrapper = new BsonByteBuf(buffer)
+    val buff = buffer(3).order(LITTLE_ENDIAN)
+    val wrapper = new BsonByteBuf(buff)
 
     "return the string from the buffer" in {
       wrapper.writeCString("hi")
-      buffer.array must beEqualTo(bytes)
+      buff.array must beEqualTo(bytes)
     }
   }
 
   "ByteBuf#writeCString" should {
 
     val bytes = Array[Byte](104, 105, 0)
-    val buffer = dynamicBuffer(3)
+    val buff = buffer(3).order(LITTLE_ENDIAN)
 
     "return the string from the buffer" in {
-      buffer.writeCString("hi")
-      buffer.array must beEqualTo(bytes)
+      buff.writeCString("hi")
+      buff.array must beEqualTo(bytes)
     }
   }
 
   "BsonByteBuf#writeInts" should {
 
     val bytes = Array[Byte](1, 0, 0, 0, 2, 0, 0, 0)
-    val buffer = dynamicBuffer(8)
-    val wrapper = new BsonByteBuf(buffer)
+    val buff = buffer(8).order(LITTLE_ENDIAN)
+    val wrapper = new BsonByteBuf(buff)
 
     "write each int to the buffer in order" in {
       wrapper.writeInts(1, 2)
-      buffer.array must beEqualTo(bytes)
+      buff.array must beEqualTo(bytes)
     }
   }
 
   "ByteBuf#writeInts" should {
 
     val bytes = Array[Byte](1, 0, 0, 0, 2, 0, 0, 0)
-    val buffer = dynamicBuffer(8)
+    val buff = buffer(8).order(LITTLE_ENDIAN)
 
     "write each int to the buffer in order" in {
-      buffer.writeInts(1, 2)
-      buffer.array must beEqualTo(bytes)
+      buff.writeInts(1, 2)
+      buff.array must beEqualTo(bytes)
     }
   }
 
   "BsonByteBuf#writeString" should {
 
     val bytes = Array[Byte](3, 0, 0, 0, 121, 97, 0)
-    val buffer = dynamicBuffer(7)
-    val wrapper = new BsonByteBuf(buffer)
+    val buff = buffer(7).order(LITTLE_ENDIAN)
+    val wrapper = new BsonByteBuf(buff)
 
     "return the string from the buffer" in {
       wrapper.writeString("ya")
-      buffer.array must beEqualTo(bytes)
+      buff.array must beEqualTo(bytes)
     }
   }
 
   "ByteBuf#writeString" should {
 
     val bytes = Array[Byte](3, 0, 0, 0, 121, 97, 0)
-    val buffer = dynamicBuffer(7)
+    val buff = buffer(7).order(LITTLE_ENDIAN)
 
     "return the string from the buffer" in {
-      buffer.writeString("ya")
-      buffer.array must beEqualTo(bytes)
+      buff.writeString("ya")
+      buff.array must beEqualTo(bytes)
     }
   }
 }

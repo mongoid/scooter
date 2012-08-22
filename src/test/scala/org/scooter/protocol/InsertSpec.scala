@@ -12,11 +12,11 @@ class InsertSpec extends Spec {
   "Insert#serialize" should {
 
     val insert = new Insert(headerValue, "scooter_test.users", Array(documentValue))
-    val buffer = dynamicBuffer(55)
+    val buff = buffer(55).order(LITTLE_ENDIAN)
 
     "add the document to the buffer" in {
-      insert.serialize(buffer)
-      buffer.array must beEqualTo(dumpedInsert)
+      insert.serialize(buff)
+      buff.array must beEqualTo(dumpedInsert)
     }
   }
 }

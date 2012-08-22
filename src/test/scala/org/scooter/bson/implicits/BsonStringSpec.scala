@@ -11,33 +11,33 @@ class BsonStringSpec extends Spec {
 
   "BsonString#bsonWrite" should {
 
-    val buffer = dynamicBuffer(11)
+    val buff = buffer(11).order(LITTLE_ENDIAN)
     val wrapper = new BsonString(stringValue)
 
     "serialize the string to the buffer" in {
-      wrapper.bsonWrite(buffer, field)
-      buffer.array must beEqualTo(dumpedString)
+      wrapper.bsonWrite(buff, field)
+      buff.array must beEqualTo(dumpedString)
     }
   }
 
   "String#bsonWrite" should {
 
-    val buffer = dynamicBuffer(11)
+    val buff = buffer(11).order(LITTLE_ENDIAN)
 
     "serialize the string to the buffer" in {
-      stringValue.bsonWrite(buffer, field)
-      buffer.array must beEqualTo(dumpedString)
+      stringValue.bsonWrite(buff, field)
+      buff.array must beEqualTo(dumpedString)
     }
   }
 
   "BsonString.bsonRead" should {
 
-    val buffer = dynamicBuffer(11)
+    val buff = buffer(11).order(LITTLE_ENDIAN)
     var doc = new Document
 
     "load the key and value into the hash" in {
-      buffer.writeBytes(loadedString)
-      BsonString.bsonRead(buffer, doc)
+      buff.writeBytes(loadedString)
+      BsonString.bsonRead(buff, doc)
       doc must beEqualTo(Document(field -> stringValue))
     }
   }

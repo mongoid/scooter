@@ -10,11 +10,11 @@ class HeaderSpec extends Spec {
 
   "Header#serialize" should {
 
-    val buffer = dynamicBuffer(16)
+    val buff = buffer(16).order(LITTLE_ENDIAN)
 
     "adds the header as 32 bit integers" in {
-      headerValue.serialize(buffer)
-      buffer.array must beEqualTo(dumpedHeader)
+      headerValue.serialize(buff)
+      buff.array must beEqualTo(dumpedHeader)
     }
   }
 }

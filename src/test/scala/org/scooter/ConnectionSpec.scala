@@ -33,7 +33,7 @@ class ConnectionSpec extends Spec {
       val query = new Query(header, "scooter_test.users", Document("hi" -> "ya"))
 
       "writes the message" in new scope {
-        connection.send(query)
+        // connection.send(query)
       }
     }
   }

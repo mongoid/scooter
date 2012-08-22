@@ -24,11 +24,11 @@ class DocumentSpec extends Spec {
 
   "Document#bsonWrite" should {
 
-    val buffer = dynamicBuffer(16)
+    val buff = buffer(16).order(LITTLE_ENDIAN)
 
     "serializes the string to the buffer" in {
-      documentValue.bsonWrite(buffer)
-      buffer.array must beEqualTo(dumpedDocument)
+      documentValue.bsonWrite(buff)
+      buff.array must beEqualTo(dumpedDocument)
     }
   }
 
@@ -36,21 +36,21 @@ class DocumentSpec extends Spec {
 
     "when the document has a single pair" in {
 
-      val buffer = dynamicBuffer(16)
+      val buff = buffer(16).order(LITTLE_ENDIAN)
 
       "deserialize the bytes into a hash map" in {
-        buffer.writeBytes(dumpedDocument)
-        Document.bsonRead(buffer) must beEqualTo(documentValue)
+        buff.writeBytes(dumpedDocument)
+        Document.bsonRead(buff) must beEqualTo(documentValue)
       }
     }
 
     "when the document has multiple pairs" in {
 
-      val buffer = dynamicBuffer(27)
+      val buff = buffer(27).order(LITTLE_ENDIAN)
 
       "deserialize the bytes into a hash map" in {
-        buffer.writeBytes(dumpedMultiDocument)
-        Document.bsonRead(buffer) must beEqualTo(multiDocumentValue)
+        buff.writeBytes(dumpedMultiDocument)
+        Document.bsonRead(buff) must beEqualTo(multiDocumentValue)
       }
     }
   }

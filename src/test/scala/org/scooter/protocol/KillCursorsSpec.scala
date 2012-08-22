@@ -11,11 +11,11 @@ class KillCursorsSpec extends Spec {
   "KillCursors#serialize" should {
 
     val killCursors = new KillCursors(headerValue, cursorValues)
-    val buffer = dynamicBuffer(40)
+    val buff = buffer(40).order(LITTLE_ENDIAN)
 
     "add the document to the buffer" in {
-      killCursors.serialize(buffer)
-      buffer.array must beEqualTo(dumpedKillCursors)
+      killCursors.serialize(buff)
+      buff.array must beEqualTo(dumpedKillCursors)
     }
   }
 }

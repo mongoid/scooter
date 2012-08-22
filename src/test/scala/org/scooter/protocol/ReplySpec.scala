@@ -13,9 +13,9 @@ class ReplySpec extends Spec {
 
     "when the buffer has more than one document" in {
 
-      val buffer = dynamicBuffer(52)
-      buffer.writeBytes(dumpedReply)
-      val reply = Reply.deserialize(buffer)
+      val buff = buffer(52).order(LITTLE_ENDIAN)
+      buff.writeBytes(dumpedReply)
+      val reply = Reply.deserialize(buff)
 
       "returns a reply with the first document" in {
         reply.documents(0) must beEqualTo(Document("hi" -> "ya"))

@@ -10,12 +10,12 @@ class QuerySpec extends Spec {
 
     "when the query is not empty" in {
 
-      val buffer = dynamicBuffer(63)
+      val buff = buffer(63).order(LITTLE_ENDIAN)
       val query = new Query(queryHeaderValue, "scooter_test.users", documentValue)
 
       "serializes the message with the query document" in {
-        query.serialize(buffer)
-        buffer.array must beEqualTo(dumpedQuery)
+        query.serialize(buff)
+        buff.array must beEqualTo(dumpedQuery)
       }
     }
   }

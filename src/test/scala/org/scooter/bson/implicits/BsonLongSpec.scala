@@ -11,33 +11,33 @@ class BsonLongSpec extends Spec {
 
   "BsonLong#bsonWrite" should {
 
-    val buffer = dynamicBuffer(12)
+    val buff = buffer(12).order(LITTLE_ENDIAN)
     val wrapper = new BsonLong(longValue)
 
     "serialize the long to the buffer" in {
-      wrapper.bsonWrite(buffer, field)
-      buffer.array must beEqualTo(dumpedLong)
+      wrapper.bsonWrite(buff, field)
+      buff.array must beEqualTo(dumpedLong)
     }
   }
 
   "Long#bsonWrite" should {
 
-    val buffer = dynamicBuffer(12)
+    val buff = buffer(12).order(LITTLE_ENDIAN)
 
     "serialize the long to the buffer" in {
-      longValue.bsonWrite(buffer, field)
-      buffer.array must beEqualTo(dumpedLong)
+      longValue.bsonWrite(buff, field)
+      buff.array must beEqualTo(dumpedLong)
     }
   }
 
   "BsonLong.bsonRead" should {
 
-    val buffer = dynamicBuffer(12)
+    val buff = buffer(12).order(LITTLE_ENDIAN)
     val doc = new Document
 
     "adds the key and the long to the doc" in {
-      buffer.writeBytes(loadedLong)
-      BsonLong.bsonRead(buffer, doc)
+      buff.writeBytes(loadedLong)
+      BsonLong.bsonRead(buff, doc)
       doc must beEqualTo(Document(field -> longValue))
     }
   }
