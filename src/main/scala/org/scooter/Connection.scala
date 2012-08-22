@@ -1,11 +1,12 @@
 package org.scooter
 
-import io.netty.channel.Channel
+import io.netty.channel.{ Channel, ChannelFuture => Future }
 
 import java.net.SocketAddress
 
 import org.scooter.channel.Config.bootstrap
-import org.scooter.protocol.{ Command, Request }
+import org.scooter.channel.Handler
+import org.scooter.protocol.{ Command, Reply, Request }
 
 /**
  * Companion object for the Connection class.
@@ -37,7 +38,7 @@ case class Connection(channel: Channel) {
    *
    * @param command The Command to write.
    */
-  protected[scooter] def send(command: Command) = {
+  protected[scooter] def send(command: Command): Future = {
     channel.write(command)
   }
 
@@ -51,7 +52,7 @@ case class Connection(channel: Channel) {
    *
    * @return The Reply once it is available.
    */
-  protected[scooter] def send(request: Request) = {
+  protected[scooter] def send(request: Request): Reply = {
     channel.write(request)
     handler.reply(request.id)
   }

@@ -8,8 +8,18 @@ import io.netty.channel.socket.aio.{ AioEventLoopGroup, AioSocketChannel }
 import org.scooter.channel.Opt._
 import org.scooter.functional.Utilities._
 
+/**
+ * Configuration object for setting up the channel options.
+ */
 object Config {
 
+  /**
+   * Bootstrap the Channel with our internal options.
+   *
+   * @param address The Remote address to connect to.
+   *
+   * @return The bootstrapped Channel.
+   */
   def bootstrap(address: SocketAddress) = {
     createChannel.tap {
       channel => {
@@ -22,5 +32,10 @@ object Config {
     }
   }
 
+  /**
+   * Create the new AIO channel.
+   *
+   * @return The Channel.
+   */
   private def createChannel = new AioSocketChannel(new AioEventLoopGroup)
 }

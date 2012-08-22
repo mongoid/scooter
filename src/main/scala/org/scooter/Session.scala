@@ -1,5 +1,7 @@
 package org.scooter
 
+import io.netty.channel.{ ChannelFuture => Future }
+
 import java.net.SocketAddress
 
 import org.scooter.functional.Utilities._
@@ -70,8 +72,10 @@ class Session(hosts: Seq[SocketAddress]) extends Dynamic {
    * Execute the provided function in the context of the primary Node.
    *
    * @param func The function to execute.
+   *
+   * @return The future.
    */
-  protected[scooter] def onPrimary(func: Node => Unit) = {
+  protected[scooter] def onPrimary(func: Node => Future) = {
     cluster.onPrimary(func)
   }
 
