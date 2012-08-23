@@ -1,10 +1,11 @@
 package org.scooter
 
+import io.netty.bootstrap.Bootstrap
 import io.netty.channel.{ Channel, ChannelFuture }
+import io.netty.channel.socket.nio.{ NioEventLoopGroup, NioSocketChannel }
 
 import java.net.SocketAddress
 
-import org.scooter.channel.Config.bootstrap
 import org.scooter.channel.Handler
 import org.scooter.protocol.{ Command, Reply, Request }
 
@@ -21,7 +22,24 @@ object Connection {
    * @return The new Connection.
    */
   protected[scooter] def apply(address: SocketAddress) = {
-    new Connection(bootstrap(address))
+    new Connection(configure(address).connect.sync.channel)
+  }
+
+  /**
+   * Configure the connection via Netty bootstrap.
+   *
+   * @address The remote ScoketAddress.
+   *
+   * @todo Fix ChannelOptions to use TCP_NODELAY.
+   *
+   * @return The Boostrap.
+   */
+  private def configure(address: SocketAddress) = {
+    (new Bootstrap).
+      group(new NioEventLoopGroup).
+      channel(new NioSocketChannel).
+      handler(new Initializer).
+      remoteAddress(address)
   }
 }
 
