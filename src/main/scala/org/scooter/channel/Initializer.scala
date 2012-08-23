@@ -1,19 +1,19 @@
 package org.scooter.channel
 
 import io.netty.channel.ChannelInitializer
-import io.netty.channel.socket.aio.AioSocketChannel
+import io.netty.channel.socket.nio.NioSocketChannel
 
 /**
  * Initializes the I/O channel used for database communication.
  */
-class Initializer extends ChannelInitializer[AioSocketChannel] {
+class Initializer extends ChannelInitializer[NioSocketChannel] {
 
   /**
    * Initialize the Channel.
    *
-   * @param channel The AioSocketChannel.
+   * @param channel The NioSocketChannel.
    */
-  override def initChannel(channel: AioSocketChannel) = {
+  override def initChannel(channel: NioSocketChannel) = {
     channel.pipeline.addLast(new Encoder, new Decoder, new Handler)
   }
 }

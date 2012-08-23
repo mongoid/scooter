@@ -4,7 +4,7 @@ import java.net.SocketAddress
 
 import io.netty.bootstrap.Bootstrap
 import io.netty.channel.ChannelOption._
-import io.netty.channel.socket.aio.{ AioEventLoopGroup, AioSocketChannel }
+import io.netty.channel.socket.nio.{ NioEventLoopGroup, NioSocketChannel }
 
 import org.scooter.functional.Utilities._
 
@@ -14,28 +14,30 @@ import org.scooter.functional.Utilities._
 object Config {
 
   /**
+   * Create the new channel.
+   *
+   * @address The remote ScoketAddress.
+   *
+   * @return The Channel.
+   */
+  def connect(address: SocketAddress) = {
+    bootstrap(address).connect.sync.channel
+  }
+
+  /**
    * Bootstrap the Channel with our internal options.
    *
    * @param address The Remote address to connect to.
    *
    * @return The bootstrapped Channel.
-   */
-  def bootstrap(address: SocketAddress) = {
-    createChannel.tap {
-      channel => {
-        (new Bootstrap).
-          channel(channel).
-          handler(new Initializer).
-          // option(TCP_NODELAY, true).
-          remoteAddress(address)
-      }
-    }
-  }
-
-  /**
-   * Create the new AIO channel.
    *
-   * @return The Channel.
+   * @todo Fix ChannelOptions to use TCP_NODELAY.
    */
-  private def createChannel = new AioSocketChannel(new AioEventLoopGroup)
+  private def bootstrap(address: SocketAddress) = {
+    (new Bootstrap).
+      group(new NioEventLoopGroup).
+      channel(new NioSocketChannel).
+      handler(new Initializer).
+      remoteAddress(address)
+  }
 }
