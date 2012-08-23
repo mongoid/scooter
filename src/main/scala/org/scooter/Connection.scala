@@ -6,7 +6,7 @@ import io.netty.channel.socket.nio.{ NioEventLoopGroup, NioSocketChannel }
 
 import java.net.SocketAddress
 
-import org.scooter.channel.Handler
+import org.scooter.channel.{ Handler, Initializer }
 import org.scooter.protocol.{ Command, Reply, Request }
 
 /**
