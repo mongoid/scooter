@@ -34,6 +34,13 @@ object BsonByteBuf {
 case class BsonByteBuf(target: ByteBuf) {
 
   /**
+   * Is the buffer readable - ie is an entire message frame present.
+   *
+   * @return If the buffer is readable.
+   */
+  def isReadable = !notReadable
+
+  /**
    * Read a C String from the buffer.
    *
    * @link http://bsonspec.org/#/specification
@@ -45,6 +52,22 @@ case class BsonByteBuf(target: ByteBuf) {
    * @return The String.
    */
   def readCString = readStringBytes(target.bytesBefore(NUL))
+
+  /**
+   * Read a message frame from the buffer.
+   *
+   * @note This gets the length of the message, and slices that from the
+   *  buffer and returns only the bytes for a single message.
+   *
+   * @return The message frame as a ByteBuf.
+   */
+  def readFrame: ByteBuf = {
+    val length = target.getInt(0)
+    val index = target.readerIndex
+    val frame = target.slice(index, length)
+    target.readerIndex(index + length)
+    return frame
+  }
 
   /**
    * Read a Header from the ByteBuf.
@@ -121,6 +144,28 @@ case class BsonByteBuf(target: ByteBuf) {
     target.writeBytes(string.getBytes)
     target.writeZero(1)
   }
+
+  /**
+   * Is a standard message frame not able to be read?
+   *
+   * @return If the frame isn't readable.
+   */
+  private def frameNotReadable = target.readableBytes < target.getInt(0)
+
+  /**
+   * Is the length of the frame not present - the first 4 bytes.
+   *
+   * @return If the length is not large enough to read a length.
+   */
+  private def lengthNotReadable = target.readableBytes < 4
+
+  /**
+   * Is the buffer not readable - if the frame is not present in it's
+   * entirety.
+   *
+   * @return If the buffer is not readable.
+   */
+  private def notReadable = lengthNotReadable || frameNotReadable
 
   /**
    * Read the bytes for a String of the specified length plus the trailing
