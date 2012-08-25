@@ -7,6 +7,8 @@ import java.net.SocketAddress
 import org.scooter.functional.Utilities._
 import org.scooter.protocol.Reply
 
+import scala.language.dynamics
+
 /**
  * Companion object for the Session class.
  */
