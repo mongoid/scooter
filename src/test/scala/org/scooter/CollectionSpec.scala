@@ -7,14 +7,14 @@ import org.scooter.spec.Spec
 
 class CollectionSpec extends Spec {
 
-  def before = session.users.drop
+  // def before = session.users.drop
 
-  "Collection#drop" should {
+  // "Collection#drop" should {
 
-    val document = new Document
+    // val document = new Document
 
-    "drop the entire collection" in {
-      session.users.drop.documents(0) must beEqualTo(document)
-    }
-  }
+    // "drop the entire collection" in {
+      // session.users.drop.documents(0) must beEqualTo(document)
+    // }
+  // }
 }
