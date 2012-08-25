@@ -1,10 +1,9 @@
 package org.scooter.channel
 
 import io.netty.buffer.ByteBuf
+import io.netty.buffer.Unpooled._
 import io.netty.channel.{ ChannelHandlerContext => Context }
 import io.netty.handler.codec.MessageToByteEncoder
-
-import java.nio.ByteOrder._
 
 import org.scooter.protocol.Serializable
 
