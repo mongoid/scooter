@@ -66,7 +66,7 @@ class Collection protected[scooter](database: Database, val name: String) {
    *
    * @return The full namespaced name.
    */
-  val namespacedName = database.name + "." + name
+  val fullName = database.name + "." + name
 
   /**
    * Insert a single Document into the database.

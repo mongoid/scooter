@@ -21,7 +21,7 @@ object Delete {
    * @return The Delete message.
    */
   protected[scooter] def apply(collection: Collection, selector: Document) = {
-    new Delete(Header(0, 0, 2006), collection.name, selector)
+    new Delete(Header(0, 0, 2006), collection.fullName, selector)
   }
 }
 

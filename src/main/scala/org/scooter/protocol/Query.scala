@@ -20,7 +20,7 @@ object Query {
    * @return The Query message.
    */
   protected[scooter] def apply(collection: Collection, selector: Document) = {
-    new Query(Header(0, 0, 2004), collection.name, selector)
+    new Query(Header(0, 0, 2004), collection.fullName, selector)
   }
 
   /**
