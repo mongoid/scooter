@@ -8,7 +8,6 @@ class CollectionSpec extends Spec {
   "Collection#drop" should {
 
     "drop the entire collection" in {
-
       println(session.users.drop)
     }
   }

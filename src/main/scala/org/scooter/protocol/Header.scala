@@ -1,6 +1,7 @@
 package org.scooter.protocol
 
 import java.util.concurrent.atomic.AtomicInteger
+import java.util.Random
 
 import io.netty.buffer.ByteBuf
 
@@ -16,7 +17,7 @@ object Header {
    *
    * @return The AtomicInteger.
    */
-  final lazy val Inc = new AtomicInteger(0)
+  final lazy val Inc = new AtomicInteger((new Random).nextInt)
 
   /**
    * Instantiate a new header, auto increments the global counter.
