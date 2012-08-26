@@ -3,10 +3,23 @@ package org.scooter
 import org.scooter.bson.Document
 
 /**
+ * Companion object to the Cursor.
+ */
+object Cursor {
+
+  /**
+   * Instantiate a new Cursor.
+   *
+   * @return The Cursor.
+   */
+  def apply = new Cursor
+}
+
+/**
  * The Cursor is an Iterator that retrieves more Documents from the database
  * when the current batch runs out.
  */
-class Cursor extends Iterator[Document] {
+class Cursor private extends Iterator[Document] {
 
   /**
    * Are there more Documents to be iterated over in the Cursor?

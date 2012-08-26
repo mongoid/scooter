@@ -41,7 +41,7 @@ object Criteria {
  * @param collection The Collection the Criteria executes against.
  * @param session The database Session.
  */
-class Criteria(collection: Collection, selector: Document)
+class Criteria private (collection: Collection, selector: Document)
   extends Iterable[Document] {
 
   /**
@@ -49,7 +49,7 @@ class Criteria(collection: Collection, selector: Document)
    *
    * @return The Cursor.
    */
-  def iterator = new Cursor
+  def iterator = Cursor.apply
 
   /**
    * Get one document matching the criteria.

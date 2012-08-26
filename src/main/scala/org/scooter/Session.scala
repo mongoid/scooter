@@ -30,7 +30,7 @@ object Session {
  *
  * @param hosts A sequence of SocketAddresses.
  */
-class Session(hosts: Seq[SocketAddress]) extends Dynamic {
+class Session private (hosts: Seq[SocketAddress]) extends Dynamic {
 
   /**
    * The current Database the Session is operating with.
@@ -60,7 +60,7 @@ class Session(hosts: Seq[SocketAddress]) extends Dynamic {
    * @param name The name of the Database.
    */
   def use(name: String) = {
-    currentDatabase = new Database(this, name)
+    currentDatabase = Database(this, name)
   }
 
   /**

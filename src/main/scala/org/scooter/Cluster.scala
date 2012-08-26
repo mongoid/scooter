@@ -32,7 +32,7 @@ object Cluster {
  *
  * @param nodes The sequence of Nodes.
  */
-class Cluster(nodes: Seq[Node]) {
+class Cluster protected[scooter](nodes: Seq[Node]) {
 
   /**
    * Execute the provided function in the context of the primary Node.

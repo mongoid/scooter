@@ -18,7 +18,7 @@ object Collection {
    * @return The Collection.
    */
   def apply(database: Database, name: String) = {
-    new Collection(database, database.name + "." + name)
+    new Collection(database, name)
   }
 }
 
@@ -28,7 +28,7 @@ object Collection {
  * @param database The database the Collection belongs to.
  * @param name The name of the Collection.
  */
-class Collection(database: Database, val name: String) {
+class Collection private (database: Database, val name: String) {
 
   /**
    * Drops this collection.
@@ -60,6 +60,13 @@ class Collection(database: Database, val name: String) {
   def find(selector: (String, Writable)*) = {
     Criteria(this, Document(selector: _*))
   }
+
+  /**
+   * Get the full namespaced name of the Collection.
+   *
+   * @return The full namespaced name.
+   */
+  val namespacedName = database.name + "." + name
 
   /**
    * Insert a single Document into the database.

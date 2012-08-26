@@ -5,12 +5,30 @@ import org.scooter.bson.Serialization._
 import org.scooter.protocol.{ Query, Reply }
 
 /**
+ * Companion object to a Database.
+ */
+object Database {
+
+  /**
+   * Instantiate a new Database.
+   *
+   * @param session The Session.
+   * @param name The name of the Database.
+   *
+   * @return The Database.
+   */
+  def apply(session: Session, name: String) = {
+    new Database(session, name)
+  }
+}
+
+/**
  * The Database represents a Database in a single MongoDB session.
  *
  * @param session The Session that contains the Database.
  * @param name The name of the Database.
  */
-class Database(val session: Session, val name: String) {
+class Database private (val session: Session, val name: String) {
 
   /**
    * Get a Collection for the provided name.

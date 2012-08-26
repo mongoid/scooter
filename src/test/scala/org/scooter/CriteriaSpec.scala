@@ -22,7 +22,7 @@ class CriteriaSpec extends Spec {
 
   trait scope extends Scope {
 
-    val database = new Database(session, "scooter_test")
-    val collection = new Collection(database, "users")
+    val database = Database(session, "scooter_test")
+    val collection = Collection(database, "users")
   }
 }

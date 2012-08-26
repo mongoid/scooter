@@ -42,8 +42,12 @@ object Header {
  * @param original The id of the original request.
  * @param code The operation code.
  */
-case class Header(val length: Int, val request: Int, val original: Int, val code: Int)
-  extends Serializable {
+case class Header protected[scooter](
+  val length: Int,
+  val request: Int,
+  val original: Int,
+  val code: Int
+) extends Serializable {
 
   /**
    * Serializes the header.

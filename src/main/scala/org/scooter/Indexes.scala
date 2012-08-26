@@ -1,3 +1,3 @@
 package org.scooter
 
-class Indexes {}
+class Indexes private
