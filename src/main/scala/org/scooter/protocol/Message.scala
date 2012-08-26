@@ -23,7 +23,7 @@ abstract class Message (header: Header, code: Int) {
    * @param func The function to execute.
    */
   def withHeader(buffer: ByteBuf)(func: => Unit) = {
-    header.serialize(buffer)
+    header.encode(buffer)
     func
     buffer.setInt(0, buffer.writerIndex)
   }

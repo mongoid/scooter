@@ -39,6 +39,8 @@ object Query {
    *
    * @param collection The Collection to insert into.
    * @param selector The selector Document.
+   * @param skip The number of Documents to skip.
+   * @param limit The number of documents to return.
    *
    * @return The Query message.
    */
@@ -77,7 +79,7 @@ sealed case class Query (
    *
    * @param buffer The ByteBuf that will get written.
    */
-  def serialize(buffer: ByteBuf) = {
+  def encode(buffer: ByteBuf) = {
     withHeader(buffer) {
       buffer.writeInt(0) // Bit vector.
       buffer.writeCString(name)

@@ -8,10 +8,10 @@ import org.scooter.bson.implicits.BsonByteBuf._
 /**
  * Companion object for Reply.
  */
-object Reply extends Deserializable {
+object Reply extends Decodable {
 
   /**
-   * Deserialize the buffer into a Reply object.
+   * Deencode the buffer into a Reply object.
    *
    * @link http://www.mongodb.org/display/DOCS/Mongo+Wire+Protocol
    *
@@ -27,7 +27,7 @@ object Reply extends Deserializable {
    *
    * @return The Reply.
    */
-  def deserialize(buffer: ByteBuf): Reply = {
+  def decode(buffer: ByteBuf): Reply = {
     new Reply(
       buffer.readHeader,
       buffer.readInt,
@@ -38,7 +38,7 @@ object Reply extends Deserializable {
   }
 
   /**
-   * Deserialize a sequence of Documents from the buffer.
+   * Deencode a sequence of Documents from the buffer.
    *
    * @param buffer The ByteBuf that has only documents to read.
    *

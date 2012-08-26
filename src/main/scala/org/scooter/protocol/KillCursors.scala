@@ -48,7 +48,7 @@ sealed case class KillCursors (header: Header, cursors: Seq[Long])
    *
    * @param buffer The ByteBuf that will get written.
    */
-  def serialize(buffer: ByteBuf) = {
+  def encode(buffer: ByteBuf) = {
     withHeader(buffer) {
       buffer.writeInt(0) // Placeholder.
       buffer.writeInt(cursors.length)

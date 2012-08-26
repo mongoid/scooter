@@ -24,6 +24,6 @@ class Decoder extends ByteToMessageDecoder[Reply] {
    */
   def decode(context: Context, input: ByteBuf): Reply = {
     val buffer = input.order(LITTLE_ENDIAN)
-    if (buffer.isReadable) Reply.deserialize(buffer.readFrame) else return null
+    if (buffer.isReadable) Reply.decode(buffer.readFrame) else return null
   }
 }

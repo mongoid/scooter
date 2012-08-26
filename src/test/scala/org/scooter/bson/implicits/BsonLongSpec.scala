@@ -14,7 +14,7 @@ class BsonLongSpec extends Spec {
     val buff = buffer(12).order(LITTLE_ENDIAN)
     val wrapper = new BsonLong(longValue)
 
-    "serialize the long to the buffer" in {
+    "encode the long to the buffer" in {
       wrapper.bsonWrite(buff, field)
       buff.array must beEqualTo(dumpedLong)
     }
@@ -24,7 +24,7 @@ class BsonLongSpec extends Spec {
 
     val buff = buffer(12).order(LITTLE_ENDIAN)
 
-    "serialize the long to the buffer" in {
+    "encode the long to the buffer" in {
       longValue.bsonWrite(buff, field)
       buff.array must beEqualTo(dumpedLong)
     }

@@ -14,7 +14,7 @@ class BsonDoubleSpec extends Spec {
     val buff = buffer(12).order(LITTLE_ENDIAN)
     val wrapper = new BsonDouble(doubleValue)
 
-    "serialize the double to the buffer" in {
+    "encode the double to the buffer" in {
       wrapper.bsonWrite(buff, field)
       buff.array must beEqualTo(dumpedDouble)
     }
@@ -24,7 +24,7 @@ class BsonDoubleSpec extends Spec {
 
     val buff = buffer(12).order(LITTLE_ENDIAN)
 
-    "serialize the double to the buffer" in {
+    "encode the double to the buffer" in {
       doubleValue.bsonWrite(buff, field)
       buff.array must beEqualTo(dumpedDouble)
     }

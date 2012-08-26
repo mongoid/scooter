@@ -55,7 +55,7 @@ sealed case class Insert (
    *
    * @param buffer The ByteBuf that will get written.
    */
-  def serialize(buffer: ByteBuf) = {
+  def encode(buffer: ByteBuf) = {
     withHeader(buffer) {
       buffer.writeInt(0) // Bit vector.
       buffer.writeCString(name)

@@ -9,13 +9,13 @@ import org.scooter.spec.Spec
 
 class ReplySpec extends Spec {
 
-  "Reply.deserialize" should {
+  "Reply.decode" should {
 
     "when the buffer has more than one document" in {
 
       val buff = buffer(52).order(LITTLE_ENDIAN)
       buff.writeBytes(dumpedReply)
-      val reply = Reply.deserialize(buff)
+      val reply = Reply.decode(buff)
 
       "returns a reply with the first document" in {
         reply.documents(0) must beEqualTo(Document("hi" -> "ya"))

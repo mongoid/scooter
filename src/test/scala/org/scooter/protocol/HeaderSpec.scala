@@ -8,12 +8,12 @@ import org.scooter.spec.Spec
 
 class HeaderSpec extends Spec {
 
-  "Header#serialize" should {
+  "Header#encode" should {
 
     val buff = buffer(16).order(LITTLE_ENDIAN)
 
     "adds the header as 32 bit integers" in {
-      headerValue.serialize(buff)
+      headerValue.encode(buff)
       buff.array must beEqualTo(dumpedHeader)
     }
   }

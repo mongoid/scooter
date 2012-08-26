@@ -9,13 +9,13 @@ import org.scooter.spec.Spec
 
 class InsertSpec extends Spec {
 
-  "Insert#serialize" should {
+  "Insert#encode" should {
 
     val insert = new Insert(headerValue, "scooter_test.users", Array(documentValue))
     val buff = buffer(55).order(LITTLE_ENDIAN)
 
     "add the document to the buffer" in {
-      insert.serialize(buff)
+      insert.encode(buff)
       buff.array must beEqualTo(dumpedInsert)
     }
   }

@@ -16,7 +16,7 @@ class BsonBooleanSpec extends Spec {
       val buff = buffer(5).order(LITTLE_ENDIAN)
       val wrapper = new BsonBoolean(true)
 
-      "serialize the boolean to the buffer" in {
+      "encode the boolean to the buffer" in {
         wrapper.bsonWrite(buff, field)
         buff.array must beEqualTo(dumpedTrue)
       }
@@ -27,7 +27,7 @@ class BsonBooleanSpec extends Spec {
       val buff = buffer(5).order(LITTLE_ENDIAN)
       val wrapper = new BsonBoolean(false)
 
-      "serialize the boolean to the buffer" in {
+      "encode the boolean to the buffer" in {
         wrapper.bsonWrite(buff, field)
         buff.array must beEqualTo(dumpedFalse)
       }
@@ -40,7 +40,7 @@ class BsonBooleanSpec extends Spec {
 
       val buff = buffer(5).order(LITTLE_ENDIAN)
 
-      "serialize the boolean to the buffer" in {
+      "encode the boolean to the buffer" in {
         true.bsonWrite(buff, field)
         buff.array must beEqualTo(dumpedTrue)
       }
@@ -50,7 +50,7 @@ class BsonBooleanSpec extends Spec {
 
       val buff = buffer(5).order(LITTLE_ENDIAN)
 
-      "serialize the boolean to the buffer" in {
+      "encode the boolean to the buffer" in {
         false.bsonWrite(buff, field)
         buff.array must beEqualTo(dumpedFalse)
       }

@@ -26,7 +26,7 @@ class DocumentSpec extends Spec {
 
     val buff = buffer(16).order(LITTLE_ENDIAN)
 
-    "serializes the string to the buffer" in {
+    "encodes the string to the buffer" in {
       documentValue.bsonWrite(buff)
       buff.array must beEqualTo(dumpedDocument)
     }
@@ -38,7 +38,7 @@ class DocumentSpec extends Spec {
 
       val buff = buffer(16).order(LITTLE_ENDIAN)
 
-      "deserialize the bytes into a hash map" in {
+      "decode the bytes into a hash map" in {
         buff.writeBytes(dumpedDocument)
         Document.bsonRead(buff) must beEqualTo(documentValue)
       }
@@ -48,7 +48,7 @@ class DocumentSpec extends Spec {
 
       val buff = buffer(27).order(LITTLE_ENDIAN)
 
-      "deserialize the bytes into a hash map" in {
+      "decode the bytes into a hash map" in {
         buff.writeBytes(dumpedMultiDocument)
         Document.bsonRead(buff) must beEqualTo(multiDocumentValue)
       }

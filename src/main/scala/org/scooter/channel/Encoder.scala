@@ -5,22 +5,22 @@ import io.netty.buffer.Unpooled._
 import io.netty.channel.{ ChannelHandlerContext => Context }
 import io.netty.handler.codec.MessageToByteEncoder
 
-import org.scooter.protocol.Serializable
+import org.scooter.protocol.Encodable
 
 /**
- * Encodes Serializable messages to the output ByteBuf.
+ * Encodes Encodable messages to the output ByteBuf.
  */
-class Encoder extends MessageToByteEncoder[Serializable] {
+class Encoder extends MessageToByteEncoder[Encodable] {
 
   /**
    * Encode the outbound message to the ByteBuf, ensuring we use little
    * endian as the byte order.
    *
    * @param context The ChannelHandlerContext.
-   * @param message The Serializable Message.
+   * @param message The Encodable Message.
    * @param outbound The outbound ByteBuf.
    */
-  def encode(context: Context, message: Serializable, outbound: ByteBuf) = {
-    message.serialize(outbound.order(LITTLE_ENDIAN))
+  def encode(context: Context, message: Encodable, outbound: ByteBuf) = {
+    message.encode(outbound.order(LITTLE_ENDIAN))
   }
 }

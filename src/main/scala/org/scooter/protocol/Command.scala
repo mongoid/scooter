@@ -8,4 +8,4 @@ package org.scooter.protocol
  * @param code The operation code.
  */
 abstract class Command (header: Header, code: Int)
-  extends Message(header, code) with Serializable
+  extends Message(header, code) with Encodable

@@ -14,7 +14,7 @@ class BsonIntSpec extends Spec {
     val buff = buffer(8).order(LITTLE_ENDIAN)
     val wrapper = new BsonInt(intValue)
 
-    "serialize the int to the buffer" in {
+    "encode the int to the buffer" in {
       wrapper.bsonWrite(buff, field)
       buff.array must beEqualTo(dumpedInt)
     }
@@ -24,7 +24,7 @@ class BsonIntSpec extends Spec {
 
     val buff = buffer(8).order(LITTLE_ENDIAN)
 
-    "serialize the int to the buffer" in {
+    "encode the int to the buffer" in {
       intValue.bsonWrite(buff, field)
       buff.array must beEqualTo(dumpedInt)
     }

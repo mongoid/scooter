@@ -14,7 +14,7 @@ class BsonStringSpec extends Spec {
     val buff = buffer(11).order(LITTLE_ENDIAN)
     val wrapper = new BsonString(stringValue)
 
-    "serialize the string to the buffer" in {
+    "encode the string to the buffer" in {
       wrapper.bsonWrite(buff, field)
       buff.array must beEqualTo(dumpedString)
     }
@@ -24,7 +24,7 @@ class BsonStringSpec extends Spec {
 
     val buff = buffer(11).order(LITTLE_ENDIAN)
 
-    "serialize the string to the buffer" in {
+    "encode the string to the buffer" in {
       stringValue.bsonWrite(buff, field)
       buff.array must beEqualTo(dumpedString)
     }

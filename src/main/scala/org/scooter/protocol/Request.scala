@@ -7,7 +7,7 @@ package org.scooter.protocol
  * @param code The operation code.
  */
 abstract class Request (header: Header, code: Int)
-  extends Message(header, code) with Serializable {
+  extends Message(header, code) with Encodable {
 
   /**
    * Get the unique id of the request in the context of this deployment.

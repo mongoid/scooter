@@ -9,13 +9,13 @@ import org.scooter.spec.Spec
 
 class DeleteSpec extends Spec {
 
-  "Delete#serialize" should {
+  "Delete#encode" should {
 
     val delete = new Delete(headerValue, "scooter_test.users", documentValue)
     val buff = buffer(59).order(LITTLE_ENDIAN)
 
     "add the document to the buffer" in {
-      delete.serialize(buff)
+      delete.encode(buff)
       buff.array must beEqualTo(dumpedDelete)
     }
   }

@@ -47,7 +47,7 @@ case class Header (
   val request: Int,
   val original: Int,
   val code: Int
-) extends Serializable {
+) extends Encodable {
 
   /**
    * Serializes the header.
@@ -62,7 +62,7 @@ case class Header (
    *
    * @param buffer The ByteBuf that will get written.
    */
-  def serialize(buffer: ByteBuf) = {
+  def encode(buffer: ByteBuf) = {
     buffer.writeInts(length, request, original, code)
   }
 }
