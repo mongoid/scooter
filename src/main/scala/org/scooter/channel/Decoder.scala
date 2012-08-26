@@ -12,7 +12,7 @@ import org.scooter.protocol.Reply
  * Decodes bytes from the database server and converts the frames of bytes
  * into Reply objects.
  */
-class Decoder extends ByteToMessageDecoder[Reply] {
+class Decoder protected[scooter] extends ByteToMessageDecoder[Reply] {
 
   /**
    * Decode the reply from the database, returning a Reply object.

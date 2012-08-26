@@ -6,7 +6,7 @@ import io.netty.channel.socket.nio.NioSocketChannel
 /**
  * Initializes the I/O channel used for database communication.
  */
-class Initializer extends ChannelInitializer[NioSocketChannel] {
+class Initializer protected[scooter] extends ChannelInitializer[NioSocketChannel] {
 
   /**
    * Initialize the Channel.

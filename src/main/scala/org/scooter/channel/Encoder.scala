@@ -10,7 +10,7 @@ import org.scooter.protocol.Serializable
 /**
  * Encodes Serializable messages to the output ByteBuf.
  */
-class Encoder extends MessageToByteEncoder[Serializable] {
+class Encoder protected[scooter] extends MessageToByteEncoder[Serializable] {
 
   /**
    * Encode the outbound message to the ByteBuf, ensuring we use little
