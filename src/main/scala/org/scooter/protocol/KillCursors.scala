@@ -17,7 +17,7 @@ object KillCursors {
    *
    * @return The KillCursors message.
    */
-  def apply(cursors: Seq[Long]) = {
+  protected[scooter] def apply(cursors: Seq[Long]) = {
     new KillCursors(Header(0, 0, 2007), cursors)
   }
 }
@@ -31,7 +31,7 @@ object KillCursors {
  * @param header The Header.
  * @param cursors The ids of the cursors to kill.
  */
-sealed case class KillCursors(header: Header, cursors: Seq[Long])
+sealed case class KillCursors protected[scooter](header: Header, cursors: Seq[Long])
   extends Command(header, 2007) {
 
   /**

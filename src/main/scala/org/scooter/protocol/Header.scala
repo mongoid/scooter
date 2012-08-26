@@ -27,7 +27,7 @@ object Header {
    *
    * @return The Header.
    */
-  def apply(length: Int, original: Int, code: Int): Header = {
+  protected[scooter] def apply(length: Int, original: Int, code: Int): Header = {
     Header(length, Inc.getAndIncrement, original, code)
   }
 }

@@ -7,5 +7,5 @@ package org.scooter.protocol
  * @param header The Header.
  * @param code The operation code.
  */
-abstract class Command(header: Header, code: Int) extends Message(header, code)
-  with Serializable
+abstract class Command protected[scooter](header: Header, code: Int)
+  extends Message(header, code) with Serializable

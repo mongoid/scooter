@@ -20,7 +20,7 @@ object Insert {
    *
    * @return The Insert message.
    */
-  def apply(collection: Collection, documents: Seq[Document]) = {
+  protected[scooter] def apply(collection: Collection, documents: Seq[Document]) = {
     new Insert(Header(0, 0, 2002), collection.name, documents)
   }
 }
@@ -35,8 +35,11 @@ object Insert {
  * @param name The full name of the Collection.
  * @param documents The documents to insert.
  */
-sealed case class Insert(header: Header, name: String, documents: Seq[Document])
-  extends Command(header, 2002) {
+sealed case class Insert protected[scooter](
+  header: Header,
+  name: String,
+  documents: Seq[Document]
+) extends Command(header, 2002) {
 
   /**
    * Serialize the Insert into a buffer that can be written to the socket.

@@ -19,7 +19,7 @@ object Query {
    *
    * @return The Query message.
    */
-  def apply(collection: Collection, selector: Document) = {
+  protected[scooter] def apply(collection: Collection, selector: Document) = {
     new Query(Header(0, 0, 2004), collection.name, selector)
   }
 
@@ -30,7 +30,7 @@ object Query {
    *
    * @return The Query message.
    */
-  def apply(command: Document) = {
+  protected[scooter] def apply(command: Document) = {
     new Query(Header(0, 0, 2004), "$cmd", command)
   }
 }
