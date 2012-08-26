@@ -30,7 +30,7 @@ object Session {
  *
  * @param hosts A sequence of SocketAddresses.
  */
-class Session protected[scooter](hosts: Seq[SocketAddress]) extends Dynamic {
+class Session (hosts: Seq[SocketAddress]) extends Dynamic {
 
   /**
    * The current Database the Session is operating with.
@@ -70,7 +70,7 @@ class Session protected[scooter](hosts: Seq[SocketAddress]) extends Dynamic {
    *
    * @return The Reply from the database.
    */
-  protected[scooter] def onPrimary(func: Node => Reply) = {
+  def onPrimary(func: Node => Reply) = {
     cluster.onPrimary(func)
   }
 
@@ -81,7 +81,7 @@ class Session protected[scooter](hosts: Seq[SocketAddress]) extends Dynamic {
    *
    * @return The future.
    */
-  protected[scooter] def onPrimary(func: Node => Future) = {
+  def onPrimary(func: Node => Future) = {
     cluster.onPrimary(func)
   }
 

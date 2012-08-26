@@ -16,7 +16,7 @@ object Node {
    *
    * @return The Node.
    */
-  protected[scooter] def apply(address: SocketAddress) = {
+  def apply(address: SocketAddress) = {
     new Node(Connection(address))
   }
 }
@@ -26,14 +26,14 @@ object Node {
  *
  * @param connection The db Connection.
  */
-class Node protected[scooter](connection: Connection) {
+class Node (connection: Connection) {
 
   /**
    * Send the provided Command to the database.
    *
    * @param message The Command to send.
    */
-  protected[scooter] def send(command: Command) = {
+  def send(command: Command) = {
     connection.send(command)
   }
 
@@ -42,7 +42,7 @@ class Node protected[scooter](connection: Connection) {
    *
    * @param message The Request to send.
    */
-  protected[scooter] def send(request: Request) = {
+  def send(request: Request) = {
     connection.send(request)
   }
 }

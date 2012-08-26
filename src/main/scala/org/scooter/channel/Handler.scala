@@ -12,7 +12,7 @@ import scala.concurrent.SyncVar
 /**
  * Handler for hooking into messages received by the channel.
  */
-class Handler protected[scooter] extends ChannelInboundMessageHandlerAdapter[Reply] {
+class Handler extends ChannelInboundMessageHandlerAdapter[Reply] {
 
   /**
    * Get a reply given the id of the original Request. This id is generated

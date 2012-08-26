@@ -27,7 +27,7 @@ object Header {
    *
    * @return The Header.
    */
-  protected[scooter] def apply(length: Int, original: Int, code: Int): Header = {
+  def apply(length: Int, original: Int, code: Int): Header = {
     Header(length, Inc.getAndIncrement, original, code)
   }
 }
@@ -42,7 +42,7 @@ object Header {
  * @param original The id of the original request.
  * @param code The operation code.
  */
-case class Header protected[scooter](
+case class Header (
   val length: Int,
   val request: Int,
   val original: Int,

@@ -20,7 +20,7 @@ object Delete {
    *
    * @return The Delete message.
    */
-  protected[scooter] def apply(collection: Collection, selector: Document) = {
+  def apply(collection: Collection, selector: Document) = {
     new Delete(Header(0, 0, 2006), collection.fullName, selector)
   }
 }
@@ -35,7 +35,7 @@ object Delete {
  * @param name The full name of the Collection.
  * @param selector The document selector.
  */
-sealed case class Delete protected[scooter](header: Header, name: String, document: Document)
+sealed case class Delete (header: Header, name: String, document: Document)
   extends Command(header, 2006) {
 
   /**

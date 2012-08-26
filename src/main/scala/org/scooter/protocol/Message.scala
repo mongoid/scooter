@@ -8,7 +8,7 @@ import io.netty.buffer.ByteBuf
  * @param header The Header.
  * @param code The operation code.
  */
-abstract class Message protected[scooter](header: Header, code: Int) {
+abstract class Message (header: Header, code: Int) {
 
   /**
    * Serialize a header then process the rest of the message's

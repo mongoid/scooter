@@ -18,7 +18,7 @@ object Cluster {
    *
    * @return The Cluster.
    */
-  protected[scooter] def apply(addresses: Seq[SocketAddress]) = {
+  def apply(addresses: Seq[SocketAddress]) = {
     new Cluster(
       addresses.foldLeft(List[Node]())(
         (nodes, address) => nodes.+:(Node(address))
@@ -32,7 +32,7 @@ object Cluster {
  *
  * @param nodes The sequence of Nodes.
  */
-class Cluster protected[scooter](nodes: Seq[Node]) {
+class Cluster (nodes: Seq[Node]) {
 
   /**
    * Execute the provided function in the context of the primary Node.
@@ -41,7 +41,7 @@ class Cluster protected[scooter](nodes: Seq[Node]) {
    *
    * @return The Reply from the database.
    */
-  protected[scooter] def onPrimary(func: Node => Reply) = {
+  def onPrimary(func: Node => Reply) = {
     func(primary)
   }
 
@@ -52,7 +52,7 @@ class Cluster protected[scooter](nodes: Seq[Node]) {
    *
    * @return The future.
    */
-  protected[scooter] def onPrimary(func: Node => Future) = {
+  def onPrimary(func: Node => Future) = {
     func(primary)
   }
 

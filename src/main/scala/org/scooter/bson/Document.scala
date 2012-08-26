@@ -69,7 +69,7 @@ object Document {
  *
  * @param document The Hash to wrap.
  */
-class Document protected[scooter] extends HashMap[String, Writable] {
+class Document extends HashMap[String, Writable] {
 
   /**
    * Dump the document to the buffer, and yield to the provided

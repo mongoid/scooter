@@ -28,7 +28,7 @@ object Collection {
  * @param database The database the Collection belongs to.
  * @param name The name of the Collection.
  */
-class Collection protected[scooter](database: Database, val name: String) {
+class Collection (database: Database, val name: String) {
 
   /**
    * Drops this collection.
@@ -95,5 +95,5 @@ class Collection protected[scooter](database: Database, val name: String) {
    *
    * @return The Session.
    */
-  protected[scooter] def session = database.session
+  def session = database.session
 }

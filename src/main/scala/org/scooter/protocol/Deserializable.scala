@@ -14,5 +14,5 @@ trait Deserializable {
    *
    * @return The Reply.
    */
-  protected[scooter] def deserialize(buffer: ByteBuf) : Reply
+  def deserialize(buffer: ByteBuf) : Reply
 }

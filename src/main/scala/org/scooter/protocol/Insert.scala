@@ -20,7 +20,7 @@ object Insert {
    *
    * @return The Insert message.
    */
-  protected[scooter] def apply(collection: Collection, documents: Seq[Document]) = {
+  def apply(collection: Collection, documents: Seq[Document]) = {
     new Insert(Header(0, 0, 2002), collection.fullName, documents)
   }
 }
@@ -35,7 +35,7 @@ object Insert {
  * @param name The full name of the Collection.
  * @param documents The documents to insert.
  */
-sealed case class Insert protected[scooter](
+sealed case class Insert (
   header: Header,
   name: String,
   documents: Seq[Document]

@@ -12,5 +12,5 @@ trait Serializable {
    *
    * @param buffer The ByteBuf that will get written.
    */
-  protected[scooter] def serialize(buffer: ByteBuf) : Unit
+  def serialize(buffer: ByteBuf) : Unit
 }

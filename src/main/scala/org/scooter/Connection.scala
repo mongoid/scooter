@@ -21,7 +21,7 @@ object Connection {
    *
    * @return The new Connection.
    */
-  protected[scooter] def apply(address: SocketAddress) = {
+  def apply(address: SocketAddress) = {
     new Connection(configure(address).connect.sync.channel)
   }
 
@@ -49,7 +49,7 @@ object Connection {
  *
  * @param channel The SocketChannel used in the Connection.
  */
-class Connection protected[scooter](channel: Channel) {
+class Connection (channel: Channel) {
 
   /**
    * Write the Command to the socket.
@@ -58,7 +58,7 @@ class Connection protected[scooter](channel: Channel) {
    *
    * @return The ChannelFuture.
    */
-  protected[scooter] def send(command: Command): ChannelFuture = {
+  def send(command: Command): ChannelFuture = {
     channel.write(command)
   }
 
@@ -72,7 +72,7 @@ class Connection protected[scooter](channel: Channel) {
    *
    * @return The Reply once it is available.
    */
-  protected[scooter] def send(request: Request): Reply = {
+  def send(request: Request): Reply = {
     channel.write(request)
     handler.reply(request.id)
   }

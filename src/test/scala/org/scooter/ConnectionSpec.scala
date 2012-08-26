@@ -30,7 +30,7 @@ class ConnectionSpec extends Spec {
     "when writing a message that expects replies" in {
 
       val header = Header(0, 0, 2004)
-      val query = new Query(header, "scooter_test.users", Document("hi" -> "ya"))
+      val query = new Query(header, "scooter_test.users", Document("hi" -> "ya"), 0, 0)
 
       "writes the message" in new scope {
         // connection.send(query)

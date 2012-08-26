@@ -19,8 +19,8 @@ object Query {
    *
    * @return The Query message.
    */
-  protected[scooter] def apply(collection: Collection, selector: Document) = {
-    new Query(Header(0, 0, 2004), collection.fullName, selector)
+  def apply(collection: Collection, selector: Document) = {
+    new Query(Header(0, 0, 2004), collection.fullName, selector, 0, 0)
   }
 
   /**
@@ -30,8 +30,20 @@ object Query {
    *
    * @return The Query message.
    */
-  protected[scooter] def apply(command: Document) = {
-    new Query(Header(0, 0, 2004), "$cmd", command)
+  def apply(command: Document) = {
+    new Query(Header(0, 0, 2004), "$cmd", command, 0, -1)
+  }
+
+  /**
+   * Instantiate a new Query message.
+   *
+   * @param collection The Collection to insert into.
+   * @param selector The selector Document.
+   *
+   * @return The Query message.
+   */
+  def apply(collection: Collection, selector: Document, skip: Int, limit: Int) = {
+    new Query(Header(0, 0, 2004), collection.fullName, selector, 0, 0)
   }
 }
 
@@ -45,10 +57,8 @@ object Query {
  * @param name The full name of the Collection.
  * @param selector The selector Document.
  */
-sealed case class Query protected[scooter](
-  header: Header,
-  name: String,
-  selector: Document
+sealed case class Query (
+  header: Header, name: String, selector: Document, skip: Int, limit: Int
 ) extends Request(header, 2004) {
 
   /**
@@ -71,8 +81,8 @@ sealed case class Query protected[scooter](
     withHeader(buffer) {
       buffer.writeInt(0) // Bit vector.
       buffer.writeCString(name)
-      buffer.writeInt(0) // Skip.
-      buffer.writeInt(0) // Return.
+      buffer.writeInt(skip)
+      buffer.writeInt(limit)
       selector.bsonWrite(buffer)
     }
   }

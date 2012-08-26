@@ -27,7 +27,7 @@ object Reply extends Deserializable {
    *
    * @return The Reply.
    */
-  protected[scooter] def deserialize(buffer: ByteBuf): Reply = {
+  def deserialize(buffer: ByteBuf): Reply = {
     new Reply(
       buffer.readHeader,
       buffer.readInt,
@@ -60,7 +60,7 @@ object Reply extends Deserializable {
  * @param skip The marker of where the cursor is on the server.
  * @param docs The sequence of Documents in this batch.
  */
-sealed case class Reply protected[scooter](
+sealed case class Reply (
   header: Header,
   flags: Int,
   cursor: Long,

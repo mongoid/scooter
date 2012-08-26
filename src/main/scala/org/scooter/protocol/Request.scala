@@ -6,7 +6,7 @@ package org.scooter.protocol
  * @param header The Header.
  * @param code The operation code.
  */
-abstract class Request protected[scooter](header: Header, code: Int)
+abstract class Request (header: Header, code: Int)
   extends Message(header, code) with Serializable {
 
   /**
@@ -14,5 +14,5 @@ abstract class Request protected[scooter](header: Header, code: Int)
    *
    * @return The Int request id.
    */
-  protected[scooter] def id = header.request
+  def id = header.request
 }
