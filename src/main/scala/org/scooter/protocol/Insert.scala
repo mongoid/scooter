@@ -35,10 +35,8 @@ object Insert {
  * @param name The full name of the Collection.
  * @param documents The documents to insert.
  */
-sealed case class Insert (
-  header: Header,
-  name: String,
-  documents: Seq[Document]
+sealed case class Insert(
+  header: Header, name: String, documents: Seq[Document]
 ) extends Command(header, 2002) {
 
   /**

@@ -59,7 +59,7 @@ object Query {
  * @param name The full name of the Collection.
  * @param selector The selector Document.
  */
-sealed case class Query (
+sealed case class Query(
   header: Header, name: String, selector: Document, skip: Int, limit: Int
 ) extends Request(header, 2004) {
 

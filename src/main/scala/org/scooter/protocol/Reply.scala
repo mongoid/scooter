@@ -60,12 +60,9 @@ object Reply extends Decodable {
  * @param skip The marker of where the cursor is on the server.
  * @param docs The sequence of Documents in this batch.
  */
-sealed case class Reply (
-  header: Header,
-  flags: Int,
-  cursor: Long,
-  skip: Int,
-  val documents: Seq[Document]) extends Message(header, 1) {
+sealed case class Reply(
+  header: Header, flags: Int, cursor: Long, skip: Int, val documents: Seq[Document]
+) extends Message(header, 1) {
 
   /**
    * Get the id of the original request.

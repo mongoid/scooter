@@ -35,7 +35,7 @@ object Delete {
  * @param name The full name of the Collection.
  * @param selector The document selector.
  */
-sealed case class Delete (header: Header, name: String, document: Document)
+sealed case class Delete(header: Header, name: String, document: Document)
   extends Command(header, 2006) {
 
   /**

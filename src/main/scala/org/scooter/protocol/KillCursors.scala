@@ -31,7 +31,7 @@ object KillCursors {
  * @param header The Header.
  * @param cursors The ids of the cursors to kill.
  */
-sealed case class KillCursors (header: Header, cursors: Seq[Long])
+sealed case class KillCursors(header: Header, cursors: Seq[Long])
   extends Command(header, 2007) {
 
   /**

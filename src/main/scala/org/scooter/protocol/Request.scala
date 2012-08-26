@@ -6,7 +6,7 @@ package org.scooter.protocol
  * @param header The Header.
  * @param code The operation code.
  */
-abstract class Request (header: Header, code: Int)
+abstract class Request(header: Header, code: Int)
   extends Message(header, code) with Encodable {
 
   /**
