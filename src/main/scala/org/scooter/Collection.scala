@@ -71,6 +71,10 @@ class Collection (database: Database, val name: String) {
   /**
    * Insert a single Document into the database.
    *
+   * @example Insert a Document.
+   *  val sid = Document("name" -> "Sid")
+   *  session.users.insert(sid)
+   *
    * @param document The Document to insert.
    */
   def insert(document: Document) = {
@@ -81,6 +85,11 @@ class Collection (database: Database, val name: String) {
 
   /**
    * Insert multiple Documents into the database as a batch.
+   *
+   * @example Insert multiple documents.
+   *  val sid = Document("name" -> "Sid")
+   *  val johnny = Document("name" -> "Johnny")
+   *  session.users.insert(sid, johnny)
    *
    * @param documents The Documents to insert.
    */
