@@ -2,7 +2,7 @@ package org.scooter.protocol
 
 import io.netty.buffer.ByteBuf
 
-import org.scooter.Collection
+import org.scooter.{ Collection, Database }
 import org.scooter.bson.implicits.BsonByteBuf._
 import org.scooter.bson.Document
 
@@ -26,12 +26,13 @@ object Query {
   /**
    * Instantiate a new Query message that is a $cmd.
    *
+   * @param database The database to execute the command on.
    * @param command The command.
    *
    * @return The Query message.
    */
-  def apply(command: Document) = {
-    new Query(Header(0, 0, 2004), "$cmd", command, 0, -1)
+  def apply(database: Database, command: Document) = {
+    new Query(Header(0, 0, 2004), database.commandNamespace, command, 0, -1)
   }
 
   /**

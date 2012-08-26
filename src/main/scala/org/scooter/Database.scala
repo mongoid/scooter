@@ -40,6 +40,15 @@ class Database (val session: Session, val name: String) {
   def collection(name: String) = Collection(this, name)
 
   /**
+   * Get the namespace that commands for this database run on.
+   *
+   * @note This is the database name + .$cmd
+   *
+   * @return The command namespace String.
+   */
+  val commandNamespace = name + ".$cmd"
+
+  /**
    * Execute a command ($cmd) against this database.
    *
    * @example Execute a drop collection command.
@@ -51,7 +60,7 @@ class Database (val session: Session, val name: String) {
    */
   def command(instruction: (String, Writable)*): Reply = {
     session.onPrimary {
-      (node: Node) => node.send(Query(Document(instruction: _*)))
+      (node: Node) => node.send(Query(this, Document(instruction: _*)))
     }
   }
 }
