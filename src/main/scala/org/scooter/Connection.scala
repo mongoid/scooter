@@ -49,7 +49,7 @@ object Connection {
  *
  * @param channel The SocketChannel used in the Connection.
  */
-class Connection private (channel: Channel) {
+class Connection protected[scooter](channel: Channel) {
 
   /**
    * Write the Command to the socket.

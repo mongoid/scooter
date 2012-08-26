@@ -28,7 +28,7 @@ object Database {
  * @param session The Session that contains the Database.
  * @param name The name of the Database.
  */
-class Database private (val session: Session, val name: String) {
+class Database protected[scooter](val session: Session, val name: String) {
 
   /**
    * Get a Collection for the provided name.

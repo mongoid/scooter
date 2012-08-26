@@ -41,7 +41,7 @@ object Criteria {
  * @param collection The Collection the Criteria executes against.
  * @param session The database Session.
  */
-class Criteria private (collection: Collection, selector: Document)
+class Criteria protected[scooter](collection: Collection, selector: Document)
   extends Iterable[Document] {
 
   /**

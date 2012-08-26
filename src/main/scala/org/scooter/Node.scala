@@ -26,7 +26,7 @@ object Node {
  *
  * @param connection The db Connection.
  */
-class Node private (connection: Connection) {
+class Node protected[scooter](connection: Connection) {
 
   /**
    * Send the provided Command to the database.

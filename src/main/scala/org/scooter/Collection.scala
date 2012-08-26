@@ -28,7 +28,7 @@ object Collection {
  * @param database The database the Collection belongs to.
  * @param name The name of the Collection.
  */
-class Collection private (database: Database, val name: String) {
+class Collection protected[scooter](database: Database, val name: String) {
 
   /**
    * Drops this collection.

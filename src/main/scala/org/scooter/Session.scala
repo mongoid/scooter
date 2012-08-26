@@ -30,7 +30,7 @@ object Session {
  *
  * @param hosts A sequence of SocketAddresses.
  */
-class Session private (hosts: Seq[SocketAddress]) extends Dynamic {
+class Session protected[scooter](hosts: Seq[SocketAddress]) extends Dynamic {
 
   /**
    * The current Database the Session is operating with.
