@@ -22,17 +22,17 @@ class DocumentSpec extends Spec {
     }
   }
 
-  "Document#bsonWrite" should {
+  "Document#encode" should {
 
     val buff = buffer(16).order(LITTLE_ENDIAN)
 
     "encodes the string to the buffer" in {
-      documentValue.bsonWrite(buff)
+      documentValue.encode(buff)
       buff.array must beEqualTo(dumpedDocument)
     }
   }
 
-  "Document.bsonRead" should {
+  "Document.decode" should {
 
     "when the document has a single pair" in {
 
@@ -40,7 +40,7 @@ class DocumentSpec extends Spec {
 
       "decode the bytes into a hash map" in {
         buff.writeBytes(dumpedDocument)
-        Document.bsonRead(buff) must beEqualTo(documentValue)
+        Document.decode(buff) must beEqualTo(documentValue)
       }
     }
 
@@ -50,7 +50,7 @@ class DocumentSpec extends Spec {
 
       "decode the bytes into a hash map" in {
         buff.writeBytes(dumpedMultiDocument)
-        Document.bsonRead(buff) must beEqualTo(multiDocumentValue)
+        Document.decode(buff) must beEqualTo(multiDocumentValue)
       }
     }
   }

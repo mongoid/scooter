@@ -47,7 +47,7 @@ object Reply extends Decodable[Reply] {
    */
   private def documents(buffer: ByteBuf) = {
     (1 to buffer.readInt).foldLeft(List[Document]())(
-      (docs, bytes) => docs.:+(Document.bsonRead(buffer))
+      (docs, bytes) => docs.:+(Document.decode(buffer))
     )
   }
 }

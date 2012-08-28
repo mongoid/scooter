@@ -58,7 +58,7 @@ sealed case class Delete(header: Header, name: String, document: Document)
       buffer.writeInt(0) // Placeholder.
       buffer.writeCString(name)
       buffer.writeInt(0) // Bit vector.
-      document.bsonWrite(buffer)
+      document.encode(buffer)
     }
   }
 }

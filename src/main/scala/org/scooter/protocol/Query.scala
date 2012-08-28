@@ -86,7 +86,7 @@ sealed case class Query(
       buffer.writeCString(name)
       buffer.writeInt(skip)
       buffer.writeInt(limit)
-      selector.bsonWrite(buffer)
+      selector.encode(buffer)
     }
   }
 }

@@ -4,6 +4,7 @@ import io.netty.buffer.ByteBuf
 
 import org.scooter.bson.implicits.BsonByteBuf._
 import org.scooter.bson.Serialization._
+import org.scooter.codec.{ Decodable, Encodable }
 import org.scooter.functional.Utilities._
 
 import scala.collection.mutable.HashMap
@@ -11,7 +12,7 @@ import scala.collection.mutable.HashMap
 /**
  * Companion object for a bson Document.
  */
-object Document {
+object Document extends Decodable[Document] with Readable {
 
   /**
    * Instantiate a new document from the provided pairs.
@@ -27,13 +28,35 @@ object Document {
   }
 
   /**
-   * Loads a Document from the buffer.
+   * Read the embedded document from the buffer and set it with the key
+   * int the provided Document.
+   *
+   * @param buffer The ByteBuf.
+   * @param doc The document to put the embedded document in.
+   */
+  def bsonRead(buffer: ByteBuf, doc: Document) = {
+    doc(buffer.readCString) = readDocument(buffer)
+  }
+
+  /**
+   * Decode the Document from the ByteBuf.
+   *
+   * @param buffer The ByteBuf to decode.
+   *
+   * @return The decoded Document.
+   */
+  def decode(buffer: ByteBuf) = {
+    readDocument(buffer)
+  }
+
+  /**
+   * Reads a Document from the buffer.
    *
    * @param buffer The ByteBuf.
    *
    * @return The document.
    */
-  def bsonRead(buffer: ByteBuf) = {
+  private def readDocument(buffer: ByteBuf) = {
     (new Document).tap {
       doc => {
         val length = buffer.readInt
@@ -69,11 +92,30 @@ object Document {
  *
  * @param document The Hash to wrap.
  */
-class Document extends HashMap[String, Writable] {
+class Document extends HashMap[String, Writable] with Encodable with Writable {
 
   /**
-   * Dump the document to the buffer, and yield to the provided
-   * function.
+   * Write the embedded document to the buffer for the provided key.
+   *
+   * @note The order in which bytes must be placed into the buffer:
+   *  - The document type.
+   *  - The bytes for the documents's key.
+   *  - A null byte.
+   *  - The length of the document in bytes.
+   *  - The document.
+   *  - A null byte.
+   *  - The length of the entire message.
+   *
+   * @param buffer The ByteBuf to write to.
+   */
+  def bsonWrite(buffer: ByteBuf, key: String) = {
+    buffer.writeByte(Bytes.Embedded)
+    buffer.writeCString(key)
+    writeDocument(buffer)
+  }
+
+  /**
+   * Encode the document.
    *
    * @note The order in which bytes must be placed into the buffer:
    *  - The length of the document in bytes.
@@ -83,7 +125,22 @@ class Document extends HashMap[String, Writable] {
    *
    * @param buffer The ByteBuf to write to.
    */
-  def bsonWrite(buffer: ByteBuf) = {
+  def encode(buffer: ByteBuf) = {
+    writeDocument(buffer)
+  }
+
+  /**
+   * Write the document to the buffer.
+   *
+   * @note The order in which bytes must be placed into the buffer:
+   *  - The length of the document in bytes.
+   *  - The document.
+   *  - A null byte.
+   *  - The length of the entire message.
+   *
+   * @param buffer The ByteBuf to write to.
+   */
+  private def writeDocument(buffer: ByteBuf) = {
     val start = buffer.writerIndex
     buffer.writeInt(0)
     foreach(pair => pair._2.bsonWrite(buffer, pair._1))
