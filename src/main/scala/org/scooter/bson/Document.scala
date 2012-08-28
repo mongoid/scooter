@@ -34,12 +34,12 @@ object Document {
    * @return The document.
    */
   def bsonRead(buffer: ByteBuf) = {
-    new Document tap(
+    (new Document).tap {
       doc => {
         val length = buffer.readInt
         loadPair(buffer, buffer.readByte, doc)
       }
-    )
+    }
   }
 
   /**

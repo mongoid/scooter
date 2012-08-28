@@ -8,7 +8,7 @@ import org.scooter.bson.implicits.BsonByteBuf._
 /**
  * Companion object for Reply.
  */
-object Reply extends Decodable {
+object Reply extends Decodable[Reply] {
 
   /**
    * Deencode the buffer into a Reply object.
