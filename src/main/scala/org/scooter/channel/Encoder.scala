@@ -5,7 +5,7 @@ import io.netty.buffer.Unpooled._
 import io.netty.channel.{ ChannelHandlerContext => Context }
 import io.netty.handler.codec.MessageToByteEncoder
 
-import org.scooter.protocol.Encodable
+import org.scooter.codec.Encodable
 
 /**
  * Encodes Encodable messages to the output ByteBuf.

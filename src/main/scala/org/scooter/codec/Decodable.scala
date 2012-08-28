@@ -1,4 +1,4 @@
-package org.scooter.protocol
+package org.scooter.codec
 
 import io.netty.buffer.ByteBuf
 

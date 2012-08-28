@@ -6,6 +6,7 @@ import java.util.Random
 import io.netty.buffer.ByteBuf
 
 import org.scooter.bson.implicits.BsonByteBuf._
+import org.scooter.codec.Encodable
 
 /**
  * Companion object to the Header class.

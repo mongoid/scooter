@@ -4,6 +4,7 @@ import io.netty.buffer.ByteBuf
 
 import org.scooter.bson.Document
 import org.scooter.bson.implicits.BsonByteBuf._
+import org.scooter.codec.Decodable
 
 /**
  * Companion object for Reply.

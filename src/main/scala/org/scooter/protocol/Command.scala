@@ -1,5 +1,7 @@
 package org.scooter.protocol
 
+import org.scooter.codec.Encodable
+
 /**
  * Represents a message that is sent to the database that does not get
  * a reply back.
