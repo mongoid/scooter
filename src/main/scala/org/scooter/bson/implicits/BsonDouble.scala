@@ -27,7 +27,7 @@ object BsonDouble extends Readable {
  *
  * @param target The Double that is wrapped.
  */
-case class BsonDouble(target: Double) extends Writable {
+case class BsonDouble(target: Double) extends BsonValue(target) {
 
   /**
    * Dump the double to the buffer in it's proper BSON format.

@@ -27,7 +27,7 @@ object BsonString extends Readable {
  *
  * @param target The String that is wrapped.
  */
-case class BsonString(target: String) extends Writable {
+case class BsonString(target: String) extends BsonValue(target) {
 
   /**
    * Dump the string to the buffer in it's proper BSON format.

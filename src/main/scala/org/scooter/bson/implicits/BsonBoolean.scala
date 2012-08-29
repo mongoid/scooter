@@ -27,7 +27,7 @@ object BsonBoolean extends Readable {
  *
  * @param target The Boolean that is wrapped.
  */
-case class BsonBoolean(target: Boolean) extends Writable {
+case class BsonBoolean(target: Boolean) extends BsonValue(target) {
 
   /**
    * Dump the boolean to the buffer in it's proper BSON format.

@@ -27,7 +27,7 @@ object BsonInt extends Readable {
  *
  * @param target The Int that is wrapped.
  */
-case class BsonInt(target: Int) extends Writable {
+case class BsonInt(target: Int) extends BsonValue(target) {
 
   /**
    * Dump the int to the buffer in it's proper BSON format.
