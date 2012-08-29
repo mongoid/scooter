@@ -57,9 +57,6 @@ case class BsonByteBuf(target: ByteBuf) {
   /**
    * Read the document from the buffer.
    *
-   * @param buffer The ByteBuf.
-   * @param doc The document to put the embedded document in.
-   *
    * @return The Document.
    */
   def readDocument = {
