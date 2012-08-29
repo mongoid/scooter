@@ -54,6 +54,14 @@ case class BsonByteBuf(target: ByteBuf) {
    */
   def readCString = readStringBytes(target.bytesBefore(NUL))
 
+  /**
+   * Read the document from the buffer.
+   *
+   * @param buffer The ByteBuf.
+   * @param doc The document to put the embedded document in.
+   *
+   * @return The Document.
+   */
   def readDocument = {
     (new Document).tap {
       doc => {

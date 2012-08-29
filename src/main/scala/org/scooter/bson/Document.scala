@@ -42,6 +42,8 @@ object Document extends Decodable[Document] with Readable {
    *
    * @param buffer The ByteBuf.
    * @param doc The document to put the embedded document in.
+   *
+   * @return Unit.
    */
   def read(buffer: ByteBuf, doc: Document) = {
     doc(buffer.readCString) = buffer.readDocument
