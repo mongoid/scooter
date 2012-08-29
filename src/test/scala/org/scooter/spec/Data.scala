@@ -213,4 +213,23 @@ trait Data {
     dumpedUpdateHeader ++ dumpedPlaceholder ++ dumpedCollectionName ++
       dumpedFlags ++ dumpedDocument ++ dumpedUpdateDoc
   }
+
+  def getMoreHeaderValue = Header(0, 0, 0, 2005)
+
+  def dumpedGetMoreHeader = {
+    Array[Byte](51, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -43, 7, 0, 0)
+  }
+
+  def dumpedGetMoreLimit = {
+    Array[Byte](100, 0, 0, 0)
+  }
+
+  def dumpedGetMoreCursor = {
+    Array[Byte](123, 0, 0, 0, 0, 0, 0, 0)
+  }
+
+  def dumpedGetMore = {
+    dumpedGetMoreHeader ++ dumpedPlaceholder ++ dumpedCollectionName ++
+      dumpedGetMoreLimit ++ dumpedGetMoreCursor
+  }
 }
