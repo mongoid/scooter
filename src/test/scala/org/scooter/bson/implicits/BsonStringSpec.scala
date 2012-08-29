@@ -30,14 +30,14 @@ class BsonStringSpec extends Spec {
     }
   }
 
-  "BsonString.bsonRead" should {
+  "BsonString.read" should {
 
     val buff = buffer(11).order(LITTLE_ENDIAN)
     var doc = new Document
 
     "load the key and value into the hash" in {
       buff.writeBytes(loadedString)
-      BsonString.bsonRead(buff, doc)
+      BsonString.read(buff, doc)
       doc must beEqualTo(Document(field -> stringValue))
     }
   }

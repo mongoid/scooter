@@ -30,14 +30,14 @@ class BsonLongSpec extends Spec {
     }
   }
 
-  "BsonLong.bsonRead" should {
+  "BsonLong.read" should {
 
     val buff = buffer(12).order(LITTLE_ENDIAN)
     val doc = new Document
 
     "adds the key and the long to the doc" in {
       buff.writeBytes(loadedLong)
-      BsonLong.bsonRead(buff, doc)
+      BsonLong.read(buff, doc)
       doc must beEqualTo(Document(field -> longValue))
     }
   }

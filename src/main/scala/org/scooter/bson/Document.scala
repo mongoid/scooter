@@ -28,17 +28,6 @@ object Document extends Decodable[Document] with Readable {
   }
 
   /**
-   * Read the embedded document from the buffer and set it with the key
-   * int the provided Document.
-   *
-   * @param buffer The ByteBuf.
-   * @param doc The document to put the embedded document in.
-   */
-  def bsonRead(buffer: ByteBuf, doc: Document) = {
-    doc(buffer.readCString) = readDocument(buffer)
-  }
-
-  /**
    * Decode the Document from the ByteBuf.
    *
    * @param buffer The ByteBuf to decode.
@@ -47,6 +36,17 @@ object Document extends Decodable[Document] with Readable {
    */
   def decode(buffer: ByteBuf) = {
     readDocument(buffer)
+  }
+
+  /**
+   * Read the embedded document from the buffer and set it with the key
+   * int the provided Document.
+   *
+   * @param buffer The ByteBuf.
+   * @param doc The document to put the embedded document in.
+   */
+  def read(buffer: ByteBuf, doc: Document) = {
+    doc(buffer.readCString) = readDocument(buffer)
   }
 
   /**
@@ -80,7 +80,7 @@ object Document extends Decodable[Document] with Readable {
    */
   private def loadPair(buffer: ByteBuf, byte: Byte, doc: Document): Unit = {
     if (byte != Bytes.Null) {
-      Bytes.getCompanion(byte).bsonRead(buffer, doc)
+      Bytes.getCompanion(byte).read(buffer, doc)
       loadPair(buffer, buffer.readByte, doc)
     }
   }
@@ -93,6 +93,19 @@ object Document extends Decodable[Document] with Readable {
  * @param document The Hash to wrap.
  */
 class Document extends HashMap[String, Writable] with Encodable with Writable {
+
+  /**
+   * Encode the document.
+   *
+   * @note The order in which bytes must be placed into the buffer:
+   *  - The length of the document in bytes.
+   *  - The document.
+   *  - A null byte.
+   *  - The length of the entire message.
+   *
+   * @param buffer The ByteBuf to write to.
+   */
+  def encode(buffer: ByteBuf) = buffer.writeDocument(this)
 
   /**
    * Write the embedded document to the buffer for the provided key.
@@ -113,17 +126,4 @@ class Document extends HashMap[String, Writable] with Encodable with Writable {
     buffer.writeCString(key)
     buffer.writeDocument(this)
   }
-
-  /**
-   * Encode the document.
-   *
-   * @note The order in which bytes must be placed into the buffer:
-   *  - The length of the document in bytes.
-   *  - The document.
-   *  - A null byte.
-   *  - The length of the entire message.
-   *
-   * @param buffer The ByteBuf to write to.
-   */
-  def encode(buffer: ByteBuf) = buffer.writeDocument(this)
 }

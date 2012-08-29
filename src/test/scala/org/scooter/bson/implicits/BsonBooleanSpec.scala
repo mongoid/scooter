@@ -57,7 +57,7 @@ class BsonBooleanSpec extends Spec {
     }
   }
 
-  "BsonBoolean.bsonRead" should {
+  "BsonBoolean.read" should {
 
     "when the boolean is true" in {
 
@@ -66,7 +66,7 @@ class BsonBooleanSpec extends Spec {
 
       "add the boolean true and key to the map" in {
         buff.writeBytes(loadedTrue)
-        BsonBoolean.bsonRead(buff, doc)
+        BsonBoolean.read(buff, doc)
         doc must beEqualTo(Document(field -> true))
       }
     }
@@ -78,7 +78,7 @@ class BsonBooleanSpec extends Spec {
 
       "add the boolean false and key to the map" in {
         buff.writeBytes(loadedFalse)
-        BsonBoolean.bsonRead(buff, doc)
+        BsonBoolean.read(buff, doc)
         doc must beEqualTo(Document(field -> false))
       }
     }

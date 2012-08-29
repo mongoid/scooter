@@ -11,5 +11,5 @@ trait Readable {
    * @param buffer The buffer being read from.
    * @param doc The document to write to.
    */
-  def bsonRead(buffer: ByteBuf, doc: Document) : Unit
+  def read(buffer: ByteBuf, doc: Document) : Unit
 }

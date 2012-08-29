@@ -30,14 +30,14 @@ class BsonIntSpec extends Spec {
     }
   }
 
-  "BsonInt.bsonRead" should {
+  "BsonInt.read" should {
 
     val buff = buffer(8).order(LITTLE_ENDIAN)
     val doc = new Document
 
     "adds the key and the int to the doc" in {
       buff.writeBytes(loadedInt)
-      BsonInt.bsonRead(buff, doc)
+      BsonInt.read(buff, doc)
       doc must beEqualTo(Document(field -> intValue))
     }
   }

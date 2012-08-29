@@ -30,14 +30,14 @@ class BsonDoubleSpec extends Spec {
     }
   }
 
-  "BsonDouble.bsonRead" should {
+  "BsonDouble.read" should {
 
     val buff = buffer(12).order(LITTLE_ENDIAN)
     val doc = new Document
 
     "add the key and double to the map" in {
       buff.writeBytes(loadedDouble)
-      BsonDouble.bsonRead(buff, doc)
+      BsonDouble.read(buff, doc)
       doc must beEqualTo(Document(field -> doubleValue))
     }
   }

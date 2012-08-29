@@ -17,7 +17,7 @@ object BsonInt extends Readable {
    * @param buffer The ByteBuf.
    * @param doc The document to place in.
    */
-  def bsonRead(buffer: ByteBuf, doc: Document) = {
+  def read(buffer: ByteBuf, doc: Document) = {
     doc(buffer.readCString) = buffer.readInt
   }
 }
