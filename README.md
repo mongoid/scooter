@@ -18,6 +18,11 @@ What is it not?
 - A DSL for creating MongoDB queries outside of the normal hash-syntax.
 - An Object Document Mapper (ODM)
 
+Dependencies
+------------
+- A JVM higher than version 7 (OpenJDK or Oracle)
+- Netty 4
+
 Road Map
 --------
 Since Scooter has a dependency on Scala 2.10 and Netty 4, those must first
