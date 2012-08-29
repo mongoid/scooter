@@ -4,18 +4,24 @@ Scooter [![Build Status](https://secure.travis-ci.org/mongoid/scooter.png?branch
 Scooter is an asynchronous (non-blocking) MongoDB driver for the JVM,
 written in Scala.
 
+What is it?
+-----------
+Outside of being an async driver, Scooter is also an implementation of
+the MongoDB Wire Protocol and the BSON Specification that is designed in
+proper OO fashion and is performant. Scooter, unlike other JVM drivers
+does not wrap the MongoDB Java driver, and thusly has a different API and
+feature set. The goal is to be the easiest to use and fastest MongoDB
+driver on the JVM.
+
+What is it not?
+---------------
+- A DSL for creating MongoDB queries outside of the normal hash-syntax.
+- An Object Document Mapper (ODM)
+
 Road Map
 --------
-
-This is a work in progress, with no expectations around release date
-at this point. The following is where we'd like to be before release.
-
-- Support for the same feature set as Moped with a similar API that
-  is as clean as the Ruby version but Scala-esque at the same time. This
-  includes support for all bson types and full replica set support with
-  failover.
-- Minimal dependencies, most likely only Netty.
-- The fastest MongoDB driver on the JVM.
+Since Scooter has a dependency on Scala 2.10 and Netty 4, those must first
+be released before this goes to production. Our hope is late 2012/early 2013.
 
 License
 -------
