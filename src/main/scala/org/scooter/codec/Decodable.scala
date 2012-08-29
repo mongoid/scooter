@@ -3,7 +3,8 @@ package org.scooter.codec
 import io.netty.buffer.ByteBuf
 
 /**
- * Represents objects that can be decoded from bytes into Reply objects.
+ * Represents objects that can be decoded from bytes into objects of the
+ * parameterized type.
  */
 trait Decodable[+T] {
 
