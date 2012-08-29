@@ -111,7 +111,7 @@ class Document extends HashMap[String, Writable] with Encodable with Writable {
   def bsonWrite(buffer: ByteBuf, key: String) = {
     buffer.writeByte(Bytes.Embedded)
     buffer.writeCString(key)
-    writeDocument(buffer)
+    buffer.writeDocument(this)
   }
 
   /**
@@ -125,26 +125,5 @@ class Document extends HashMap[String, Writable] with Encodable with Writable {
    *
    * @param buffer The ByteBuf to write to.
    */
-  def encode(buffer: ByteBuf) = {
-    writeDocument(buffer)
-  }
-
-  /**
-   * Write the document to the buffer.
-   *
-   * @note The order in which bytes must be placed into the buffer:
-   *  - The length of the document in bytes.
-   *  - The document.
-   *  - A null byte.
-   *  - The length of the entire message.
-   *
-   * @param buffer The ByteBuf to write to.
-   */
-  private def writeDocument(buffer: ByteBuf) = {
-    val start = buffer.writerIndex
-    buffer.writeInt(0)
-    foreach(pair => pair._2.bsonWrite(buffer, pair._1))
-    buffer.writeZero(1)
-    buffer.setInt(start, buffer.writerIndex - start)
-  }
+  def encode(buffer: ByteBuf) = buffer.writeDocument(this)
 }

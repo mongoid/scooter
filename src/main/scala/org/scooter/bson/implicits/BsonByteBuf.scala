@@ -3,7 +3,7 @@ package org.scooter.bson.implicits
 import io.netty.buffer.ByteBuf
 import io.netty.buffer.ByteBufIndexFinder.NUL
 
-import org.scooter.bson.ObjectId
+import org.scooter.bson.{ Document, ObjectId }
 import org.scooter.protocol.Header
 
 import scala.language.implicitConversions
@@ -120,6 +120,25 @@ case class BsonByteBuf(target: ByteBuf) {
   def writeCString(string: String) = {
     target.writeBytes(string.getBytes)
     target.writeZero(1)
+  }
+
+  /**
+   * Write the document to the buffer.
+   *
+   * @note The order in which bytes must be placed into the buffer:
+   *  - The length of the document in bytes.
+   *  - The document.
+   *  - A null byte.
+   *  - The length of the entire message.
+   *
+   * @param document The Document to write.
+   */
+  def writeDocument(document: Document) = {
+    val start = target.writerIndex
+    target.writeInt(0)
+    document.foreach(pair => pair._2.bsonWrite(target, pair._1))
+    target.writeZero(1)
+    target.setInt(start, target.writerIndex - start)
   }
 
   /**
