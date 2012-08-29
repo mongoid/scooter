@@ -189,4 +189,28 @@ trait Data {
     dumpedKillHeader ++ dumpedKillPlaceholder ++
       dumpedKillCount ++ dumpedKillValues
   }
+
+  val updateHeaderValue = Header(0, 0, 0, 2001)
+
+  val selectorValue = Document("hi" -> "ya")
+
+  val updateValue = Document("$set" -> Document("hi" -> "yo"))
+
+  def dumpedUpdateHeader = {
+    Array[Byte](86, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -47, 7, 0, 0)
+  }
+
+  def dumpedUpdatePlaceholder = {
+    Array[Byte](0, 0, 0, 0)
+  }
+
+  def dumpedUpdateDoc = {
+    Array[Byte](27, 0, 0, 0, 3, 36, 115, 101, 116, 0, 16, 0, 0, 0) ++
+      Array[Byte](2, 104, 105, 0, 3, 0, 0, 0, 121, 111, 0, 0, 0)
+  }
+
+  def dumpedUpdate = {
+    dumpedUpdateHeader ++ dumpedPlaceholder ++ dumpedCollectionName ++
+      dumpedFlags ++ dumpedDocument ++ dumpedUpdateDoc
+  }
 }
