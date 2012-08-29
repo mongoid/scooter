@@ -9,23 +9,23 @@ import org.scooter.spec.Spec
 
 class BsonLongSpec extends Spec {
 
-  "BsonLong#bsonWrite" should {
+  "BsonLong#write" should {
 
     val buff = buffer(12).order(LITTLE_ENDIAN)
     val wrapper = new BsonLong(longValue)
 
     "encode the long to the buffer" in {
-      wrapper.bsonWrite(buff, field)
+      wrapper.write(buff, field)
       buff.array must beEqualTo(dumpedLong)
     }
   }
 
-  "Long#bsonWrite" should {
+  "Long#write" should {
 
     val buff = buffer(12).order(LITTLE_ENDIAN)
 
     "encode the long to the buffer" in {
-      longValue.bsonWrite(buff, field)
+      longValue.write(buff, field)
       buff.array must beEqualTo(dumpedLong)
     }
   }

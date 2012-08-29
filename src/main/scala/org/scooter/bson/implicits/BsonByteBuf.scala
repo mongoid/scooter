@@ -136,7 +136,7 @@ case class BsonByteBuf(target: ByteBuf) {
   def writeDocument(document: Document) = {
     val start = target.writerIndex
     target.writeInt(0)
-    document.foreach(pair => pair._2.bsonWrite(target, pair._1))
+    document.foreach(pair => pair._2.write(target, pair._1))
     target.writeZero(1)
     target.setInt(start, target.writerIndex - start)
   }

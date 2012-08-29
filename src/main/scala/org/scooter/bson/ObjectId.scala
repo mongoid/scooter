@@ -91,5 +91,5 @@ case class ObjectId(time: Int, machine: Int, counter: Int) extends Writable {
    * @param buffer The buffer being written to.
    * @param key The String key to this instance value.
    */
-  def bsonWrite(buffer: ByteBuf, key: String) = {}
+  def write(buffer: ByteBuf, key: String) = {}
 }

@@ -9,23 +9,23 @@ import org.scooter.spec.Spec
 
 class BsonIntSpec extends Spec {
 
-  "BsonInt#bsonWrite" should {
+  "BsonInt#write" should {
 
     val buff = buffer(8).order(LITTLE_ENDIAN)
     val wrapper = new BsonInt(intValue)
 
     "encode the int to the buffer" in {
-      wrapper.bsonWrite(buff, field)
+      wrapper.write(buff, field)
       buff.array must beEqualTo(dumpedInt)
     }
   }
 
-  "Int#bsonWrite" should {
+  "Int#write" should {
 
     val buff = buffer(8).order(LITTLE_ENDIAN)
 
     "encode the int to the buffer" in {
-      intValue.bsonWrite(buff, field)
+      intValue.write(buff, field)
       buff.array must beEqualTo(dumpedInt)
     }
   }

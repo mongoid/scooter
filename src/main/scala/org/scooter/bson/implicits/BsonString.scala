@@ -45,7 +45,7 @@ case class BsonString(target: String) extends BsonValue(target) {
    * @param buffer The buffer being written to.
    * @param key The string key to this instance string value.
    */
-  def bsonWrite(buffer: ByteBuf, key: String) = {
+  def write(buffer: ByteBuf, key: String) = {
     buffer.writeByte(Bytes.String)
     buffer.writeCString(key)
     buffer.writeString(target)

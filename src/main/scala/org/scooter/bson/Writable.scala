@@ -10,5 +10,5 @@ trait Writable {
    * @param buffer The buffer being written to.
    * @param key The string key to this instance string value.
    */
-  def bsonWrite(buffer: ByteBuf, key: String) : Unit
+  def write(buffer: ByteBuf, key: String) : Unit
 }

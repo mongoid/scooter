@@ -108,7 +108,7 @@ class Document extends HashMap[String, Writable] with Encodable with Writable {
    *
    * @param buffer The ByteBuf to write to.
    */
-  def bsonWrite(buffer: ByteBuf, key: String) = {
+  def write(buffer: ByteBuf, key: String) = {
     buffer.writeByte(Bytes.Embedded)
     buffer.writeCString(key)
     buffer.writeDocument(this)

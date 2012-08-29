@@ -43,7 +43,7 @@ case class BsonDouble(target: Double) extends BsonValue(target) {
    * @param buffer The buffer being written to.
    * @param key The String key to this instance double value.
    */
-  def bsonWrite(buffer: ByteBuf, key: String) = {
+  def write(buffer: ByteBuf, key: String) = {
     buffer.writeByte(Bytes.Double)
     buffer.writeCString(key)
     buffer.writeDouble(target)

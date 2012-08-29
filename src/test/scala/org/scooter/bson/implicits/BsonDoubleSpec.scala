@@ -9,23 +9,23 @@ import org.scooter.spec.Spec
 
 class BsonDoubleSpec extends Spec {
 
-  "BsonDouble#bsonWrite" should {
+  "BsonDouble#write" should {
 
     val buff = buffer(12).order(LITTLE_ENDIAN)
     val wrapper = new BsonDouble(doubleValue)
 
     "encode the double to the buffer" in {
-      wrapper.bsonWrite(buff, field)
+      wrapper.write(buff, field)
       buff.array must beEqualTo(dumpedDouble)
     }
   }
 
-  "Double#bsonWrite" should {
+  "Double#write" should {
 
     val buff = buffer(12).order(LITTLE_ENDIAN)
 
     "encode the double to the buffer" in {
-      doubleValue.bsonWrite(buff, field)
+      doubleValue.write(buff, field)
       buff.array must beEqualTo(dumpedDouble)
     }
   }

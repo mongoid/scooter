@@ -43,7 +43,7 @@ case class BsonBoolean(target: Boolean) extends BsonValue(target) {
    * @param buffer The buffer being written to.
    * @param key The String key to this instance boolean value.
    */
-  def bsonWrite(buffer: ByteBuf, key: String) = {
+  def write(buffer: ByteBuf, key: String) = {
     buffer.writeByte(Bytes.Boolean)
     buffer.writeCString(key)
     buffer.writeByte(if (target) 0x01 else 0x00)

@@ -43,7 +43,7 @@ case class BsonLong(target: Long) extends BsonValue(target) {
    * @param buffer The buffer being written to.
    * @param key The String key to this instance int value.
    */
-  def bsonWrite(buffer: ByteBuf, key: String) = {
+  def write(buffer: ByteBuf, key: String) = {
     buffer.writeByte(Bytes.Int64)
     buffer.writeCString(key)
     buffer.writeLong(target)

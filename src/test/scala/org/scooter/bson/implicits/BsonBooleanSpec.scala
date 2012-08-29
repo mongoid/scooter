@@ -9,7 +9,7 @@ import org.scooter.spec.Spec
 
 class BsonBooleanSpec extends Spec {
 
-  "BsonBoolean#bsonWrite" should {
+  "BsonBoolean#write" should {
 
     "when the boolean is true" in {
 
@@ -17,7 +17,7 @@ class BsonBooleanSpec extends Spec {
       val wrapper = new BsonBoolean(true)
 
       "encode the boolean to the buffer" in {
-        wrapper.bsonWrite(buff, field)
+        wrapper.write(buff, field)
         buff.array must beEqualTo(dumpedTrue)
       }
     }
@@ -28,20 +28,20 @@ class BsonBooleanSpec extends Spec {
       val wrapper = new BsonBoolean(false)
 
       "encode the boolean to the buffer" in {
-        wrapper.bsonWrite(buff, field)
+        wrapper.write(buff, field)
         buff.array must beEqualTo(dumpedFalse)
       }
     }
   }
 
-  "Boolean#bsonWrite" should {
+  "Boolean#write" should {
 
     "when the boolean is true" in {
 
       val buff = buffer(5).order(LITTLE_ENDIAN)
 
       "encode the boolean to the buffer" in {
-        true.bsonWrite(buff, field)
+        true.write(buff, field)
         buff.array must beEqualTo(dumpedTrue)
       }
     }
@@ -51,7 +51,7 @@ class BsonBooleanSpec extends Spec {
       val buff = buffer(5).order(LITTLE_ENDIAN)
 
       "encode the boolean to the buffer" in {
-        false.bsonWrite(buff, field)
+        false.write(buff, field)
         buff.array must beEqualTo(dumpedFalse)
       }
     }
