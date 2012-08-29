@@ -28,7 +28,7 @@ object Collection {
  * @param database The database the Collection belongs to.
  * @param name The name of the Collection.
  */
-class Collection (database: Database, val name: String) {
+class Collection(database: Database, val name: String) {
 
   /**
    * Drops this collection.

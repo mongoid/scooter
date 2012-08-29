@@ -71,7 +71,7 @@ object Criteria {
  * @param collection The Collection the Criteria executes against.
  * @param session The database Session.
  */
-class Criteria (
+class Criteria(
   collection: Collection, selector: Document, skip: Int, limit: Int
 ) extends Iterable[Document] {
 
