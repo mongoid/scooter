@@ -34,9 +34,7 @@ object Document extends Decodable[Document] with Readable {
    *
    * @return The decoded Document.
    */
-  def decode(buffer: ByteBuf) = {
-    readDocument(buffer)
-  }
+  def decode(buffer: ByteBuf) = buffer.readDocument
 
   /**
    * Read the embedded document from the buffer and set it with the key
@@ -46,43 +44,7 @@ object Document extends Decodable[Document] with Readable {
    * @param doc The document to put the embedded document in.
    */
   def read(buffer: ByteBuf, doc: Document) = {
-    doc(buffer.readCString) = readDocument(buffer)
-  }
-
-  /**
-   * Reads a Document from the buffer.
-   *
-   * @param buffer The ByteBuf.
-   *
-   * @return The document.
-   */
-  private def readDocument(buffer: ByteBuf) = {
-    (new Document).tap {
-      doc => {
-        val length = buffer.readInt
-        loadPair(buffer, buffer.readByte, doc)
-      }
-    }
-  }
-
-  /**
-   * Recursive function to load all the key/value pairs that
-   * are in the buffer.
-   *
-   * @note This function operates by:
-   *   - Look at the provided byte to get the type of object.
-   *   - Get the Readable for that type, and load the bytes.
-   *   - Read the next byte.
-   *
-   * @param buffer The ByteBuf to read from.
-   * @param byte The Byte representing the value type or zero.
-   * @param doc The Document being written into.
-   */
-  private def loadPair(buffer: ByteBuf, byte: Byte, doc: Document): Unit = {
-    if (byte != Bytes.Null) {
-      Bytes.getCompanion(byte).read(buffer, doc)
-      loadPair(buffer, buffer.readByte, doc)
-    }
+    doc(buffer.readCString) = buffer.readDocument
   }
 }
 

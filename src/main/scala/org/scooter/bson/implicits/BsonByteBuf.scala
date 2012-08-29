@@ -3,7 +3,8 @@ package org.scooter.bson.implicits
 import io.netty.buffer.ByteBuf
 import io.netty.buffer.ByteBufIndexFinder.NUL
 
-import org.scooter.bson.{ Document, ObjectId }
+import org.scooter.bson.{ Bytes, Document, ObjectId }
+import org.scooter.functional.Utilities._
 import org.scooter.protocol.Header
 
 import scala.language.implicitConversions
@@ -52,6 +53,15 @@ case class BsonByteBuf(target: ByteBuf) {
    * @return The String.
    */
   def readCString = readStringBytes(target.bytesBefore(NUL))
+
+  def readDocument = {
+    (new Document).tap {
+      doc => {
+        val length = target.readInt
+        readPair(target.readByte, doc)
+      }
+    }
+  }
 
   /**
    * Read a message frame from the buffer.
@@ -185,6 +195,26 @@ case class BsonByteBuf(target: ByteBuf) {
    * @return If the buffer is not readable.
    */
   private def notReadable = lengthNotReadable || frameNotReadable
+
+  /**
+   * Recursive function to load all the key/value pairs that
+   * are in the buffer.
+   *
+   * @note This function operates by:
+   *   - Look at the provided byte to get the type of object.
+   *   - Get the Readable for that type, and load the bytes.
+   *   - Read the next byte.
+   *
+   * @param buffer The ByteBuf to read from.
+   * @param byte The Byte representing the value type or zero.
+   * @param doc The Document being written into.
+   */
+  private def readPair(byte: Byte, doc: Document): Unit = {
+    if (byte != Bytes.Null) {
+      Bytes.getCompanion(byte).read(target, doc)
+      readPair(target.readByte, doc)
+    }
+  }
 
   /**
    * Read the bytes for a String of the specified length plus the trailing
