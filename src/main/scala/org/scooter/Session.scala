@@ -37,7 +37,7 @@ class Session(hosts: Seq[SocketAddress]) extends Dynamic {
    *
    * @return The current Database.
    */
-  var currentDatabase: Database = null;
+  var currentDatabase: Database = null
 
   /**
    * Use of Scala's Dyanmic invokation in order to simulate the same
