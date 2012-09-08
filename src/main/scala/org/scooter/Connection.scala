@@ -79,7 +79,10 @@ class Connection(bootstrap: Bootstrap) {
    * Shutdown the Connection - will perform all the necessary Netty magic
    * to terminate all connections and threads.
    */
-  def shutdown = bootstrap.shutdown
+  def shutdown = {
+    channel.disconnect.sync
+    bootstrap.shutdown
+  }
 
   /**
    * Get the channel from the bootstrap.
