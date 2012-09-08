@@ -45,4 +45,9 @@ class Node(connection: Connection) {
   def send(request: Request) = {
     connection.send(request)
   }
+
+  /**
+   * Shutdown the connection to the Node.
+   */
+  def shutdown = connection.shutdown
 }

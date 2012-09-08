@@ -57,6 +57,11 @@ class Cluster(nodes: Seq[Node]) {
   }
 
   /**
+   * Shutdown all nodes in the Session.
+   */
+  def shutdown = nodes.foreach(node => node.shutdown)
+
+  /**
    * Get the primary node.
    *
    * @return The primary Node.

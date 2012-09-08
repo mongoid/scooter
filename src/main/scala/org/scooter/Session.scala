@@ -86,6 +86,11 @@ class Session(hosts: Seq[SocketAddress]) extends Dynamic {
   }
 
   /**
+   * Shutdown all nodes in the Session.
+   */
+  def shutdown = cluster.shutdown
+
+  /**
    * Get the cluster of nodes for this session.
    *
    * @return The session's Cluster.

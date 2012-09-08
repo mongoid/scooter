@@ -41,6 +41,6 @@ class ConnectionSpec extends Spec {
   trait scope extends Scope {
 
     val address = new InetSocketAddress("127.0.0.1", 27017)
-    val connection = Connection(address)
+    // val connection = Connection(address)
   }
 }

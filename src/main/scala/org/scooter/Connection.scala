@@ -21,9 +21,7 @@ object Connection {
    *
    * @return The new Connection.
    */
-  def apply(address: SocketAddress) = {
-    new Connection(configure(address).connect.sync.channel)
-  }
+  def apply(address: SocketAddress) = new Connection(configure(address))
 
   /**
    * Configure the connection via Netty bootstrap.
@@ -47,9 +45,9 @@ object Connection {
  * The Connection represents a socket connection from the driver to the
  * database server.
  *
- * @param channel The SocketChannel used in the Connection.
+ * @param boostrap The Bootstrap used for the connection.
  */
-class Connection(channel: Channel) {
+class Connection(bootstrap: Bootstrap) {
 
   /**
    * Write the Command to the socket.
@@ -76,6 +74,19 @@ class Connection(channel: Channel) {
     channel.write(request)
     handler.reply(request.id)
   }
+
+  /**
+   * Shutdown the Connection - will perform all the necessary Netty magic
+   * to terminate all connections and threads.
+   */
+  def shutdown = bootstrap.shutdown
+
+  /**
+   * Get the channel from the bootstrap.
+   *
+   * @return The Channel.
+   */
+  private val channel = bootstrap.connect.sync.channel
 
   /**
    * Get the scooter io handler, the last object in the pipeline.
