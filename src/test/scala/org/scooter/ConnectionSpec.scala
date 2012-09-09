@@ -23,7 +23,6 @@ class ConnectionSpec extends Spec {
 
       "writes the message" in new scope {
         // connection.write(insert)
-        true
       }
     }
 
