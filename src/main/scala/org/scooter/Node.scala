@@ -30,6 +30,8 @@ class Node(connection: Connection) {
    * Send the provided Command to the database.
    *
    * @param message The Command to send.
+   *
+   * @return The ChannelFuture.
    */
   def send(command: Command) = connection.send(command)
 
@@ -37,6 +39,8 @@ class Node(connection: Connection) {
    * Send the provided request to the database.
    *
    * @param message The Request to send.
+   *
+   * @return The Reply.
    */
   def send(request: Request) = connection.send(request)
 
