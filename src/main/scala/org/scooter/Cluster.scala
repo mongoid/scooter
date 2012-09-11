@@ -41,9 +41,7 @@ class Cluster(nodes: Seq[Node]) {
    *
    * @return The Reply from the database.
    */
-  def onPrimary(func: Node => Reply) = {
-    func(primary)
-  }
+  def onPrimary(func: Node => Reply) = func(primary)
 
   /**
    * Execute the provided function in the context of the primary Node.
@@ -52,9 +50,7 @@ class Cluster(nodes: Seq[Node]) {
    *
    * @return The future.
    */
-  def onPrimary(func: Node => Future) = {
-    func(primary)
-  }
+  def onPrimary(func: Node => Future) = func(primary)
 
   /**
    * Shutdown all nodes in the Session.
