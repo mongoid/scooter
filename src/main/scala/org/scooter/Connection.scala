@@ -56,9 +56,7 @@ class Connection(bootstrap: Bootstrap) {
    *
    * @return The ChannelFuture.
    */
-  def send(command: Command): ChannelFuture = {
-    channel.write(command)
-  }
+  def send(command: Command): ChannelFuture = channel.write(command)
 
   /**
    * Write the Request to the socket and return the Reply.
