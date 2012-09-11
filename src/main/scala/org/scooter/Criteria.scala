@@ -89,9 +89,7 @@ class Criteria(
    *
    * @return The new Criteria with limit applied.
    */
-  def limit(value: Int): Criteria = {
-    Criteria(collection, selector, skip, value)
-  }
+  def limit(value: Int): Criteria = Criteria(collection, selector, skip, value)
 
   /**
    * Get one document that matches this Criteria.
@@ -111,9 +109,7 @@ class Criteria(
    *
    * @return The new Criteria with limit applied.
    */
-  def skip(value: Int): Criteria = {
-    Criteria(collection, selector, value, limit)
-  }
+  def skip(value: Int): Criteria = Criteria(collection, selector, value, limit)
 
   /**
    * Get the session that this criteria belongs to.
