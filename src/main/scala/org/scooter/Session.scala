@@ -50,18 +50,16 @@ class Session(hosts: Seq[SocketAddress]) extends Dynamic {
    *
    * @return The Collection for the provided name.
    */
-  def selectDynamic(name: String) = {
-    currentDatabase.collection(name)
-  }
+  def selectDynamic(name: String) = currentDatabase.collection(name)
 
   /**
    * Use the database as specified by the provided name.
    *
    * @param name The name of the Database.
+   *
+   * @return The current Database.
    */
-  def use(name: String) = {
-    currentDatabase = Database(this, name)
-  }
+  def use(name: String) = currentDatabase = Database(this, name)
 
   /**
    * Execute the provided function in the context of the primary Node.
@@ -70,9 +68,7 @@ class Session(hosts: Seq[SocketAddress]) extends Dynamic {
    *
    * @return The Reply from the database.
    */
-  def onPrimary(func: Node => Reply) = {
-    cluster.onPrimary(func)
-  }
+  def onPrimary(func: Node => Reply) = cluster.onPrimary(func)
 
   /**
    * Execute the provided function in the context of the primary Node.
@@ -81,9 +77,7 @@ class Session(hosts: Seq[SocketAddress]) extends Dynamic {
    *
    * @return The future.
    */
-  def onPrimary(func: Node => Future) = {
-    cluster.onPrimary(func)
-  }
+  def onPrimary(func: Node => Future) = cluster.onPrimary(func)
 
   /**
    * Shutdown all nodes in the Session.
