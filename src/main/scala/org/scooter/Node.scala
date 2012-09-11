@@ -16,9 +16,7 @@ object Node {
    *
    * @return The Node.
    */
-  def apply(address: SocketAddress) = {
-    new Node(Connection(address))
-  }
+  def apply(address: SocketAddress) = new Node(Connection(address))
 }
 
 /**
@@ -33,18 +31,14 @@ class Node(connection: Connection) {
    *
    * @param message The Command to send.
    */
-  def send(command: Command) = {
-    connection.send(command)
-  }
+  def send(command: Command) = connection.send(command)
 
   /**
    * Send the provided request to the database.
    *
    * @param message The Request to send.
    */
-  def send(request: Request) = {
-    connection.send(request)
-  }
+  def send(request: Request) = connection.send(request)
 
   /**
    * Shutdown the connection to the Node.
