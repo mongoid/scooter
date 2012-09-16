@@ -189,6 +189,7 @@ object Bytes {
     Boolean  -> companion[BsonBoolean.type],
     Double   -> companion[BsonDouble.type],
     String   -> companion[BsonString.type],
+    Embedded -> companion[Document.type],
     Int32    -> companion[BsonInt.type],
     Int64    -> companion[BsonLong.type],
     ObjectId -> companion[org.scooter.bson.ObjectId.type],
