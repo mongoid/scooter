@@ -22,7 +22,7 @@ object Bytes {
    *
    * @return The byte representation of null.
    */
-  final val Null: Byte = 0x00
+  final val Null: Byte = 0
 
   /**
    * Get the type for a Double. (0x01)
@@ -31,7 +31,7 @@ object Bytes {
    *
    * @return The byte representation of a Double.
    */
-  final val Double: Byte = 0x01
+  final val Double: Byte = 1
 
   /**
    * Get the type for a String. (0x02)
@@ -40,7 +40,7 @@ object Bytes {
    *
    * @return The byte representation of a UTF-8 string.
    */
-  final val String: Byte = 0x02
+  final val String: Byte = 2
 
   /**
    * Get the type for an embedded document. (0x03)
@@ -49,7 +49,7 @@ object Bytes {
    *
    * @return The byte representation of an embedded document.
    */
-  final val Embedded: Byte = 0x03
+  final val Embedded: Byte = 3
 
   /**
    * Get the type for an Array. (0x04)
@@ -58,7 +58,7 @@ object Bytes {
    *
    * @return The byte representation of an Array.
    */
-  final val Array: Byte = 0x04
+  final val Array: Byte = 4
 
   /**
    * Get the type for a Binary. (0x05)
@@ -67,7 +67,7 @@ object Bytes {
    *
    * @return The byte representation of a binary.
    */
-  final val Binary: Byte = 0x05
+  final val Binary: Byte = 5
 
   /**
    * Get the type for an Object Id. (0x07)
@@ -76,7 +76,7 @@ object Bytes {
    *
    * @return The byte representation of an object id.
    */
-  final val ObjectId: Byte = 0x07
+  final val ObjectId: Byte = 7
 
   /**
    * Get the type for a bolean. (0x08)
@@ -85,7 +85,7 @@ object Bytes {
    *
    * @return The byte representation of a boolean.
    */
-  final val Boolean: Byte = 0x08
+  final val Boolean: Byte = 8
 
   /**
    * Get the type for a UTC time. (0x09)
@@ -94,7 +94,7 @@ object Bytes {
    *
    * @return The byte representation of a UTC time.
    */
-  final val Time: Byte = 0x09
+  final val Time: Byte = 9
 
   /**
    * Get the type for null value. (0x0A)
@@ -103,7 +103,7 @@ object Bytes {
    *
    * @return The byte representation of a null.
    */
-  final val NullValue: Byte = 0x0A
+  final val NullValue: Byte = 10
 
   /**
    * Get the type for a regular expression. (0x0B)
@@ -112,7 +112,7 @@ object Bytes {
    *
    * @return The byte representation of a regular expression.
    */
-  final val Regex: Byte = 0x0B
+  final val Regex: Byte = 11
 
   /**
    * Get the type for Javascript code. (0x0D)
@@ -121,7 +121,7 @@ object Bytes {
    *
    * @return The byte representation of Javascript code.
    */
-  final val Code: Byte = 0x0D
+  final val Code: Byte = 13
 
   /**
    * Get the type for a Symbol. (0x0E)
@@ -130,7 +130,7 @@ object Bytes {
    *
    * @return The byte representation of a Symbol.
    */
-  final val Symbol: Byte = 0x0E
+  final val Symbol: Byte = 14
 
   /**
    * Get the type for Javascript code with scope. (0x0F)
@@ -139,7 +139,7 @@ object Bytes {
    *
    * @return The byte representation of Javascript code with scope.
    */
-  final val CodeWithScope: Byte = 0x0F
+  final val CodeWithScope: Byte = 15
 
   /**
    * Get the type for a 32bit integer. (0x10)
@@ -148,7 +148,7 @@ object Bytes {
    *
    * @return The byte representation of the 32 bit integer.
    */
-  final val Int32: Byte = 0x10
+  final val Int32: Byte = 16
 
   /**
    * Get the type for a 64bit integer. (0x12)
@@ -157,13 +157,33 @@ object Bytes {
    *
    * @return The byte representation of the 64 bit integer.
    */
-  final val Int64: Byte = 0x12
+  final val Int64: Byte = 18
+
+  /**
+   * Get the type for the minimum value possible.
+   *
+   * @link http://bsonspec.org/#/specification
+   *
+   * @return The byte representation of the min key.
+   */
+  final val MinKey: Byte = -1
+
+  /**
+   * Get the type for the maximum value possible.
+   *
+   * @link http://bsonspec.org/#/specification
+   *
+   * @return The byte representation of the max key.
+   */
+  final val MaxKey: Byte = 127
 
   /**
    * A hash of the mappings from a single byte to the wrapper class to be
    * used in BSON loading.
    *
    * @return The mappings.
+   *
+   * @todo We can do better than this.
    */
   final val mappings = HashMap[Byte, Readable](
     Boolean  -> companion[BsonBoolean.type],
@@ -171,6 +191,8 @@ object Bytes {
     String   -> companion[BsonString.type],
     Int32    -> companion[BsonInt.type],
     Int64    -> companion[BsonLong.type],
-    ObjectId -> companion[org.scooter.bson.ObjectId.type]
+    ObjectId -> companion[org.scooter.bson.ObjectId.type],
+    MinKey   -> companion[org.scooter.bson.MinKey.type],
+    MaxKey   -> companion[org.scooter.bson.MaxKey.type]
   )
 }

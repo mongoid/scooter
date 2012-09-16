@@ -232,4 +232,20 @@ trait Data {
     dumpedGetMoreHeader ++ dumpedPlaceholder ++ dumpedCollectionName ++
       dumpedGetMoreLimit ++ dumpedGetMoreCursor
   }
+
+  def dumpedMinKey = {
+    Array[Byte](-1, 104, 105, 0)
+  }
+
+  def loadedMinKey = {
+    Array[Byte](104, 105, 0)
+  }
+
+  def dumpedMaxKey = {
+    Array[Byte](127, 104, 105, 0)
+  }
+
+  def loadedMaxKey = {
+    Array[Byte](104, 105, 0)
+  }
 }
